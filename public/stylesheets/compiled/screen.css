@@ -682,7 +682,7 @@ input.span-24, textarea.span-24, select.span-24 {
   margin-bottom: 1.5em; }
 
 .showgrid {
-  background: url(/images/grid.png?1256001707); }
+  background: url('/grid.png'); }
 
 .error {
   padding: .8em;
@@ -1042,6 +1042,14 @@ ul#nav-bar {
     #signup #new-customer p input.title, #login #existing-customer p input.title {
       padding: 3px;
       margin: 0px; }
+  #signup #new-customer input[type=checkbox], #login #existing-customer input[type=checkbox] {
+    top: 0.0em; }
+
+input.openid_url {
+  background: #FFFFFF url(/images/openid-inputicon.gif) no-repeat scroll 0pt 50%;
+  padding-left: 18px;
+  border: 1px solid #BBBBBB;
+  font-size: 1.5em; }
 
 .flash {
   -moz-border-radius: 5px;
@@ -1262,6 +1270,18 @@ ul.thumbnails {
   * html #cart-form {
     overflow-x: hidden; }
 
+#taxon-crumbs {
+  display: inline;
+  float: left;
+  margin-right: 10px;
+  width: 950px;
+  display: block;
+  float: right;
+  margin-top: 20px;
+  width: 300px; }
+  * html #taxon-crumbs {
+    overflow-x: hidden; }
+
 div#subtotal {
   float: right;
   width: 49%;
@@ -1352,6 +1372,8 @@ div#checkout {
     div#checkout #registration div#registration_input {
       float: left;
       margin-left: 100px; }
+      div#checkout #registration div#registration_input p {
+        width: 365px; }
     div#checkout #registration div#guest_user, div#checkout #registration div#existing_user, div#checkout #registration div#already_logged_in {
       display: none; }
   div#checkout #billing {
@@ -1480,3 +1502,7 @@ div#checkout-summary {
   margin-top: 10px; }
   div#checkout-summary th, div#checkout-summary td, div#checkout-summary caption {
     padding: 0px; }
+
+input.text, input.title, input[type="text"] {
+  padding: 1px 0px;
+  margin: 0; }

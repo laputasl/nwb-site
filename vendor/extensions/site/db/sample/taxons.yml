@@ -1,0 +1,44 @@
+system_root:
+  id: 9999
+  name: System
+  taxonomy: system
+  permalink: system/
+  position: 0
+  lft: 1
+  rgt: 10
+featured:
+  id: 9998
+  parent_id: 9999
+  name: Featured
+  taxonomy: system
+  permalink: system/featured/
+  position: 0
+  lft: 2
+  rgt: 3
+hot_product:
+  id: 9997
+  parent_id: 9999
+  name: Hot Product
+  taxonomy: system
+  permalink: system/hot/
+  position: 0
+  lft: 4
+  rgt: 5
+new_product:
+  id: 9996
+  parent_id: 9999
+  name: New Product
+  taxonomy: system
+  permalink: system/new/
+  position: 0
+  lft: 6
+  rgt: 7
+value_pack:
+  id: 9995
+  parent_id: 9999
+  name: Value Pack
+  taxonomy: system
+  permalink: system/value_pack/
+  position: 0
+  lft: 8
+  rgt: 9

@@ -72,16 +72,19 @@ var chg_state_input_element = function (parent, html) {
   var name = child.attr('name');
   var id = child.attr('id');
   //Toggle back and forth between id and name
-  if(html.attr('type') == 'text' && child.attr('type') != 'text') {
-    name = name.replace('_id', '_name');
-    id = id.replace('_id', '_name');
-  } else if(html.attr('type') != 'text' && child.attr('type') == 'text') {
-    name = name.replace('_name', '_id');
-    id = id.replace('_name', '_id');
-  }
-  html.addClass('required')
+  if (name)
+  {
+      if(html.attr('type') == 'text' && child.attr('type') != 'text') {
+        name = name.replace('_id', '_name');
+        id = id.replace('_id', '_name');
+      } else if(html.attr('type') != 'text' && child.attr('type') == 'text') {
+        name = name.replace('_name', '_id');
+        id = id.replace('_name', '_id');
+      }
+    html.addClass('required')
       .attr('name', name)
       .attr('id',   id);
+  }    
   child.remove();		// better as parent-relative?
   parent.append(html);
   return html;
@@ -417,13 +420,13 @@ var submit_confirmation = function() {
 // update login partial
 var update_login = function() {
   $.ajax({
-    url: '/user_session/login_bar',                                 
+    url: '/user_session/nav_bar',                                 
     beforeSend : function (xhr) {
       xhr.setRequestHeader('Accept-Encoding', 'identity');
     },      
     dataType: "html",
     success: function(result) {
-      $("div#login-bar").html(result);
+      $("ul#nav-bar").html(result);
     },
     error: function (XMLHttpRequest, textStatus, errorThrown) {
       // TODO (maybe do nothing)

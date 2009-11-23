@@ -437,12 +437,14 @@ div#calculator-settings-warning {
 	height:25px;
 	left:33%;
 	padding:10px 0 15px;
-	position:absolute;
+	position:fixed;
 	text-align:center;
-	width:33%;
+	width:30%;
 	font-weight:bold;
 	-moz-border-radius-bottomleft:15px;
 	-moz-border-radius-bottomright:15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-webkit-border-bottom-right-radius: 15px;
 }
 #progress img{
 	vertical-align:middle;
@@ -456,4 +458,34 @@ ul#shipping-specs {
 ul#shipping-specs li {
   list-style-image:none;
   display:inline;
+}
+
+.product-scopes ul > li {
+  float: left;
+  width: 220px;
+  margin-right: 20px;
+}
+
+.product-scopes .invalid {
+  background-color: red;
+}
+
+div.product-preview-products {
+  max-height: 200px;
+  overflow: auto;
+}
+
+#preference-settings input, #preference-settings select, #preference-settings textarea{
+  float:left;
+ 
+}
+
+#preference-settings input[type=text] {
+  width: 250px;
+}
+#preference-settings label{
+  clear:both;
+  display:block;
+  float:left;
+  width:170px;
 }

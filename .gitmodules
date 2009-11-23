@@ -1,3 +1,6 @@
 [submodule "vendor/spree"]
 	path = vendor/spree
 	url = git://github.com/railsdog/spree.git
+[submodule "vendor/extensions/volume_pricing"]
+	path = vendor/extensions/volume_pricing
+	url = git://github.com/railsdog/spree-volume-pricing.git

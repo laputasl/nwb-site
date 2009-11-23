@@ -7,9 +7,11 @@ Hopefully, this will evolve into a propper class.
 var spree;
 if (!spree) spree = {};
 
-jQuery.noConflict() 
+jQuery.noConflict() ;
 
 jQuery(document).ajaxStart(function(){
+  width = jQuery(window).width() /3;
+  jQuery("#progress").css('width', width)
   jQuery("#progress").slideDown();
 });
 
