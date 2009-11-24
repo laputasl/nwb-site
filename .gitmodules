@@ -4,3 +4,6 @@
 [submodule "vendor/extensions/volume_pricing"]
 	path = vendor/extensions/volume_pricing
 	url = git://github.com/railsdog/spree-volume-pricing.git
+[submodule "vendor/extensions/advanced_taxon"]
+	path = vendor/extensions/advanced_taxon
+	url = git://github.com/romul/spree-advanced-taxon.git

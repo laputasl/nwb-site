@@ -4,1672 +4,1951 @@ nwb_235_master:
   price: "39.99"
   product_id: 1279
   is_master: true
+  id: 1279
   sku: HL 1335
 pwb_44_master: 
   count_on_hand: 10
   price: "27.95"
   product_id: 1030
   is_master: true
+  id: 1030
   sku: PH 7400
 nwb_55_master: 
   count_on_hand: 10
   price: "69.95"
   product_id: 1122
   is_master: true
+  id: 1122
   sku: QS 10100
 nwb_104_master: 
   count_on_hand: 10
   price: "24.95"
   product_id: 1156
   is_master: true
+  id: 1156
   sku: HT 1625
 pwb_31_master: 
   count_on_hand: 10
   price: "27.95"
   product_id: 1017
   is_master: true
+  id: 1017
   sku: PH 1800
 nwb_37_master: 
   count_on_hand: 10
   price: "39.99"
   product_id: 1111
   is_master: true
+  id: 1111
   sku: LL 6100
 pwb_108_master: 
   count_on_hand: 10
   price: "78"
   product_id: 1094
   is_master: true
+  id: 1094
   sku: FR
 nwb_201_master: 
   count_on_hand: 10
   price: "12.95"
   product_id: 1248
   is_master: true
+  id: 1248
   sku: MU 4525
 pwb_10_master: 
   count_on_hand: 10
   price: "36.95"
   product_id: 1004
   is_master: true
+  id: 1004
   sku: PH 1250
 nwb_192_master: 
   count_on_hand: 10
   price: "39"
   product_id: 1241
   is_master: true
+  id: 1241
   sku: SC 4580
 pwb_85_master: 
   count_on_hand: 10
   price: "38.95"
   product_id: 1071
   is_master: true
+  id: 1071
   sku: PH 1450
 pwb_72_master: 
   count_on_hand: 10
   price: "39.95"
   product_id: 1058
   is_master: true
+  id: 1058
   sku: PH 1350
 pwb_90_master: 
   count_on_hand: 10
   price: "39.95"
   product_id: 1076
   is_master: true
+  id: 1076
   sku: PH 1550
 nwb_27_master: 
   count_on_hand: 10
   price: "34.95"
   product_id: 1105
   is_master: true
+  id: 1105
   sku: WL 7110
 pwb_33_master: 
   count_on_hand: 10
   price: "21.95"
   product_id: 1019
   is_master: true
+  id: 1019
   sku: PH 1850
 pwb_51_master: 
   count_on_hand: 10
   price: "22.95"
   product_id: 1037
   is_master: true
+  id: 1037
   sku: PH 5400
 nwb_141_master: 
   count_on_hand: 10
   price: "34.95"
   product_id: 1192
   is_master: true
+  id: 1192
   sku: PH 2000
 nwb_204_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1250
   is_master: true
+  id: 1250
   sku: MU 4540
 nwb_117_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1168
   is_master: true
+  id: 1168
   sku: HR 2206
 nwb_85_master: 
   count_on_hand: 10
   price: "37.95"
   product_id: 1143
   is_master: true
+  id: 1143
   sku: LL 6160
 pwb_57_master: 
   count_on_hand: 10
   price: "16.95"
   product_id: 1043
   is_master: true
+  id: 1043
   sku: PH 6100
 nwb_68_master: 
   count_on_hand: 10
   price: "14.95"
   product_id: 1129
   is_master: true
+  id: 1129
   sku: HT 1225
 nwb_182_master: 
   count_on_hand: 10
   price: "49"
   product_id: 1232
   is_master: true
+  id: 1232
   sku: SC 4535
 nwb_177_master: 
   count_on_hand: 10
   price: "39"
   product_id: 1227
   is_master: true
+  id: 1227
   sku: SC 4510
 pwb_74_master: 
   count_on_hand: 10
   price: "45.95"
   product_id: 1060
   is_master: true
+  id: 1060
   sku: PH 1400
 pwb_92_master: 
   count_on_hand: 10
   price: "45.95"
   product_id: 1078
   is_master: true
+  id: 1078
   sku: PH 2350
 nwb_164_master: 
   count_on_hand: 10
   price: "18.95"
   product_id: 1215
   is_master: true
+  id: 1215
   sku: PH 1925
 nwb_227_master: 
   count_on_hand: 10
   price: "9.95"
   product_id: 1272
   is_master: true
+  id: 1272
   sku: "2501"
 nwb_209_master: 
   count_on_hand: 10
   price: "16.95"
   product_id: 1255
   is_master: true
+  id: 1255
   sku: MU 4565
 pwb_23_master: 
   count_on_hand: 10
   price: "21.95"
   product_id: 1009
   is_master: true
+  id: 1009
   sku: PH 1650
 nwb_34_master: 
   count_on_hand: 10
   price: "39.99"
   product_id: 1109
   is_master: true
+  id: 1109
   sku: HT 1000
 nwb_51_master: 
   count_on_hand: 10
   price: "89"
   product_id: 1118
   is_master: true
+  id: 1118
   sku: HT 1220
 nwb_29_master: 
   count_on_hand: 10
   price: "32.95"
   product_id: 1107
   is_master: true
+  id: 1107
   sku: LL 6200
 nwb_16_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1099
   is_master: true
+  id: 1099
   sku: AR 3000
 pwb_98_master: 
   count_on_hand: 10
   price: "64.95"
   product_id: 1084
   is_master: true
+  id: 1084
   sku: PH 2400
 pwb_40_master: 
   count_on_hand: 10
   price: "37.95"
   product_id: 1026
   is_master: true
+  id: 1026
   sku: PH 1050
 nwb_143_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1194
   is_master: true
+  id: 1194
   sku: PH 2100
 nwb_130_master: 
   count_on_hand: 10
   price: "34.95"
   product_id: 1181
   is_master: true
+  id: 1181
   sku: PH 1450
 pwb_104_master: 
   count_on_hand: 10
   price: "14.95"
   product_id: 1090
   is_master: true
+  id: 1090
   sku: PH 5363
 nwb_210_master: 
   count_on_hand: 10
   price: "18.95"
   product_id: 1256
   is_master: true
+  id: 1256
   sku: MU 4570
 pwb_64_master: 
   count_on_hand: 10
   price: "36.95"
   product_id: 1050
   is_master: true
+  id: 1050
   sku: PH 1250
 pwb_59_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1045
   is_master: true
+  id: 1045
   sku: PH 5725
 nwb_81_master: 
   count_on_hand: 10
   price: "39.95"
   product_id: 1141
   is_master: true
+  id: 1141
   sku: HR 13000
 nwb_119_master: 
   count_on_hand: 10
   price: "14.99"
   product_id: 1170
   is_master: true
+  id: 1170
   sku: HR 2208
 pwb_46_master: 
   count_on_hand: 10
   price: "59.95"
   product_id: 1032
   is_master: true
+  id: 1032
   sku: PH 7500
 nwb_184_master: 
   count_on_hand: 10
   price: "39"
   product_id: 1234
   is_master: true
+  id: 1234
   sku: SC 4545
 pwb_81_master: 
   count_on_hand: 10
   price: "21.95"
   product_id: 1067
   is_master: true
+  id: 1067
   sku: PH 2050
 nwb_171_master: 
   count_on_hand: 10
   price: "39.95"
   product_id: 1222
   is_master: true
+  id: 1222
   sku: PH 2225
 nwb_229_master: 
   count_on_hand: 10
   price: "34.99"
   product_id: 1273
   is_master: true
+  id: 1273
   sku: SC 5025
 nwb_216_master: 
   count_on_hand: 10
   price: "17.49"
   product_id: 1261
   is_master: true
+  id: 1261
   sku: MU 4595
 pwb_25_master: 
   count_on_hand: 10
   price: "32.95"
   product_id: 1011
   is_master: true
+  id: 1011
   sku: PH 1700
 nwb_36_master: 
   count_on_hand: 10
   price: "39.99"
   product_id: 1110
   is_master: true
+  id: 1110
   sku: LL 6250
 pwb_87_master: 
   count_on_hand: 10
   price: "38.95"
   product_id: 1073
   is_master: true
+  id: 1073
   sku: PH 1500
 nwb_98_master: 
   count_on_hand: 10
   price: "24"
   product_id: 1151
   is_master: true
+  id: 1151
   sku: HT 1605
 pwb_12_master: 
   count_on_hand: 10
   price: "31.95"
   product_id: 1006
   is_master: true
+  id: 1006
   sku: PH 1950
 nwb_23_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1102
   is_master: true
+  id: 1102
   sku: HR 2130
 pwb_111_master: 
   count_on_hand: 10
   price: "56"
   product_id: 1097
   is_master: true
+  id: 1097
   sku: KR
 pwb_30_master: 
   count_on_hand: 10
   price: "27.95"
   product_id: 1016
   is_master: true
+  id: 1016
   sku: PH 1800
 nwb_132_master: 
   count_on_hand: 10
   price: "34.95"
   product_id: 1183
   is_master: true
+  id: 1183
   sku: PH 1550
 pwb_106_master: 
   count_on_hand: 10
   price: "22.95"
   product_id: 1092
   is_master: true
+  id: 1092
   sku: PH 5364
 nwb_150_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1201
   is_master: true
+  id: 1201
   sku: PH 1025
 pwb_48_master: 
   count_on_hand: 10
   price: "8.95"
   product_id: 1034
   is_master: true
+  id: 1034
   sku: PH 7502
 nwb_59_master: 
   count_on_hand: 10
   price: "89.95"
   product_id: 1124
   is_master: true
+  id: 1124
   sku: HT 1510
 pwb_66_master: 
   count_on_hand: 10
   price: "38.95"
   product_id: 1052
   is_master: true
+  id: 1052
   sku: PH 2000
 pwb_53_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1039
   is_master: true
+  id: 1039
   sku: PH 5700
 nwb_191_master: 
   count_on_hand: 10
   price: "39"
   product_id: 1240
   is_master: true
+  id: 1240
   sku: SC 4575
 nwb_173_master: 
   count_on_hand: 10
   price: "199.95"
   product_id: 1224
   is_master: true
+  id: 1224
   sku: HR 2500
 nwb_156_master: 
   count_on_hand: 10
   price: "38.95"
   product_id: 1207
   is_master: true
+  id: 1207
   sku: PH 1325
 pwb_71_master: 
   count_on_hand: 10
   price: "38.95"
   product_id: 1057
   is_master: true
+  id: 1057
   sku: PH 1150
 pwb_5_master: 
   count_on_hand: 10
   price: "32.95"
   product_id: 1002
   is_master: true
+  id: 1002
   sku: PH 1700
 nwb_219_master: 
   count_on_hand: 10
   price: "7.95"
   product_id: 1264
   is_master: true
+  id: 1264
   sku: MU 4535
 nwb_218_master: 
   count_on_hand: 10
   price: "9.95"
   product_id: 1263
   is_master: true
+  id: 1263
   sku: MU 4605
 pwb_89_master: 
   count_on_hand: 10
   price: "45.95"
   product_id: 1075
   is_master: true
+  id: 1075
   sku: PH 2300
 pwb_32_master: 
   count_on_hand: 10
   price: "21.95"
   product_id: 1018
   is_master: true
+  id: 1018
   sku: PH 1850
 nwb_197_master: 
   count_on_hand: 10
   price: "12.95"
   product_id: 1245
   is_master: true
+  id: 1245
   sku: MU 4510
 nwb_179_master: 
   count_on_hand: 10
   price: "49"
   product_id: 1229
   is_master: true
+  id: 1229
   sku: SC 4520
 nwb_122_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1173
   is_master: true
+  id: 1173
   sku: PH 1050
 pwb_94_master: 
   count_on_hand: 10
   price: "37.95"
   product_id: 1080
   is_master: true
+  id: 1080
   sku: PH 1100
 pwb_38_master: 
   count_on_hand: 10
   price: "32.95"
   product_id: 1024
   is_master: true
+  id: 1024
   sku: PH 2250
 nwb_49_master: 
   count_on_hand: 10
   price: "20"
   product_id: 1116
   is_master: true
+  id: 1116
   sku: HT 1210
 pwb_55_master: 
   count_on_hand: 10
   price: "24.95"
   product_id: 1041
   is_master: true
+  id: 1041
   sku: PH 5900
 nwb_180_master: 
   count_on_hand: 10
   price: "59"
   product_id: 1230
   is_master: true
+  id: 1230
   sku: SC 4525
 nwb_145_master: 
   count_on_hand: 10
   price: "39.95"
   product_id: 1196
   is_master: true
+  id: 1196
   sku: PH 2200
 pwb_60_master: 
   count_on_hand: 10
   price: "17.95"
   product_id: 1046
   is_master: true
+  id: 1046
   sku: PH 6000
 nwb_163_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1214
   is_master: true
+  id: 1214
   sku: PH 1825
 nwb_158_master: 
   count_on_hand: 10
   price: "33.95"
   product_id: 1209
   is_master: true
+  id: 1209
   sku: PH 1425
 pwb_73_master: 
   count_on_hand: 10
   price: "39.95"
   product_id: 1059
   is_master: true
+  id: 1059
   sku: PH 1350
 nwb_96_master: 
   count_on_hand: 10
   price: "49.95"
   product_id: 1150
   is_master: true
+  id: 1150
   sku: SC 9125
 nwb_225_master: 
   count_on_hand: 10
   price: "59.95"
   product_id: 1270
   is_master: true
+  id: 1270
   sku: HR 2600
 nwb_208_master: 
   count_on_hand: 10
   price: "16.95"
   product_id: 1254
   is_master: true
+  id: 1254
   sku: MU 4560
 pwb_79_master: 
   count_on_hand: 10
   price: "43.95"
   product_id: 1065
   is_master: true
+  id: 1065
   sku: PH 2200
 nwb_15_master: 
   count_on_hand: 10
   price: "10.95"
   product_id: 1098
   is_master: true
+  id: 1098
   sku: PR 5100
 nwb_199_master: 
   count_on_hand: 10
   price: "9.95"
   product_id: 1247
   is_master: true
+  id: 1247
   sku: MU 4520
 nwb_62_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1126
   is_master: true
+  id: 1126
   sku: HR 2350
 nwb_111_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1163
   is_master: true
+  id: 1163
   sku: WL 7610
 pwb_96_master: 
   count_on_hand: 10
   price: "89.95"
   product_id: 1082
   is_master: true
+  id: 1082
   sku: PH 7625
 pwb_103_master: 
   count_on_hand: 10
   price: "24.95"
   product_id: 1089
   is_master: true
+  id: 1089
   sku: PH 5811
 nwb_124_master: 
   count_on_hand: 10
   price: "34.95"
   product_id: 1175
   is_master: true
+  id: 1175
   sku: PH 1150
 pwb_27_master: 
   count_on_hand: 10
   price: "32.95"
   product_id: 1013
   is_master: true
+  id: 1013
   sku: PH 1750
 pwb_45_master: 
   count_on_hand: 10
   price: "59.95"
   product_id: 1031
   is_master: true
+  id: 1031
   sku: PH 7500
 nwb_221_master: 
   count_on_hand: 10
   price: "34.15"
   product_id: 1266
   is_master: true
+  id: 1266
   sku: SC 5050
 nwb_152_master: 
   count_on_hand: 10
   price: "28.95"
   product_id: 1203
   is_master: true
+  id: 1203
   sku: PH 1125
 nwb_170_master: 
   count_on_hand: 10
   price: "25.95"
   product_id: 1221
   is_master: true
+  id: 1221
   sku: PH 2175
 pwb_62_master: 
   count_on_hand: 10
   price: "49.95"
   product_id: 1048
   is_master: true
+  id: 1048
   sku: PH 5600
 pwb_1_master: 
   count_on_hand: 10
   price: "28.95"
   product_id: 1001
   is_master: true
+  id: 1001
   sku: PH 5500
 nwb_165_master: 
   count_on_hand: 10
   price: "25.95"
   product_id: 1216
   is_master: true
+  id: 1216
   sku: PH 1975
 nwb_17_master: 
   count_on_hand: 10
   price: "15.95"
   product_id: 1100
   is_master: true
+  id: 1100
   sku: MR 4150
 pwb_68_master: 
   count_on_hand: 10
   price: "31.95"
   product_id: 1054
   is_master: true
+  id: 1054
   sku: PH 2150
 pwb_86_master: 
   count_on_hand: 10
   price: "38.95"
   product_id: 1072
   is_master: true
+  id: 1072
   sku: PH 1500
 pwb_11_master: 
   count_on_hand: 10
   price: "22.95"
   product_id: 1005
   is_master: true
+  id: 1005
   sku: PH 5850
 nwb_193_master: 
   count_on_hand: 10
   price: "39"
   product_id: 1242
   is_master: true
+  id: 1242
   sku: SC 4585
 nwb_188_master: 
   count_on_hand: 10
   price: "39"
   product_id: 1237
   is_master: true
+  id: 1237
   sku: SC 4560
 nwb_131_master: 
   count_on_hand: 10
   price: "34.95"
   product_id: 1182
   is_master: true
+  id: 1182
   sku: PH 1500
 pwb_105_master: 
   count_on_hand: 10
   price: "14.95"
   product_id: 1091
   is_master: true
+  id: 1091
   sku: PH 5362
 pwb_47_master: 
   count_on_hand: 10
   price: "74.95"
   product_id: 1033
   is_master: true
+  id: 1033
   sku: PH 7600
 pwb_34_master: 
   count_on_hand: 10
   price: "21.95"
   product_id: 1020
   is_master: true
+  id: 1020
   sku: PH 1900
 pwb_29_master: 
   count_on_hand: 10
   price: "37.95"
   product_id: 1015
   is_master: true
+  id: 1015
   sku: PH 1600
 nwb_172_master: 
   count_on_hand: 10
   price: "89"
   product_id: 1223
   is_master: true
+  id: 1223
   sku: SC 9400
 nwb_137_master: 
   count_on_hand: 10
   price: "24.95"
   product_id: 1188
   is_master: true
+  id: 1188
   sku: PH 1800
 nwb_30_master: 
   count_on_hand: 10
   price: "99"
   product_id: 1108
   is_master: true
+  id: 1108
   sku: HT 1200
 nwb_154_master: 
   count_on_hand: 10
   price: "28.95"
   product_id: 1205
   is_master: true
+  id: 1205
   sku: PH 1225
 pwb_88_master: 
   count_on_hand: 10
   price: "45.95"
   product_id: 1074
   is_master: true
+  id: 1074
   sku: PH 2300
 pwb_75_master: 
   count_on_hand: 10
   price: "45.95"
   product_id: 1061
   is_master: true
+  id: 1061
   sku: PH 1400
 nwb_92_master: 
   count_on_hand: 10
   price: "39.99"
   product_id: 1147
   is_master: true
+  id: 1147
   sku: HR 13025
 nwb_196_master: 
   count_on_hand: 10
   price: "19"
   product_id: 1244
   is_master: true
+  id: 1244
   sku: SC 4531
 nwb_195_master: 
   count_on_hand: 10
   price: "49"
   product_id: 1243
   is_master: true
+  id: 1243
   sku: SC 4590
 nwb_178_master: 
   count_on_hand: 10
   price: "49"
   product_id: 1228
   is_master: true
+  id: 1228
   sku: SC 4515
 nwb_120_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1171
   is_master: true
+  id: 1171
   sku: PH 1000
 pwb_54_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1040
   is_master: true
+  id: 1040
   sku: PH 5875
 nwb_71_master: 
   count_on_hand: 10
   price: "14.95"
   product_id: 1132
   is_master: true
+  id: 1132
   sku: HT 1227
 pwb_36_master: 
   count_on_hand: 10
   price: "34.95"
   product_id: 1022
   is_master: true
+  id: 1022
   sku: PH 1000
 nwb_230_master: 
   count_on_hand: 10
   price: "39.99"
   product_id: 1274
   is_master: true
+  id: 1274
   sku: CE 1000
 nwb_161_master: 
   count_on_hand: 10
   price: "32.95"
   product_id: 1212
   is_master: true
+  id: 1212
   sku: PH 1575
 nwb_139_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1190
   is_master: true
+  id: 1190
   sku: PH 1900
 nwb_77_master: 
   count_on_hand: 10
   price: "134.95"
   product_id: 1138
   is_master: true
+  id: 1138
   sku: WC 9100
 nwb_126_master: 
   count_on_hand: 10
   price: "27.95"
   product_id: 1177
   is_master: true
+  id: 1177
   sku: PH 1250
 pwb_41_master: 
   count_on_hand: 10
   price: "37.95"
   product_id: 1027
   is_master: true
+  id: 1027
   sku: PH 1050
 nwb_144_master: 
   count_on_hand: 10
   price: "28.95"
   product_id: 1195
   is_master: true
+  id: 1195
   sku: PH 2150
 nwb_206_master: 
   count_on_hand: 10
   price: "16.95"
   product_id: 1252
   is_master: true
+  id: 1252
   sku: MU 4550
 pwb_20_master: 
   count_on_hand: 10
   price: "17.95"
   product_id: 1007
   is_master: true
+  id: 1007
   sku: PH 7025
 pwb_77_master: 
   count_on_hand: 10
   price: "37.95"
   product_id: 1063
   is_master: true
+  id: 1063
   sku: PH 1200
 nwb_185_master: 
   count_on_hand: 10
   price: "39"
   product_id: 1235
   is_master: true
+  id: 1235
   sku: SC4550
 nwb_110_master: 
   count_on_hand: 10
   price: "39.95"
   product_id: 1162
   is_master: true
+  id: 1162
   sku: AR 3400
 pwb_101_master: 
   count_on_hand: 10
   price: "6.95"
   product_id: 1087
   is_master: true
+  id: 1087
   sku: PH 6075
 nwb_105_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1157
   is_master: true
+  id: 1157
   sku: AR 3300
 nwb_43_master: 
   count_on_hand: 10
   price: "34.95"
   product_id: 1113
   is_master: true
+  id: 1113
   sku: LL 6150
 nwb_167_master: 
   count_on_hand: 10
   price: "33.95"
   product_id: 1218
   is_master: true
+  id: 1218
   sku: PH 2025
 pwb_43_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1029
   is_master: true
+  id: 1029
   sku: PH 7075
 pwb_26_master: 
   count_on_hand: 10
   price: "32.95"
   product_id: 1012
   is_master: true
+  id: 1012
   sku: PH 1750
 nwb_202_master: 
   count_on_hand: 10
   price: "9.95"
   product_id: 1249
   is_master: true
+  id: 1249
   sku: MU 4530
 nwb_128_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1179
   is_master: true
+  id: 1179
   sku: PH 1350
 nwb_151_master: 
   count_on_hand: 10
   price: "28.95"
   product_id: 1202
   is_master: true
+  id: 1202
   sku: PH 1075
 nwb_146_master: 
   count_on_hand: 10
   price: "18.95"
   product_id: 1197
   is_master: true
+  id: 1197
   sku: PH 1675
 nwb_133_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1184
   is_master: true
+  id: 1184
   sku: PH 1600
 pwb_107_master: 
   count_on_hand: 10
   price: "45"
   product_id: 1093
   is_master: true
+  id: 1093
   sku: P4
 nwb_83_master: 
   count_on_hand: 10
   price: "39.95"
   product_id: 1142
   is_master: true
+  id: 1142
   sku: LL 6300
 pwb_49_master: 
   count_on_hand: 10
   price: "24.95"
   product_id: 1035
   is_master: true
+  id: 1035
   sku: PH 5300
 pwb_67_master: 
   count_on_hand: 10
   price: "38.95"
   product_id: 1053
   is_master: true
+  id: 1053
   sku: PH 2000
 nwb_187_master: 
   count_on_hand: 10
   price: "69"
   product_id: 1236
   is_master: true
+  id: 1236
   sku: SC 4555
 nwb_174_master: 
   count_on_hand: 10
   price: "49.95"
   product_id: 1225
   is_master: true
+  id: 1225
   sku: HR 2525
 nwb_45_master: 
   count_on_hand: 10
   price: "174.95"
   product_id: 1114
   is_master: true
+  id: 1114
   sku: HT 1050
 nwb_169_master: 
   count_on_hand: 10
   price: "18.95"
   product_id: 1220
   is_master: true
+  id: 1220
   sku: PH 2125
 nwb_112_master: 
   count_on_hand: 10
   price: "20"
   product_id: 1164
   is_master: true
+  id: 1164
   sku: HT 1212
 pwb_28_master: 
   count_on_hand: 10
   price: "37.95"
   product_id: 1014
   is_master: true
+  id: 1014
   sku: PH 1600
 nwb_50_master: 
   count_on_hand: 10
   price: "39.99"
   product_id: 1117
   is_master: true
+  id: 1117
   sku: AR 3100
 nwb_118_master: 
   count_on_hand: 10
   price: "14.99"
   product_id: 1169
   is_master: true
+  id: 1169
   sku: HR 2207
 nwb_86_master: 
   count_on_hand: 10
   price: "54.95"
   product_id: 1144
   is_master: true
+  id: 1144
   sku: HR 2170
 nwb_135_master: 
   count_on_hand: 10
   price: "24.95"
   product_id: 1186
   is_master: true
+  id: 1186
   sku: PH 1700
 pwb_109_master: 
   count_on_hand: 10
   price: "59.5"
   product_id: 1095
   is_master: true
+  id: 1095
   sku: VR
 nwb_73_master: 
   count_on_hand: 10
   price: "58.95"
   product_id: 1134
   is_master: true
+  id: 1134
   sku: HT 1229
 nwb_153_master: 
   count_on_hand: 10
   price: "32.95"
   product_id: 1204
   is_master: true
+  id: 1204
   sku: PH 1175
 nwb_140_master: 
   count_on_hand: 10
   price: "27.95"
   product_id: 1191
   is_master: true
+  id: 1191
   sku: PH 1950
 pwb_69_master: 
   count_on_hand: 10
   price: "31.95"
   product_id: 1055
   is_master: true
+  id: 1055
   sku: PH 2150
 pwb_80_master: 
   count_on_hand: 10
   price: "21.95"
   product_id: 1066
   is_master: true
+  id: 1066
   sku: PH 2050
 pwb_56_master: 
   count_on_hand: 10
   price: "24.95"
   product_id: 1042
   is_master: true
+  id: 1042
   sku: PH 5900
 nwb_232_master: 
   count_on_hand: 10
   price: "39.99"
   product_id: 1276
   is_master: true
+  id: 1276
   sku: CF 4250
 nwb_176_master: 
   count_on_hand: 10
   price: "39"
   product_id: 1226
   is_master: true
+  id: 1226
   sku: SC 4500
 nwb_159_master: 
   count_on_hand: 10
   price: "33.95"
   product_id: 1210
   is_master: true
+  id: 1210
   sku: PH 1475
 nwb_52_master: 
   count_on_hand: 10
   price: "24.95"
   product_id: 1119
   is_master: true
+  id: 1119
   sku: HR 2200
 nwb_101_master: 
   count_on_hand: 10
   price: "34.95"
   product_id: 1154
   is_master: true
+  id: 1154
   sku: LL 6335
 pwb_22_master: 
   count_on_hand: 10
   price: "52.95"
   product_id: 1008
   is_master: true
+  id: 1008
   sku: PH 5625
 pwb_35_master: 
   count_on_hand: 10
   price: "21.95"
   product_id: 1021
   is_master: true
+  id: 1021
   sku: PH 1900
 nwb_211_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1257
   is_master: true
+  id: 1257
   sku: MU 4575
 nwb_125_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1176
   is_master: true
+  id: 1176
   sku: PH 1200
 nwb_142_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1193
   is_master: true
+  id: 1193
   sku: PH 2050
 nwb_58_master: 
   count_on_hand: 10
   price: "89.95"
   product_id: 1123
   is_master: true
+  id: 1123
   sku: HT 1500
 nwb_107_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1159
   is_master: true
+  id: 1159
   sku: PC 8500
 nwb_75_master: 
   count_on_hand: 10
   price: "24.95"
   product_id: 1136
   is_master: true
+  id: 1136
   sku: HR 2160
 pwb_82_master: 
   count_on_hand: 10
   price: "25.95"
   product_id: 1068
   is_master: true
+  id: 1068
   sku: PH 2100
 nwb_93_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1148
   is_master: true
+  id: 1148
   sku: NC 9300
 pwb_58_master: 
   count_on_hand: 10
   price: "18.95"
   product_id: 1044
   is_master: true
+  id: 1044
   sku: PH 6125
 nwb_80_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1140
   is_master: true
+  id: 1140
   sku: AR 3200
 nwb_234_master: 
   count_on_hand: 10
   price: "39.99"
   product_id: 1278
   is_master: true
+  id: 1278
   sku: AR 1275
 nwb_217_master: 
   count_on_hand: 10
   price: "14.95"
   product_id: 1262
   is_master: true
+  id: 1262
   sku: MU 4600
 nwb_166_master: 
   count_on_hand: 10
   price: "28.95"
   product_id: 1217
   is_master: true
+  id: 1217
   sku: PH 2275
 nwb_99_master: 
   count_on_hand: 10
   price: "24"
   product_id: 1152
   is_master: true
+  id: 1152
   sku: HT 1610
 nwb_24_master: 
   count_on_hand: 10
   price: "23.95"
   product_id: 1103
   is_master: true
+  id: 1103
   sku: HR 2140
 nwb_148_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1199
   is_master: true
+  id: 1199
   sku: PH 1775
 pwb_24_master: 
   count_on_hand: 10
   price: "21.95"
   product_id: 1010
   is_master: true
+  id: 1010
   sku: PH 1650
 nwb_189_master: 
   count_on_hand: 10
   price: "45"
   product_id: 1238
   is_master: true
+  id: 1238
   sku: SC 4565
 nwb_114_master: 
   count_on_hand: 10
   price: "119"
   product_id: 1165
   is_master: true
+  id: 1165
   sku: HT 1240
 nwb_109_master: 
   count_on_hand: 10
   price: "82.75"
   product_id: 1161
   is_master: true
+  id: 1161
   sku: HR 2400
 nwb_127_master: 
   count_on_hand: 10
   price: "37.95"
   product_id: 1178
   is_master: true
+  id: 1178
   sku: PH 1300
 nwb_65_master: 
   count_on_hand: 10
   price: "5.99"
   product_id: 1127
   is_master: true
+  id: 1127
   sku: shipping
 nwb_224_master: 
   count_on_hand: 10
   price: "33.6"
   product_id: 1269
   is_master: true
+  id: 1269
   sku: SC 5200
 nwb_155_master: 
   count_on_hand: 10
   price: "25.95"
   product_id: 1206
   is_master: true
+  id: 1206
   sku: PH 1275
 nwb_26_master: 
   count_on_hand: 10
   price: "74.95"
   product_id: 1104
   is_master: true
+  id: 1104
   sku: HR 2100
 nwb_88_master: 
   count_on_hand: 10
   price: "110.25"
   product_id: 1146
   is_master: true
+  id: 1146
   sku: HR 2325
 nwb_168_master: 
   count_on_hand: 10
   price: "18.95"
   product_id: 1219
   is_master: true
+  id: 1219
   sku: PH 2075
 pwb_95_master: 
   count_on_hand: 10
   price: "37.95"
   product_id: 1081
   is_master: true
+  id: 1081
   sku: PH 1100
 nwb_134_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1185
   is_master: true
+  id: 1185
   sku: PH 1650
 nwb_121_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1172
   is_master: true
+  id: 1172
   sku: PH 2250
 nwb_67_master: 
   count_on_hand: 10
   price: "24.95"
   product_id: 1128
   is_master: true
+  id: 1128
   sku: HR 2375
 nwb_116_master: 
   count_on_hand: 10
   price: "14.99"
   product_id: 1167
   is_master: true
+  id: 1167
   sku: HR 2205
 nwb_54_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1121
   is_master: true
+  id: 1121
   sku: PC 8000
 nwb_181_master: 
   count_on_hand: 10
   price: "69.95"
   product_id: 1231
   is_master: true
+  id: 1231
   sku: SC 4530
 pwb_61_master: 
   count_on_hand: 10
   price: "39.95"
   product_id: 1047
   is_master: true
+  id: 1047
   sku: PH 7000
 nwb_72_master: 
   count_on_hand: 10
   price: "14.95"
   product_id: 1133
   is_master: true
+  id: 1133
   sku: HT 1228
 pwb_37_master: 
   count_on_hand: 10
   price: "34.95"
   product_id: 1023
   is_master: true
+  id: 1023
   sku: PH 1000
 nwb_231_master: 
   count_on_hand: 10
   price: "39.99"
   product_id: 1275
   is_master: true
+  id: 1275
   sku: PE 1000
 nwb_226_master: 
   count_on_hand: 10
   price: "49.95"
   product_id: 1271
   is_master: true
+  id: 1271
   sku: HR 2610
 nwb_213_master: 
   count_on_hand: 10
   price: "39.95"
   product_id: 1259
   is_master: true
+  id: 1259
   sku: MU 4585
 nwb_100_master: 
   count_on_hand: 10
   price: "47.95"
   product_id: 1153
   is_master: true
+  id: 1153
   sku: HT 1600
 pwb_6_master: 
   count_on_hand: 10
   price: "41.95"
   product_id: 1003
   is_master: true
+  id: 1003
   sku: PH 1300
 pwb_97_master: 
   count_on_hand: 10
   price: "89.95"
   product_id: 1083
   is_master: true
+  id: 1083
   sku: PH 7650
 nwb_157_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1208
   is_master: true
+  id: 1208
   sku: PH 1375
 nwb_95_master: 
   count_on_hand: 10
   price: "17.95"
   product_id: 1149
   is_master: true
+  id: 1149
   sku: WC 9350
 pwb_84_master: 
   count_on_hand: 10
   price: "38.45"
   product_id: 1070
   is_master: true
+  id: 1070
   sku: PH 1450
 nwb_198_master: 
   count_on_hand: 10
   price: "14.95"
   product_id: 1246
   is_master: true
+  id: 1246
   sku: MU 4515
 nwb_106_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1158
   is_master: true
+  id: 1158
   sku: WL 7600
 nwb_74_master: 
   count_on_hand: 10
   price: "58.95"
   product_id: 1135
   is_master: true
+  id: 1135
   sku: HT 1230
 nwb_123_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1174
   is_master: true
+  id: 1174
   sku: PH 1100
 nwb_61_master: 
   count_on_hand: 10
   price: "47.95"
   product_id: 1125
   is_master: true
+  id: 1125
   sku: HR 2300
 pwb_63_master: 
   count_on_hand: 10
   price: "41.95"
   product_id: 1049
   is_master: true
+  id: 1049
   sku: PH 1300
 pwb_39_master: 
   count_on_hand: 10
   price: "32.95"
   product_id: 1025
   is_master: true
+  id: 1025
   sku: PH 2250
 pwb_50_master: 
   count_on_hand: 10
   price: "46.95"
   product_id: 1036
   is_master: true
+  id: 1036
   sku: PH 5350
 nwb_233_master: 
   count_on_hand: 10
   price: "39.99"
   product_id: 1277
   is_master: true
+  id: 1277
   sku: SE-1530
 nwb_220_master: 
   count_on_hand: 10
   price: "35.99"
   product_id: 1265
   is_master: true
+  id: 1265
   sku: SC 5000
 nwb_215_master: 
   count_on_hand: 10
   price: "94"
   product_id: 1260
   is_master: true
+  id: 1260
   sku: MU 4590
 nwb_79_master: 
   count_on_hand: 10
   price: "24.95"
   product_id: 1139
   is_master: true
+  id: 1139
   sku: WL 7550
 nwb_129_master: 
   count_on_hand: 10
   price: "34.95"
   product_id: 1180
   is_master: true
+  id: 1180
   sku: PH 1400
 nwb_22_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1101
   is_master: true
+  id: 1101
   sku: HR 2120
 nwb_147_master: 
   count_on_hand: 10
   price: "26.95"
   product_id: 1198
   is_master: true
+  id: 1198
   sku: PH 1725
 nwb_40_master: 
   count_on_hand: 10
   price: "39.99"
   product_id: 1112
   is_master: true
+  id: 1112
   sku: WL 7500
 pwb_91_master: 
   count_on_hand: 10
   price: "39.95"
   product_id: 1077
   is_master: true
+  id: 1077
   sku: PH 1550
 pwb_110_master: 
   count_on_hand: 10
   price: "85"
   product_id: 1096
   is_master: true
+  id: 1096
   sku: ER
 nwb_108_master: 
   count_on_hand: 10
   price: "24.95"
   product_id: 1160
   is_master: true
+  id: 1160
   sku: WC 9400
 nwb_46_master: 
   count_on_hand: 10
   price: "7.51"
   product_id: 1115
   is_master: true
+  id: 1115
   sku: xpress
 nwb_28_master: 
   count_on_hand: 10
   price: "44.95"
   product_id: 1106
   is_master: true
+  id: 1106
   sku: WL 7100
 nwb_160_master: 
   count_on_hand: 10
   price: "32.95"
   product_id: 1211
   is_master: true
+  id: 1211
   sku: PH 1525
 pwb_52_master: 
   count_on_hand: 10
   price: "56.95"
   product_id: 1038
   is_master: true
+  id: 1038
   sku: PH 5550
 pwb_70_master: 
   count_on_hand: 10
   price: "38.95"
   product_id: 1056
   is_master: true
+  id: 1056
   sku: PH 1150
 nwb_223_master: 
   count_on_hand: 10
   price: "33.95"
   product_id: 1268
   is_master: true
+  id: 1268
   sku: SC 5150
 nwb_222_master: 
   count_on_hand: 10
   price: "36.95"
   product_id: 1267
   is_master: true
+  id: 1267
   sku: SC 5100
 nwb_205_master: 
   count_on_hand: 10
   price: "16.95"
   product_id: 1251
   is_master: true
+  id: 1251
   sku: MU 4545
 nwb_69_master: 
   count_on_hand: 10
   price: "49.95"
   product_id: 1130
   is_master: true
+  id: 1130
   sku: QS 10125
 nwb_149_master: 
   count_on_hand: 10
   price: "18.95"
   product_id: 1200
   is_master: true
+  id: 1200
   sku: PH 1875
 pwb_76_master: 
   count_on_hand: 10
   price: "37.95"
   product_id: 1062
   is_master: true
+  id: 1062
   sku: PH 1200
 nwb_87_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1145
   is_master: true
+  id: 1145
   sku: WC 9200
 nwb_136_master: 
   count_on_hand: 10
   price: "24.95"
   product_id: 1187
   is_master: true
+  id: 1187
   sku: PH 1750
 nwb_183_master: 
   count_on_hand: 10
   price: "59"
   product_id: 1233
   is_master: true
+  id: 1233
   sku: SC 4540
 pwb_93_master: 
   count_on_hand: 10
   price: "45.95"
   product_id: 1079
   is_master: true
+  id: 1079
   sku: PH 2350
 pwb_100_master: 
   count_on_hand: 10
   price: "36.95"
   product_id: 1086
   is_master: true
+  id: 1086
   sku: PH 5800
 pwb_99_master: 
   count_on_hand: 10
   price: "64.95"
   product_id: 1085
   is_master: true
+  id: 1085
   sku: PH 2425
 nwb_115_master: 
   count_on_hand: 10
   price: "15.95"
   product_id: 1166
   is_master: true
+  id: 1166
   sku: HR 2204
 pwb_42_master: 
   count_on_hand: 10
   price: "18.95"
   product_id: 1028
   is_master: true
+  id: 1028
   sku: PH 7050
 nwb_53_master: 
   count_on_hand: 10
   price: "29.95"
   product_id: 1120
   is_master: true
+  id: 1120
   sku: WC 9000
 nwb_102_master: 
   count_on_hand: 10
   price: "74.95"
   product_id: 1155
   is_master: true
+  id: 1155
   sku: LL 6400
 nwb_162_master: 
   count_on_hand: 10
   price: "27.95"
   product_id: 1213
   is_master: true
+  id: 1213
   sku: PH 1625
 nwb_70_master: 
   count_on_hand: 10
   price: "14.95"
   product_id: 1131
   is_master: true
+  id: 1131
   sku: HT 1226
 nwb_212_master: 
   count_on_hand: 10
   price: "24.95"
   product_id: 1258
   is_master: true
+  id: 1258
   sku: MU 4580
 nwb_207_master: 
   count_on_hand: 10
   price: "18.95"
   product_id: 1253
   is_master: true
+  id: 1253
   sku: MU 4555
 nwb_138_master: 
   count_on_hand: 10
   price: "19.95"
   product_id: 1189
   is_master: true
+  id: 1189
   sku: PH 1850
 pwb_65_master: 
   count_on_hand: 10
   price: "31.95"
   product_id: 1051
   is_master: true
+  id: 1051
   sku: PH 1950
 nwb_76_master: 
   count_on_hand: 10
   price: "27.95"
   product_id: 1137
   is_master: true
+  id: 1137
   sku: HR 2165
 pwb_78_master: 
   count_on_hand: 10
   price: "43.95"
   product_id: 1064
   is_master: true
+  id: 1064
   sku: PH 2200
 nwb_190_master: 
   count_on_hand: 10
   price: "29"
   product_id: 1239
   is_master: true
+  id: 1239
   sku: SC 4570
 pwb_102_master: 
   count_on_hand: 10
   price: "3.95"
   product_id: 1088
   is_master: true
+  id: 1088
   sku: PH 6150
 pwb_83_master: 
   count_on_hand: 10
   price: "25.95"
   product_id: 1069
   is_master: true
+  id: 1069
   sku: PH 2100
