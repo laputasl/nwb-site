@@ -12,7 +12,7 @@ class SiteExtension < Spree::Extension
  
   def activate
 		Image.attachment_definitions[:attachment][:storage] = :s3
-		Image.attachment_definitions[:attachment][:s3_credentials] = "#{RAILS_ROOT}/vendor/extensions/site/config/s3.yml"
+		Image.attachment_definitions[:attachment][:s3_credentials] = "#{RAILS_ROOT}/config/s3.yml"
 		Image.attachment_definitions[:attachment][:bucket] = "nwb"
 		Image.attachment_definitions[:attachment][:path] = ":attachment/:id/:style.:extension"
     Image.attachment_definitions[:attachment].delete :url

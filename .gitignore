@@ -20,7 +20,7 @@ public/javascripts/dashboard.js
 public/javascripts/gateway.js
 public/javascripts/jqPlot/
 public/stylesheets/admin/dashboard.css
-vendor/extensions/site/config/s3.yml
+config/s3.yml
 
 # from capistrano
 mkmf.log

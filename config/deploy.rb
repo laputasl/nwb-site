@@ -28,7 +28,7 @@ namespace :deploy do
   end
 end
 
-set :shared_assets, ['config/database.yml', 'public/assets']
+set :shared_assets, ['config/database.yml', 'config/s3.yml', 'public/assets']
 
 namespace :spree do
   task :create_symlinks, :roles => :app do
