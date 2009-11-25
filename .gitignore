@@ -20,3 +20,6 @@ public/javascripts/dashboard.js
 public/javascripts/gateway.js
 public/javascripts/jqPlot/
 public/stylesheets/admin/dashboard.css
+
+# from capistrano
+mkmf.log
