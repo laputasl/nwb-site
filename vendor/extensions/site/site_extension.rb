@@ -5,34 +5,16 @@ class SiteExtension < Spree::Extension
   version "1.0"
   description "Describe your extension here"
   url "http://yourwebsite.com/site"
-
-  # Please use site/config/routes.rb instead for extension routes.
-
-  # def self.require_gems(config)
-  #   config.gem "gemname-goes-here", :version => '1.2.3'
-  # end
-  
+ 
+  def self.require_gems(config)
+    config.gem 'right_aws'
+  end
+ 
   def activate
-
-    # Add your extension tab to the admin.
-    # Requires that you have defined an admin controller:
-    # app/controllers/admin/yourextension_controller
-    # and that you mapped your admin in config/routes
-
-    #Admin::BaseController.class_eval do
-    #  before_filter :add_yourextension_tab
-    #
-    #  def add_yourextension_tab
-    #    # add_extension_admin_tab takes an array containing the same arguments expected
-    #    # by the tab helper method:
-    #    #   [ :extension_name, { :label => "Your Extension", :route => "/some/non/standard/route" } ]
-    #    add_extension_admin_tab [ :yourextension ]
-    #  end
-    #end
-
-    # make your helper avaliable in all views
-    # Spree::BaseController.class_eval do
-    #   helper YourHelper
-    # end
+		Image.attachment_definitions[:attachment][:storage] = :s3
+		Image.attachment_definitions[:attachment][:s3_credentials] = "#{RAILS_ROOT}/vendor/extensions/site/config/s3.yml"
+		Image.attachment_definitions[:attachment][:bucket] = "nwb"
+		Image.attachment_definitions[:attachment][:path] = ":attachment/:id/:style.:extension"
+    Image.attachment_definitions[:attachment].delete :url
   end
 end
