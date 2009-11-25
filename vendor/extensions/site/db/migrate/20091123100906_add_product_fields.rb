@@ -3,27 +3,31 @@ class AddProductFields < ActiveRecord::Migration
     add_column :products, :legacy_id, :integer
     add_column :products, :short_home, :string
     add_column :products, :anchor_name, :string
-    add_column :products, :short_category, :string
-    add_column :products, :short_subcategory, :string
-    add_column :products, :short_brand, :string
-    add_column :products, :sales_copy, :string
-    add_column :products, :dosage, :string
-    add_column :products, :storage, :string
-    add_column :products, :ingredients, :string
-    add_column :products, :warning, :string
-    add_column :products, :package_description, :string
-    add_column :products, :subtitle_main, :string
-    add_column :products, :subtitle_subcategory, :string
-    add_column :products, :subtitle_brand, :string
+    add_column :products, :short_category, :text
+    add_column :products, :short_subcategory, :text
+    add_column :products, :short_brand, :text
+    add_column :products, :sales_copy, :text
+    add_column :products, :dosage, :text
+    add_column :products, :storage, :text
+    add_column :products, :ingredients, :text
+    add_column :products, :warning, :text
+    add_column :products, :package_description, :text
+    add_column :products, :subtitle_main, :text
+    add_column :products, :subtitle_subcategory, :text
+    add_column :products, :subtitle_brand, :text
     add_column :products, :units_of_measure, :string
     add_column :products, :reminder, :integer
     add_column :products, :export_description_broad, :string
     add_column :products, :export_description_specific, :string
     add_column :products, :country_id, :integer
     add_column :products, :tarrif_code, :string
+    add_column :products, :from, :string
+    add_column :products, :legacy_brand_id, :integer
   end
 
   def self.down
+    remove_column :products, :legacy_brand_id
+    remove_column :products, :from
     remove_column :products, :legacy_id
     remove_column :products, :tarrif_code
     remove_column :products, :country_id
