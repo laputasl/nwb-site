@@ -17,4 +17,20 @@ class SiteExtension < Spree::Extension
 		Image.attachment_definitions[:attachment][:path] = ":attachment/:id/:style.:extension"
     Image.attachment_definitions[:attachment].delete :url
   end
+  
+  Admin::ProductsController.class_eval do
+    def additional_fields
+      load_object
+      @countries = Country.find(:all).sort
+    end
+    
+    before_filter :add_additional_fields
+    
+    private
+    def add_additional_fields
+      @product_admin_tabs << {:name => "Additional Fields", :url => "additional_fields_admin_product_url"}
+    end
+  end
+  
+ 
 end

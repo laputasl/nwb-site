@@ -1,5 +1,4 @@
-# Put your extension routes here.
-
-# map.namespace :admin do |admin|
-#   admin.resources :whatever
-# end  
+map.namespace :admin do |admin|
+   admin.resources :products, :member => {:additional_fields => :get}
+    
+end  

@@ -1,0 +1,47 @@
+<%= error_messages_for :taxon %>
+<% form_for @taxon, :url => admin_adv_edit_taxon_url(@taxon.id), :html => {:multipart => true} do |f| %>
+	<% f.field_container :name do %>
+	  <%= f.label :name, "Taxon Name"%><br />
+	  <%= f.text_field :name, :class => 'fullwidth'  %>
+	  <%= f.error_message_on :name %>
+	<% end %>
+
+	<% f.field_container :title do %>
+	  <%= f.label :title, "Taxon Title"%><br />
+	  <%= f.text_field :title, :class => 'fullwidth'  %>
+	  <%= f.error_message_on :title %>
+	<% end %>
+	
+	<% f.field_container :icon do %>
+	  <%= f.label :icon, "Taxon Icon"%><br />
+	  <%= f.file_field :icon %>
+	  <%= f.error_message_on :icon %>
+	<% end %>
+ 
+  <% f.field_container :description do %>
+    <%= f.label :description, "Taxon Description"%><br />
+    <%= f.text_area :description, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :description %>
+  <% end %>
+
+  <% f.field_container :meta_description do %>
+    <%= f.label :meta_description, "Meta Description"%><br />
+    <%= f.text_area :meta_description, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :meta_description %>
+  <% end %>
+ 
+  <% f.field_container :meta_keywords do %>
+    <%= f.label :meta_keywords, "Meta Keywords"%><br />
+    <%= f.text_area :meta_keywords, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :meta_keywords %>
+  <% end %>
+
+  <% f.field_container :footer do %>
+    <%= f.label :footer, "Footer"%><br />
+    <%= f.text_area :footer, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :footer %>
+  <% end %>
+ 	
+  <%= submit_tag t(:update) %>
+<% end %>
+

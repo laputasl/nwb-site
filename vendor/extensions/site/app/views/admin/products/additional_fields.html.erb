@@ -1,0 +1,132 @@
+<%= render :partial => 'admin/shared/product_sub_menu' %>
+
+<%= render :partial => 'admin/shared/product_tabs', :locals => {:current => "Additional fields"} %>
+
+<% form_for(@product, :url => object_url, :html => { :method => :put, :multipart => true }) do |f| %>
+ 	
+	<% f.field_container :sales_copy do %>
+	  <%= f.label :sales_copy, "Sale Copy"%><br />
+	  <%= f.text_area :sales_copy, {:style=> "height:100px;", :class => 'fullwidth'} %>
+	  <%= f.error_message_on :sales_copy %>
+	<% end %>
+
+	<% f.field_container :short_home do %>
+    <%= f.label :short_home, "Home (Short)"%><br />
+    <%= f.text_area :short_category, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :short_home %>
+  <% end %>
+
+	<% f.field_container :anchor_name do %>
+    <%= f.label :anchor_name, "Anchor Name"%><br />
+    <%= f.text_field :anchor_name, :class => 'fullwidth'  %>
+    <%= f.error_message_on :anchor_name %>
+  <% end %>
+
+  <% f.field_container :short_category do %>
+    <%= f.label :short_category, "Category (Short)"%><br />
+    <%= f.text_area :short_category, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :short_category %>
+  <% end %>
+
+  <% f.field_container :short_subcategory do %>
+    <%= f.label :short_subcategory, "Sub-Category (Short)"%><br />
+    <%= f.text_area :short_subcategory, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :short_subcategory %>
+  <% end %>
+
+  <% f.field_container :short_brand do %>
+    <%= f.label :short_brand, "Brand (Short)"%><br />
+    <%= f.text_area :short_brand, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :short_brand %>
+  <% end %>
+
+  <% f.field_container :dosage do %>
+    <%= f.label :dosage, "Dosage"%><br />
+    <%= f.text_area :dosage, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :dosage %>
+  <% end %>
+
+  <% f.field_container :storage do %>
+    <%= f.label :storage, "Storage"%><br />
+    <%= f.text_area :storage, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :storage %>
+  <% end %>
+
+  <% f.field_container :ingredients do %>
+    <%= f.label :ingredients, "Ingredients"%><br />
+    <%= f.text_area :ingredients, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :ingredients %>
+  <% end %>
+
+  <% f.field_container :warning do %>
+    <%= f.label :warning, "Warning"%><br />
+    <%= f.text_area :warning, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :warning %>
+  <% end %>
+
+  <% f.field_container :package_description do %>
+    <%= f.label :package_description, "Package Description"%><br />
+    <%= f.text_area :package_description, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :package_description %>
+  <% end %>
+
+  <% f.field_container :subtitle_main do %>
+    <%= f.label :subtitle_main, "Subtitle (Main)"%><br />
+    <%= f.text_area :subtitle_main, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :subtitle_main %>
+  <% end %>
+
+  <% f.field_container :subtitle_subcategory do %>
+    <%= f.label :subtitle_subcategory, "Subtitle (Sub-Category)"%><br />
+    <%= f.text_area :subtitle_subcategory, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :subtitle_subcategory %>
+  <% end %>
+
+  <% f.field_container :subtitle_brand do %>
+    <%= f.label :subtitle_brand, "Subtitle (Brand)"%><br />
+    <%= f.text_area :subtitle_brand, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :subtitle_brand %>
+  <% end %>
+
+	<% f.field_container :units_of_measure do %>
+    <%= f.label :units_of_measure, "Unit of Measure"%><br />
+    <%= f.text_field :units_of_measure, :class => 'fullwidth'  %>
+    <%= f.error_message_on :units_of_measure %>
+  <% end %>
+
+	<% f.field_container :reminder do %>
+    <%= f.label :reminder, "Reminder"%><br />
+    <%= f.text_field :reminder, :class => 'fullwidth'  %>
+    <%= f.error_message_on :reminder %>
+  <% end %>
+
+	<% f.field_container :export_description_broad do %>
+    <%= f.label :export_description_broad, "Export Description (Broad)"%><br />
+    <%= f.text_field :export_description_broad, :class => 'fullwidth'  %>
+    <%= f.error_message_on :export_description_broad %>
+  <% end %>
+
+	<% f.field_container :export_description_specific do %>
+    <%= f.label :export_description_specific, "Export Description (Specific)"%><br />
+    <%= f.text_field :export_description_specific, :class => 'fullwidth'  %>
+    <%= f.error_message_on :export_description_specific %>
+  <% end %>
+
+	<% f.field_container :tarrif_code do %>
+    <%= f.label :tarrif_code, "Tarrif Code"%><br />
+    <%= f.text_field :tarrif_code, :class => 'fullwidth'  %>
+    <%= f.error_message_on :tarrif_code %>
+  <% end %>
+	
+	<% f.field_container :country_id do %>
+    <%= f.label :country_id, "Country of Origin "%><br />
+    <%= f.collection_select :country_id, @countries, :id, :name, {}, {:style => 'width:150px;'} %>
+    <%= f.error_message_on :country_id %>
+  <% end %>
+	
+
+
+  <%= render :partial => 'admin/shared/edit_resource_links' %>
+<% end %>
+
+
