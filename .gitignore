@@ -21,6 +21,8 @@ public/javascripts/dashboard.js
 public/javascripts/gateway.js
 public/javascripts/jqPlot/
 public/stylesheets/admin/dashboard.css
+public/pets
+public/people
 config/s3.yml
 
 # from capistrano

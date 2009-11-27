@@ -1,15 +1,15 @@
 <p>
-	<% if session[:store] == "pwb" %>
-		<% if session[:ignore_domain] && session[:started_from] == "nwb"  %>
-			<%= link_to "Back to our products for People", "/people" %>
-		<% else %>
-			<%= link_to "See our natural products for People", "/people" %>
-		<% end %>
-	<% else %>
-		<% if session[:ignore_domain] && session[:started_from] == "pwb" %>
-			<%= link_to "Back to our natural products for Pets", "/pets" %>
-		<% else %>
-			<%= link_to "See our natural products for Pets", "/pets" %>
-		<% end %>
-	<% end %>
+  <% if @site == "pwb" %>
+    <% if @backto_site != @site %>
+      <%= link_to "Back to our products for People", "/" %>
+    <% else %>
+      <%= link_to "See our natural products for People", "/people" %>
+    <% end %>
+  <% else %>
+    <% if @backto_site != @site %>
+      <%= link_to "Back to our natural products for Pets", "/" %>
+    <% else %>
+      <%= link_to "See our natural products for Pets", "/pets" %>
+    <% end %>
+  <% end %>
 </p>

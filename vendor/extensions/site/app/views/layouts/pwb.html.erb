@@ -19,7 +19,7 @@ end
         <%= render 'shared/nav_bar' %>
       </ul>
     </div>
-	<%= logo %>
+  <%= logo %>
   </div>
   <div id="wrapper" class="container">
     <% if @content_for_sidebar %>
@@ -29,8 +29,8 @@ end
     <% end %>
 
     <div id="content">
-			<h3>Pet Well Being.com</h3>
-			<%= render :partial => "shared/store_switch" %>
+      <h3>Pet Well Being.com</h3>
+      <%= render :partial => "shared/store_switch" %>
       <%= breadcrumbs(@taxon) if @taxon %>
       <% if flash[:notice] %>
       <div class="flash notice"><%= flash[:notice] %></div>

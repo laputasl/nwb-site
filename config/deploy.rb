@@ -37,6 +37,12 @@ namespace :spree do
       destination_path = File.join(release_path, asset)
       run "ln -nsf #{origin_path} #{destination_path}"
     end
+
+     %w(pets people).each do |store|
+       origin_path= File.join(release_path, 'public')
+       destination_path = File.join(release_path, 'public', store)
+       run "ln -nsf #{origin_path} #{destination_path}"
+     end
   end
 
   namespace :gems do
