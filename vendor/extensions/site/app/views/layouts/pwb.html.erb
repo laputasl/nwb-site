@@ -13,21 +13,21 @@ if @body_class.nil?
 end
  %>
 <body class="<%= @body_class %>"<%= %( id="#{@body_id}") if @body_id %>>
-  <div id="header" class="container">                                                          
-    <div id="login-bar">          
+  <div id="header" class="container">
+    <div id="login-bar">
       <ul id="nav-bar">
         <%= render 'shared/nav_bar' %>
       </ul>
     </div>
 	<%= logo %>
   </div>
-  <div id="wrapper" class="container"> 
+  <div id="wrapper" class="container">
     <% if @content_for_sidebar %>
     <div id="sidebar">
       <%= yield :sidebar %>
     </div>
     <% end %>
-    
+
     <div id="content">
 			<h3>Pet Well Being.com</h3>
 			<%= render :partial => "shared/store_switch" %>
