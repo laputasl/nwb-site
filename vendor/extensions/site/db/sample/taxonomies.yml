@@ -1,10 +1,14 @@
 system:
   name: System
 nwb_brand:
-  name: NWB Brand
+  name: Brand
+  store: nwb
 pwb_brand:
-  name: PWB Brand
+  name: Brand
+  store: pwb
 nwb_category:
-  name: NWB Category
+  name: Category
+  store: nwb
 pwb_category:
-  name: PWB Category
+  name: Category
+  store: pwb

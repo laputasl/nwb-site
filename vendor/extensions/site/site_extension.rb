@@ -16,14 +16,18 @@ class SiteExtension < Spree::Extension
 		Image.attachment_definitions[:attachment][:bucket] = "nwb"
 		Image.attachment_definitions[:attachment][:path] = ":attachment/:id/:style.:extension"
     Image.attachment_definitions[:attachment].delete :url
+    
+    Spree::BaseController.class_eval do
+      before_filter :set_layout
+   
+      private
+      def set_layout
+         self.class.layout session[:store]
+      end
+    end
   end
   
-  Admin::ProductsController.class_eval do
-    def additional_fields
-      load_object
-      @countries = Country.find(:all).sort
-    end
-    
+  Admin::BaseController.class_eval do
     before_filter :add_additional_fields
     
     private
@@ -32,5 +36,19 @@ class SiteExtension < Spree::Extension
     end
   end
   
- 
+  Admin::ProductsController.class_eval do
+    def additional_fields
+      load_object
+      @countries = Country.find(:all).sort
+    end
+  end
+  
+  Spree::BaseController.class_eval do
+    def get_taxonomies
+      @taxonomies ||= Taxonomy.find(:all, :include => {:root => :children}, :conditions => ["store = ?", session[:store]])
+      @taxonomies
+    end
+  end
+  
+
 end
