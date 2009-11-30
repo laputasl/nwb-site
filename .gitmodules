@@ -7,3 +7,6 @@
 [submodule "vendor/extensions/advanced_taxon"]
 	path = vendor/extensions/advanced_taxon
 	url = git://github.com/romul/spree-advanced-taxon.git
+[submodule "vendor/extensions/product_assembly"]
+	path = vendor/extensions/product_assembly
+	url = git://github.com/romul/spree-product-assembly.git
