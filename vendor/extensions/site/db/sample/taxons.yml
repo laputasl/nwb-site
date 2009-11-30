@@ -42,7 +42,16 @@ value_pack:
   position: 0
   lft: 8
   rgt: 9
-nwb_brand_23: 
+ships_from_canada:
+  id: 9994
+  parent_id: 9999
+  name: Ships from Canada
+  taxonomy: system
+  permalink: system/ships_from_canada
+  position: 0
+  lft: 10
+  rgt: 11
+nwb_brand_23:
   position: 0
   permalink: nwb_brands/hydroviton-cr/
   name: Hydroviton CR
@@ -57,7 +66,7 @@ nwb_brand_23:
   description: ""
   legacy_id: nwb_brand_23
   rgt: 61
-nwb_brand_12: 
+nwb_brand_12:
   position: 0
   permalink: nwb_brands/ultra-hairstop/
   name: Ultra HairStop
@@ -74,7 +83,7 @@ nwb_brand_12:
     Ultra HairStop, professional formula, is formulated to eliminate unwanted hair safely, and easily. Just spray on Ultra HairStop Hair Remover, wait for a few minutes, and then wipe off. It's that simple. Follow with Ultra HairStop Inhibitor to slow the regrowth of hair for up to 6 weeks. Could it be any easier to have a beautiful hair-free body?
   legacy_id: nwb_brand_12
   rgt: 39
-nwb_brand_2: 
+nwb_brand_2:
   position: 0
   permalink: nwb_brands/nisim/
   name: Nisim
@@ -91,7 +100,7 @@ nwb_brand_2:
     Nisim is a unique, ultra deep cleansing shampoo and hair loss treatment that has been specifically formulated to create a clean and nutrient rich environment for healthy hair growth. Many customers begin to see a difference within a week. Nisim shampoo effectively removes the build up of sweat, oils, and dirt as well as neutralizing the DHT on the surface of the scalp. DHT is the most common cause of hair loss. Nisim shampoo has been developed and tested to work in perfect harmony with Nisim New Hair Biofactors Hair Stimulating Extract (a hair loss treatment). Use the shampoo as your first step in the advanced New Hair Biofactors Tri Pack. Nisim shampoos can be used as standalone solutions or in combination with other Nisim hair loss products.
   legacy_id: nwb_brand_2
   rgt: 23
-nwb_brand_3: 
+nwb_brand_3:
   position: 0
   permalink: nwb_brands/hair-essentials/
   name: Hair Essentials
@@ -101,7 +110,7 @@ nwb_brand_3:
   parent_id: 2000
   legacy_id: nwb_brand_3
   rgt: 25
-pwb_brand_root: 
+pwb_brand_root:
   position: 0
   permalink: pwb_brands/
   name: PWB Brands
@@ -109,7 +118,7 @@ pwb_brand_root:
   id: 1000
   taxonomy: pwb_brand
   rgt: 18
-nwb_brand_24: 
+nwb_brand_24:
   position: 0
   permalink: nwb_brands/trioxil/
   name: Trioxil
@@ -124,7 +133,7 @@ nwb_brand_24:
   description: ""
   legacy_id: nwb_brand_24
   rgt: 63
-nwb_brand_13: 
+nwb_brand_13:
   position: 0
   permalink: nwb_brands/egf-plus/
   name: EGF Plus
@@ -134,12 +143,12 @@ nwb_brand_13:
   meta_description: ""
   meta_keywords: ""
   taxonomy: nwb_brand
-  footer: 
+  footer:
   parent_id: 2000
   description: <h1>Advance skin care from EGF</h1> EGF Plus Rejuvenating Essential is a breakthrough in skin care. It contains an unique human protein (EGF), which helps speed up epidermal cell renewal and reduce fine wrinkles. <br>
   legacy_id: nwb_brand_13
   rgt: 41
-nwb_brand_4: 
+nwb_brand_4:
   position: 0
   permalink: nwb_brands/naka/
   name: Naka
@@ -154,7 +163,7 @@ nwb_brand_4:
   description: ""
   legacy_id: nwb_brand_4
   rgt: 27
-pwb_brand_2: 
+pwb_brand_2:
   position: 0
   permalink: pwb_brands/nhv/
   name: NHV
@@ -169,7 +178,7 @@ pwb_brand_2:
   description: We at NHV are proud to manufacture the highest quality, all-natural, cat supplies available on the market today.   We understand that all cats are different, and because of this, they each have their own individual health issues.  For that reason we have committed ourselves to producing one of the widest varieties of cat health supplies available.  Be it liver disease, skin irritation, ear mites, ear infection, cat cancer, wound spray, paw injury ointment, heart disease, worms, anxiety, stress disorder, arthritis, kitty breath, fleas, diabetes, diarrhea, allergies, kidney disease, or aggression, we at NHV will have a product for your pet&rsquo;s particular problem.
   legacy_id: pwb_brand_2
   rgt: 3
-nwb_brand_25: 
+nwb_brand_25:
   position: 0
   permalink: nwb_brands/viterol-a/
   name: Viterol.A
@@ -184,7 +193,7 @@ nwb_brand_25:
   description: ""
   legacy_id: nwb_brand_25
   rgt: 65
-nwb_brand_14: 
+nwb_brand_14:
   position: 0
   permalink: nwb_brands/nhd/
   name: NHD
@@ -201,7 +210,7 @@ nwb_brand_14:
     Find a selection of natural products that help relieve the symptoms of herpes simplex and cold sores.
   legacy_id: nwb_brand_14
   rgt: 43
-nwb_brand_5: 
+nwb_brand_5:
   position: 0
   permalink: nwb_brands/naturalwellbeing/
   name: NaturalWellbeing
@@ -218,7 +227,7 @@ nwb_brand_5:
     Natural supplements that increase libido.
   legacy_id: nwb_brand_5
   rgt: 29
-pwb_brand_3: 
+pwb_brand_3:
   position: 0
   permalink: pwb_brands/nupro/
   name: Nupro
@@ -233,7 +242,7 @@ pwb_brand_3:
   description: If you are concerned for the wellbeing of your cat turn to the pet wellness company that is dedicated to the production of all-natural pet supplies of unparalleled quality, Nupro.  Nupro supplements are scientifically formulated to be rich in minerals, vitamins, amino acids, and essential nutrients. Any product offered by Nupro is comprised of only all natural ingredients of the highest quality ingredients.  It is for this reason that Nupro boasts the most complete dietary supplements on today&rsquo;s market.  Our painstaking dedication to quality can be recognized through the fact that Nupro products contain no sugar, starch fillers, or preservatives.   If improving the overall health of your cat, be sure to invest in one of Nupro&rsquo;s fine products.
   legacy_id: pwb_brand_3
   rgt: 5
-nwb_brand_26: 
+nwb_brand_26:
   position: 0
   permalink: nwb_brands/epilady/
   name: Epilady
@@ -248,7 +257,7 @@ nwb_brand_26:
   description: Epilady is the world's leading brand of electronic hair removers.
   legacy_id: nwb_brand_26
   rgt: 67
-nwb_brand_15: 
+nwb_brand_15:
   position: 0
   permalink: nwb_brands/milargo/
   name: Milargo
@@ -265,7 +274,7 @@ nwb_brand_15:
     Milagro Nail Conditioner is absorbed by the nail to deliver a rich combination of gentle botanicals, minerals, and essential amino acids to encourage your nails to be smooth, curved, and void of any spotting.
   legacy_id: nwb_brand_15
   rgt: 45
-nwb_brand_6: 
+nwb_brand_6:
   position: 0
   permalink: nwb_brands/hair-no-more/
   name: Hair No More
@@ -289,7 +298,7 @@ nwb_brand_6:
     <p>Hair No More can be safely used by men and women on all areas of unwanted body hair. Hair No More has been clinically and dermatologist-tested and shown to be 100% effective and safe.<br /></p>
   legacy_id: nwb_brand_6
   rgt: 31
-nwb_brand_root: 
+nwb_brand_root:
   position: 0
   permalink: nwb_brands/
   name: NWB Brands
@@ -297,7 +306,7 @@ nwb_brand_root:
   id: 2000
   taxonomy: nwb_brand
   rgt: 68
-pwb_brand_4: 
+pwb_brand_4:
   position: 0
   permalink: pwb_brands/ark-naturals/
   name: Ark Naturals
@@ -312,7 +321,7 @@ pwb_brand_4:
   description: The most trusted brand in all-natural cat supplies is Ark Naturals. Over the past ten years Ark Naturals has been at the forefront for innovative change in the constantly changing and growing field of natural cat care.  We at Ark Naturals are proud to produce a full line of vet recommended, all-natural, holistic, remedies that are guaranteed safe for your cat.  The all-natural ingredients used in all of the Ark Naturals products is what separates them as second to none in overall quality.  So if your pet&rsquo;s overall wellness is a concern of yours, look no further than the trusted all-natural remedies manufactured by Ark Naturals.
   legacy_id: pwb_brand_4
   rgt: 7
-nwb_brand_16: 
+nwb_brand_16:
   position: 0
   permalink: nwb_brands/rozge/
   name: Rozge
@@ -329,7 +338,7 @@ nwb_brand_16:
     Specially formulated for people experiencing hair thinning or rapid hair loss .
   legacy_id: nwb_brand_16
   rgt: 47
-pwb_brand_5: 
+pwb_brand_5:
   position: 0
   permalink: pwb_brands/drinkwell/
   name: DrinkWell
@@ -344,7 +353,7 @@ pwb_brand_5:
   description: For nearly thirteen years the diligent people at DrinkWell have been working hard to improve the lives of cats.  One easy way for a cat owner to improve the health of their pet is by increasing its water consumption.  We at DrinkWell took this line of thought a step further by manufacturing a superior cat fountain that not only encourages a pet to drink but also filters the water that it consumes.  The suffering of urinary diseases are a common side effect of dehydration.  Don&rsquo;t let your cat fall victim to this terrible affliction.  Encourage your pet to drink, clean, pure, water by investing in the DrinkWell cat fountain.
   legacy_id: pwb_brand_5
   rgt: 9
-nwb_brand_17: 
+nwb_brand_17:
   position: 0
   permalink: nwb_brands/touchme/
   name: TouchMe
@@ -354,12 +363,12 @@ nwb_brand_17:
   meta_description: Offers a wide range of hair removal products.
   meta_keywords: ""
   taxonomy: nwb_brand
-  footer: 
+  footer:
   parent_id: 2000
   description: <H1>TouchMe body sugaring hair removal</H1>
   legacy_id: nwb_brand_17
   rgt: 49
-nwb_brand_8: 
+nwb_brand_8:
   position: 0
   permalink: nwb_brands/kalo/
   name: Kalo
@@ -376,7 +385,7 @@ nwb_brand_8:
     Kalo safely and effectively inhibits unwanted body hair from growing back    permanently. You will never need to deal with waxing, tweezing, laser or electrolysis    again. Kalo is great for Bodybuilders, Swimmers, Cyclists or anyone who wants a    great looking hair free body. Kalo is effective on facial hair, back hair, leg hair,    even safe for sensitive areas. Kalo is the painless solution from hair removal for    men or women.
   legacy_id: nwb_brand_8
   rgt: 33
-pwb_brand_6: 
+pwb_brand_6:
   position: 0
   permalink: pwb_brands/zukes/
   name: Zuke's
@@ -391,7 +400,7 @@ pwb_brand_6:
   description: ""
   legacy_id: pwb_brand_6
   rgt: 11
-nwb_brand_18: 
+nwb_brand_18:
   position: 0
   permalink: nwb_brands/parissa/
   name: Parissa
@@ -406,7 +415,7 @@ nwb_brand_18:
   description: Offers a wide selection of Parissa waxing and body sugaring products for hair removal.
   legacy_id: nwb_brand_18
   rgt: 51
-nwb_brand_9: 
+nwb_brand_9:
   position: 0
   permalink: nwb_brands/nicitout/
   name: Nicitout
@@ -416,12 +425,12 @@ nwb_brand_9:
   meta_description: ""
   meta_keywords: ""
   taxonomy: nwb_brand
-  footer: 
+  footer:
   parent_id: 2000
   description: <h1>Nicitout quit smoking aids </h1>
   legacy_id: nwb_brand_9
   rgt: 35
-pwb_brand_7: 
+pwb_brand_7:
   position: 0
   permalink: pwb_brands/earth-dog/
   name: Earth Dog
@@ -436,7 +445,7 @@ pwb_brand_7:
   description: ""
   legacy_id: pwb_brand_7
   rgt: 13
-nwb_brand_20: 
+nwb_brand_20:
   position: 0
   permalink: nwb_brands/biolee/
   name: Biolee
@@ -451,7 +460,7 @@ nwb_brand_20:
   description: ""
   legacy_id: nwb_brand_20
   rgt: 55
-nwb_brand_19: 
+nwb_brand_19:
   position: 0
   permalink: nwb_brands/vector-set/
   name: Vector Set
@@ -466,7 +475,7 @@ nwb_brand_19:
   description: Vector Set - Home Electrolysis
   legacy_id: nwb_brand_19
   rgt: 53
-pwb_brand_8: 
+pwb_brand_8:
   position: 0
   permalink: pwb_brands/pet-health-kits/
   name: Assorted Kits
@@ -476,7 +485,7 @@ pwb_brand_8:
   parent_id: 1000
   legacy_id: pwb_brand_8
   rgt: 15
-nwb_brand_21: 
+nwb_brand_21:
   position: 0
   permalink: nwb_brands/clio/
   name: Clio
@@ -491,7 +500,7 @@ nwb_brand_21:
   description: ""
   legacy_id: nwb_brand_21
   rgt: 57
-nwb_brand_10: 
+nwb_brand_10:
   position: 0
   permalink: nwb_brands/vita-herbs/
   name: Vita-Herbs
@@ -501,7 +510,7 @@ nwb_brand_10:
   parent_id: 2000
   legacy_id: nwb_brand_10
   rgt: 37
-pwb_brand_9: 
+pwb_brand_9:
   position: 0
   permalink: pwb_brands/the-honest-kitchen/
   name: The Honest Kitchen
@@ -516,7 +525,7 @@ pwb_brand_9:
   description: ""
   legacy_id: pwb_brand_9
   rgt: 17
-nwb_brand_22: 
+nwb_brand_22:
   position: 0
   permalink: nwb_brands/spectral/
   name: Spectral
@@ -531,7 +540,7 @@ nwb_brand_22:
   description: Extra Strength hair loss treatment with Minoxidil
   legacy_id: nwb_brand_22
   rgt: 59
-nwb_brand_1: 
+nwb_brand_1:
   position: 0
   permalink: nwb_brands/revivogen/
   name: Revivogen
@@ -548,7 +557,7 @@ nwb_brand_1:
     Revivogen is made with the safest, most powerful natural ingredients to form    a product that not only combats hair loss, but promotes thicker, fuller and healthier    hair growth. Revivogen Formula is a revolutionary, all-natural solution in the fight    against hair loss. Unlike its competitors, Revivogen is based on the latest medical    breakthroughs into the cause and treatment of hair loss and is made with natural    ingredients that have been scientifically proven to reduce DHT production, block    the androgen receptors and stimulate hair growth. Revivogen is used topically, can    be used by both men and women and has no known systemic side effects.
   legacy_id: nwb_brand_1
   rgt: 21
-nwb_cat_type_45_20: 
+nwb_cat_type_45_20:
   position: 0
   permalink: nwb_categories/smok/cleansers
   name: Cleansers
@@ -563,7 +572,7 @@ nwb_cat_type_45_20:
   description: ""
   legacy_id: type_45
   rgt: 498
-nwb_cat_type_44_2: 
+nwb_cat_type_44_2:
   position: 0
   permalink: nwb_categories/hrem/electrolysis-hair-removal
   name: Electrolysis
@@ -584,13 +593,13 @@ nwb_cat_type_44_2:
     <ul>
       <li> Cheaper then professional electrolysis.</li>
       <li>You can do it from home when it's convenient for you. </li>
-      <li>Home electrolysis is an option for those who want permanent hair removal but 
-        don't have the time to book regular appointments. 
+      <li>Home electrolysis is an option for those who want permanent hair removal but
+        don't have the time to book regular appointments.
       </li>
     </ul>
   legacy_id: type_44
   rgt: 534
-nwb_cat_type_41_5: 
+nwb_cat_type_41_5:
   position: 0
   permalink: nwb_categories/arth/arthritis
   name: Arthritis
@@ -605,7 +614,7 @@ nwb_cat_type_41_5:
   description: ""
   legacy_id: type_41
   rgt: 154
-nwb_cat_type_25_25: 
+nwb_cat_type_25_25:
   position: 0
   permalink: nwb_categories/whel/female-libido
   name: Female Libido
@@ -620,7 +629,7 @@ nwb_cat_type_25_25:
   description: <h1>Womens Sex Drive </h1>These herbal supplements are designed to increase a womens sex drive.<br>
   legacy_id: type_25
   rgt: 482
-nwb_cat_type_35_2: 
+nwb_cat_type_35_2:
   position: 0
   permalink: nwb_categories/hrem/hair-removal-sugaring
   name: Sugaring
@@ -635,19 +644,19 @@ nwb_cat_type_35_2:
     Sugaring is a method of hair removal that uses a substance that sticks to the hair and not the skin.  The sugaring products offered here at NaturalWellbeing.com are all-natural, which means they are PH balanced for your skin, without the use of any nasty chemicals.   Not to mention it is easy to wash off after you are done.  This technique is offers all the benefits of waxing without the harsh realities of skin irritation or rash.  That is the sugaring advantage.  So if you are ready to get rid of unwanted body hair without the risk of rash or irritation, be sure to invest in one of the fine sugaring products offered by the fine people at NaturalWellbeing.com.   We have made it our business to offer all of the finest products that are useful in ending the embarrassment and shame of unwanted body hair, so if you are interested in a healthier, all-natural, alternative to waxing, look no further than the sugaring advantage.  "
   parent_id: 4001
   description: |-
-    <h1>Sugaring Body Hair Removal</h1> 
+    <h1>Sugaring Body Hair Removal</h1>
     <ul>
       <li>Sugaring is a good medium to long term hair removal solution. </li>
-      <li>Similar to waxing, but the sugaring gel only sticks to the hair and not the 
+      <li>Similar to waxing, but the sugaring gel only sticks to the hair and not the
         skin. </li>
-      <li>Highly effective on legs, body & face, hair grows back slower and finer 
+      <li>Highly effective on legs, body & face, hair grows back slower and finer
         with continued applications. </li>
       <li>Sugaring gel is easily washed off.</li>
       <li>It can be done at home and is inexpensive. </li>
     </ul>
   legacy_id: type_35
   rgt: 480
-nwb_cat_type_10_3: 
+nwb_cat_type_10_3:
   position: 0
   permalink: nwb_categories/meno/health-capsules
   name: Capsules
@@ -662,7 +671,7 @@ nwb_cat_type_10_3:
   description: ""
   legacy_id: type_10
   rgt: 452
-nwb_cat_3: 
+nwb_cat_3:
   position: 0
   permalink: nwb_categories/meno
   name: Makeup
@@ -683,7 +692,7 @@ nwb_cat_3:
     </table>"
   legacy_id: cat_3
   rgt: 58
-pwb_cat_type_7_3: 
+pwb_cat_type_7_3:
   position: 0
   permalink: pwb_categories/cat_supplies/cat-dog-stress-anxiety
   name: Stress & Anxiety
@@ -700,7 +709,7 @@ pwb_cat_type_7_3:
   description: "Petwellbeing.com is proud to be on the forefront of the ever-changing field of cat psychology.   It is now known that cat stress and anxiety is a real issue and it may be affecting the quality of your pet\xE2\x80\x99s life.  To counter this growing trend in the cat community we at Petwellness.com offer a variety of products dealing with the growing issue of cat stress and anxiety.  So if you think that your cat may suffer from cat stress and anxiety look no further than the all-natural high quality products available at Petwellbeing.com."
   legacy_id: type_7
   rgt: 39
-pwb_cat_type_8_2: 
+pwb_cat_type_8_2:
   position: 0
   permalink: pwb_categories/dog_supplies/cat-dog-vitamins
   name: Vitamins & Dietary Supplements
@@ -721,7 +730,7 @@ pwb_cat_type_8_2:
   description: "A dog cannot live a healthy life if it is not well fed.  At Petwellbeing.com we have a wide array of dog vitamins and dietary supplements designed to improve the overall wellness of your dog.  The all natural dog vitamins and dietary supplements can help a dog get the essential nutrients, enzymes, and minerals that may be missing from the processed food that he eats. "
   legacy_id: type_8
   rgt: 49
-nwb_cat_type_36_2: 
+nwb_cat_type_36_2:
   position: 0
   permalink: nwb_categories/hrem/hair-removal-waxing
   name: Waxing
@@ -738,14 +747,14 @@ nwb_cat_type_36_2:
   description: |-
     <h1>Hair waxing and leg waxing</h1>
     <ul>
-      <li>Waxing is highly effective on legs, chest, bikini lines, face, eyebrows & 
+      <li>Waxing is highly effective on legs, chest, bikini lines, face, eyebrows &
         upper lips. </li>
       <li>Waxing can be done at home, it is fast & inexpensive. </li>
       <li>Waxing is a great medium to long term hair removal solution.</li>
     </ul>
   legacy_id: type_36
   rgt: 492
-nwb_cat_type_10_4: 
+nwb_cat_type_10_4:
   position: 0
   permalink: nwb_categories/hlss/health-capsules
   name: Capsules
@@ -760,7 +769,7 @@ nwb_cat_type_10_4:
   description: ""
   legacy_id: type_10
   rgt: 448
-nwb_cat_type_10_20: 
+nwb_cat_type_10_20:
   position: 0
   permalink: nwb_categories/smok/health-capsules
   name: Capsules
@@ -775,7 +784,7 @@ nwb_cat_type_10_20:
   description: ""
   legacy_id: type_10
   rgt: 456
-nwb_cat_4: 
+nwb_cat_4:
   position: 0
   permalink: nwb_categories/hlss
   name: Hair Loss
@@ -819,7 +828,7 @@ nwb_cat_4:
     </p>
   legacy_id: cat_4
   rgt: 60
-nwb_cat_20: 
+nwb_cat_20:
   position: 0
   permalink: nwb_categories/smok
   name: Acne Skin Care
@@ -865,7 +874,7 @@ nwb_cat_20:
     </table>"
   legacy_id: cat_20
   rgt: 66
-nwb_cat_type_9_4: 
+nwb_cat_type_9_4:
   position: 0
   permalink: nwb_categories/hlss/hair-loss-topical-formulas
   name: Topical Formulas
@@ -879,16 +888,16 @@ nwb_cat_type_9_4:
   parent_id: 4003
   description: |-
     <h1>DHT blocker, dht blockers,amd dht inhibitors</h1>
-      These hair loss products contain a natural yet extremely powerful anti-DHT formula 
-      which acts as a dht blocker or dht inhibitor. The ingredients work through different 
-      mechanisms to synergistically inhibit both type 1 and 2 forms of 5-Alpha Reductase 
-      and decrease DHT locally. By decreasing the DHT levels, hair follicles can grow 
-      and thicken naturally, leading to a fuller, healthier scalp without the side effects 
-      associated with synthetic drugs. A DHT blocker inhibits the androgen receptors and 
+      These hair loss products contain a natural yet extremely powerful anti-DHT formula
+      which acts as a dht blocker or dht inhibitor. The ingredients work through different
+      mechanisms to synergistically inhibit both type 1 and 2 forms of 5-Alpha Reductase
+      and decrease DHT locally. By decreasing the DHT levels, hair follicles can grow
+      and thicken naturally, leading to a fuller, healthier scalp without the side effects
+      associated with synthetic drugs. A DHT blocker inhibits the androgen receptors and
       stimulates hair growth.<br>
   legacy_id: type_9
   rgt: 442
-pwb_cat_type_9_2: 
+pwb_cat_type_9_2:
   position: 0
   permalink: pwb_categories/dog_supplies/cat-dog-oral-hygiene
   name: Oral Hygiene
@@ -909,7 +918,7 @@ pwb_cat_type_9_2:
   description: "Anyone that has heard the term \xE2\x80\x9Cdoggie breath\xE2\x80\x9D knows that a dog\xE2\x80\x99s mouth is not always the freshest place.  "
   legacy_id: type_9
   rgt: 33
-pwb_cat_type_8_3: 
+pwb_cat_type_8_3:
   position: 0
   permalink: pwb_categories/cat_supplies/cat-dog-vitamins
   name: Vitamins & Dietary Supplements
@@ -928,7 +937,7 @@ pwb_cat_type_8_3:
   description: "If a cat is not well fed it cannot live a healthy life.  At Petwellbeing.com we boast a wide variety of cat vitamins and dietary supplements formulated to aid the overall health of your cat.  These all-natural cat vitamins and dietary supplements can help cats acquire the essential nutrients, enzymes, and minerals that are missing from most of the processed food on the market.  The food that you choose to feed to your cat is a vital part of ensuring that it stays healthy.  So if you are serious about helping your cat live a long and healthy life consider trying one of the various cat vitamins and dietary supplements offered here at Petwellbeing.com. "
   legacy_id: type_8
   rgt: 47
-nwb_cat_type_45_3: 
+nwb_cat_type_45_3:
   position: 0
   permalink: nwb_categories/meno/cleansers
   name: Cleansers
@@ -943,7 +952,7 @@ nwb_cat_type_45_3:
   description: Learn about Clio branded skin care products and facial cleansers <BR>
   legacy_id: type_45
   rgt: 522
-nwb_cat_type_51_20: 
+nwb_cat_type_51_20:
   position: 0
   permalink: nwb_categories/smok/foundations
   name: Foundations
@@ -958,7 +967,7 @@ nwb_cat_type_51_20:
   description: ""
   legacy_id: type_51
   rgt: 502
-nwb_cat_5: 
+nwb_cat_5:
   position: 0
   permalink: nwb_categories/arth
   name: Arthritis
@@ -979,7 +988,7 @@ nwb_cat_5:
     <p>We\xE2\x80\x99ve done our homework and shopped the globe. On this page, you\xE2\x80\x99ll find our shortlist of the finest, most effective natural herbal arthritis pain relief products available anywhere.</p>"
   legacy_id: cat_5
   rgt: 62
-nwb_cat_21: 
+nwb_cat_21:
   position: 0
   permalink: nwb_categories/wrin
   name: Skin Care
@@ -997,7 +1006,7 @@ nwb_cat_21:
     <p>We also offer related products, such as natural wart creams and treatments for <a href=\"http://www.toenailfungus.org/\" class=\"out\">toenail fungus</a>. We even have products to improve the health of your nails and cuticles.</p>"
   legacy_id: cat_21
   rgt: 68
-nwb_cat_type_31_26: 
+nwb_cat_type_31_26:
   position: 0
   permalink: nwb_categories/csor/herpes-liquid-drops
   name: Liquid Drops
@@ -1011,13 +1020,13 @@ nwb_cat_type_31_26:
   parent_id: 4010
   description: |-
     <h1>Treating a cold sore</h1>
-      Everyone who has suffered from a cold sore knows how terribly embarrassing they 
-      can be. Now you can drastically reduce the time it takes to heal your cold sore 
-      by treating it with this herbal remedy. Treating a cold sore has never been so easy 
+      Everyone who has suffered from a cold sore knows how terribly embarrassing they
+      can be. Now you can drastically reduce the time it takes to heal your cold sore
+      by treating it with this herbal remedy. Treating a cold sore has never been so easy
       or effective.
   legacy_id: type_31
   rgt: 432
-pwb_cat_type_9_3: 
+pwb_cat_type_9_3:
   position: 0
   permalink: pwb_categories/cat_supplies/cat-dog-oral-hygiene
   name: Oral Hygiene
@@ -1036,7 +1045,7 @@ pwb_cat_type_9_3:
   description: "In the world of pet health, cat oral hygiene is something that is often overlooked. We at Petwellbeing.com pride ourselves on thinking outside the box, and as a result it occurred to us: Why should a cat have bad breath?  "
   legacy_id: type_9
   rgt: 31
-nwb_cat_type_10_21: 
+nwb_cat_type_10_21:
   position: 0
   permalink: nwb_categories/wrin/health-capsules
   name: Capsules
@@ -1051,7 +1060,7 @@ nwb_cat_type_10_21:
   description: ""
   legacy_id: type_10
   rgt: 424
-nwb_cat_type_10_5: 
+nwb_cat_type_10_5:
   position: 0
   permalink: nwb_categories/arth/health-capsules
   name: Capsules
@@ -1065,18 +1074,18 @@ nwb_cat_type_10_5:
   parent_id: 4004
   description: |-
     <h1>Arthritis pain relief</h1>
-      Arthritis pain relief products contain powerful anti-inflammatory and herbal extracts 
-      that bring fast, long-lasting pain relief to aching joints and sore muscles associated 
-      with rheumatoid arthritis and osteoarthritis. Millions of Americans are looking 
-      for a safer healthier way to ease the pain brought on by arthritis. For years we 
-      have been told that prescription drugs were our only choice. The truth is that arthritis 
-      pain has been treated with herbs for thousands of years and today Americans are 
-      finally experiencing relief. Herbal supplements are absolutely safe, and we have 
-      confidence they can help you. The perfect solution to arthritis pain and lasting 
+      Arthritis pain relief products contain powerful anti-inflammatory and herbal extracts
+      that bring fast, long-lasting pain relief to aching joints and sore muscles associated
+      with rheumatoid arthritis and osteoarthritis. Millions of Americans are looking
+      for a safer healthier way to ease the pain brought on by arthritis. For years we
+      have been told that prescription drugs were our only choice. The truth is that arthritis
+      pain has been treated with herbs for thousands of years and today Americans are
+      finally experiencing relief. Herbal supplements are absolutely safe, and we have
+      confidence they can help you. The perfect solution to arthritis pain and lasting
       relief is herbal.<BR>
   legacy_id: type_10
   rgt: 436
-nwb_cat_type_51_21: 
+nwb_cat_type_51_21:
   position: 0
   permalink: nwb_categories/wrin/foundations
   name: Foundations
@@ -1091,7 +1100,7 @@ nwb_cat_type_51_21:
   description: ""
   legacy_id: type_51
   rgt: 530
-nwb_cat_type_46_3: 
+nwb_cat_type_46_3:
   position: 0
   permalink: nwb_categories/meno/toners
   name: Toners
@@ -1106,14 +1115,14 @@ nwb_cat_type_46_3:
   description: "This soothing toner provides the skin with a fresh, clean feeling. "
   legacy_id: type_46
   rgt: 524
-nwb_category_root: 
+nwb_category_root:
   position: 0
   permalink: nwb_categories/
   name: NWB Categories
   lft: 54
   id: 4000
   taxonomy: nwb_category
-nwb_cat_type_47_3: 
+nwb_cat_type_47_3:
   position: 0
   permalink: nwb_categories/meno/moisturizers
   name: Moisturizers
@@ -1128,7 +1137,7 @@ nwb_cat_type_47_3:
   description: Infuse your skin with Clio's facial moisturizer and give it the hydration it deserves <BR>
   legacy_id: type_47
   rgt: 520
-nwb_cat_24: 
+nwb_cat_24:
   position: 0
   permalink: nwb_categories/mhel
   name: Men's Health
@@ -1143,7 +1152,7 @@ nwb_cat_24:
   description: Natural products for a healthy man. Men's health and men's sexual health<br>
   legacy_id: cat_24
   rgt: 70
-nwb_cat_type_25_10: 
+nwb_cat_type_25_10:
   position: 0
   permalink: nwb_categories/libi/female-libido
   name: Female Libido
@@ -1156,30 +1165,30 @@ nwb_cat_type_25_10:
   footer: ""
   parent_id: 4005
   description: |-
-    <h1>Female Libido and Female Sex Drive</h1>As a female we often suffer from a decline in libido, especially when our hormone 
-    levels fall after menopause. Research has shown that nearly 40 percent of women experience 
-    a decline in sex drive and libido during menopause. NaturalWellbeing has researched 
-    the marketplace and found three natural alternatives to hormone replacement drugs. 
+    <h1>Female Libido and Female Sex Drive</h1>As a female we often suffer from a decline in libido, especially when our hormone
+    levels fall after menopause. Research has shown that nearly 40 percent of women experience
+    a decline in sex drive and libido during menopause. NaturalWellbeing has researched
+    the marketplace and found three natural alternatives to hormone replacement drugs.
     These herbal supplements are designed to increase female libido and increase
     your sex drive.<br>
   legacy_id: type_25
   rgt: 460
-nwb_cat_type_27_24: 
+nwb_cat_type_27_24:
   position: 0
   permalink: nwb_categories/mhel/prostate-health
   name: Prostate health
   title: Prostate health - enlarged prostate
   lft: 463
   id: 4205
-  meta_keywords: 
-  meta_description: 
+  meta_keywords:
+  meta_description:
   taxonomy: nwb_category
-  footer: 
+  footer:
   parent_id: 4008
-  description: 
+  description:
   legacy_id: type_27
   rgt: 464
-nwb_cat_type_10_24: 
+nwb_cat_type_10_24:
   position: 0
   permalink: nwb_categories/mhel/health-capsules
   name: Capsules
@@ -1194,7 +1203,7 @@ nwb_cat_type_10_24:
   description: ""
   legacy_id: type_10
   rgt: 454
-nwb_cat_type_26_24: 
+nwb_cat_type_26_24:
   position: 0
   permalink: nwb_categories/mhel/cholesterol
   name: Cholesterol
@@ -1209,7 +1218,7 @@ nwb_cat_type_26_24:
   description: <h1>Low cholesterol diet - herbal supplements</h1>
   legacy_id: type_26
   rgt: 466
-nwb_cat_type_17_2: 
+nwb_cat_type_17_2:
   position: 0
   permalink: nwb_categories/hrem/hair-removal-creams
   name: Hair Removal Creams
@@ -1233,7 +1242,7 @@ nwb_cat_type_17_2:
     </ul>
   legacy_id: type_17
   rgt: 526
-nwb_cat_type_26_25: 
+nwb_cat_type_26_25:
   position: 0
   permalink: nwb_categories/whel/cholesterol
   name: Cholesterol
@@ -1248,7 +1257,7 @@ nwb_cat_type_26_25:
   description: <h1>Supplement for a womans cholesterol level</h1>
   legacy_id: type_26
   rgt: 488
-nwb_cat_type_21_2: 
+nwb_cat_type_21_2:
   position: 0
   permalink: nwb_categories/hrem/ingrown-hairs
   name: Ingrown hairs
@@ -1263,17 +1272,17 @@ nwb_cat_type_21_2:
     The ingrown hair treatments offered here at NaturalWellbeing.com have been specifically designed to respond to the needs of those who suffer from ingrown hairs.  That means that our product does not just treat ingrown hairs but it also soothes the skin, while providing a cooling effect for after shaving.  This spectacular ingrown hair treatment is equipped with a spray nozzle that makes application easy on even the most difficult areas to reach such as the bikini line, eyebrows, or neck.  Our ingrown hair treatment combats through the exfoliation of the outer dermal layer of skin by adding elasticity to the exposed hair follicle.   Little by little the ingrown hair is released through the skin rather than retreating below the surface.  This process is what separates our ingrown hair treatment from that of our competitors.  A sound scientific base and effective methodology leaves the spectacular ingrown hair removal treatment offered at naturalwellness.com a cut above the rest.   "
   parent_id: 4001
   description: |-
-    <h1>Ingrown hair removal and ingrown hair home remedies</h1> 
+    <h1>Ingrown hair removal and ingrown hair home remedies</h1>
     <ul>
       <li>Relieves the pressure and irritation caused by ingrown hairs. </li>
-      <li>Soothes rashes and irritations such as redness and razor burns caused by hair 
+      <li>Soothes rashes and irritations such as redness and razor burns caused by hair
         removal treatments.</li>
       <li>Effective relief of pubic and bikini line ingrown hairs.</li>
       <li>Helps eliminate future ingrown hairs.</li>
     </ul>
   legacy_id: type_21
   rgt: 474
-nwb_cat_type_10_25: 
+nwb_cat_type_10_25:
   position: 0
   permalink: nwb_categories/whel/health-capsules
   name: Capsules
@@ -1288,7 +1297,7 @@ nwb_cat_type_10_25:
   description: ""
   legacy_id: type_10
   rgt: 458
-nwb_cat_25: 
+nwb_cat_25:
   position: 0
   permalink: nwb_categories/whel
   name: Women's Health
@@ -1303,7 +1312,7 @@ nwb_cat_25:
   description: </h1>Natural products to promote women's health and women's sexual health.<br>
   legacy_id: cat_25
   rgt: 72
-nwb_cat_type_51_3: 
+nwb_cat_type_51_3:
   position: 0
   permalink: nwb_categories/meno/foundations
   name: Foundations
@@ -1318,7 +1327,7 @@ nwb_cat_type_51_3:
   description: Clio makeup powders, foundations and concealers visibly improve the complexion, yet look incredibly natural on the skin. <br>
   legacy_id: type_51
   rgt: 514
-nwb_cat_type_46_20: 
+nwb_cat_type_46_20:
   position: 0
   permalink: nwb_categories/smok/toners
   name: Toners
@@ -1333,7 +1342,7 @@ nwb_cat_type_46_20:
   description: ""
   legacy_id: type_46
   rgt: 510
-nwb_cat_type_47_20: 
+nwb_cat_type_47_20:
   position: 0
   permalink: nwb_categories/smok/moisturizers
   name: Moisturizers
@@ -1348,7 +1357,7 @@ nwb_cat_type_47_20:
   description: ""
   legacy_id: type_47
   rgt: 504
-nwb_cat_type_33_24: 
+nwb_cat_type_33_24:
   position: 0
   permalink: nwb_categories/mhel/mens-heart-health
   name: Heart health
@@ -1363,14 +1372,14 @@ nwb_cat_type_33_24:
   description: <h1>Heart Health</h1>
   legacy_id: type_33
   rgt: 484
-pwb_category_root: 
+pwb_category_root:
   position: 0
   permalink: pwb_categories/
   name: PWB Categories
   lft: 1
   id: 3000
   taxonomy: pwb_category
-nwb_cat_type_10_26: 
+nwb_cat_type_10_26:
   position: 0
   permalink: nwb_categories/csor/health-capsules
   name: Capsules
@@ -1384,14 +1393,14 @@ nwb_cat_type_10_26:
   parent_id: 4010
   description: |-
     <h1>Cold Sore remedies</h1>
-    Powerful capsules that relieve the symptoms of a cold sore. Suffering from 
-      the embarrassment of a cold sore? Trilex is specially formulated to help you cope. 
-      Trilex takes the heat and irritation out of a cold sore almost immediately. A cold 
-      sore may act up for almost two weeks, using trilex can help control the symptoms 
+    Powerful capsules that relieve the symptoms of a cold sore. Suffering from
+      the embarrassment of a cold sore? Trilex is specially formulated to help you cope.
+      Trilex takes the heat and irritation out of a cold sore almost immediately. A cold
+      sore may act up for almost two weeks, using trilex can help control the symptoms
       in days. <br>
   legacy_id: type_10
   rgt: 428
-nwb_cat_26: 
+nwb_cat_26:
   position: 0
   permalink: nwb_categories/csor
   name: Cold Sores
@@ -1428,7 +1437,7 @@ nwb_cat_26:
     <p>Whether you suffer from facial cold sores or genital herpes (herpes simplex one or two), you\xE2\x80\x99ll find effective herpes cold sore treatments right here.</p>"
   legacy_id: cat_26
   rgt: 74
-nwb_cat_type_10_27: 
+nwb_cat_type_10_27:
   position: 0
   permalink: nwb_categories/conc/health-capsules
   name: Capsules
@@ -1443,7 +1452,7 @@ nwb_cat_type_10_27:
   description: ""
   legacy_id: type_10
   rgt: 542
-nwb_cat_type_1_25: 
+nwb_cat_type_1_25:
   position: 0
   permalink: nwb_categories/whel/shampoo
   name: Shampoo
@@ -1458,7 +1467,7 @@ nwb_cat_type_1_25:
   description: ""
   legacy_id: type_1
   rgt: 538
-nwb_cat_type_52_3: 
+nwb_cat_type_52_3:
   position: 0
   permalink: nwb_categories/meno/makeup-eye-makeup
   name: Eye Makeup
@@ -1477,7 +1486,7 @@ nwb_cat_type_52_3:
 
   legacy_id: type_52
   rgt: 512
-nwb_cat_type_37_20: 
+nwb_cat_type_37_20:
   position: 0
   permalink: nwb_categories/smok/soap
   name: Soap
@@ -1487,12 +1496,12 @@ nwb_cat_type_37_20:
   meta_keywords: power natural pine pollen extracts Soap biolee
   meta_description: With the power of the natural pine pollen extracts, Biolee soap cleans, moist and polishes your skin without leaving it taut or dry
   taxonomy: nwb_category
-  footer: 
+  footer:
   parent_id: 4006
   description: ""
   legacy_id: type_37
   rgt: 508
-nwb_cat_type_20_5: 
+nwb_cat_type_20_5:
   position: 0
   permalink: nwb_categories/arth/psoriatic-rheumatoid-arthritis
   name: Liquid Supplements
@@ -1506,16 +1515,16 @@ nwb_cat_type_20_5:
   parent_id: 4004
   description: |-
     <h1>Psoriatic arthritis and rhumatoid arthritis</h1>
-      Psoriatic arthritis is a specific type of arthritis that has been diagnosed in approximately 
-      23 percent of people who have psoriasis, psoriatic arthritis commonly affects the 
-      ends of the fingers and toes. It can also affect the spine. Rhumatoid Arthritis 
-      can affect many joints in the body, including the knee, ankle, elbow, and wrist. 
-      Joints that are actively involved with rhumatoid are usually tender, swollen, and 
-      likely demonstrate reduced motion. Herbal supplements have been known to dramatically 
+      Psoriatic arthritis is a specific type of arthritis that has been diagnosed in approximately
+      23 percent of people who have psoriasis, psoriatic arthritis commonly affects the
+      ends of the fingers and toes. It can also affect the spine. Rhumatoid Arthritis
+      can affect many joints in the body, including the knee, ankle, elbow, and wrist.
+      Joints that are actively involved with rhumatoid are usually tender, swollen, and
+      likely demonstrate reduced motion. Herbal supplements have been known to dramatically
       improve the affects of psoriatic arthritis and rhumatoid arthritis.<br>
   legacy_id: type_20
   rgt: 438
-nwb_cat_type_19_2: 
+nwb_cat_type_19_2:
   position: 0
   permalink: nwb_categories/hrem/hair-removal-kits
   name: Hair Removal Kits
@@ -1534,13 +1543,13 @@ nwb_cat_type_19_2:
     <ul>
       <li> A combination of hair removal creams and hair growth inhibitors for permanent hair removal. </li>
       <li>A two step process that is fast, and easy and can be done from home. </li>
-      <li>Hair removal kits designed for hair removal across the entire body including 
+      <li>Hair removal kits designed for hair removal across the entire body including
         tough areas like your back. </li>
       <li>Perfect for both men and women, bodybuilders, cyclists, swimmers, etc. </li>
     </ul>
   legacy_id: type_19
   rgt: 446
-nwb_cat_27: 
+nwb_cat_27:
   position: 0
   permalink: nwb_categories/conc
   name: Concentration & Memory
@@ -1555,7 +1564,7 @@ nwb_cat_27:
   description: ""
   legacy_id: cat_27
   rgt: 76
-nwb_cat_type_10_28: 
+nwb_cat_type_10_28:
   position: 0
   permalink: nwb_categories/dsa/health-capsules
   name: Capsules
@@ -1570,7 +1579,7 @@ nwb_cat_type_10_28:
   description: ""
   legacy_id: type_10
   rgt: 540
-nwb_cat_type_53_3: 
+nwb_cat_type_53_3:
   position: 0
   permalink: nwb_categories/meno/makeup-lip-color
   name: Lip Color
@@ -1585,7 +1594,7 @@ nwb_cat_type_53_3:
   description: Clio's deliciously shiny lip glosses are designed to leave lips soft, full, and extremely kissable<br>
   legacy_id: type_53
   rgt: 516
-nwb_cat_type_38_20: 
+nwb_cat_type_38_20:
   position: 0
   permalink: nwb_categories/smok/skin-care
   name: Skin care
@@ -1593,7 +1602,7 @@ nwb_cat_type_38_20:
   lft: 505
   id: 4226
   meta_keywords: |-
-    controls troubled skin and takes care of dry and rough skin. 
+    controls troubled skin and takes care of dry and rough skin.
     A smoothing function make your skin smoother and the pine pollen extract relieves skin troubles.UV block SPF30 Oil Free
   meta_description: ""
   taxonomy: nwb_category
@@ -1602,7 +1611,7 @@ nwb_cat_type_38_20:
   description: ""
   legacy_id: type_38
   rgt: 506
-nwb_cat_type_18_4: 
+nwb_cat_type_18_4:
   position: 0
   permalink: nwb_categories/hlss/hair-loss-treatment
   name: Hair Loss Treatment
@@ -1617,7 +1626,7 @@ nwb_cat_type_18_4:
   description: "  <h1>Hair loss treatment\r\n  </h1>Having problems with hair loss? Research and choose the very best hair loss \r\n  treatment available. Our product line includes a hair loss treatment that is right \r\n  for you and your individual hair loss.<br>"
   legacy_id: type_18
   rgt: 476
-nwb_cat_28: 
+nwb_cat_28:
   position: 0
   permalink: nwb_categories/dsa
   name: Digestion & Stomach Ailments
@@ -1632,7 +1641,7 @@ nwb_cat_28:
   description: Digestion & Stomach Ailments
   legacy_id: cat_28
   rgt: 78
-nwb_cat_type_5_21: 
+nwb_cat_type_5_21:
   position: 0
   permalink: nwb_categories/wrin/anti-wrinkle-creams
   name: Anti wrinkle creams
@@ -1649,7 +1658,7 @@ nwb_cat_type_5_21:
 
   legacy_id: type_5
   rgt: 430
-pwb_cat_type_10_2: 
+pwb_cat_type_10_2:
   position: 0
   permalink: pwb_categories/dog_supplies/cat-dog-treats
   name: Treats
@@ -1664,7 +1673,7 @@ pwb_cat_type_10_2:
   description: ""
   legacy_id: type_10
   rgt: 45
-nwb_cat_type_24_24: 
+nwb_cat_type_24_24:
   position: 0
   permalink: nwb_categories/mhel/male-libido
   name: Male libido
@@ -1679,7 +1688,7 @@ nwb_cat_type_24_24:
   description: <h1>Male Sex Drive and Loss of Sex Drive</h1>These herbal supplements are designed to increase male sex drive.<br>
   legacy_id: type_24
   rgt: 468
-nwb_cat_type_38_21: 
+nwb_cat_type_38_21:
   position: 0
   permalink: nwb_categories/wrin/skin-care
   name: Skin care
@@ -1687,7 +1696,7 @@ nwb_cat_type_38_21:
   lft: 527
   id: 4237
   meta_keywords: |-
-    controls troubled skin and takes care of dry and rough skin. 
+    controls troubled skin and takes care of dry and rough skin.
     A smoothing function make your skin smoother and the pine pollen extract relieves skin troubles.UV block SPF30 Oil Free
   meta_description: ""
   taxonomy: nwb_category
@@ -1696,7 +1705,7 @@ nwb_cat_type_38_21:
   description: ""
   legacy_id: type_38
   rgt: 528
-nwb_cat_type_54_3: 
+nwb_cat_type_54_3:
   position: 0
   permalink: nwb_categories/meno/makeup-brushes
   name: Brushes
@@ -1706,7 +1715,7 @@ nwb_cat_type_54_3:
   meta_keywords: makeup brushes
   meta_description: "Site offers makeup brushes and beauty products. "
   taxonomy: nwb_category
-  footer: 
+  footer:
   parent_id: 4002
   description: |
     Time to brush up on your makeup techniques! Clio makeup brushes are just what you need to professionally apply your makeup with ease.
@@ -1714,7 +1723,7 @@ nwb_cat_type_54_3:
 
   legacy_id: type_54
   rgt: 500
-pwb_cat_type_11_2: 
+pwb_cat_type_11_2:
   position: 0
   permalink: pwb_categories/dog_supplies/cat-dog-accessories
   name: Accessories
@@ -1733,7 +1742,7 @@ pwb_cat_type_11_2:
   description: Dogs are more and more becoming a part of the social fabric.  Considering our position as their masters and companions we have a responsibility to see that all aspects of their lives are enjoyable.  They rely on us for that.  Here at Petwellbeing.com we believe that the use of our dog accessories can better the quality of your pet's life.  Our dog accessories can offer improvements on a wide variety of things, from your pet's physical wellbeing to its emotional security.
   legacy_id: type_11
   rgt: 17
-pwb_cat_type_10_3: 
+pwb_cat_type_10_3:
   position: 0
   permalink: pwb_categories/cat_supplies/cat-dog-treats
   name: Treats
@@ -1748,7 +1757,7 @@ pwb_cat_type_10_3:
   description: ""
   legacy_id: type_10
   rgt: 43
-nwb_cat_type_23_4: 
+nwb_cat_type_23_4:
   position: 0
   permalink: nwb_categories/hlss/hair-loss-conditioners
   name: Conditioners
@@ -1763,7 +1772,7 @@ nwb_cat_type_23_4:
   description: "  <h1>Hair loss products - hair conditioners</h1>\r\n  Unique hair loss products and hair conditioners specially formulated to maintain \r\n  a healthy head of hair. These hair loss products will increase the texture and appearance \r\n  of dull, brittle and/or thinning hair. <br>"
   legacy_id: type_23
   rgt: 462
-nwb_cat_type_55_3: 
+nwb_cat_type_55_3:
   position: 0
   permalink: nwb_categories/meno/makeup-removers
   name: Makeup Removers
@@ -1778,7 +1787,7 @@ nwb_cat_type_55_3:
   description: Take the day away with Clio's eye and lip makeup remover<br>
   legacy_id: type_55
   rgt: 518
-nwb_cat_10: 
+nwb_cat_10:
   position: 0
   permalink: nwb_categories/libi
   name: Libido
@@ -1818,7 +1827,7 @@ nwb_cat_10:
     <p>Below you will find our top selling male and female low libido supplements. </p>
   legacy_id: cat_10
   rgt: 64
-pwb_cat_type_11_3: 
+pwb_cat_type_11_3:
   position: 0
   permalink: pwb_categories/cat_supplies/cat-dog-accessories
   name: Accessories
@@ -1835,7 +1844,7 @@ pwb_cat_type_11_3:
   description: "Every day cats are more and more becoming a part of the social fabric.  Considering the unique relationship we share as simultaneously their masters and companions it is our duty to see that all aspects of their lives are enjoyable.  They rely on us for that.  At Petwellbeing.com we are of the belief that the use of our cat accessories can have a positive impact on quality of your pet\xE2\x80\x99s life.  These cat accessories we offer can improve a wide variety of aspects of your cats life, from its physical wellbeing to its emotional security.\r\n"
   legacy_id: type_11
   rgt: 15
-pwb_cat_type_12_2: 
+pwb_cat_type_12_2:
   position: 0
   permalink: pwb_categories/dog_supplies/cat-dog-food
   name: Food
@@ -1853,7 +1862,7 @@ pwb_cat_type_12_2:
     <p> Our foods contain absolutely no by-products, added salt or sugar, chemical preservatives, artificial colors or flavors and NO beet pulp, rice, wheat, corn, or soy. These are common allergens for dogs and can cause dry, itchy skin, hair loss or dullness, lack of energy, chronic ear problems and chewing at the feet. </p>
   legacy_id: type_12
   rgt: 53
-nwb_cat_type_10_10: 
+nwb_cat_type_10_10:
   position: 0
   permalink: nwb_categories/libi/health-capsules
   name: Capsules
@@ -1868,7 +1877,7 @@ nwb_cat_type_10_10:
   description: ""
   legacy_id: type_10
   rgt: 450
-nwb_cat_type_50_20: 
+nwb_cat_type_50_20:
   position: 0
   permalink: nwb_categories/smok/facial-masks
   name: Facial Masks
@@ -1883,7 +1892,7 @@ nwb_cat_type_50_20:
   description: ""
   legacy_id: type_50
   rgt: 494
-nwb_cat_type_1_4: 
+nwb_cat_type_1_4:
   position: 0
   permalink: nwb_categories/hlss/shampoo
   name: Shampoo
@@ -1898,7 +1907,7 @@ nwb_cat_type_1_4:
   description: "  <h1>Hair loss product - shampoo\r\n  </h1>These unique deep cleansing and stimulating shampoos have been formulated \r\n  to maintain a healthy and nutrient rich environment for hair growth that's alive \r\n  and strong. A powerful hair loss product for both men and women. <br>"
   legacy_id: type_1
   rgt: 478
-pwb_cat_type_1_2: 
+pwb_cat_type_1_2:
   position: 0
   permalink: pwb_categories/dog_supplies/cat-dog-arthritis
   name: Arthritis & Joint Pain
@@ -1917,7 +1926,7 @@ pwb_cat_type_1_2:
   description: "Dog arthritis is a serious issue.  For many caring dog owners watching their pet suffer is almost unbearable.  We at Petwellbeing.com are proud to offer a wide variety of supplements, creams, ointments, treats, and fluids; that can help ease the pain of dog arthritis.  Our fine products are all made with the best natural ingredients specifically formulated to enrich your pet\xE2\x80\x99s spirit and soothe those nagging aches and pains of dog arthritis."
   legacy_id: type_1
   rgt: 7
-pwb_cat_type_12_3: 
+pwb_cat_type_12_3:
   position: 0
   permalink: pwb_categories/cat_supplies/cat-dog-food
   name: Food
@@ -1934,7 +1943,7 @@ pwb_cat_type_12_3:
     <p>The essence of these products is the integration of a companion  animal's ancestral diet of fresh meat and natural, unprocessed foods, the quality and wholesomeness of a homemade meal, the convenience of a diet that is already nutritionally balanced - and meals that can be prepared quickly and simply, with minimal effort.</p>
   legacy_id: type_12
   rgt: 51
-nwb_cat_type_57_3: 
+nwb_cat_type_57_3:
   position: 0
   permalink: nwb_categories/meno/makeup-blush
   name: Blush
@@ -1949,7 +1958,7 @@ nwb_cat_type_57_3:
   description: ""
   legacy_id: type_57
   rgt: 536
-nwb_cat_type_58_2: 
+nwb_cat_type_58_2:
   position: 0
   permalink: nwb_categories/hrem/epilators-hair-removal
   name: Epilators
@@ -1964,7 +1973,7 @@ nwb_cat_type_58_2:
   description: Epilators - electronic hair remover for home use.
   legacy_id: type_58
   rgt: 532
-nwb_cat_type_34_21: 
+nwb_cat_type_34_21:
   position: 0
   permalink: nwb_categories/wrin/wart-creams
   name: Wart Creams
@@ -1979,7 +1988,7 @@ nwb_cat_type_34_21:
   description: <h1>Treatment for genital warts</h1> Creams and lotions for the removal of warts.<br>
   legacy_id: type_34
   rgt: 486
-nwb_cat_type_2_4: 
+nwb_cat_type_2_4:
   position: 0
   permalink: nwb_categories/hlss/vitamins
   name: Vitamins
@@ -1994,7 +2003,7 @@ nwb_cat_type_2_4:
   description: ""
   legacy_id: type_2
   rgt: 472
-pwb_cat_type_1_3: 
+pwb_cat_type_1_3:
   position: 0
   permalink: pwb_categories/cat_supplies/cat-dog-arthritis
   name: Arthritis & Joint Pain
@@ -2013,7 +2022,7 @@ pwb_cat_type_1_3:
   description: "Cat arthritis is a terrible affliction.  To a cat, the ability to move around with quickness and agility is a basic evolutionary feature.  To allow a cat to suffer from cat arthritis is to remove its ability to fully be a cat.  Cat arthritis first wreaks havoc on a cat\xE2\x80\x99s joints and then on its psyche.  When a cat loses its ability to move around because of constant nagging pain the emotional weight can be huge."
   legacy_id: type_1
   rgt: 9
-pwb_cat_type_2_2: 
+pwb_cat_type_2_2:
   position: 0
   permalink: pwb_categories/dog_supplies/cat-dog-eyes-ears
   name: Eyes & Ears
@@ -2034,7 +2043,7 @@ pwb_cat_type_2_2:
     </table> "
   legacy_id: type_2
   rgt: 13
-pwb_cat_type_2_3: 
+pwb_cat_type_2_3:
   position: 0
   permalink: pwb_categories/cat_supplies/cat-dog-eyes-ears
   name: Eyes & Ears
@@ -2053,7 +2062,7 @@ pwb_cat_type_2_3:
     </table>"
   legacy_id: type_2
   rgt: 11
-pwb_cat_type_3_2: 
+pwb_cat_type_3_2:
   position: 0
   permalink: pwb_categories/dog_supplies/cat-dog-fleas
   name: Flea Control
@@ -2072,7 +2081,7 @@ pwb_cat_type_3_2:
   description: "Dog flea control is an issue that can directly affect the quality of your pet\xE2\x80\x99s life.  Here at petwellbeing.com, we are proud to carry a variety of all natural Dog flea control products.  Some chemical insecticides have been known to cause liver damage in some dog so if your pet\xE2\x80\x99s health is important to you, we strongly recommend the use of one of our all natural Dog flea control products.  \r\n"
   legacy_id: type_3
   rgt: 25
-pwb_cat_type_4_2: 
+pwb_cat_type_4_2:
   position: 0
   permalink: pwb_categories/dog_supplies/cat-dog-cancer
   name: Cancer
@@ -2091,7 +2100,7 @@ pwb_cat_type_4_2:
   description: "Dog cancer is a serious issue that we at Petwellbeing.com do not take lightly.  There are few things worse than watching a dog suffer through the horrors of dog cancer, so it is on our strongest recommendation that dog owners take every precaution to decrease the likelihood that their dog develops dog cancer.  "
   legacy_id: type_4
   rgt: 21
-pwb_cat_type_3_3: 
+pwb_cat_type_3_3:
   position: 0
   permalink: pwb_categories/cat_supplies/cat-dog-fleas
   name: Flea Control
@@ -2108,7 +2117,7 @@ pwb_cat_type_3_3:
   description: "Cat flea control can be a problem that has a profoundly negative effect on the quality of your pet\xE2\x80\x99s life.  For this reason, we at Petwellbeing.com are proud to offer a wide variety of all-natural cat flea control products.  Some of the chemical insecticides sold on the market today have been known to be harmful to a cat\xE2\x80\x99s internal organs.   If the health of your cat is important to you, we at Petwellbeing.com strongly recommend the use of an all-natural cat flea control product. "
   legacy_id: type_3
   rgt: 23
-nwb_cat_type_24_10: 
+nwb_cat_type_24_10:
   position: 0
   permalink: nwb_categories/libi/male-libido
   name: Male libido
@@ -2121,15 +2130,15 @@ nwb_cat_type_24_10:
   footer: ""
   parent_id: 4005
   description: |-
-    <h1>Male Libido and Male Sex Drive</h1>Herbal supplements designed to increase male libido and sex drive. Loss of 
-      libido affects a significant number of men in North America and the developed world, 
-      especially if you take into account the number of men asking their doctors for Viagra. 
-      NaturalWellbeing has researched the marketplace and found three natural alternatives 
-      to Viagra. These herbal supplements are designed to increase male libido and give 
+    <h1>Male Libido and Male Sex Drive</h1>Herbal supplements designed to increase male libido and sex drive. Loss of
+      libido affects a significant number of men in North America and the developed world,
+      especially if you take into account the number of men asking their doctors for Viagra.
+      NaturalWellbeing has researched the marketplace and found three natural alternatives
+      to Viagra. These herbal supplements are designed to increase male libido and give
       back the confidence we had in our youth. <br>
   legacy_id: type_24
   rgt: 444
-nwb_cat_type_28_25: 
+nwb_cat_type_28_25:
   position: 0
   permalink: nwb_categories/whel/pms-relief
   name: PMS relief
@@ -2139,14 +2148,14 @@ nwb_cat_type_28_25:
   meta_keywords: ""
   meta_description: ""
   taxonomy: nwb_category
-  footer: 
+  footer:
   parent_id: 4009
   description: |
     <h1>PMS treatment</h1>
 
   legacy_id: type_28
   rgt: 470
-nwb_cat_type_6_2: 
+nwb_cat_type_6_2:
   position: 0
   permalink: nwb_categories/hrem/hair-inhibitors
   name: Hair Inhibitors
@@ -2161,17 +2170,17 @@ nwb_cat_type_6_2:
     Here at NaturalWellbeing.com we offer a variety of hair inhibitors.  Be it a cream or a spray one thing is for sure, the hair inhibitor will be of superior quality.  With the use of our Kalo hair inhibitor combo the days of unwanted body hair could be over.  This dual method Kalo hair inhibitor combo uses a lotion for specific areas like the eyebrows, chin or upper lip, while the spray has been specifically formulated to be more effective in the larger areas like the back, chest or legs.   With the use of this highly effective combination of hair inhibitors, the unwanted emotional weight that comes with unsightly body hair may be a thing of the past.  So if you are in the market for a hair inhibitor that is effective and reasonably priced there is no option finer than the Kalo hair inhibitor combo offered here at NaturalWellbeing.com.   "
   parent_id: 4001
   description: |-
-    <h1>Hair Inhibitors</h1> 
+    <h1>Hair Inhibitors</h1>
 
     <ul>
       <li>An easy and painless way to eliminate unwanted body hair.</li>
-      <li>Hair inhibitors are an effective alternative to expensive laser treatments and 
+      <li>Hair inhibitors are an effective alternative to expensive laser treatments and
         electrolysis. </li>
       <li>Hair inhibitors also moisturize and make your skin feel soft and smooth.</li>
     </ul>
   legacy_id: type_6
   rgt: 426
-nwb_cat_type_48_20: 
+nwb_cat_type_48_20:
   position: 0
   permalink: nwb_categories/smok/body-care
   name: Body Care
@@ -2186,7 +2195,7 @@ nwb_cat_type_48_20:
   description: ""
   legacy_id: type_48
   rgt: 496
-nwb_cat_type_30_4: 
+nwb_cat_type_30_4:
   position: 0
   permalink: nwb_categories/hlss/hair-growth-vitamins
   name: Hair growth vitamins
@@ -2201,7 +2210,7 @@ nwb_cat_type_30_4:
   description: "  <h1>Hair growth vitamins</h1>\r\n  Hair essentials is a powerful hair growth vitamin designed to help restore the hair follicle \r\n  from within the scalp. Men and women who are suffering from hair loss report a dramatic \r\n  change in the thickness of their hair, the speed at which it grows and the color \r\n  (grey hair is reduced almost immediately).<br>"
   legacy_id: type_30
   rgt: 434
-pwb_cat_type_4_3: 
+pwb_cat_type_4_3:
   position: 0
   permalink: pwb_categories/cat_supplies/cat-dog-cancer
   name: Cancer
@@ -2218,7 +2227,7 @@ pwb_cat_type_4_3:
   description: "Cat cancer is a big issue and we at Petwellbeing.com take it very seriously.   For a cat owner there is nothing worse than watching your beloved pet suffer.  Cancer is a nondiscriminatory disease that can afflict any cat at any time.  So if you are worried about cat cancer we at Petwellbeing.com strongly recommend the use of one of our fine products to help your cat pursue a life without cancer.  "
   legacy_id: type_4
   rgt: 19
-pwb_cat_type_5_2: 
+pwb_cat_type_5_2:
   position: 0
   permalink: pwb_categories/dog_supplies/cat-dog-internal
   name: Internal Ailments
@@ -2233,7 +2242,7 @@ pwb_cat_type_5_2:
     <BR><BR>
     As is the case with everything we sell here art petwellbeing.com our products directed at Dog internal ailments are all natural and of the highest quality.  We take great pride in our work because we love animals so much.  As a dog owner who has lost a pet to cancer, let me tell you that sometimes Dog internal ailments are too much for a pet to handle.  If your dog is sick and wont get better, it is your responsibility to ensure that whatever few days your pet has on this earth are spent in as little pain as possible.  With the use of our Dog internal ailment products a dog owner can know that he is doing everything he can to give his dog the quality of life that it deserves.
     <BR><BR>
-    Dog internal ailments are a serious issue and should be dealt with accordingly.  It is important to educate oneself as a pet owner and take all the necessary steps to prevent and combat the horrors of Dog internal ailments.  There is no better way to do this than with the use of the fine products offered here at Petwellbeing.com.   
+    Dog internal ailments are a serious issue and should be dealt with accordingly.  It is important to educate oneself as a pet owner and take all the necessary steps to prevent and combat the horrors of Dog internal ailments.  There is no better way to do this than with the use of the fine products offered here at Petwellbeing.com.
 
   parent_id: 3001
   description: |-
@@ -2265,7 +2274,7 @@ pwb_cat_type_5_2:
     </table>
   legacy_id: type_5
   rgt: 29
-pwb_cat_2: 
+pwb_cat_2:
   position: 0
   permalink: pwb_categories/dog_supplies/
   name: Dog Supplies
@@ -2329,7 +2338,7 @@ pwb_cat_2:
     </table>
   legacy_id: cat_2
   rgt: 3
-pwb_cat_type_5_3: 
+pwb_cat_type_5_3:
   position: 0
   permalink: pwb_categories/cat_supplies/cat-dog-internal
   name: Internal Ailments
@@ -2377,7 +2386,7 @@ pwb_cat_type_5_3:
     </table>
   legacy_id: type_5
   rgt: 27
-pwb_cat_type_6_2: 
+pwb_cat_type_6_2:
   position: 0
   permalink: pwb_categories/dog_supplies/cat-dog-skin-care
   name: Skin Care
@@ -2398,7 +2407,7 @@ pwb_cat_type_6_2:
     </table>"
   legacy_id: type_6
   rgt: 37
-nwb_cat_type_22_20: 
+nwb_cat_type_22_20:
   position: 0
   permalink: nwb_categories/smok/patch
   name: Patch
@@ -2408,14 +2417,14 @@ nwb_cat_type_22_20:
   meta_keywords: ""
   meta_description: ""
   taxonomy: nwb_category
-  footer: 
+  footer:
   parent_id: 4006
   description: |
     <h1>Quit smoking patch</h1>100% Herbal Solution, quit smoking without the side affects. <br>
 
   legacy_id: type_22
   rgt: 88
-pwb_cat_3: 
+pwb_cat_3:
   position: 0
   permalink: pwb_categories/cat_supplies/
   name: Cat Supplies
@@ -2481,7 +2490,7 @@ pwb_cat_3:
     </table>
   legacy_id: cat_3
   rgt: 5
-nwb_cat_type_32_21: 
+nwb_cat_type_32_21:
   position: 0
   permalink: nwb_categories/wrin/nail-care
   name: Nail care
@@ -2496,7 +2505,7 @@ nwb_cat_type_32_21:
   description: <h1>Finger nail and Toenail care</h1>
   legacy_id: type_32
   rgt: 440
-nwb_cat_type_34_26: 
+nwb_cat_type_34_26:
   position: 0
   permalink: nwb_categories/csor/wart-creams
   name: Wart Creams
@@ -2511,7 +2520,7 @@ nwb_cat_type_34_26:
   description: <h1>Effective control of genital warts</h1>
   legacy_id: type_34
   rgt: 490
-nwb_cat_2: 
+nwb_cat_2:
   position: 0
   permalink: nwb_categories/hrem
   name: Hair Removal
@@ -2557,7 +2566,7 @@ nwb_cat_2:
       <a href="http://www.naturalwellbeing.com/hair-removal-waxing-c2s36.cfm">Waxing</a> is a form of hair removal very similar to sugaring. For this method, a layer of wax is applied to the skin and quickly removed using a strip of cloth or paper. This not only pulls hairs out by their roots, it also removes dead skin. As a result, waxing is a very effective form of temporary hair removal that leaves the skin smooth and generally lasts for three to eight weeks. It can be used on nearly any part of the body, including the eyebrows, face, legs, abdomen, and bikini area. Waxing can be carried out either on your own at home or by a qualified cosmetologist or esthetician. Repeated use of waxing often results in slower hair regrowth and, at times, the destruction of some hair roots. Eventually, this may lead to permanent hair reduction. Waxing is a fast and inexpensive hair removal method but, as with sugaring, it can be messy and can result in ingrown hairs and irritation. Exfoliating regularly and applying a solution of astringent and oil can greatly reduce the occurrence of these problems.</p>
   parent_id: 4000
   description: |-
-    <h1>What type of hair removal product are you looking for?</h1> 
+    <h1>What type of hair removal product are you looking for?</h1>
     <table width="550" cellpadding="5">
       <tr>
         <td width="25%"><div align="center"><a href="http://www.naturalwellbeing.com/hair-removal-kits-c2s19.cfm"><img src="/UserFiles/Image/hr-kits.jpg" alt="hair removal kits" width="57" height="80" border="0" /></a><br>
@@ -2582,7 +2591,7 @@ nwb_cat_2:
     </table>
   legacy_id: cat_2
   rgt: 56
-pwb_cat_type_6_3: 
+pwb_cat_type_6_3:
   position: 0
   permalink: pwb_categories/cat_supplies/cat-dog-skin-care
   name: Skin Care
@@ -2603,7 +2612,7 @@ pwb_cat_type_6_3:
     </table> "
   legacy_id: type_6
   rgt: 35
-pwb_cat_type_7_2: 
+pwb_cat_type_7_2:
   position: 0
   permalink: pwb_categories/dog_supplies/cat-dog-stress-anxiety
   name: Stress & Anxiety
