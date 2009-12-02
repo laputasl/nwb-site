@@ -23,11 +23,11 @@ class AddProductFields < ActiveRecord::Migration
     add_column :products, :tarrif_code, :string
     add_column :products, :from, :string
     add_column :products, :legacy_brand_id, :integer
-    add_column :products, :store, :string
+    add_column :products, :store_id, :integer
   end
 
   def self.down
-    remove_column :products, :store
+    remove_column :products, :store_id
     remove_column :products, :legacy_brand_id
     remove_column :products, :from
     remove_column :products, :legacy_id

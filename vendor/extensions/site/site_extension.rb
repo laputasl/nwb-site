@@ -22,9 +22,9 @@ class SiteExtension < Spree::Extension
 
       private
       def set_layout
-        @site = request.headers['wellbeing-site']
+        @site ||= Store.find(:first, :conditions => {:code => request.headers['wellbeing-site']})
         @backto_site = request.headers['wellbeing-backto']
-        self.class.layout @site
+        self.class.layout @site.code
       end
     end
 
@@ -46,7 +46,7 @@ class SiteExtension < Spree::Extension
 
     Spree::BaseController.class_eval do
       def get_taxonomies
-        @taxonomies ||= Taxonomy.find(:all, :include => {:root => :children}, :conditions => ["store = ?", @site])
+        @taxonomies ||= Taxonomy.find(:all, :include => {:root => :children}, :conditions => ["store_id = ?", @site.id])
         @taxonomies
       end
     end
@@ -57,8 +57,29 @@ class SiteExtension < Spree::Extension
       end
     end
 
-    Variant.additional_fields += [ {:name => 'Store', :only => [:product], :use => 'select', :value => lambda { |controller, field| [["NaturalWellBeing", "nwb"], ["PetWellBeing", "pwb"]]  } } ]
+    Variant.additional_fields += [ {:name => 'Store', :only => [:product], :use => 'select', :value => lambda { |controller, field| Store.all.collect {|s| [s.name, s.code ]}  } } ]
 
+    Product.class_eval do
+      belongs_to :store
+    end
+
+    Taxonomy.class_eval do
+      belongs_to :store
+    end
+
+    Order.class_eval do
+      belongs_to :store
+    end
+
+    OrdersController.class_eval do
+      create.before << :assign_to_store
+
+      private
+      def assign_to_store
+        @order.store = @site
+      end
+
+    end
   end
 
 end
