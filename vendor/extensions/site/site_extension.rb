@@ -27,35 +27,38 @@ class SiteExtension < Spree::Extension
         self.class.layout @site
       end
     end
-  end
 
-  Admin::BaseController.class_eval do
-    before_filter :add_additional_fields
+    Admin::BaseController.class_eval do
+      before_filter :add_additional_fields
 
-    private
-    def add_additional_fields
-      @product_admin_tabs << {:name => "Additional Fields", :url => "additional_fields_admin_product_url"}
+      private
+      def add_additional_fields
+        @product_admin_tabs << {:name => "Additional Fields", :url => "additional_fields_admin_product_url"}
+      end
     end
-  end
 
-  Admin::ProductsController.class_eval do
-    def additional_fields
-      load_object
-      @countries = Country.find(:all).sort
+    Admin::ProductsController.class_eval do
+      def additional_fields
+        load_object
+        @countries = Country.find(:all).sort
+      end
     end
-  end
 
-  Spree::BaseController.class_eval do
-    def get_taxonomies
-      @taxonomies ||= Taxonomy.find(:all, :include => {:root => :children}, :conditions => ["store = ?", @site])
-      @taxonomies
+    Spree::BaseController.class_eval do
+      def get_taxonomies
+        @taxonomies ||= Taxonomy.find(:all, :include => {:root => :children}, :conditions => ["store = ?", @site])
+        @taxonomies
+      end
     end
-  end
 
-  ProductsHelper.module_eval do
-    def seo_url(taxon, product = nil)
-      return "#{ActionController::Base.relative_url_root}/t/" + taxon.permalink if product.nil?
+    ProductsHelper.module_eval do
+      def seo_url(taxon, product = nil)
+        return "#{ActionController::Base.relative_url_root}/t/" + taxon.permalink if product.nil?
+      end
     end
+
+    Variant.additional_fields += [ {:name => 'Store', :only => [:product], :use => 'select', :value => lambda { |controller, field| [["NaturalWellBeing", "nwb"], ["PetWellBeing", "pwb"]]  } } ]
+
   end
 
 end

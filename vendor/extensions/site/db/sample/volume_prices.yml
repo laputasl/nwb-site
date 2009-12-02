@@ -77,12 +77,6 @@ nwb_231_1:
   display: "1 "
   range: (1...3)
   variant_id: 1275
-nwb_123_1: 
-  position: 0
-  amount: "29.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1174
 pwb_75_1: 
   position: 0
   amount: "45.95"
@@ -113,12 +107,6 @@ pwb_75_2:
   display: 2 Bottles
   range: (2+)
   variant_id: 1061
-nwb_139_1: 
-  position: 0
-  amount: "19.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1190
 pwb_38_2: 
   position: 1
   amount: "29.95"
@@ -143,12 +131,6 @@ nwb_88_1:
   display: 1 kit
   range: (1...2)
   variant_id: 1146
-nwb_141_1: 
-  position: 0
-  amount: "34.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1192
 pwb_93_1: 
   position: 0
   amount: "45.95"
@@ -305,12 +287,6 @@ nwb_26_1:
   display: 1 kit
   range: (1...2)
   variant_id: 1104
-nwb_132_1: 
-  position: 0
-  amount: "34.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1183
 pwb_31_1: 
   position: 0
   amount: "27.95"
@@ -431,12 +407,6 @@ nwb_50_3:
   display: 4 bottles
   range: (4+)
   variant_id: 1117
-nwb_126_1: 
-  position: 0
-  amount: "27.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1177
 pwb_78_2: 
   position: 1
   amount: "41.95"
@@ -479,12 +449,6 @@ pwb_80_1:
   display: 1 Bottle
   range: (1...2)
   variant_id: 1066
-nwb_144_1: 
-  position: 0
-  amount: "28.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1195
 pwb_96_1: 
   position: 0
   amount: "89.95"
@@ -599,12 +563,6 @@ pwb_71_2:
   display: 2 Bottles
   range: (2+)
   variant_id: 1057
-nwb_135_1: 
-  position: 0
-  amount: "24.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1186
 pwb_34_1: 
   position: 0
   amount: "21.95"
@@ -707,12 +665,6 @@ nwb_53_3:
   display: 3 months
   range: (3+)
   variant_id: 1120
-nwb_129_1: 
-  position: 0
-  amount: "34.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1180
 nwb_16_2: 
   position: 1
   amount: "18.48"
@@ -845,12 +797,6 @@ nwb_230_1:
   display: 1 bottle
   range: (1...3)
   variant_id: 1274
-nwb_122_1: 
-  position: 0
-  amount: "29.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1173
 pwb_74_1: 
   position: 0
   amount: "45.95"
@@ -929,12 +875,6 @@ pwb_68_1:
   display: 1 Bottle
   range: (1...2)
   variant_id: 1054
-nwb_138_1: 
-  position: 0
-  amount: "19.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1189
 pwb_37_2: 
   position: 1
   amount: "32.95"
@@ -977,12 +917,6 @@ nwb_87_1:
   display: 1 jar
   range: (1...2)
   variant_id: 1145
-nwb_140_1: 
-  position: 0
-  amount: "27.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1191
 pwb_92_1: 
   position: 0
   amount: "45.95"
@@ -1109,12 +1043,6 @@ nwb_104_1:
   display: 1 kit
   range: (1...2)
   variant_id: 1156
-nwb_131_1: 
-  position: 0
-  amount: "34.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1182
 nwb_104_2: 
   position: 1
   amount: "22.95"
@@ -1175,12 +1103,6 @@ nwb_233_2:
   display: 3 bottles
   range: (3...4)
   variant_id: 1277
-nwb_125_1: 
-  position: 0
-  amount: "29.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1176
 pwb_77_2: 
   position: 1
   amount: "32.95"
@@ -1253,12 +1175,6 @@ pwb_109_1:
   display: 1 box
   range: (1...2)
   variant_id: 1095
-nwb_143_1: 
-  position: 0
-  amount: "19.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1194
 nwb_59_2: 
   position: 1
   amount: "88.95"
@@ -1445,12 +1361,6 @@ pwb_70_2:
   display: 2 Bottles
   range: (2...3)
   variant_id: 1056
-nwb_134_1: 
-  position: 0
-  amount: "19.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1185
 pwb_33_1: 
   position: 0
   amount: "21.95"
@@ -1601,12 +1511,6 @@ nwb_52_3:
   display: 3 kits
   range: (3+)
   variant_id: 1119
-nwb_128_1: 
-  position: 0
-  amount: "29.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1179
 pwb_82_1: 
   position: 0
   amount: "25.95"
@@ -1715,12 +1619,6 @@ nwb_119_2:
   display: 2 boxes
   range: (2+)
   variant_id: 1170
-nwb_121_1: 
-  position: 0
-  amount: "29.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1172
 nwb_37_2: 
   position: 1
   amount: "33.33"
@@ -1775,12 +1673,6 @@ pwb_67_1:
   display: 1 Jar
   range: (1...2)
   variant_id: 1053
-nwb_137_1: 
-  position: 0
-  amount: "24.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1188
 pwb_36_2: 
   position: 1
   amount: "32.95"
@@ -1967,12 +1859,6 @@ nwb_24_1:
   display: 1 tube
   range: (1...2)
   variant_id: 1103
-nwb_130_1: 
-  position: 0
-  amount: "34.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1181
 nwb_161_1: 
   position: 0
   amount: "32.95"
@@ -2009,12 +1895,6 @@ nwb_232_1:
   display: 1 bottle
   range: (1...3)
   variant_id: 1276
-nwb_124_1: 
-  position: 0
-  amount: "34.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1175
 pwb_76_1: 
   position: 0
   amount: "37.95"
@@ -2075,12 +1955,6 @@ pwb_108_1:
   display: 1 box
   range: (1...2)
   variant_id: 1094
-nwb_142_1: 
-  position: 0
-  amount: "19.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1193
 nwb_58_2: 
   position: 1
   amount: "88.95"
@@ -2093,72 +1967,72 @@ pwb_94_1:
   display: 1 Bottle
   range: (1...2)
   variant_id: 1080
-pwb_94_2: 
-  position: 1
-  amount: "32.95"
-  display: 2 Bottles
-  range: (2+)
-  variant_id: 1080
-nwb_58_3: 
-  position: 2
-  amount: "87.95"
-  display: 3 kits
-  range: (3+)
-  variant_id: 1123
-pwb_110_1: 
-  position: 0
-  amount: "85"
-  display: 1 box
-  range: (1...2)
-  variant_id: 1096
-pwb_108_2: 
-  position: 1
-  amount: "76"
-  display: 2 boxes
-  range: (2+)
-  variant_id: 1094
 pwb_57_1: 
   position: 0
   amount: "16.95"
   display: 1 Bag
   range: (1...2)
   variant_id: 1043
-nwb_79_1: 
-  position: 0
-  amount: "24.95"
-  display: 1 bottle
-  range: (1...2)
-  variant_id: 1139
-pwb_110_2: 
+pwb_108_2: 
   position: 1
-  amount: "82"
+  amount: "76"
   display: 2 boxes
   range: (2+)
+  variant_id: 1094
+pwb_110_1: 
+  position: 0
+  amount: "85"
+  display: 1 box
+  range: (1...2)
   variant_id: 1096
-pwb_57_2: 
+nwb_58_3: 
+  position: 2
+  amount: "87.95"
+  display: 3 kits
+  range: (3+)
+  variant_id: 1123
+pwb_94_2: 
   position: 1
-  amount: "15.95"
-  display: 2 Bags
+  amount: "32.95"
+  display: 2 Bottles
   range: (2+)
-  variant_id: 1043
+  variant_id: 1080
 pwb_88_1: 
   position: 0
   amount: "45.95"
   display: 1 Bottle
   range: (1...2)
   variant_id: 1074
-pwb_88_2: 
+pwb_57_2: 
   position: 1
-  amount: "39.95"
-  display: 2 Bottles
+  amount: "15.95"
+  display: 2 Bags
   range: (2+)
-  variant_id: 1074
+  variant_id: 1043
+pwb_110_2: 
+  position: 1
+  amount: "82"
+  display: 2 boxes
+  range: (2+)
+  variant_id: 1096
+nwb_79_1: 
+  position: 0
+  amount: "24.95"
+  display: 1 bottle
+  range: (1...2)
+  variant_id: 1139
 nwb_79_2: 
   position: 1
   amount: "24"
   display: 2 bottles
   range: (2...3)
   variant_id: 1139
+pwb_88_2: 
+  position: 1
+  amount: "39.95"
+  display: 2 Bottles
+  range: (2+)
+  variant_id: 1074
 nwb_79_3: 
   position: 2
   amount: "23.31"
@@ -2189,66 +2063,30 @@ nwb_115_1:
   display: "1 "
   range: (1...2)
   variant_id: 1166
-nwb_115_2: 
-  position: 1
-  amount: "14.95"
-  display: "2 "
-  range: (2+)
-  variant_id: 1166
 pwb_1_1: 
   position: 0
   amount: "28.95"
   display: 1 Jar
   range: (1...2)
   variant_id: 1001
-nwb_106_1: 
-  position: 0
-  amount: "29.95"
-  display: "1 "
-  range: (1...2)
-  variant_id: 1158
+nwb_115_2: 
+  position: 1
+  amount: "14.95"
+  display: "2 "
+  range: (2+)
+  variant_id: 1166
 pwb_32_1: 
   position: 0
   amount: "21.95"
   display: 1 Bottle
   range: (1...2)
   variant_id: 1018
-nwb_133_1: 
+nwb_106_1: 
   position: 0
   amount: "29.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1184
-pwb_48_1: 
-  position: 0
-  amount: "8.95"
-  display: 1 Bag
+  display: "1 "
   range: (1...2)
-  variant_id: 1034
-nwb_106_2: 
-  position: 1
-  amount: "27.95"
-  display: "2 "
-  range: (2+)
   variant_id: 1158
-nwb_51_1: 
-  position: 0
-  amount: "89"
-  display: 1 kit
-  range: (1...2)
-  variant_id: 1118
-pwb_32_2: 
-  position: 1
-  amount: "19.95"
-  display: 2 Bottles
-  range: (2+)
-  variant_id: 1018
-pwb_63_1: 
-  position: 0
-  amount: "41.95"
-  display: 1 Bottle
-  range: (1...2)
-  variant_id: 1049
 pwb_1_2: 
   position: 1
   amount: "26.95"
@@ -2261,114 +2099,120 @@ nwb_164_1:
   display: 1 bottle
   range: (1+)
   variant_id: 1215
-pwb_23_1: 
+pwb_63_1: 
   position: 0
-  amount: "21.95"
+  amount: "41.95"
   display: 1 Bottle
   range: (1...2)
-  variant_id: 1009
-pwb_48_2: 
+  variant_id: 1049
+pwb_32_2: 
   position: 1
-  amount: "8.45"
-  display: 2 Bags
-  range: (2...3)
-  variant_id: 1034
-pwb_79_1: 
-  position: 0
-  amount: "43.95"
-  display: 1 Package
-  range: (1...2)
-  variant_id: 1065
-nwb_51_2: 
-  position: 1
-  amount: "82.5"
-  display: 2 kits
-  range: (2+)
-  variant_id: 1118
-pwb_63_2: 
-  position: 1
-  amount: "39.95"
+  amount: "19.95"
   display: 2 Bottles
   range: (2+)
-  variant_id: 1049
+  variant_id: 1018
+nwb_51_1: 
+  position: 0
+  amount: "89"
+  display: 1 kit
+  range: (1...2)
+  variant_id: 1118
+nwb_106_2: 
+  position: 1
+  amount: "27.95"
+  display: "2 "
+  range: (2+)
+  variant_id: 1158
+pwb_48_1: 
+  position: 0
+  amount: "8.95"
+  display: 1 Bag
+  range: (1...2)
+  variant_id: 1034
 pwb_101_1: 
   position: 0
   amount: "6.95"
   display: 1 Bag
   range: (1...2)
   variant_id: 1087
-pwb_23_2: 
+pwb_63_2: 
   position: 1
-  amount: "19.95"
+  amount: "39.95"
   display: 2 Bottles
   range: (2+)
-  variant_id: 1009
-pwb_50_1: 
-  position: 0
-  amount: "46.95"
-  display: 1 Jar
-  range: (1...2)
-  variant_id: 1036
-pwb_48_3: 
-  position: 2
-  amount: "7.95"
-  display: 3 Bags
-  range: (3+)
-  variant_id: 1034
-nwb_45_1: 
-  position: 0
-  amount: "174.95"
-  display: 1 combo
-  range: (1...2)
-  variant_id: 1114
-pwb_79_2: 
+  variant_id: 1049
+nwb_51_2: 
   position: 1
-  amount: "41.95"
-  display: 2 Packages
+  amount: "82.5"
+  display: 2 kits
   range: (2+)
-  variant_id: 1065
-nwb_127_1: 
+  variant_id: 1118
+pwb_79_1: 
   position: 0
-  amount: "37.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1178
+  amount: "43.95"
+  display: 1 Package
+  range: (1...2)
+  variant_id: 1065
+pwb_48_2: 
+  position: 1
+  amount: "8.45"
+  display: 2 Bags
+  range: (2...3)
+  variant_id: 1034
+pwb_23_1: 
+  position: 0
+  amount: "21.95"
+  display: 1 Bottle
+  range: (1...2)
+  variant_id: 1009
 pwb_101_2: 
   position: 1
   amount: "0"
   display: 2 Bags
   range: (2+)
   variant_id: 1087
-nwb_154_1: 
-  position: 0
-  amount: "28.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1205
 nwb_235_1: 
   position: 0
   amount: "39.99"
   display: 1 bottle
   range: (1...3)
   variant_id: 1279
-pwb_50_2: 
+pwb_79_2: 
   position: 1
-  amount: "44.95"
-  display: 2 Jars
+  amount: "41.95"
+  display: 2 Packages
   range: (2+)
-  variant_id: 1036
-pwb_81_1: 
+  variant_id: 1065
+nwb_45_1: 
   position: 0
-  amount: "21.95"
-  display: 1 Bottle
+  amount: "174.95"
+  display: 1 combo
   range: (1...2)
-  variant_id: 1067
-nwb_45_2: 
-  position: 1
-  amount: "166.49"
-  display: 2 combos
-  range: (2+)
   variant_id: 1114
+pwb_48_3: 
+  position: 2
+  amount: "7.95"
+  display: 3 Bags
+  range: (3+)
+  variant_id: 1034
+pwb_50_1: 
+  position: 0
+  amount: "46.95"
+  display: 1 Jar
+  range: (1...2)
+  variant_id: 1036
+pwb_23_2: 
+  position: 1
+  amount: "19.95"
+  display: 2 Bottles
+  range: (2+)
+  variant_id: 1009
+nwb_154_1: 
+  position: 0
+  amount: "28.95"
+  display: 1 bottle
+  range: (1+)
+  variant_id: 1205
 nwb_72_1: 
   position: 0
   amount: "14.95"
@@ -2381,245 +2225,251 @@ nwb_235_2:
   display: 3 bottles
   range: (3...6)
   variant_id: 1279
-pwb_97_1: 
-  position: 0
-  amount: "89.95"
-  display: 1 Kit
-  range: (1+)
-  variant_id: 1083
-pwb_81_2: 
+nwb_45_2: 
   position: 1
-  amount: "19.95"
-  display: 2 Bottles
+  amount: "166.49"
+  display: 2 combos
   range: (2+)
+  variant_id: 1114
+pwb_81_1: 
+  position: 0
+  amount: "21.95"
+  display: 1 Bottle
+  range: (1...2)
   variant_id: 1067
+pwb_50_2: 
+  position: 1
+  amount: "44.95"
+  display: 2 Jars
+  range: (2+)
+  variant_id: 1036
 nwb_72_2: 
   position: 1
   amount: "14.45"
   display: 2 bottles
   range: (2...3)
   variant_id: 1133
-nwb_145_1: 
-  position: 0
-  amount: "39.95"
-  display: 1 bar
-  range: (1+)
-  variant_id: 1196
 nwb_235_3: 
   position: 2
   amount: "25"
   display: 6 bottles
   range: (6+)
   variant_id: 1279
+pwb_81_2: 
+  position: 1
+  amount: "19.95"
+  display: 2 Bottles
+  range: (2+)
+  variant_id: 1067
+pwb_97_1: 
+  position: 0
+  amount: "89.95"
+  display: 1 Kit
+  range: (1+)
+  variant_id: 1083
 nwb_72_3: 
   position: 2
   amount: "13.95"
   display: 3 bottles
   range: (3+)
   variant_id: 1133
-nwb_36_1: 
-  position: 0
-  amount: "39.99"
-  display: 1 bottle
-  range: (1...3)
-  variant_id: 1110
-nwb_118_1: 
-  position: 0
-  amount: "14.99"
-  display: 1 boxes
-  range: (1...2)
-  variant_id: 1169
 pwb_41_1: 
   position: 0
   amount: "37.95"
   display: 1 Bottle
   range: (1...2)
   variant_id: 1027
-pwb_72_1: 
+nwb_118_1: 
   position: 0
-  amount: "39.95"
-  display: 1 Bottle
+  amount: "14.99"
+  display: 1 boxes
   range: (1...2)
-  variant_id: 1058
-nwb_36_2: 
-  position: 1
-  amount: "33.33"
-  display: 3 bottles
-  range: (3+)
-  variant_id: 1110
-nwb_120_1: 
-  position: 0
-  amount: "29.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1171
-nwb_118_2: 
-  position: 1
-  amount: "13.95"
-  display: 2 boxes
-  range: (2+)
   variant_id: 1169
+nwb_36_1: 
+  position: 0
+  amount: "39.99"
+  display: 1 bottle
+  range: (1...3)
+  variant_id: 1110
 pwb_41_2: 
   position: 1
   amount: "32.95"
   display: 2 Bottles
   range: (2+)
   variant_id: 1027
-pwb_72_2: 
+nwb_118_2: 
   position: 1
-  amount: "37.95"
-  display: 2 Bottles
+  amount: "13.95"
+  display: 2 boxes
   range: (2+)
-  variant_id: 1058
-nwb_109_1: 
+  variant_id: 1169
+nwb_36_2: 
+  position: 1
+  amount: "33.33"
+  display: 3 bottles
+  range: (3+)
+  variant_id: 1110
+pwb_72_1: 
   position: 0
-  amount: "82.75"
-  display: "1 "
+  amount: "39.95"
+  display: 1 Bottle
   range: (1...2)
-  variant_id: 1161
+  variant_id: 1058
 pwb_35_1: 
   position: 0
   amount: "21.95"
   display: 1 Jar
   range: (1...2)
   variant_id: 1021
-nwb_109_2: 
-  position: 1
-  amount: "80.75"
-  display: "2 "
-  range: (2...3)
+nwb_109_1: 
+  position: 0
+  amount: "82.75"
+  display: "1 "
+  range: (1...2)
   variant_id: 1161
-nwb_54_1: 
-  position: 0
-  amount: "29.95"
-  display: 1 bottle
-  range: (1...2)
-  variant_id: 1121
-pwb_35_2: 
+pwb_72_2: 
   position: 1
-  amount: "19.95"
-  display: 2 Jars
+  amount: "37.95"
+  display: 2 Bottles
   range: (2+)
-  variant_id: 1021
-nwb_136_1: 
-  position: 0
-  amount: "24.95"
-  display: 1 bottle
-  range: (1+)
-  variant_id: 1187
-pwb_66_1: 
-  position: 0
-  amount: "38.95"
-  display: 1 Jar
-  range: (1...2)
-  variant_id: 1052
+  variant_id: 1058
 nwb_167_1: 
   position: 0
   amount: "33.95"
   display: 1 bottle
   range: (1+)
   variant_id: 1218
-pwb_104_1: 
+pwb_66_1: 
   position: 0
-  amount: "14.95"
+  amount: "38.95"
   display: 1 Jar
-  range: (1+)
-  variant_id: 1090
-pwb_26_1: 
-  position: 0
-  amount: "32.95"
-  display: 1 Bottle
   range: (1...2)
-  variant_id: 1012
-nwb_109_3: 
-  position: 2
-  amount: "61.95"
-  display: "3 "
-  range: (3+)
-  variant_id: 1161
-pwb_90_1: 
-  position: 0
-  amount: "39.95"
-  display: 1 Bottle
-  range: (1...2)
-  variant_id: 1076
-nwb_54_2: 
+  variant_id: 1052
+pwb_35_2: 
   position: 1
-  amount: "27.48"
-  display: 2 bottles
-  range: (2...3)
-  variant_id: 1121
-nwb_85_1: 
+  amount: "19.95"
+  display: 2 Jars
+  range: (2+)
+  variant_id: 1021
+nwb_54_1: 
   position: 0
-  amount: "37.95"
+  amount: "29.95"
   display: 1 bottle
   range: (1...2)
-  variant_id: 1143
+  variant_id: 1121
+nwb_109_2: 
+  position: 1
+  amount: "80.75"
+  display: "2 "
+  range: (2...3)
+  variant_id: 1161
 pwb_66_2: 
   position: 1
   amount: "36.95"
   display: 2 Jars
   range: (2+)
   variant_id: 1052
-pwb_26_2: 
-  position: 1
-  amount: "29.95"
-  display: 2 Bottles
-  range: (2+)
-  variant_id: 1012
-pwb_53_1: 
+nwb_85_1: 
   position: 0
-  amount: "19.95"
-  display: 1 Bag
-  range: (1...2)
-  variant_id: 1039
-pwb_90_2: 
-  position: 1
   amount: "37.95"
-  display: 2 Bottles
-  range: (2+)
-  variant_id: 1076
-nwb_54_3: 
-  position: 2
-  amount: "24.98"
-  display: 3 bottles
-  range: (3+)
-  variant_id: 1121
-nwb_85_2: 
+  display: 1 bottle
+  range: (1...2)
+  variant_id: 1143
+nwb_54_2: 
   position: 1
-  amount: "34.95"
+  amount: "27.48"
   display: 2 bottles
   range: (2...3)
-  variant_id: 1143
+  variant_id: 1121
+pwb_90_1: 
+  position: 0
+  amount: "39.95"
+  display: 1 Bottle
+  range: (1...2)
+  variant_id: 1076
+nwb_109_3: 
+  position: 2
+  amount: "61.95"
+  display: "3 "
+  range: (3+)
+  variant_id: 1161
+pwb_26_1: 
+  position: 0
+  amount: "32.95"
+  display: 1 Bottle
+  range: (1...2)
+  variant_id: 1012
+pwb_104_1: 
+  position: 0
+  amount: "14.95"
+  display: 1 Jar
+  range: (1+)
+  variant_id: 1090
 nwb_157_1: 
   position: 0
   amount: "29.95"
   display: 1 bottle
   range: (1+)
   variant_id: 1208
-pwb_53_2: 
+nwb_85_2: 
   position: 1
-  amount: "18.95"
-  display: 2 Bags
+  amount: "34.95"
+  display: 2 bottles
+  range: (2...3)
+  variant_id: 1143
+nwb_54_3: 
+  position: 2
+  amount: "24.98"
+  display: 3 bottles
+  range: (3+)
+  variant_id: 1121
+pwb_90_2: 
+  position: 1
+  amount: "37.95"
+  display: 2 Bottles
   range: (2+)
-  variant_id: 1039
-pwb_84_1: 
+  variant_id: 1076
+pwb_53_1: 
   position: 0
-  amount: "38.45"
-  display: 1 Bottle
+  amount: "19.95"
+  display: 1 Bag
   range: (1...2)
-  variant_id: 1070
+  variant_id: 1039
+pwb_26_2: 
+  position: 1
+  amount: "29.95"
+  display: 2 Bottles
+  range: (2+)
+  variant_id: 1012
+nwb_75_1: 
+  position: 0
+  amount: "24.95"
+  display: 1 bottle
+  range: (1...3)
+  variant_id: 1136
 nwb_85_3: 
   position: 2
   amount: "33"
   display: 3 bottles
   range: (3+)
   variant_id: 1143
-nwb_75_1: 
+pwb_84_1: 
   position: 0
-  amount: "24.95"
-  display: 1 bottle
-  range: (1...3)
+  amount: "38.45"
+  display: 1 Bottle
+  range: (1...2)
+  variant_id: 1070
+pwb_53_2: 
+  position: 1
+  amount: "18.95"
+  display: 2 Bags
+  range: (2+)
+  variant_id: 1039
+nwb_75_2: 
+  position: 1
+  amount: "20.95"
+  display: 3 bottles
+  range: (3...4)
   variant_id: 1136
 pwb_84_2: 
   position: 1
@@ -2627,9 +2477,3 @@ pwb_84_2:
   display: 2 Bottles
   range: (2+)
   variant_id: 1070
-nwb_75_2: 
-  position: 1
-  amount: "20.95"
-  display: 3 bottles
-  range: (3...4)
-  variant_id: 1136
