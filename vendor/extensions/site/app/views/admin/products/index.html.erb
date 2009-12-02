@@ -19,9 +19,10 @@
 
 <table class="index">
   <tr>
-    <th><%= t("sku") %></td>
-      <th><%= order @search, :by => :name, :as => t("name") %></td>
-      <th><%= order @search, :by => :price, :as => t("master_price") %></td>
+    <th><%= t("sku") %></th>
+      <th><%= order @search, :by => :name, :as => t("name") %></th>
+      <th><%= order @search, :by => :price, :as => t("master_price") %></th>
+      <th><%= order @search, :by => :store, :as => t("store") %></th>
     <th>&nbsp;</th>
   </tr>
 <% @collection.each do |product| %>
@@ -29,6 +30,7 @@
     <td><%= product.sku %></td>
     <td><%= product.name %></td>
     <td><%= product.price %></td>
+    <td><%= product.store.code.upcase %></td>
     <td class="actions">
       <%= link_to_edit product if product.deleted_at.nil?  %>
       &nbsp;
