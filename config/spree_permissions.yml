@@ -8,9 +8,9 @@
 #      option_name : options_value
 #  permission_N+1:
 #    role : [role_name1]                           # a roll_name from permission_N
-#    options :                                     
+#    options :
 #      option_name : options_value                 # options specific to that roll_name
-#      option_name : options_value                   
+#      option_name : options_value
 #      option_name : options_value
 #      option_name : options_value
 # SecondControllerName:
@@ -37,7 +37,7 @@
 #  * :for  - same as :only
 #  * :except - Require the role for everything but the given action(s)
 #  * :for_all_except  - same as :except
-#  * :if - takes a string to eval in the context of the controller.  
+#  * :if - takes a string to eval in the context of the controller.
 #          If it evaluates to true, the role is required.
 #  * :unless - The inverse of :if
 #
@@ -45,24 +45,72 @@
 # By default, admin role is required for all controllers extending Admin::BaseController (unless otherwise specified here)
 'Admin::BaseController':
   permission1:
+    roles : [admin, csr]
+'Admin::ConfigurationsController':
+  permission1:
+    roles : [admin]
+'Admin::GeneralSettingsController':
+  permission1:
+    roles : [admin]
+'Admin::MailSettingsController':
+  permission1:
+    roles : [admin]
+'Admin::TaxCategoriesController':
+  permission1:
+    roles : [admin]
+'Admin::ZonesController':
+  permission1:
+    roles : [admin]
+'Admin::StatesController':
+  permission1:
+    roles : [admin]
+'Admin::GatewaysController':
+  permission1:
+    roles : [admin]
+'Admin::BillingIntegrationsController':
+  permission1:
+    roles : [admin]
+'Admin::TaxonomiesController':
+  permission1:
+    roles : [admin]
+'Admin::InventorySettingsController':
+  permission1:
+    roles : [admin]
+'Admin::InventorySettingsController':
+  permission1:
+    roles : [admin]
+'Admin::TaxRatesController':
+  permission1:
+    roles : [admin]
+'Admin::TaxSettingsController':
+  permission1:
+    roles : [admin]
+'Admin::ShippingMethodsController':
+  permission1:
+    roles : [admin]
+'Admin::ShippingCategoriesController':
+  permission1:
+    roles : [admin]
+'Admin::ShippingRatesController':
+  permission1:
     roles : [admin]
 # Users can only see their own accounts
 'UsersController':
   permission1:
     roles : [admin]
     options :
-      except : [new, create]   
+      except : [new, create]
       unless : "current_user and current_user.id == object.id"
 'OrdersController':
   permission1:
     # Users can only see their own orders
     roles : [admin]
     options :
-      except : [new, create, cvv]   
+      except : [new, create, cvv]
       unless : can_access?  #orders_controller may grant access based on presence of token, etc.
 'CheckoutsController':
   permission1:
     roles : [user]
     options :
-      for : [update]   
+      for : [update]
       unless : "Spree::Config[:allow_guest_checkout]"
