@@ -10,6 +10,7 @@
       <th><%= order @search, :by => :state,            :as => t("status") %></th>
       <th><%= order @search, :by => :checkout_email,   :as => t("customer") %></th>
       <th><%= order @search, :by => :total,            :as => t("total") %></th>
+      <th><%= order @search, :by => :checkout_bill_address_phone, :as => t('phone') %></th>
       <th><%= order @search, :by => :store_id,         :as => t('store') %></th>
     </tr>
   </thead>
@@ -21,6 +22,7 @@
       <td><%= t(order.state.downcase) %></td>
       <td><%= order.email %></td>
       <td><%= number_to_currency order.total %></td>
+      <td><%= order.checkout.bill_address.phone %></td>
       <td><%= order.store.code.upcase %></td>
     </tr>
   <% end %>
@@ -62,6 +64,12 @@
       <label><%= t 'email' %></label><br />
       <%= f.text_field :checkout_email_contains, :size=>25 %>
     </p>
+
+    <p>
+      <label><%= t 'phone' %></label><br />
+      <%= f.text_field :checkout_bill_address_phone_contains, :size=>25 %>
+    </p>
+
     <p>
     <label><%= t 'first_name' %></label><br />
         <%= f.text_field :checkout_bill_address_firstname_contains, :size=>25 %>
