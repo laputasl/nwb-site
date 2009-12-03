@@ -57,7 +57,7 @@ class SiteExtension < Spree::Extension
       end
     end
 
-    Variant.additional_fields += [ {:name => 'Store', :only => [:product], :use => 'select', :value => lambda { |controller, field| Store.all.collect {|s| [s.name, s.code ]}  } } ]
+    Variant.additional_fields += [ {:name => 'Store Id', :only => [:product], :use => 'select', :value => lambda { |controller, field| Store.all.collect {|s| [s.name, s.code ]}  } } ]
 
     Product.class_eval do
       belongs_to :store
