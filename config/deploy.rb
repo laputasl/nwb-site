@@ -43,6 +43,17 @@ namespace :spree do
        destination_path = File.join(release_path, 'public', store)
        run "ln -nsf #{origin_path} #{destination_path}"
      end
+
+     origin_path = File.join(shared_path, 'blog', 'nwb_uploads')
+     destination_path = File.join(release_path, 'public', 'nwb_blog', 'wp-content', 'uploads')
+     run "ln -nsf #{origin_path} #{destination_path}"
+     
+     origin_path = File.join(shared_path, 'blog', 'pwb_uploads')
+     destination_path = File.join(release_path, 'public', 'pwb_blog', 'wp-content', 'uploads')
+     run "ln -nsf #{origin_path} #{destination_path}"
+
+     #%(nwb pwb).each do |blog|
+     #end
   end
 
   namespace :gems do
