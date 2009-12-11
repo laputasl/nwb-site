@@ -1,0 +1,25 @@
+IndexIgnore .htaccess */.??* *~ *# */HEADER* */README* */_vti*
+
+<Limit GET POST>
+order deny,allow
+deny from all
+allow from all
+</Limit>
+<Limit PUT DELETE>
+order deny,allow
+deny from all
+</Limit>
+#AuthName naturalwellbeing.com
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /nwb_blog/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /nwb_blog/index.php [L]
+</IfModule>
+
+
+# BEGIN WordPress
+
+# END WordPress
