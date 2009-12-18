@@ -33,7 +33,7 @@ class SiteExtension < Spree::Extension
 
       private
       def add_additional_fields
-        @product_admin_tabs << {:name => "Additional Fields", :url => "additional_fields_admin_product_url"}
+        # @product_admin_tabs << {:name => "Additional Fields", :url => "additional_fields_admin_product_url"}
       end
     end
 
@@ -57,7 +57,7 @@ class SiteExtension < Spree::Extension
       end
     end
 
-    Variant.additional_fields += [ {:name => 'Store Id', :only => [:product], :use => 'select', :value => lambda { |controller, field| Store.all.collect {|s| [s.name, s.code ]}  } } ]
+    Variant.additional_fields += [ {:name => 'Store Id', :only => [:product], :use => 'select', :value => lambda { |controller, field| Store.all.collect {|s| [s.name, s.id ]}  } } ]
 
     Product.class_eval do
       belongs_to :store

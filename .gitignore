@@ -16,12 +16,9 @@ tmp/*
 TAGS
 nbproject
 public/assets
-public/javascripts/taxonomy.js
-public/javascripts/dashboard.js
-public/javascripts/gateway.js
-public/javascripts/jqPlot/
-public/javascripts/product_assembly.js
-public/stylesheets/admin/dashboard.css
+public/javascripts
+public/stylesheets
+public/images
 public/pets
 public/people
 config/s3.yml

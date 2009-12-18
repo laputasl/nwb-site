@@ -60,7 +60,7 @@
     roles : [admin, csr]
 'Admin::UsersController':
   permission1:
-    roles : [admin, csr]
+    roles : [admin, ‰csr]
 # Users can only see their own accounts
 'UsersController':
   permission1:

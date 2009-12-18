@@ -29,12 +29,9 @@ Spree::Initializer.run do |config|
   config.gem "highline", :version => '>=1.4.0'
   config.gem 'authlogic', :version => '>=2.1.2'
   config.gem 'authlogic-oid', :lib => "authlogic_openid"
-  config.gem "activemerchant", :lib => "active_merchant", :version => '>=1.4.1'
-  config.gem "tlsmail", :version => '0.0.1'
+  config.gem "activemerchant", :lib => "active_merchant", :version => '>=1.4.2'
   config.gem 'activerecord-tableless', :lib => 'tableless', :version => '>=0.1.0'
-  config.gem 'haml', :version => '>=2.2.0'
-  config.gem 'compass', :version => '0.8.17', :source => "http://gemcutter.org"
-  config.gem 'calendar_date_select', :version => '1.15'
+  config.gem 'less', :version => '>=1.2.20', :source => "http://gemcutter.org"
   config.gem 'rsl-stringex', :lib => 'stringex', :source => "http://gems.github.com"
   config.gem 'chronic' #required for whenever
   config.gem 'javan-whenever', :lib => false, :source => 'http://gems.github.com'
@@ -48,6 +45,8 @@ Spree::Initializer.run do |config|
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
   config.plugins = [ :all, :resource_controller, :extension_patches ]
 
+  config.extensions = [:theme_default, :all]
+  
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
 
@@ -67,13 +66,13 @@ Spree::Initializer.run do |config|
 
   # Activate observers that should always be running
   # config.active_record.observers = :cacher, :garbage_collector
+  config.active_record.observers = :state_monitor
 
   # The internationalization framework can be changed to have another default locale (standard is :en) or more load paths.
   # All files from config/locales/*.rb,yml are added automatically.
   #config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
   config.i18n.default_locale = :'en-US'
 
-  config.active_record.observers = :order_observer
 end
 
 Time::DATE_FORMATS[:date_time24] = "%Y-%m-%d %H:%M"
@@ -93,3 +92,4 @@ Time::DATE_FORMATS[:short_date] = "%Y-%m-%d"
 # Mime::Type.register "application/x-mobile", :mobile
 
 # Include your application configuration below
+
