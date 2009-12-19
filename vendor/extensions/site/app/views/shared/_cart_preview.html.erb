@@ -4,7 +4,7 @@
   <h3><a href="#" title="Shopping Cart">Shopping Cart</a></h3>
   <table summary="My Shopping Cart" cellspacing="0">
     <tbody>
-      <% unless order.line_items.empty? -%>
+      <% unless order.nil? || order.line_items.empty? -%>
         <tr>
           <td class="right"><%= link_to "Item #", edit_order_url(order) %></td>
           <td><%= order.line_items.inject(0) { |kount, line_item| kount + line_item.quantity } %></td>
