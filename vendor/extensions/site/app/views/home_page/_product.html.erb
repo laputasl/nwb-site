@@ -14,7 +14,7 @@
 
   </div>
   <div class="price">
-    <p><strong>Save: <%= number_to_currency(product.price - product.base_price) %><br />Price: <%= product_price(product) %></strong></p>
+    <p><strong>Save: <%= number_to_currency(product.base_price - product.price) %><br />Price: <%= product_price(product) %></strong></p>
     <% form_for :order, :url => orders_url do |f| %>
       <fieldset>
         <%= buy_button(product, "btnBuyNow") %>
