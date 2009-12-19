@@ -1,0 +1,5 @@
+<% if url_options_authenticate?(:controller => 'admin/products') %>
+  <li<%= ' class="active"' if current == "Additional fields" %>>
+    <%= link_to "Additional Fields", additional_fields_admin_product_url(@product) %>
+  </li>
+<% end %>

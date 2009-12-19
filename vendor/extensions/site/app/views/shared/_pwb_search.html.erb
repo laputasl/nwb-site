@@ -1,0 +1,7 @@
+<% form_tag products_url,  {:method => :get,:id => "searchForm"} do %>
+  <fieldset>
+    <%= text_field_tag :keywords, params[:keywords], :id => "search" %>
+    <%= submit_tag t(:search), :name => nil, :id => "btnSearch" %>
+     <p><a href="#" title="Popular Searches">Popular Searches</a></p>
+  </fieldset>
+<% end %>

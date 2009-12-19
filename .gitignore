@@ -21,6 +21,8 @@ public/stylesheets
 public/images
 public/pets
 public/people
+public/pwb
+public/nwb
 config/s3.yml
 
 # from capistrano

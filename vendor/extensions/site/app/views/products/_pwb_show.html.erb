@@ -1,0 +1,93 @@
+<div class="product">
+  <div class="photo">
+    <%= product_image(@product, {:style => "max-width:140px;"}) %>
+    <p class="itemNum">
+      Item # <%= @product.sku %><br />
+      In Stock: <%= @product.has_stock? ? "Yes" : "No" %>
+    </p>
+  </div>
+  <div class="info">
+    <h2><%= link_to @product.name, @product, :title => @product.name %></h2>
+    <p><%= @product.subtitle_main %></p>
+    <p><%= @product.sales_copy %></p>
+  </div>
+  <div class="price">
+    <%= render "pwb_pricing" %>
+  </div>
+  <div class="rateShare">
+    <div class="rating">
+      <script type="text/javascript">
+      var pr_snippet_min_reviews=1;
+      POWERREVIEWS.display.snippet(document, { pr_page_id : "<%= @product.legacy_id %>" });
+      </script>
+    </div>
+    <div class="share">
+      <p><strong>Share This</strong></p>
+      <a href="http://www.addthis.com/bookmark.php" onclick="addthis_url   = location.href; addthis_title = document.title; return addthis_click(this);"><img src="img/icon_plus.gif" alt="Bookmark and Share" /></a>
+      <a href="http://www.addthis.com/bookmark.php" onclick="addthis_url   = location.href; addthis_title = document.title; return addthis_click(this);">Bookmark &amp; Share</a>
+      <script type="text/javascript" src="http://s7.addthis.com/js/widget.php?v=10"></script>
+    </div>
+  </div>
+</div>
+<div class="productDetails">
+  <ul class="productMenu">
+    <li class="active"><a id="tabDescription" href="#" title="Description">Description</a></li>
+    <li><a id="tabReviews" href="#" title="Reviews">Reviews</a></li>
+    <li><a id="tabDirections" href="#" title="Dosage &amp; Directions">Dosage &amp; Directions</a></li>
+    <li><a id="tabIngredients" href="#" title="Ingredients">Ingredients</a></li>
+  </ul>
+  <div id="Description" class="content">
+    <h3>Description</h3>
+    <%= @product.description %>
+    <p class="right"><a href="#" title="Back to Top &raquo;">Back to Top &raquo;</a></p>
+  </div>
+  <div id="Reviews" style="display:none;" class="content">
+    <h3>Reviews</h3>
+    <script type="text/javascript">
+      POWERREVIEWS.display.engine(document, { pr_page_id : "<%= @product.legacy_id %>" });
+    </script>
+    <p class="right"><a href="#" title="Back to Top &raquo;">Back to Top &raquo;</a></p>
+  </div>
+  <div id="Directions" style="display:none;" class="content">
+    <h3>Dosage &amp; Directions</h3>
+    <%= @product.dosage %>
+    <p class="right"><a href="#" title="Back to Top &raquo;">Back to Top &raquo;</a></p>
+  </div>
+  <div id="Ingredients" style="display:none;" class="content">
+    <h3>Ingredients</h3>
+    <%= @product.ingredients %>
+    <p class="right"><a href="#" title="Back to Top &raquo;">Back to Top &raquo;</a></p>
+  </div>
+</div>
+<div class="product">
+  <div class="price">
+    <%= render "pwb_pricing" %>
+  </div>
+</div>
+
+<% content_for :head do %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var last_tab = "Description";
+      $('ul.productMenu li a').click(function(){
+        var id = this.id.replace("tab", "");
+
+        $('ul.productMenu li a#tab' + last_tab).parent().removeClass("active");
+        $('ul.productMenu li a#tab' + id).parent().addClass("active");
+
+        $('div.productDetails div#' + last_tab).hide();
+
+        $('div.productDetails div#' + id).show();
+        last_tab = id;
+
+        return false;
+      });
+
+      $("div.price form input[type='radio']").click(function(){
+        $("div.price form input[id*='variants_']").val($(this).val());
+      })
+
+    });
+  </script>
+<% end %>
+

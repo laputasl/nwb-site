@@ -1,0 +1,16 @@
+<% form_for :order, :url => orders_url do |f| %>
+  <%= hidden_field_tag("variants[#{@product.master.id}]", 1)  %>
+  <fieldset>
+    <%= radio_button_tag 'bundle_quantity', 1, true %>
+    <label>
+      1 <%= @product.units_of_measure.titleize %> <span class="strike"><%= number_to_currency(@product.base_price) %></span> <strong><%= number_to_currency(@product.price) %></strong><br />
+      Save <%= number_to_currency(@product.base_price - @product.price) %>
+    </label>
+    <%= radio_button_tag 'bundle_quantity', 2, false %>
+    <label>
+      2 <%= @product.units_of_measure.pluralize.titleize %> <span class="strike"><%= number_to_currency(@product.base_price * 2) %></span> <strong><%= number_to_currency(@product.master.volume_price(2) * 2) %></strong><br />
+      Save <%= number_to_currency((@product.base_price * 2) - (@product.master.volume_price(2) * 2)) %> and get &nbsp;<strong>free shipping</strong>
+    </label>
+    <%= submit_tag "Add to Cart", :class => "btnAddCart" %>
+  </fieldset>
+<% end %>

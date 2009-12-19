@@ -1,0 +1,705 @@
+/*--------------------------------------*/
+/* CSS Created by Domo - 2009 ----------*/
+/* www.okdomo.com ----------------------*/
+/*--------------------------------------*/
+
+/*---------------------*/
+/* General ------------*/
+/*---------------------*/
+* {margin: 0;padding: 0;}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+hr {display: none;}
+img, fieldset {border: none;}
+a:link {color: #0342C9;}
+a:visited {color: #791F7C;}
+a:hover, a:active {color: #1c3c80;}
+.clear {
+  clear: both;
+  height: 0;
+  font-size: 0;
+  line-height: 0;
+}
+#container {
+  width: 745px;
+  margin: 0 auto;
+}
+/*---------------------*/
+/* Header -------------*/
+/*---------------------*/
+#header {
+  width: 745px;
+  overflow: hidden;
+  padding: 5px 0 0 0;
+}
+#header h1 a {
+  background: url(/pwb/images/pwb_logo.jpg) top left no-repeat;
+  float: left;
+  display: inline;
+  text-indent: -999em;
+  overflow: hidden;
+  width: 341px;
+  height: 64px;
+}
+#header li {
+  list-style: none;
+  list-style-position: outside;
+  display: inline;
+}
+#header #miscNav {
+  float: right;
+  display: inline;
+  width: 400px;
+}
+#header #miscNav li {
+  float: right;
+  display: inline;
+  padding: 0 5px;
+  border-right: 1px solid #000;
+  line-height: 14px;
+}
+#header #miscNav li.first {border: 0;padding-right: 0;}
+/*---------------------*/
+/* Search -------------*/
+/*---------------------*/
+#header #searchForm {
+  float: right;
+  display: inline;
+  width: 220px;
+  font-size: 11px;
+  text-align: right;
+  overflow: hidden;
+  margin: 7px 0 0 0;
+}
+#header #searchForm p {
+  clear: both;
+}
+#header #searchForm legend {display:none;}
+#header #searchForm input {
+  float: left;
+  display: inline;
+  width: 118px;
+  padding: 1px 2px;
+}
+#header #searchForm #btnSearch {
+  background: url(/pwb/images/btn_search.png) top left no-repeat;
+  float: right;
+  text-indent: -999em;
+  overflow: hidden;
+  width: 86px;
+  height: 20px;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+/*---------------------*/
+/* Nav ----------------*/
+/*---------------------*/
+#nav {
+  font-family: Tahoma, Arial, sans-serif;
+  clear: both;
+  width: 745px;
+  overflow: hidden;
+}
+#nav li {
+  float: left;
+  display: inline;
+}
+#nav li a {
+  display: block;
+  text-align: center;
+  color: #000;
+  overflow: hidden;
+  height: 25px;
+  padding: 5px 0 0 0;
+  line-height: 16px;
+}
+#nav li a:hover {
+  background-position: bottom;
+}
+#navHome {
+  background: url(/pwb/images/nav_home.png) top left no-repeat;
+  width: 55px;
+}
+#navShipping {
+  background: url(/pwb/images/nav_shipping.png) top left no-repeat;
+  width: 149px;
+}
+#navSecure {
+  background: url(/pwb/images/nav_secure.png) top left no-repeat;
+  width: 115px;
+  padding-left: 15px !important;
+}
+#navGuarantee {
+  background: url(/pwb/images/nav_guarantee.png) top left no-repeat;
+  width: 182px;
+}
+#navCart {
+  background: url(/pwb/images/nav_cart.png) top left no-repeat;
+  width: 120px;
+  padding-left: 15px !important;
+}
+#navAccount {
+  background: url(/pwb/images/nav_account.png) top left no-repeat;
+  width: 94px;
+}
+/*---------------------*/
+/* Main ---------------*/
+/*---------------------*/
+#main {
+  background: url(/pwb/images/bg_main.png) top left repeat-y;
+  border-top: 1px solid #ddd;
+  width: 745px;
+  overflow: hidden;
+  padding: 5px 0 0 0;
+  margin: 5px 0 0 0;
+}
+/*---------------------*/
+/* Sidebar ------------*/
+/*---------------------*/
+#sidebar {
+  width: 163px;
+  float: left;
+  display: inline;
+}
+#sidebar #petBtns {
+  padding: 0 7px 5px 7px;
+  margin: 0 0 10px 0;
+}
+#sidebar #petBtns a {
+  display: block;
+  text-indent: -999em;
+  overflow: hidden;
+  width: 144px;
+  height: 27px;
+  margin: 0 0 8px 0;
+}
+#sidebar #btnDogs {background: url(/pwb/images/btn_dogs.png) top left no-repeat;}
+#sidebar #btnCats {background: url(/pwb/images/btn_cats.png) top left no-repeat;}
+#sidebar img {
+  display: block;
+  margin: 10px auto;
+}
+#sidebar #btnPHBlog {
+  background: url(/pwb/images/btn_blog.png) top left no-repeat;
+  display: block;
+  text-indent: -999em;
+  overflow: hidden;
+  width: 135px;
+  height: 39px;
+  margin: 10px auto;
+}
+#sidebar #btnChatLive {
+  background: url(/pwb/images/btn_live_chat.png) top left no-repeat;
+  display: block;
+  text-indent: -999em;
+  overflow: hidden;
+  width: 150px;
+  height: 60px;
+  margin: 0 auto;
+}
+/*---------------------*/
+/* Cart Preview -------*/
+/*---------------------*/
+#cartPreview {
+  background: #e9efe4;
+  border: 1px solid #a7b79a;
+  margin: 8px 0 0 0;
+}
+#cartPreview h3 a {
+  background: #a7b79a;
+  color: #fff;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  padding: 5px 0;
+  font-size: 13px;
+}
+#cartPreview table {
+  width: 140px;
+  margin: 10px 10px 5px 10px;
+  font-size: 11px;
+}
+#cartPreview table td {
+  padding: 0 0 5px 0;
+  vertical-align: top;
+}
+#cartPreview table td.right {
+  text-align: right;
+  padding: 0 10px 0 0;
+}
+#cartPreview p {
+  text-align: center;
+  font-size: 11px;
+  padding: 5px 0 10px 0;
+}
+/*---------------------*/
+/* Sub Nav ------------*/
+/*---------------------*/
+#subNav {
+  padding: 0 1px;
+  font-family: Verdana, Arial, sans-serif;
+}
+#subNav dt {
+  background: #d3d9be;
+}
+#subNav dt a,
+#subNav dt p {
+  padding: 6px 0 6px 13px;
+  display: block;
+}
+#subNav ul {
+  border-top: 1px dashed #d8d5c3;
+}
+#subNav li {display:inline;}
+#subNav li a,
+#subNav li p {
+  border-bottom: 1px dashed #d8d5c3;
+  padding: 5px 5px 5px 13px;
+  display: block;
+  line-height: 16px;
+}
+#subNav li a:hover {background: #e9efe4;}
+/*---------------------*/
+/* Sub Nav Tier -------*/
+/*---------------------*/
+#subNav ul ul {
+  border: 0;
+  background: #fff;
+}
+#subNav ul ul a,
+#subNav ul ul p {padding-left: 25px;}
+#subNav ul p,
+#subNav dt p {
+  background-image: url(/pwb/images/icon_arrow.gif);
+  background-repeat: no-repeat;
+  background-position: 4px center;
+  font-weight: bold;
+}
+#subNav ul ul p {
+  font-weight: normal;
+  background-position: 10px center;
+}
+/*---------------------*/
+/* Body ---------------*/
+/*---------------------*/
+#body {
+  width: 578px;
+  float: right;
+  display: inline;
+}
+#body .banner h2 {
+  background: url(/pwb/images/banner_home.jpg) top left no-repeat;
+  display: block;
+  text-indent: -999em;
+  overflow: hidden;
+  width: 578px;
+  height: 75px;
+  margin: 0 0 5px 0;
+}
+#body #breadcrumbs {
+  margin: 0 0 30px 13px;
+}
+#body #breadcrumbs li {
+  list-style: none;
+  list-style-position: outside;
+  display: inline;
+  font-size: 11px;
+}
+/*---------------------*/
+/* Text Content -------*/
+/*---------------------*/
+#body .content {
+  border: 1px solid #e9efe4;
+  margin: 10px 0 20px 13px;
+  background: #fbfff7;
+  padding: 10px;
+  line-height: 16px;
+  overflow: hidden;
+  width: 543px;
+}
+#body .content h1 {
+  color: #485543;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 21px;
+  margin: 10px 0 10px 0;
+}
+#body .content ul.categories {
+  width: 150px;
+  float: left;
+  display: inline;
+}
+#body .content p {
+  margin: 0 0 10px 0;
+}
+#body .content ul,
+#body .content ol {
+  margin: 0 0 10px 35px;
+}
+#body .content li {
+  margin: 0 0 5px 0;
+}
+#body .content ul {margin: 0 0 10px 25px;}
+#body .content ul li {
+  background: url(/pwb/images/icon_bullet.gif) 0 3px no-repeat;
+  list-style: none;
+  list-style-position: outside;
+  padding: 0 0 0 14px;
+}
+
+#body .content h3 {
+  background: #f8f5ef;
+  padding: 5px;
+  margin: 5px 0 15px 0;
+  font-size: 14px;
+}
+#body .content p.right {
+  text-align: right;
+}
+/*---------------------*/
+/* Product Details ----*/
+/*---------------------*/
+.product {
+  margin: 0 0 0 13px;
+  width: 565px;
+}
+.product .photo {
+  float: left;
+  display: inline;
+  width: 125px;
+  text-align: center;
+}
+.product .info {
+  float: right;
+  display: inline;
+  width: 420px;
+}
+.product h2 {
+  margin: 0 0 10px 0;
+}
+.product h2 a {
+  color: #708369;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 18px;
+}
+.product .info p {
+  margin: 0 0 10px 0;
+}
+.product .info ul {margin: 0 0 10px 25px;}
+.product .info li {
+  background: url(/pwb/images/icon_bullet.gif) 0 3px no-repeat;
+  list-style: none;
+  list-style-position: outside;
+  padding: 0 0 0 14px;
+  margin: 0 0 3px 0;
+}
+/*---------------------*/
+/* Product Price ------*/
+/*---------------------*/
+.product .price {
+  clear: both;
+  width: 515px;
+  overflow: auto;
+  padding-left: 50px;
+  padding-top: 20px;
+}
+.product .price strong {color: #941C1C;}
+.product .price .strike {text-decoration: line-through;}
+.product .price input {
+  float: left;
+  display: inline;
+  margin: 0 5px 0 0;
+}
+.product .price label {
+  float: left;
+  display: inline;
+  width: 210px;
+  margin: 0 10px 20px 0;
+  line-height: 16px;
+}
+/*---------------------*/
+/* Rating & Share -----*/
+/*---------------------*/
+.rateShare {
+  width: 565px;
+  overflow: hidden;
+  border-top: 1px solid #d8d5c3;
+  border-bottom: 1px solid #d8d5c3;
+}
+.rateShare .rating{
+  min-height:64px;
+}
+.product .rating {
+  width: 280px;
+  border-right: 1px solid #d8d5c3;
+  float: left;
+  display: inline;
+  padding: 0 10px 5px 0;
+}
+.product .prSnippetTitle,
+.product .share p {
+  margin: 10px 0 5px 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+.product .prSnippetRatingUnclickable {
+  float: left;
+  display: inline;
+  width: 85px;
+  text-align: center;
+  margin: 0 10px 0 0;
+}
+.product .prSnippetWriteReview,
+.product .prSnippetReadReviews {
+  display: inline;
+}
+.product .prStarsSmall {
+  display: block;
+  float: none;
+}
+.product .rating * {
+  padding: 0;
+}
+.product .share {
+  width: 260px;
+  float: right;
+  display: inline;
+}
+/*---------------------*/
+/* Product Tabs -------*/
+/*---------------------*/
+#body .productDetails .content {
+  margin: 0 0 20px 0;
+  border-color: #c2bfaf;
+  border-top: 0;
+}
+.productDetails {
+  margin: 25px 0 0 13px;
+}
+.productMenu {
+  background: url(/pwb/images/bg_tab_menu.png) bottom left repeat-x;
+  overflow: hidden;
+  width: 565px;
+}
+.productMenu li {
+  list-style: none;
+  list-style-position: outside;
+  float: left;
+  display: inline;
+}
+.productMenu li a {
+  float: left;
+  display: inline;
+  text-align: center;
+  font-size: 14px;
+  padding: 5px 0 0 0;
+  text-decoration: none;
+  color: #000;
+  height: 23px;
+}
+.productMenu .active a,
+.productMenu .active a:hover {background-position: bottom left !important;}
+.productMenu li a:hover {background-position: center left !important;}
+#tabDescription {
+  background: url(/pwb/images/tab_description.png) top left no-repeat;
+  width: 91px;
+}
+#tabReviews {
+  background: url(/pwb/images/tab_reviews.png) top left no-repeat;
+  width: 101px;
+}
+#tabDirections {
+  background: url(/pwb/images/tab_directions.png) top left no-repeat;
+  width: 155px;
+}
+#tabIngredients {
+  background: url(/pwb/images/tab_ingredients.png) top left no-repeat;
+  width: 96px;
+}
+/*---------------------*/
+/* Product List -------*/
+/*---------------------*/
+.products {
+  border: 1px solid #a7b79a;
+  border-top: 0;
+  margin: 0 0 20px 13px;
+}
+.products h1 {
+  background: #cad8bd;
+  font-size: 15px;
+  color: #324a21;
+  padding: 3px 10px 5px 10px;
+  border-top: 1px solid #a7b79a;
+  border-bottom: 1px solid #a7b79a;
+}
+.products h1 a {color: #324a21;}
+.products h1 a:hover {color: #496337;}
+.products ul {
+  background: url(/pwb/images/bg_dotted.png) 265px 0 repeat-y;
+  margin: 10px;
+  width: 545px;
+  overflow: hidden;
+}
+.productList .border {
+  border-bottom: 5px solid #F4F3F0;
+  padding-bottom: 10px !important;
+  margin-bottom: 20px;
+}
+.productList .rating {
+  margin: 10px 0 0 ;
+  min-height: 20px;
+}
+.productList li {
+  width: 262px;
+  float: left;
+  display: inline;
+  padding: 0 10px 0 0;
+  min-height:195px;
+}
+.productList li .photo {
+  float: left;
+  display: inline;
+  width: 60px;
+}
+.productList li .info {
+  float: right;
+  display: inline;
+  width: 188px;
+  overflow: hidden;
+  margin: 5px 0 5px 0;
+}
+.productList li .info h2 {
+  font-size: 14px;
+  margin: 0 0 7px 0;
+}
+.productList li .info p.itemNum {
+  font-size: 11px;
+  margin: 0;
+}
+.productList li .info p.description {
+  min-height: 50px;
+}
+.productList li .info p {
+  font-size: 12px;
+  margin: 7px 0 0 0;
+  line-height: 15px;
+}
+.productList .info .rating {
+  margin: 10px 0 0 ;
+  min-height: 20px;
+}
+.productList .info p.price {
+  width: 95px;
+  margin: 0;
+  padding: 0;
+  float: left;
+  display: inline;
+}
+.productList .info p.more {
+  float: right;
+  display: inline;
+  clear: none;
+  width: 90px;
+  margin: 0;
+}
+.productList li p.more {
+  clear: both;
+  font-size: 10px;
+  margin: 0 0 10px 0;
+}
+/*---------------------*/
+/* Review Snippet -----*/
+/*---------------------*/
+.productList .prSnippetTitle,
+.productList .prSnippetWriteReview,
+.productList .prSnippetReadReviews {
+  border: 1px solid red;
+  display: none;
+}
+.productList .prSnippetRatingUnclickable {
+  padding: 0 !important;
+  margin: 0 0 10px 0;
+}
+/*---------------------*/
+/* Price --------------*/
+/*---------------------*/
+.price {
+  clear: both;
+  padding: 10px 0;
+}
+.price p {
+  float: left;
+  display: inline;
+  width: 120px;
+  font-size: 11px;
+}
+.price form .btnBuyNow,
+.price form .btnAddCart {
+  background: url(/pwb/images/btn_buy_now.png) top left no-repeat;
+  float: left;
+  display: inline;
+  text-indent: -999em;
+  overflow: hidden;
+  width: 72px;
+  height: 20px;
+  border: 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin: 2px 0 0 0;
+}
+.product .price form .btnAddCart,
+.productList .price form .btnAddCart {
+  background: url(/pwb/images/btn_add_cart.png) top left no-repeat;
+  width: 84px;
+  float: none;
+  display: block;
+  margin: 0 0 0 180px;
+}
+.productList .price form .btnAddCart {
+  margin: 0;
+  float: left;
+  display: inline;
+}
+.price .quantity {
+  float: left;
+  display: inline;
+  width: 100px;
+}
+.price .quantity input {
+  width: 30px;
+  margin: 0 0 0 5px;
+  text-align: center;
+}
+/*---------------------*/
+/* Footer -------------*/
+/*---------------------*/
+#footer {
+  text-align: center;
+  font-size: 11px;
+  padding: 0 0 20px 0;
+}
+#footer p {
+  margin: 0 0 10px 0;
+  line-height: 15px;
+}
+#footer ul {
+  background: #829870;
+  list-style: none;
+  list-style-position: outside;
+  padding: 15px 0 15px 10px;
+  margin: 0 0 5px 0;
+  text-align: left;
+}
+#footer li {
+  display: inline;
+  border-left: 1px solid #fff;
+  padding: 0 6px 0 10px;
+  font-size: 11px;
+}
+#footer ul a {color: #fff}
+#footer li.first {border: 0;}

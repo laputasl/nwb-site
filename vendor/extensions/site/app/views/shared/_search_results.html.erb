@@ -1,0 +1,8 @@
+<% if @products.empty? %>
+  <%= t(:no_products_found) %>
+<% else %>
+  <div class="products">
+    <h1>Search Results</h1>
+    <%= render "shared/products", :locals => {:products => @products, :taxon => @taxon } %>
+  </div>
+<% end %>

@@ -1,0 +1,33 @@
+<%- order = Order.find_or_create_by_id(session[:order_id]) unless session[:order_id].blank? -%>
+
+<div id="cartPreview">
+  <h3><a href="#" title="Shopping Cart">Shopping Cart</a></h3>
+  <table summary="My Shopping Cart" cellspacing="0">
+    <tbody>
+      <% unless order.line_items.empty? -%>
+        <tr>
+          <td class="right"><%= link_to "Item #", edit_order_url(order) %></td>
+          <td><%= order.line_items.inject(0) { |kount, line_item| kount + line_item.quantity } %></td>
+        </tr>
+        <tr>
+          <td class="right">Sub Total:</td>
+          <td><%= number_to_currency(order.item_total) %></td>
+        </tr>
+        <tr>
+          <td class="right">Shipping:</td>
+          <td>-</td>
+        </tr>
+        <tr>
+          <td class="right">Total:</td>
+          <td><strong><%= number_to_currency(order.total) %></strong></td>
+        </tr>
+      <% else %>
+        <tr>
+          <td colspan="2">Your shopping cart is empty.</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <p><a href="#" title="Free Same Day Shipping at $50.00">Free Same Day Shipping at $50.00</a></p>
+
+</div>

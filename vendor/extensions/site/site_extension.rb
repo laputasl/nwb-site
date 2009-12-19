@@ -17,8 +17,14 @@ class SiteExtension < Spree::Extension
     Image.attachment_definitions[:attachment][:path] = ":attachment/:id/:style.:extension"
     Image.attachment_definitions[:attachment].delete :url
 
+    base = File.dirname(__FILE__)
+    Dir.glob(File.join(base, "app/**/*_decorator*.rb")) do |c|
+      RAILS_ENV=="production" ? require(c) : load(c)
+    end
+
     Spree::BaseController.class_eval do
-      before_filter :set_layout
+      before_filter :set_layout, :load_global_taxons
+      helper :products
 
       private
       def set_layout
@@ -26,14 +32,14 @@ class SiteExtension < Spree::Extension
         @backto_site = request.headers['wellbeing-backto']
         self.class.layout @site.code
       end
-    end
 
-    Admin::BaseController.class_eval do
-      before_filter :add_additional_fields
+      def get_taxonomies
+        @taxonomies ||= Taxonomy.find(:all, :include => {:root => :children}, :conditions => ["store_id = ?", @site.id])
+        @taxonomies
+      end
 
-      private
-      def add_additional_fields
-        # @product_admin_tabs << {:name => "Additional Fields", :url => "additional_fields_admin_product_url"}
+      def load_global_taxons
+        @categories = Taxonomy.find(:first, :conditions => {:store_id => @site.id, :name => "Category"})
       end
     end
 
@@ -44,17 +50,8 @@ class SiteExtension < Spree::Extension
       end
     end
 
-    Spree::BaseController.class_eval do
-      def get_taxonomies
-        @taxonomies ||= Taxonomy.find(:all, :include => {:root => :children}, :conditions => ["store_id = ?", @site.id])
-        @taxonomies
-      end
-    end
-
-    ProductsHelper.module_eval do
-      def seo_url(taxon, product = nil)
-        return "#{ActionController::Base.relative_url_root}/t/" + taxon.permalink if product.nil?
-      end
+    ProductsController.class_eval do
+      show.wants.html { render :partial => "#{@site.code}_show", :layout => true }
     end
 
     Variant.additional_fields += [ {:name => 'Store Id', :only => [:product], :use => 'select', :value => lambda { |controller, field| Store.all.collect {|s| [s.name, s.id ]}  } } ]

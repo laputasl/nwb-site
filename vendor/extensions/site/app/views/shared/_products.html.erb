@@ -1,0 +1,67 @@
+<% if @site.code == "nwb" %>
+  <% paginated_products = params.key?(:keywords) ? Spree::Config.searcher.products : products %>
+  <% if params[:keywords] %>
+  <h3><%= t(:search_results, :keywords => h(params[:keywords])) %></h3>
+  <% end %>
+  <% if products.empty? %>
+    <%= t(:no_products_found) %>
+  <% end %>
+
+  <% if products.any? %>
+  <ul class="product-listing">
+    <% products.each do |product| %>
+      <% if Spree::Config[:show_zero_stock_products] || product.has_stock? %>
+        <li id="product_<%= product.id %>">
+          <%= link_to small_image(product), product %>
+          <%= link_to product.name + "<span class='price selling'>#{product_price(product)}</span>", product, :class => 'info' %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+  <% end %>
+
+  <hr class="space" />
+
+  <%  if paginated_products.is_a?(WillPaginate::Collection)
+        params.delete(:search)
+        params.delete(:taxon)
+
+  %><%= will_paginate(paginated_products,
+                      :previous_label => "&#171; #{t('previous')}",
+                      :next_label => "#{t('next')} &#187;") %>
+  <%  end -%>
+
+  <hr class="space" />
+<% else %>
+  <ul class="productList">
+    <% products.each do |product| %>
+      <li class="<%= ((products.size - products.index(product)) < (3 - (products.size % 2))) ? "" : "border" %>">
+        <%= link_to small_image(product, {:style => "max-width:70px;"}), product, {:class => "photo"} %>
+        <div class="info" style="min-height:145px;">
+          <h2><%= link_to truncate(product.name, 26), product, :title => product.name %></h2>
+          <p class="itemNum">Item # <%= product.sku %></p>
+          <p class="description"><%= product.short_subcategory %></p>
+          <div class="rating">
+            <script type="text/javascript">
+            var pr_snippet_min_reviews=1;
+            POWERREVIEWS.display.snippet(document, { pr_page_id : "<%= product.legacy_id %>" });
+            </script>
+          </div>
+          <p class="price"><%= product_price(product) %> USD</p>
+          <p class="more"><a href="#" title="Product Info &raquo;">Product Info &raquo;</a></p>
+        </div>
+        <div class="price">
+          <% form_for :order, :url => orders_url do |f| %>
+            <fieldset>
+               <div class="quantity">
+                <label>Quantity</label>
+                <%= text_field_tag("variants[#{product.master.id}]", 1)  %>
+              </div>
+              <%= submit_tag("Buy Now", :class => "btnAddCart") %>
+            </fieldset>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
