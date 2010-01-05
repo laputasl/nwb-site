@@ -76,35 +76,6 @@
   </div>
 
   <div class="additional_fields">
-    <h3>Export Details</h3>
-
-    <% f.field_container :export_description_broad do %>
-      <%= f.label :export_description_broad, "Export Description (Broad)"%><br />
-      <%= f.text_field :export_description_broad, :class => 'fullwidth'  %>
-      <%= f.error_message_on :export_description_broad %>
-    <% end %>
-
-    <% f.field_container :export_description_specific do %>
-      <%= f.label :export_description_specific, "Export Description (Specific)"%><br />
-      <%= f.text_field :export_description_specific, :class => 'fullwidth'  %>
-      <%= f.error_message_on :export_description_specific %>
-    <% end %>
-
-    <% f.field_container :country_id do %>
-      <%= f.label :country_id, "Country of Origin "%><br />
-      <%= f.collection_select :country_id, @countries, :id, :name, {}, {:class => 'fullwidth'} %>
-      <%= f.error_message_on :country_id %>
-    <% end %>
-
-    <% f.field_container :tarrif_code do %>
-      <%= f.label :tarrif_code, "Tarrif Code"%><br />
-      <%= f.text_field :tarrif_code, :class => 'fullwidth'  %>
-      <%= f.error_message_on :tarrif_code %>
-    <% end %>
-
-  </div>
-
-  <div class="additional_fields">
     <h3>Misc. Details</h3>
 
     <% f.field_container :units_of_measure do %>
