@@ -45,8 +45,6 @@ Spree::Initializer.run do |config|
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
   config.plugins = [ :all, :resource_controller, :extension_patches ]
 
-  config.extensions = [:theme_default, :all]
-
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
 
