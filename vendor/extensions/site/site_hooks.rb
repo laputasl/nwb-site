@@ -18,4 +18,7 @@ class SiteHooks < Spree::ThemeSupport::HookListener
 
   #remove :homepage_sidebar_navigation
   replace :search_results, :partial => "shared/search_results"
+
+  #disables 'can be part' flag if product is an assembly/kit
+  insert_after :admin_product_form_additional_fields, :partial => "admin/products/hide_parts"
 end

@@ -58,6 +58,11 @@ class SiteExtension < Spree::Extension
 
     Product.class_eval do
       belongs_to :store
+
+      private
+      def validate
+        errors.add(:can_be_part, "cannot be true when the product contains parts.") if assembly? && can_be_part
+      end
     end
 
     Taxonomy.class_eval do
