@@ -11,30 +11,6 @@
       <%= f.text_field :subtitle_main, {:class => 'fullwidth'} %>
       <%= f.error_message_on :subtitle_main %>
     <% end %>
-
-    <% f.field_container :subtitle_home do %>
-      <%= f.label :subtitle_home, "Home" %><br />
-      <%= f.text_field :subtitle_home, {:class => 'fullwidth'} %>
-      <%= f.error_message_on :subtitle_home %>
-    <% end %>
-
-    <% f.field_container :subtitle_category do %>
-      <%= f.label :subtitle_category, "Category" %><br />
-      <%= f.text_field :subtitle_category, {:class => 'fullwidth'} %>
-      <%= f.error_message_on :subtitle_category %>
-    <% end %>
-
-    <% f.field_container :subtitle_subcategory do %>
-      <%= f.label :subtitle_subcategory, "Subcategory" %><br />
-      <%= f.text_field :subtitle_subcategory, {:class => 'fullwidth'} %>
-      <%= f.error_message_on :subtitle_subcategory %>
-    <% end %>
-
-    <% f.field_container :subtitle_brand do %>
-      <%= f.label :subtitle_brand, "Brand" %><br />
-      <%= f.text_field :subtitle_brand, {:class => 'fullwidth'} %>
-      <%= f.error_message_on :subtitle_brand %>
-    <% end %>
   </div>
 
   <div class="additional_fields">
@@ -55,24 +31,6 @@
       <%= f.label :short_home, "Home"%><br />
       <%= f.text_area :short_home, {:style=> "height:100px;", :class => 'fullwidth'} %>
       <%= f.error_message_on :short_home %>
-    <% end %>
-
-    <% f.field_container :short_category do %>
-      <%= f.label :short_category, "Category"%><br />
-      <%= f.text_area :short_category, {:style=> "height:100px;", :class => 'fullwidth'} %>
-      <%= f.error_message_on :short_category %>
-    <% end %>
-
-    <% f.field_container :short_subcategory do %>
-      <%= f.label :short_subcategory, "Sub-Category"%><br />
-      <%= f.text_area :short_subcategory, {:style=> "height:100px;", :class => 'fullwidth'} %>
-      <%= f.error_message_on :short_subcategory %>
-    <% end %>
-
-    <% f.field_container :short_brand do %>
-      <%= f.label :short_brand, "Brand"%><br />
-      <%= f.text_area :short_brand, {:style=> "height:100px;", :class => 'fullwidth'} %>
-      <%= f.error_message_on :short_brand %>
     <% end %>
   </div>
 

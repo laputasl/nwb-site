@@ -40,7 +40,7 @@
         <div class="info" style="min-height:145px;">
           <h2><%= link_to truncate(product.name, 26), product, :title => product.name %></h2>
           <p class="itemNum">Item # <%= product.sku %></p>
-          <p class="description"><%= product.short_subcategory %></p>
+          <p class="description"><%= product.subtitle_main %></p>
           <div class="rating">
             <script type="text/javascript">
             var pr_snippet_min_reviews=1;
