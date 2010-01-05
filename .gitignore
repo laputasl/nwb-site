@@ -23,6 +23,7 @@ public/pets
 public/people
 public/pwb
 public/nwb
+public/ckeditor
 config/s3.yml
 
 # from capistrano
