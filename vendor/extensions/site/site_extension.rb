@@ -51,7 +51,16 @@ class SiteExtension < Spree::Extension
     end
 
     ProductsController.class_eval do
+      before_filter :can_show_product
+
       show.wants.html { render :partial => "#{@current_domain}_show", :layout => true }
+
+      private
+      def can_show_product
+       if (@product.store.nil? || (@product.store.code != @site.code)) || (RAILS_ENV == "produdction" && params[:id].is_integer?)
+         render :file => "public/404.html", :status => 404
+       end
+      end
     end
 
     Variant.additional_fields += [ {:name => 'Store Id', :only => [:product], :use => 'select', :value => lambda { |controller, field| Store.all.collect {|s| [s.name, s.id ]}  } } ]
