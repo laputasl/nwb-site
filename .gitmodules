@@ -8,11 +8,8 @@
   path = vendor/extensions/advanced_taxon
   url = git://github.com/romul/spree-advanced-taxon.git
 [submodule "vendor/extensions/product_assembly"]
-	path = vendor/extensions/product_assembly
-	url = git://github.com/BDQ/spree-product-assembly.git
+  path = vendor/extensions/product_assembly
+  url = git://github.com/BDQ/spree-product-assembly.git
 [submodule "vendor/extensions/site/vendor/plugins/rbet"]
-	path = vendor/extensions/site/vendor/plugins/rbet
-	url = git://github.com/BDQ/rbet.git
-[submodule "vendor/extensions/ckeditor"]
-	path = vendor/extensions/ckeditor
-	url = git://github.com/davidnorth/spree-ckeditor.git
+  path = vendor/extensions/site/vendor/plugins/rbet
+  url = git://github.com/BDQ/rbet.git
