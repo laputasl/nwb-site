@@ -10,21 +10,21 @@ class StoreSwitcher
     if env['PATH_INFO'] =~ /^\/people/
       remove_path = "/people"
       env['wellbeing-site'] = "nwb"
-      env['wellbeing-backto'] = "pwb"
+      env['wellbeing-domain'] = "pwb"
     elsif env['PATH_INFO'] =~ /^\/pets/
       remove_path = "/pets"
       env['wellbeing-site'] = "pwb"
-      env['wellbeing-backto'] = "nwb"
+      env['wellbeing-domain'] = "nwb"
     else
       env['wellbeing-site'] = case domain_name
         when "petwellbeing" then "pwb"
         when "naturalwellbeing" then "nwb"
         else "nwb"
       end
-      env['wellbeing-backto'] = env['wellbeing-site']
+      env['wellbeing-domain'] = env['wellbeing-site']
     end
 
-    if env['wellbeing-site'] == "pwb"
+    if env['wellbeing-domain'] == "pwb"
       Spree::Config.set(:site_name => "PetWellBeing.com")
     else
       Spree::Config.set(:site_name => "NaturalWellBeing.com")

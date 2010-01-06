@@ -1,12 +1,12 @@
 <p>
   <% if @site.code == "pwb" %>
-    <% if @backto_site != @site.code %>
+    <% if @current_domain != @site.code %>
       <%= link_to "Back to our products for People", "/" %>
     <% else %>
       <%= link_to "See our natural products for People", "/people" %>
     <% end %>
   <% else %>
-    <% if @backto_site != @site.code %>
+    <% if @current_domain != @site.code %>
       <%= link_to "Back to our natural products for Pets", "/" %>
     <% else %>
       <%= link_to "See our natural products for Pets", "/pets" %>
