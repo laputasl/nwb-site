@@ -13,3 +13,6 @@
 [submodule "vendor/extensions/site/vendor/plugins/rbet"]
   path = vendor/extensions/site/vendor/plugins/rbet
   url = git://github.com/BDQ/rbet.git
+[submodule "vendor/extensions/ckeditor"]
+	path = vendor/extensions/ckeditor
+	url = git@github.com:BDQ/spree-ckeditor.git
