@@ -51,7 +51,7 @@ class SiteExtension < Spree::Extension
     end
 
     ProductsController.class_eval do
-      before_filter :can_show_product
+      before_filter :can_show_product, :only => :show
 
       show.wants.html { render :partial => "#{@current_domain}_show", :layout => true }
 
