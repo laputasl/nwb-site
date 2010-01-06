@@ -1,4 +1,20 @@
+<% if @backto_site != @site.code && !@taxon.cross_sell.nil? %>
+  <div class="content">
+    <%= @taxon.cross_sell %>
+  </div>
+<% end %>
+
+<% unless @taxon.description.nil? %>
+  <div class="content">
+    <%= @taxon.description %>
+  </div>
+<% end %>
 <div class="products">
   <h1><%= taxon_header(@taxon) %></h1>
   <%= render "shared/products", :products => @taxon.products %>
 </div>
+<% unless @taxon.footer %>
+  <div class="content">
+    <%= @taxon.footer %>
+  </div>
+<% end %>
