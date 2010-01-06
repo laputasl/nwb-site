@@ -57,7 +57,7 @@ class SiteExtension < Spree::Extension
 
       private
       def can_show_product
-       if (@product.store.nil? || (@product.store.code != @site.code)) || (RAILS_ENV == "produdction" && params[:id].is_integer?)
+       if (@product.store.nil? || (@product.store.code != @site.code)) || (RAILS_ENV == "production" && params[:id].is_integer?)
          render :file => "public/404.html", :status => 404
        end
       end
