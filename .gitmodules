@@ -10,12 +10,9 @@
 [submodule "vendor/extensions/product_assembly"]
   path = vendor/extensions/product_assembly
   url = git://github.com/BDQ/spree-product-assembly.git
-[submodule "vendor/extensions/site/vendor/plugins/rbet"]
-  path = vendor/extensions/site/vendor/plugins/rbet
-  url = git://github.com/BDQ/rbet.git
 [submodule "vendor/extensions/ckeditor"]
-	path = vendor/extensions/ckeditor
-	url = git://github.com/BDQ/spree-ckeditor.git
+  path = vendor/extensions/ckeditor
+  url = git://github.com/BDQ/spree-ckeditor.git
 [submodule "vendor/extensions/static_content"]
-	path = vendor/extensions/static_content
-	url = git://github.com/PeterBerkenbosch/spree-static-content.git
+  path = vendor/extensions/static_content
+  url = git://github.com/PeterBerkenbosch/spree-static-content.git
