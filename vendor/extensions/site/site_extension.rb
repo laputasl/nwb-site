@@ -23,7 +23,7 @@ class SiteExtension < Spree::Extension
     end
 
     Spree::BaseController.class_eval do
-      before_filter :set_layout, :load_global_taxons
+      prepend_before_filter :set_layout, :load_global_taxons
       helper :products, :taxons
 
       private

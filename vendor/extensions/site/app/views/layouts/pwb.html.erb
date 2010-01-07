@@ -9,21 +9,19 @@
       <h1><a href="/" title="PetWellbeing.com">PetWellbeing.com - 1.877.633.2401</a></h1>
       <ul id="miscNav">
         <li class="first"><%= link_to "Login", login_path %></li>
-        <li><a href="#" title="Videos">Videos</a></li>
-        <li><a href="#" title="Store">Store</a></li>
-        <li><a href="#" title="Site Map">Site Map</a></li>
-        <li><a href="#" title="Wiki">Wiki</a></li>
+        <li><a href="http://videos.petwellbeing.com/" title="Videos">Videos</a></li>
+        <li><a href="http://pethealth.petwellbeing.com/wiki/Main_Page" title="Wiki">Wiki</a></li>
         <li><a href="/blog" title="Blog">Blog</a></li>
-        <li><a href="#" title="Contact">Contact</a></li>
-        <li><a href="#" title="About">About</a></li>
+        <li><a href="/pwb/contactus" title="Contact">Contact</a></li>
+        <li><a href="/pwb/aboutus" title="About">About</a></li>
       </ul>
       <%= render "shared/pwb_search" %>
 
       <ul id="nav">
         <li><a id="navHome" href="/" title="Home">Home</a></li>
-        <li><a id="navShipping" href="#" title="Free Same Day Shipping">Free Same Day Shipping</a></li>
-        <li><a id="navSecure" href="#" title="Secure Shopping">Secure Shopping</a></li>
-        <li><a id="navGuarantee" href="#" title="30-Day Money Back Guarantee">30-Day Money Back Guarantee</a></li>
+        <li><a id="navShipping" href="/pwb/shipping" title="Free Same Day Shipping">Free Same Day Shipping</a></li>
+        <li><a id="navSecure" href="/pwb/secure" title="Secure Shopping">Secure Shopping</a></li>
+        <li><a id="navGuarantee" href="/pwb/guarantee" title="30-Day Money Back Guarantee">30-Day Money Back Guarantee</a></li>
         <li><%= link_to "My Shopping Cart", cart_path, {:id => "navCart"} %></li>
         <li><%= link_to "My Account", current_user ? user_path(current_user) : login_path(), {:id => "navAccount"} %></li>
       </ul>
@@ -83,24 +81,24 @@
     <hr />
     <div id="footer">
       <ul>
-        <li class="first"><a href="#" title="Shipping">Shipping</a></li>
-        <li><a href="#" title="Security">Security</a></li>
-        <li><a href="#" title="Guarantee">Guarantee</a></li>
-        <li><a href="#" title="Privacy Policy">Privacy Policy</a></li>
-        <li><a href="#" title="Contact Us">Contact Us</a></li>
-        <li><a href="#" title="Advertising">Advertising</a></li>
-        <li><a href="#" title="Resources">Resources</a></li>
-        <li><a href="#" title="Resource Library">Resource Library</a></li>
-        <li><a href="#" title="Terms &amp; Conditions">Terms &amp; Conditions</a></li>
+        <li class="first"><a href="/pwb/shipping" title="Shipping">Shipping</a></li>
+        <li><a href="/pwb/secure" title="Security">Security</a></li>
+        <li><a href="/pwb/guarantee" title="Guarantee">Guarantee</a></li>
+        <li><a href="/pwb/privacy_policy" title="Privacy Policy">Privacy Policy</a></li>
+        <li><a href="/pwb/contact_us" title="Contact Us">Contact Us</a></li>
+        <li><a href="/pwb/shipping" title="Advertising">Advertising</a></li>
+        <li><a href="/pwb/resources" title="Resources">Resources</a></li>
+        <li><a href="/pwb/resource_library" title="Resource Library">Resource Library</a></li>
+        <li><a href="/pwb/terms" title="Terms &amp; Conditions">Terms &amp; Conditions</a></li>
       </ul>
-      <p><a href="#" title="Internet Marketing by VKI Studios">Internet Marketing by VKI Studios</a></p>
+      <p><a href="/pwb/internet-marketing-partner" title="Internet Marketing by VKI Studios">Internet Marketing by VKI Studios</a></p>
       <p>
         <strong>1-877-633-2401</strong><br />
         <a href="mailto:customerservice@petwellbeing.com" title="Contact Customer Service">customerservice@petwellbeing.com</a>
       </p>
       <p>All Products Shipped From Georgia State USA<br />NaturalWellbeing Distribution Inc.<br />Copyright &copy; 2001-2009</p>
       <img src="/pwb/images/icon_flag.png" alt="USA Flag" />
-      <p><a href="#" title="Fax/Mail Order Form">Fax/Mail Order Form</a><br /><a href="#" title="Get Adobe Acrobat">Requires Adobe Acrobat</a></p>
+      <p><a href="/MailFaxOrder.pdf" title="Fax/Mail Order Form">Fax/Mail Order Form</a><br /><a href="http://get.adobe.com/reader/" title="Get Adobe Acrobat">Requires Adobe Acrobat</a></p>
     </div>
   </div>
 </body>

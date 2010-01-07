@@ -25,6 +25,7 @@ public/pwb
 public/nwb
 public/ckeditor
 config/s3.yml
+public/MailFaxOrder.pdf
 
 # from capistrano
 mkmf.log

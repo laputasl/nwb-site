@@ -1,0 +1,12 @@
+<% content_for :head do -%>
+  <meta name="title" content="<%=@page.title%>">
+  <% if @page.attribute_present? :meta_keywords -%>
+    <meta name="keywords" content="<%=@page.meta_keywords%>">
+  <% end -%>
+  <% if @page.attribute_present? :meta_description -%>
+    <meta name="description" content="<%=@page.meta_description%>">
+  <% end -%>
+<% end -%>
+<div class="content" style="background:none;border:none;">
+  <%=@page.body%>
+</div>

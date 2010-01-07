@@ -1,0 +1,1 @@
+SPREE_EXTENSIONS_LOAD_ORDER = [ :all, :static_content, :site]
