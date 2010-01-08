@@ -1,0 +1,43 @@
+<%= render :partial => 'admin/shared/configuration_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+      <%= button_link_to t("exact_target.new_list"), new_object_url, :icon => 'add'  %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1><%= t("exact_target.lists") %></h1>
+
+<table class="index">
+  <thead>
+    <% hook :admin_exact_target_lists_index_headers do %>
+      <th><%= t("exact_target.title") %></th>
+      <th><%= t("exact_target.list_id") %></th>
+      <th><%= t("exact_target.subscribe_all_new_users") %></th>
+      <th><%= t("exact_target.visible") %></th>
+    <% end %>
+    <th><% hook :admin_exact_target_lists_index_header_actions %></th>
+  </thead>
+  <tbody>
+    <% @exact_target_lists.each do |exact_target_list|%>
+      <tr id="<%= dom_id exact_target_list %>">
+        <%- locals = {:exact_target_list => exact_target_list} -%>
+        <% hook :admin_exact_target_lists_index_rows, locals do %>
+          <td width="140px"><%= exact_target_list.title %></td>
+          <td width="120px"><%= exact_target_list.list_id %></td>
+          <td width="40px"><%= exact_target_list.subscribe_all_new_users.to_s.titleize %></td>
+          <td width="40px"><%= exact_target_list.visible.to_s.titleize %></td>
+        <% end %>
+        <td width="140px">
+          <% hook :admin_exact_target_lists_index_row_actions, locals do %>
+            <%= link_to_edit exact_target_list %> &nbsp;
+            <%= link_to_delete exact_target_list %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,19 @@
+en-US:
+  exact_target:
+    lists_admin: Exact Target Lists
+    manage_settings: Manage Exact Target mailing lists made available to Spree users
+    new_list: New List
+    lists: Exact Target Lists
+    list_id: Exact Target List ID
+    subscribe_all_new_users: Subscribe all new users
+    title: Display Name
+    editing: Editing Exact Target List
+    retrieve_from_exact_target: Retrieve from ExactTarget
+    slow_warning: This can be slow depending on the number of lists defined.
+    only_list_can_subscribe_all: Only one list can be set to subscribe all new users at a time.
+    validate_unique: is already registered to another list
+    visible: Visible
+    my_newsletters: My Newsletters
+    update_subscriptions: Update Subscriptions
+    subscribed: Subscribed?
+    subscribe_question: Would you like to subscribe to any of our newsletters?

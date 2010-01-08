@@ -1,0 +1,47 @@
+<%- locals = {:f => f} -%>
+<% hook :admin_exact_target_lists_form, locals do %>
+  <% f.field_container :title do %>
+    <%= f.label :title, t("exact_target.title") %> <span class="required">*</span><br />
+    <%= f.text_field :title, :class => 'fullwidth title'  %>
+    <%= f.error_message_on :title %>
+  <% end %>
+
+  <div id="lists">
+    <% f.field_container :list_id do %>
+      <%= f.label :list_id, t("exact_target.list_id") %> <span class="required">*</span><br />
+      <%= f.text_field :list_id %>
+      <%= button_to_remote t("exact_target.retrieve_from_exact_target"),
+                         :url => get_lists_admin_exact_target_lists_url,
+                         :method => :get,
+                         :update => "lists",
+                         :confirm => t("exact_target.slow_warning"),
+                         :with => "'list_id=#{@exact_target_list.list_id}'"%>
+      <%= f.error_message_on :list_id %>
+    <% end %>
+  </div>
+
+  <% f.field_container :visible do %>
+    <%= f.label :visible, t("exact_target.visible") %> <span class="required">*</span><br />
+
+      <%= f.radio_button(:visible, true ) %>
+      <%= t("yes") %>
+
+      <%= f.radio_button(:visible, false ) %>
+      <%= t("no") %>
+
+      <%= f.error_message_on :visible %>
+  <% end %>
+
+  <% f.field_container :subscribe_all_new_users do %>
+    <%= f.label :subscribe_all_new_users, t("exact_target.subscribe_all_new_users") %> <span class="required">*</span><br />
+
+      <%= f.radio_button(:subscribe_all_new_users, true ) %>
+      <%= t("yes") %>
+
+      <%= f.radio_button(:subscribe_all_new_users, false ) %>
+      <%= t("no") %>
+
+      <%= f.error_message_on :subscribe_all_new_users %>
+  <% end %>
+
+<% end %>

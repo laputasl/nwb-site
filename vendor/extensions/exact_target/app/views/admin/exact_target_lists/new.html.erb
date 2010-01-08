@@ -1,0 +1,11 @@
+<%= render :partial => 'admin/shared/configuration_menu' %>
+
+<h1><%= t("exact_target.new_list") %></h1>
+<%= error_messages_for :exact_target_list %>
+
+<% form_for(:exact_target_list, :url => collection_url) do |f| %>
+  <%= render :partial => "form", :locals => { :f => f } %>
+  <p>
+    <%= submit_tag t("create") %>
+  </p>
+<% end %>

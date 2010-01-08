@@ -21,4 +21,9 @@ class SiteHooks < Spree::ThemeSupport::HookListener
 
   #disables 'can be part' flag if product is an assembly/kit
   insert_after :admin_product_form_additional_fields, :partial => "admin/products/hide_parts"
+
+
+  insert_after :admin_exact_target_lists_index_headers, :partial => "admin/exact_target_lists/index_headers"
+  insert_after :admin_exact_target_lists_index_rows, :partial => "admin/exact_target_lists/index_rows"
+  insert_after :admin_exact_target_lists_form, :partial => "admin/exact_target_lists/form_fields"
 end

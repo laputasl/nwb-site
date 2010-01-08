@@ -1,0 +1,5 @@
+<p>
+  <label><%= t("exact_target.list_id") %></label><span class="required">*</span>
+  <br/>
+  <%= select_tag 'exact_target_list[list_id]', options_for_select(@lists, @list_id) %>
+</p>

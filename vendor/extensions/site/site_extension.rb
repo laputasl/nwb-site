@@ -84,6 +84,10 @@ class SiteExtension < Spree::Extension
       belongs_to :store
     end
 
+    ExactTargetList.class_eval do
+      belongs_to :store
+    end
+
     OrdersController.class_eval do
       create.before << :assign_to_store
 
@@ -137,6 +141,31 @@ class SiteExtension < Spree::Extension
         return(@products)
       end
     end
+
+    UsersController.class_eval do
+      private
+      def get_exact_target_lists
+        set_layout if @site.nil?
+        @exact_target_lists = ExactTargetList.find_all_by_store_id(@site.id)
+      end
+    end
+
+    Spree::ExactTarget.module_eval do
+      def autosubscribe_list
+        ExactTargetList.find(:first, :conditions => ["site_id = ? AND subscribe_all_new_users = ?", @site.id, true])
+      end
+    end
+
+    ExactTargetList.class_eval do
+      def validate
+        if self.new_record?
+          errors.add_to_base I18n.translate("exact_target.only_list_can_subscribe_all") if self.subscribe_all_new_users && ExactTargetList.exists?(["subscribe_all_new_users = ? AND store_id = ?" , true, self.store_id])
+        else
+          errors.add_to_base I18n.translate("exact_target.only_list_can_subscribe_all") if self.subscribe_all_new_users && ExactTargetList.exists?(["subscribe_all_new_users = ? AND id <> ? AND store_id = ?" , true, self.id, self.store_id])
+        end
+      end
+    end
+
   end
 
 end

@@ -1,0 +1,15 @@
+<h2><%= t("exact_target.my_newsletters") %></h2>
+
+<%= error_messages_for :exact_target_list %>
+<% form_for(@user, :url => object_url, :html => { :method => :put }) do |f| %>
+  <table>
+    <tr>
+      <th><%= t('name') %></th>
+      <th><%= t('exact_target.subscribed') %></th>
+    </tr>
+    <%= render :partial => "exact_target_lists/form" %>
+  </table>
+  <p>
+    <%=submit_tag t("exact_target.update_subscriptions")%>
+  </p>
+<% end %>
