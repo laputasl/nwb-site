@@ -1,0 +1,21 @@
+<system> 
+  <system_name>triggeredsend</system_name> 
+  <action>add</action> 
+  <TriggeredSend xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' 
+xmlns:xsd='http://www.w3.org/2001/XMLSchema' 
+xmlns='http://exacttarget.com/wsdl/partnerAPI'> 
+    <TriggeredSendDefinition> 
+      <CustomerKey><%= @external_key %></CustomerKey> 
+    </TriggeredSendDefinition> 
+    <Subscribers> 
+      <SubscriberKey><%= @email %></SubscriberKey> 
+      <EmailAddress><%= @email %></EmailAddress>
+      <% @attributes.each do |key, value| %>
+        <Attributes> 
+          <Name><%= key %></Name> 
+          <Value><%= value %></Value> 
+        </Attributes> 
+      <% end %>
+    </Subscribers> 
+  </TriggeredSend> 
+</system> 

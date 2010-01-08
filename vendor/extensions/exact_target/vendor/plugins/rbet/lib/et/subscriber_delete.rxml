@@ -1,0 +1,7 @@
+<system>
+  <system_name>subscriber</system_name>
+  <action>delete</action>
+  <search_type><%= @subscriberid.nil? ? "listid" : "subid" %></search_type>
+  <search_value><%= @subscriberid.nil? ? @subscriber_listid : @subscriberid %></search_value>
+  <search_value2><%= @email if @subscriberid.nil? %></search_value2>
+</system>

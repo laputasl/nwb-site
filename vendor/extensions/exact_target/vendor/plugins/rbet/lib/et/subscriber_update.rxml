@@ -1,0 +1,17 @@
+<system>
+  <system_name>subscriber</system_name>
+  <action>edit</action>
+  <search_type><%= @subscriberid.nil? ? "listid" : "subid" %></search_type>
+  <search_value><%= @subscriberid.nil? ? @listid : @subscriberid %></search_value>
+  <search_value2><%= @email unless @subscriberid.nil? %></search_value2>
+  <values>
+    <Email__Address><%= @email %></Email__Address>
+    <% unless @listid.nil? %>
+      <status>active</status>
+    <% end %>
+    <% @attributes.each do|name,value| %>
+      <<%= name %>><%= (value.is_a?(Array)) ? value.join(',') : value %></<%= name %>>
+    <% end %>
+  </values>
+  <update>true</update>
+</system>
