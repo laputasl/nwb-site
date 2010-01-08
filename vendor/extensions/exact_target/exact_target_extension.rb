@@ -24,7 +24,7 @@ class ExactTargetExtension < Spree::Extension
 
       private
       def get_exact_target_lists
-        @exact_target_lists = ExactTargetList.all
+        @exact_target_lists = ExactTargetList.find(:all, :conditions => {:visible => true})
       end
 
       def update_exact_target_lists

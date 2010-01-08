@@ -146,13 +146,13 @@ class SiteExtension < Spree::Extension
       private
       def get_exact_target_lists
         set_layout if @site.nil?
-        @exact_target_lists = ExactTargetList.find_all_by_store_id(@site.id)
+        @exact_target_lists = ExactTargetList.find(:all, :conditions => {:visible => true, :store_id => @site.id})
       end
     end
 
     Spree::ExactTarget.module_eval do
       def autosubscribe_list
-        ExactTargetList.find(:first, :conditions => ["site_id = ? AND subscribe_all_new_users = ?", @site.id, true])
+        ExactTargetList.find(:first, :conditions => ["store_id = ? AND subscribe_all_new_users = ?", @site.id, true])
       end
     end
 
