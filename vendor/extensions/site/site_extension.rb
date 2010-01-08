@@ -23,7 +23,8 @@ class SiteExtension < Spree::Extension
     end
 
     Spree::BaseController.class_eval do
-      prepend_before_filter :set_layout, :load_global_taxons
+      prepend_before_filter :set_layout
+      before_filter :load_global_taxons
       helper :products, :taxons
 
       private
@@ -145,7 +146,7 @@ class SiteExtension < Spree::Extension
     UsersController.class_eval do
       private
       def get_exact_target_lists
-        set_layout if @site.nil?
+        @site ||= Store.find(:first, :conditions => {:code => request.headers['wellbeing-site']})
         @exact_target_lists = ExactTargetList.find(:all, :conditions => {:visible => true, :store_id => @site.id})
       end
     end
