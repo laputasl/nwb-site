@@ -1,4 +1,4 @@
-external_key: <%= @order.store.code ? "pwb" "pwb-custordercancel" : "nwb-ordercancel" %>
+external_key: <%= @order.store.code ? "pwb-custordercancel" : "nwb-ordercancel" %>
 First_Name: <%= @order.ship_address.firstname %>
 Last_Name: <%= @order.ship_address.lastname %>
 SENDTIME__CONTENT2: "<%= render :partial => "order_details" %>"
