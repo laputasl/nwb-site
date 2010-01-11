@@ -16,3 +16,6 @@
 [submodule "vendor/extensions/static_content"]
   path = vendor/extensions/static_content
   url = git://github.com/PeterBerkenbosch/spree-static-content.git
+[submodule "vendor/extensions/xapit_search"]
+	path = vendor/extensions/xapit_search
+	url = git://github.com/romul/spree-xapit-search.git
