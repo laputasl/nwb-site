@@ -28,7 +28,7 @@ namespace :deploy do
   end
 end
 
-set :shared_assets, ['config/database.yml', 'config/s3.yml', 'public/assets']
+set :shared_assets, ['config/database.yml', 'config/s3.yml', 'public/assets', 'db/xapiandb']
 
 namespace :spree do
   task :create_symlinks, :roles => :app do
@@ -47,7 +47,7 @@ namespace :spree do
      origin_path = File.join(shared_path, 'blog', 'nwb_uploads')
      destination_path = File.join(release_path, 'public', 'nwb_blog', 'wp-content', 'uploads')
      run "ln -nsf #{origin_path} #{destination_path}"
-     
+
      origin_path = File.join(shared_path, 'blog', 'pwb_uploads')
      destination_path = File.join(release_path, 'public', 'pwb_blog', 'wp-content', 'uploads')
      run "ln -nsf #{origin_path} #{destination_path}"
@@ -60,7 +60,7 @@ namespace :spree do
     desc "Install gems"
     task :install, :roles => :app do
       run "cd #{release_path} && #{sudo} /usr/bin/env rake gems:install RAILS_ENV=production"
-      run "cd #{release_path} && #{sudo} chown -R #{user}:deploy public/*"
+      run "cd #{release_path} && #{sudo} chown -R #{user}:deploy public/* log/production.log"
     end
   end
 
