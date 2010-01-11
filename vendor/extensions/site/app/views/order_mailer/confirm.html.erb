@@ -1,0 +1,4 @@
+external_key: <%= @order.store.code ? "pwb" "pwb-custorderconfirm" : "nwb-orderconfirm" %>
+First_Name: <%= @order.ship_address.firstname %>
+Last_Name: <%= @order.ship_address.lastname %>
+SENDTIME__CONTENT2: "<%= render :partial => "order_details" %>"

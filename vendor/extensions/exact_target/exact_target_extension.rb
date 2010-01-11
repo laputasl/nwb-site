@@ -16,38 +16,48 @@ class ExactTargetExtension < Spree::Extension
     end
 
     UsersController.class_eval do
+      include Spree::BaseControllerOverrides
       include Spree::ExactTarget
 
       show.before << :get_exact_target_lists
       new_action.before << :get_exact_target_lists
       after_filter :update_exact_target_lists, :only => [:create, :update]
 
-      private
-      def get_exact_target_lists
-        @exact_target_lists = ExactTargetList.find(:all, :conditions => {:visible => true})
-      end
+    end
 
-      def update_exact_target_lists
+    CheckoutsController.class_eval do
+      include Spree::BaseControllerOverrides
+      include Spree::ExactTarget
 
-        params[:exact_target_list].each do |id, subscribe|
+      before_filter :get_exact_target_lists, :only =>:register
+      after_filter :update_exact_target_lists, :only => [:create, :update]
 
-          list = ExactTargetList.find(id)
+    end
 
-          if subscribe == "true"
-            #subscribe
-            unless @user.exact_target_lists.include? list
-              @user.exact_target_lists << list if subscribe_to_list(@user, list.list_id)
-            end
-          else
-            #unsubscribe
-            if @user.exact_target_lists.include? list
-              @user.exact_target_lists.delete(list) if unsubscribe_from_list(@user, list.list_id)
+    ActionMailer::Base.class_eval do
+      def self.method_missing(method_symbol, *parameters) #:nodoc:
+        if match = matches_dynamic_method?(method_symbol)
+          if match[1] == 'deliver'
+            mailer = new(match[2], *parameters)
+            variables = YAML::load(mailer.body)
+            external_key = variables.delete "external_key"
+
+            unless external_key.nil?
+              begin
+                trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+                result = trigger.deliver(mailer.mail.to, external_key, variables)
+              rescue ET::Error => error
+
+              end
             end
           end
+        else
+          super
         end
-
       end
 
     end
+
+
   end
 end

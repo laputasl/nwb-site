@@ -1,0 +1,9 @@
+<system>
+  <system_name>email</system_name>
+  <action>retrieve</action>
+  <sub_action>all</sub_action>
+  <search_type><%= "emailname" unless @emailname.nil? %></search_type>
+  <search_value><%= @emailname unless @emailname.nil? %></search_value>
+  <search_value2/>
+  <daterange/>
+</system>

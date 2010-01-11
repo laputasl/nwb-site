@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2007 Todd A. Fisher
+# Copyright (c) 2010 Brian D. Quinn
 #
 # Permission is hereby granted, free of charge, to any person obtaining
 # a copy of this software and associated documentation files (the
@@ -19,13 +19,57 @@
 # CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-#
 
 require 'rubygems'
-gem 'activesupport'
-require 'activesupport'
+require 'hpricot'
 
-$LOAD_PATH.unshift(File.expand_path(File.dirname(__FILE__) + "/et"))
-%w(renderable error client subscriber list tracker triggered_send email).each do |lib|
-  require lib
+module ET
+  #
+  # Email
+  # usage:
+  #
+  #
+  #   # retrieve all email definitions
+  #   all_email = Email.all()
+  #   => Hash
+  #
+  #   # retrieve email defintion by name
+  #   email = Email.retrieve_by_name('My Super Email')
+  #   => Hash
+  #
+
+  #
+  class Email < Client
+    def initialize(username,password,options={})
+      super
+    end
+
+    # desc:
+    #   returns hash of all emails definitions
+    # params:
+    #   none
+    def all
+      retrieve(nil)
+    end
+
+    # desc:
+    #   returns hash of email defintion
+    # params:
+    #   emailname = name of email
+    def retrieve_by_name(emailname)
+      retrieve(emailname)
+    end
+
+    private
+    def retrieve(emailname)
+      @emailname = emailname
+      response = send do|io|
+        io << render_template('email_retrieve')
+      end
+      Error.check_response_error(response)
+      h = Hash.from_xml(response.read_body)
+      h["exacttarget"]["system"]["email"]["emaillist"]
+    end
+
+  end
 end

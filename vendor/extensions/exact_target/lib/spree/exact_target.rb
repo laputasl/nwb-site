@@ -13,7 +13,12 @@ module Spree
         subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
         begin
-          subscriber_id = subscriber.add(user.email, list.list_id, {:Customer_ID => user.id, :Customer_ID_NWB => user.id, :Customer_ID_PWB => user.id})
+          if user.is_a? String
+            subscriber_id = subscriber.add(user, list.list_id)
+          else
+            subscriber_id = subscriber.add(user.email, list.list_id, {:Customer_ID => user.id, :Customer_ID_NWB => user.id, :Customer_ID_PWB => user.id})
+          end
+
           user.exact_target_lists << list
           user.save!
         rescue
@@ -57,5 +62,31 @@ module Spree
       end
     end
 
+    private
+    #CONTROLLER Actions
+    def get_exact_target_lists
+      @exact_target_lists = ExactTargetList.find(:all, :conditions => {:visible => true})
+    end
+
+    def update_exact_target_lists
+      return unless params.key? :exact_target_list
+      params[:exact_target_list].each do |id, subscribe|
+
+        list = ExactTargetList.find(id)
+
+        if subscribe == "true"
+          #subscribe
+          unless @user.exact_target_lists.include? list
+            @user.exact_target_lists << list if subscribe_to_list(@user, list.list_id)
+          end
+        else
+          #unsubscribe
+          if @user.exact_target_lists.include? list
+            @user.exact_target_lists.delete(list) if unsubscribe_from_list(@user, list.list_id)
+          end
+        end
+      end
+
+    end
   end
 end

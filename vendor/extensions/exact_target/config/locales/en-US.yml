@@ -9,7 +9,7 @@ en-US:
     title: Display Name
     editing: Editing Exact Target List
     retrieve_from_exact_target: Retrieve from ExactTarget
-    slow_warning: This can be slow depending on the number of lists defined.
+    slow_warning: This can be slow depending on the number of items defined.
     only_list_can_subscribe_all: Only one list can be set to subscribe all new users at a time.
     validate_unique: is already registered to another list
     visible: Visible

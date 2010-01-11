@@ -22,27 +22,10 @@ class SiteExtension < Spree::Extension
       RAILS_ENV=="production" ? require(c) : load(c)
     end
 
-    Spree::BaseController.class_eval do
-      prepend_before_filter :set_layout
-      before_filter :load_global_taxons
-      helper :products, :taxons
-
-      private
-      def set_layout
-        @site ||= Store.find(:first, :conditions => {:code => request.headers['wellbeing-site']})
-        @current_domain = request.headers['wellbeing-domain']
-        self.class.layout @current_domain
-      end
-
-      def get_taxonomies
-        @taxonomies ||= Taxonomy.find(:all, :include => {:root => :children}, :conditions => ["store_id = ?", @site.id])
-        @taxonomies
-      end
-
-      def load_global_taxons
-        @categories = Taxonomy.find(:first, :conditions => {:store_id => @site.id, :name => "Category"})
-      end
-    end
+    # Spree::BaseController.class_eval do
+    #   include Spree::BaseControllerOverrides
+    # end
+    Spree::BaseController.send(:include, Spree::BaseControllerOverrides)
 
     Admin::ProductsController.class_eval do
       def additional_fields
@@ -82,10 +65,6 @@ class SiteExtension < Spree::Extension
     end
 
     Order.class_eval do
-      belongs_to :store
-    end
-
-    ExactTargetList.class_eval do
       belongs_to :store
     end
 
@@ -151,13 +130,44 @@ class SiteExtension < Spree::Extension
       end
     end
 
+    CheckoutsController.class_eval do
+      private
+      def get_exact_target_lists
+        @site ||= Store.find(:first, :conditions => {:code => request.headers['wellbeing-site']})
+        @exact_target_lists = ExactTargetList.find(:all, :conditions => {:visible => true, :store_id => @site.id})
+      end
+    end
+
     Spree::ExactTarget.module_eval do
-      def autosubscribe_list
-        ExactTargetList.find(:first, :conditions => ["store_id = ? AND subscribe_all_new_users = ?", @site.id, true])
+      def autosubscribe_list(store)
+        ExactTargetList.find(:first, :conditions => ["store_id = ? AND subscribe_all_new_users = ?", store.id, true])
+      end
+
+      def create_subscriber(user)
+        list = autosubscribe_list(user.store)
+
+        if list.nil?
+          subscriber_id = -1
+        else
+          subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+
+          begin
+            subscriber_id = subscriber.add(user.email, list.list_id, {:Customer_ID => user.id, :Customer_ID_NWB => user.id, :Customer_ID_PWB => user.id})
+            user.exact_target_lists << list
+            user.save!
+          rescue
+            subscriber_id = -1
+          end
+        end
+
+        user.exact_target_subscriber_id = subscriber_id
+        user.save!
       end
     end
 
     ExactTargetList.class_eval do
+      belongs_to :store
+
       def validate
         if self.new_record?
           errors.add_to_base I18n.translate("exact_target.only_list_can_subscribe_all") if self.subscribe_all_new_users && ExactTargetList.exists?(["subscribe_all_new_users = ? AND store_id = ?" , true, self.store_id])
@@ -167,6 +177,21 @@ class SiteExtension < Spree::Extension
       end
     end
 
+    User.class_eval do
+      belongs_to :store
+
+      attr_accessible :store_id
+    end
+
+    UserMailer.class_eval do
+      def password_reset_instructions(user)
+        subject       Spree::Config[:site_name] + ' ' + I18n.t("password_reset_instructions")
+        from          Spree::Config[:mails_from]
+        recipients    user.email
+        sent_on       Time.now
+        body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token), :user => user
+      end
+    end
   end
 
 end

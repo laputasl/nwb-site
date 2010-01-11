@@ -26,4 +26,6 @@ class SiteHooks < Spree::ThemeSupport::HookListener
   insert_after :admin_exact_target_lists_index_headers, :partial => "admin/exact_target_lists/index_headers"
   insert_after :admin_exact_target_lists_index_rows, :partial => "admin/exact_target_lists/index_rows"
   insert_after :admin_exact_target_lists_form, :partial => "admin/exact_target_lists/form_fields"
+
+  insert_after :signup_below_password_fields, :partial => "users/set_store"
 end
