@@ -19,3 +19,6 @@
 [submodule "vendor/extensions/xapit_search"]
 	path = vendor/extensions/xapit_search
 	url = git://github.com/romul/spree-xapit-search.git
+[submodule "vendor/extensions/snippets"]
+	path = vendor/extensions/snippets
+	url = git://github.com/cmaujean/spree-snippets.git
