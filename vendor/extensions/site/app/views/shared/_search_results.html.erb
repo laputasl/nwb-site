@@ -1,8 +1,18 @@
-<% if @products.empty? %>
-  <%= t(:no_products_found) %>
-<% else %>
-  <div class="products">
-    <h1>Search Results</h1>
+<div class="products">
+  <h1><%= t(:search_results, :keywords => h(params[:keywords])) %></h1>
+  <% if @products.empty? %>
+
+    <div style="margin:10px;">
+      <h3><%= t(:no_products_found) %></h3><br />
+      <% if suggestion = Spree::Config.searcher.spelling_suggestion %>
+        <p>
+          <%= t(:did_you_mean, :default => "Did you mean") %>
+          <%= link_to h(suggestion), products_url({ :keywords => suggestion }) %>?
+        </p>
+      <% end %>
+    </div>
+
+  <% else %>
     <%= render "shared/products", :locals => {:products => @products, :taxon => @taxon } %>
-  </div>
-<% end %>
+  <% end %>
+</div>

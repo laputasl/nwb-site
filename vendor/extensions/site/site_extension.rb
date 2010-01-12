@@ -22,9 +22,6 @@ class SiteExtension < Spree::Extension
       RAILS_ENV=="production" ? require(c) : load(c)
     end
 
-    # Spree::BaseController.class_eval do
-    #   include Spree::BaseControllerOverrides
-    # end
     Spree::BaseController.send(:include, Spree::BaseControllerOverrides)
 
     Admin::ProductsController.class_eval do
@@ -53,6 +50,16 @@ class SiteExtension < Spree::Extension
       belongs_to :store
 
       named_scope :by_store, lambda { |*args| { :conditions => ["products.store_id = ?", args.first] } }
+
+      xapit do |index|
+        index.text :name, :description, :subtitle_main, :sales_copy, :short_home, :ingredients
+        index.field :is_active, :taxon_ids
+        index.facet :gender_property, "Gender"
+        index.facet :brand_property, "Brand"
+        index.facet :price_range, "Price"
+        index.facet :taxon_names, "Taxon"
+        index.sortable :price
+      end
 
       private
       def validate
