@@ -71,8 +71,26 @@ class SiteExtension < Spree::Extension
       belongs_to :store
     end
 
+    fsm = Order.state_machines[:state]
+    fsm.event :hold do
+      transition :to => 'pending', :from => ['paid', 'new']
+    end
+
+    fsm.event :approve do
+      transition :to => 'approved', :from => 'pending', :if => :allow_resume?
+    end
+
+    fsm.after_transition :to => 'approved', :do => :restore_state
+
     Order.class_eval do
       belongs_to :store
+
+      private
+      def restore_state
+        # pop the resume / approve event so we can see what the event before that was
+        state_events.pop if ["resume", "approve"].include? state_events.last.name
+        update_attribute("state", state_events.last.previous_state)
+      end
     end
 
     OrdersController.class_eval do
@@ -197,6 +215,13 @@ class SiteExtension < Spree::Extension
         recipients    user.email
         sent_on       Time.now
         body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token), :user => user
+      end
+    end
+
+    Admin::OrdersController.class_eval do
+      private
+      def initialize_order_events
+        @order_events = %w{cancel hold approve resume}
       end
     end
   end
