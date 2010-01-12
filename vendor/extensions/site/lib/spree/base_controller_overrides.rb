@@ -1,10 +1,8 @@
 module Spree
   module BaseControllerOverrides
     def self.included(controller)
-      controller.prepend_before_filter :set_layout
-      controller.before_filter :load_global_taxons
+      controller.prepend_before_filter :set_layout, :load_global_taxons
       controller.helper :products, :taxons
-
     end
 
     private
