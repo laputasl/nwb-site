@@ -24,6 +24,7 @@ class AddProductFields < ActiveRecord::Migration
     add_column :products, :from, :string
     add_column :products, :legacy_brand_id, :integer
     add_column :products, :store_id, :integer
+    add_column :products, :can_be_part, :boolean, :default => false
   end
 
   def self.down
@@ -51,5 +52,6 @@ class AddProductFields < ActiveRecord::Migration
     remove_column :products, :short_category
     remove_column :products, :short_home
     remove_column :products, :anchor_name
+    remove_column :products, :can_be_part
   end
 end
