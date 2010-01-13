@@ -1,0 +1,1 @@
+# Do nothing - there is a slight issue with the normal Spree method of creating the admin user since it doesn't anticipate user's having a store, etc.
