@@ -1,0 +1,5 @@
+#
+# Mod rewrite map for 301 redirects
+#
+
+static/form_add_link.cfm         /
