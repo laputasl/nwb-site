@@ -92,6 +92,12 @@ class SiteExtension < Spree::Extension
         update_attribute("state", state_events.last.previous_state)
       end
     end
+    
+    Shipment.class_eval do
+      def editable_by?(user)
+        %w(pending ready_to_ship unable_to_ship).include?(state) or user.has_role?(:manager)
+      end
+    end
 
     OrdersController.class_eval do
       create.before << :assign_to_store
