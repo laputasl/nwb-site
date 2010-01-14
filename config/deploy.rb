@@ -52,6 +52,10 @@ namespace :spree do
      destination_path = File.join(release_path, 'public', 'pwb_blog', 'wp-content', 'uploads')
      run "ln -nsf #{origin_path} #{destination_path}"
 
+     origin_path = '/home/uploads/static'
+     destination_path = File.join(release_path, 'public', 's')
+     run "ln -nsf #{origin_path} #{destination_path}"
+
      #%(nwb pwb).each do |blog|
      #end
   end
