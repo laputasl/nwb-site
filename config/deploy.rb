@@ -53,7 +53,7 @@ namespace :spree do
      run "ln -nsf #{origin_path} #{destination_path}"
 
      origin_path = '/home/uploads/static'
-     destination_path = File.join(release_path, 'public', 'static')
+     destination_path = File.join(release_path, 'public', 's')
      run "ln -nsf #{origin_path} #{destination_path}"
 
      #%(nwb pwb).each do |blog|
