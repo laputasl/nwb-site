@@ -56,6 +56,10 @@ namespace :spree do
      destination_path = File.join(release_path, 'public', 's')
      run "ln -nsf #{origin_path} #{destination_path}"
 
+     origin_path = File.join(release_path, 'config', 'redirect-map.txt')
+     destination_path = '/etc/apache2/rewrite-map.txt'
+     run "sudo ln -nsf #{origin_path} #{destination_path}"
+
      #%(nwb pwb).each do |blog|
      #end
   end
