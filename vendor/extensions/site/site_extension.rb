@@ -93,10 +93,49 @@ class SiteExtension < Spree::Extension
       end
     end
     
+    InventoryUnit.class_eval do    
+      InventoryUnit.state_machines[:state] = StateMachine::Machine.new(InventoryUnit, :initial => 'on_hand') do    
+        event :fill_backorder do
+          transition :to => 'sold', :from => 'backordered'
+        end
+        event :ship do
+          transition :to => 'shipped', :if => :allow_ship? #, :from => 'sold'
+        end
+        event :backorder do
+          transition :to => 'backordered', :from => 'sold'
+        end
+      end      
+    end
+    
     Shipment.class_eval do
       def editable_by?(user)
-        %w(pending ready_to_ship unable_to_ship).include?(state) or user.has_role?(:manager)
+        %w(pending ready_to_ship unable_to_ship needs_fulfilment).include?(state) or user.has_role?(:admin)
       end
+      
+      Shipment.state_machines[:state] = StateMachine::Machine.new(Shipment, :initial => 'pending') do 
+        event :ready do
+          transition :from => 'pending', :to => 'ready_to_ship'
+        end
+        event :pend do
+          transition :from => 'ready_to_ship', :to => 'pending'
+        end
+        event :ship do
+          transition :from => ['needs_fulfilment', 'acknowledged'], :to => 'shipped'
+        end
+        event :transmit do 
+          transition :from => 'ready_to_ship', :to => 'transmitted'
+        end
+        event :acknowledge do 
+          transition :from => 'transmitted', :to => 'acknowledged'
+        end
+        event :flag do
+          transition :from => 'ready_to_ship', :to => 'needs_fulfilment'
+        end
+        event :problem do
+          transition :from => ['transmitted', 'acknowledged', 'needs_fulfilment'], :to => 'unable_to_ship'
+        end
+        after_transition :to => 'shipped', :do => :transition_order
+      end       
     end
 
     OrdersController.class_eval do
