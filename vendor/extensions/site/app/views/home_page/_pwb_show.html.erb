@@ -2,13 +2,13 @@
 
 <hr />
 <div class="products">
-  <h1><a href="#" title="Top Selling Dog Supplies">Top Selling Dog Supplies</a></h1>
+  <h1>Top Selling Dog Supplies</h1>
   <ul class="productList">
     <% @best_selling_dogs.each do |product| %>
       <%= render "product", :product => product %>
     <% end %>
   </ul>
-  <h1><a href="#" title="Top Selling Cat Supplies">Top Selling Cat Supplies</a></h1>
+  <h1>Top Selling Cat Supplies</h1>
   <ul class="productList">
     <% @best_selling_cats.each do |product| %>
       <%= render "product", :product => product %>

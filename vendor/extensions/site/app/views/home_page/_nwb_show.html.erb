@@ -1,1 +1,13 @@
-<h1>Coming Soon!</h1>
+<%= render_snippet('nwb-homepage-header') %>
+
+<hr />
+<div class="products">
+  <h1>Top Selling Products</h1>
+  <ul class="productList">
+    <% @best_selling_products.each do |product| %>
+      <%= render "product", :product => product %>
+    <% end %>
+  </ul>
+</div>
+
+<%= render_snippet('nwb-homepage-footer') %>

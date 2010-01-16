@@ -34,8 +34,6 @@ class SiteExtension < Spree::Extension
     ProductsController.class_eval do
       before_filter :can_show_product, :only => :show
 
-      show.wants.html { render :partial => "#{@current_domain}_show", :layout => true }
-
       private
       def can_show_product
        if (@product.store.nil? || (@product.store.code != @site.code)) || (RAILS_ENV == "production" && params[:id].is_integer?)

@@ -3,44 +3,79 @@
 <head>
 <%= render :partial => 'shared/nwb_head'%>
 </head>
-<%
-if @body_class.nil?
-  if @content_for_sidebar
-    @body_class = 'two-col'
-  else
-    @body_class = 'one-col'
-  end
-end
- %>
-<body class="<%= @body_class %>"<%= %( id="#{@body_id}") if @body_id %>>
-  <div id="header" class="container">
-    <div id="login-bar">
-      <ul id="nav-bar">
-        <%= render 'shared/nav_bar' %>
+<body>
+  <div id="container">
+    <div id="header">
+      <h1><a href="/" title="PetWellbeing.com">PetWellbeing.com - 1.877.633.2401</a></h1>
+      <ul id="miscNav">
+        <li class="first"><%= link_to "Login", login_path %></li>
+        <li><a href="/blog" title="Blog">Blog</a></li>
+        <li><a href="/nwb/contactus" title="Contact">Contact</a></li>
+        <li><a href="/nwb/aboutus" title="About">About</a></li>
+      </ul>
+      <%= render "shared/nwb_search" %>
+
+      <ul id="nav">
+        <li><a id="navHome" href="/" title="Home">Home</a></li>
+        <li><a id="navShipping" href="/nwb/shipping" title="Free Same Day Shipping">Free Same Day Shipping</a></li>
+        <li><a id="navSecure" href="/nwb/secure" title="Secure Shopping">Secure Shopping</a></li>
+        <li><a id="navGuarantee" href="/nwb/guarantee" title="90-Day Money Back Guarantee">90-Day Money Back Guarantee</a></li>
+        <li><%= link_to "My Shopping Cart", cart_path, {:id => "navCart"} %></li>
+        <li><%= link_to "My Account", current_user ? user_path(current_user) : login_path(), {:id => "navAccount"} %></li>
       </ul>
     </div>
-  <%= logo %>
-  </div>
-  <div id="wrapper" class="container">
-    <% if @content_for_sidebar %>
-    <div id="sidebar">
-      <%= yield :sidebar %>
-    </div>
-    <% end %>
+    <hr />
+    <div id="main">
+      <div id="sidebar">
+        <ul id="peopleBtns">
+          <% @categories.root.children.each do |taxon| %>
+              <% if taxon.name.include? "Men's" %>
+                <li><a id="btnMen" href="<%= seo_url(taxon) %>" title="Dogs">Dogs</a></li>
+              <% elsif taxon.name.include? "Women's" %>
+                 <li><a id="btnWomen" href="<%= seo_url(taxon) %>" title="Cats">Cats</a></li>
+              <% end %>
+          <% end %>
+        </ul>
+        <img src="/nwb/images/img_mcaffe.gif" alt="McAffe" />
 
-    <div id="content">
-      <h3>Natural Well Being.com</h3>
-      <%= render :partial => "shared/store_switch" %>
-      <%= breadcrumbs(@taxon) if @taxon %>
-      <% if flash[:notice] %>
-      <div class="flash notice"><%= flash[:notice] %></div>
-      <% end %>
-      <% if flash[:error] %>
-      <div class="flash errors"><%= flash[:error] %></div>
-      <% end %>
-      <%= yield %>
+        <%= render 'shared/cart_preview' %>
+
+        <dl id="subNav">
+          <% @categories.root.children.each do |taxon| %>
+            <dt><a href="<%= seo_url(taxon) %>" title="<%= taxon.name %>"<strong><%= taxon.name %></strong></a></dt>
+            <dd>
+              <ul>
+                <% taxon.children.each do |child| %>
+                  <li>
+                    <% if @contoller_name = "taxon" && (child == @taxon || child.children.include?(@taxon) ) %>
+                      <p><%= child.name %></p>
+                      <ul>
+                        <% child.products.each do |product| %>
+                          <li><%= link_to product.anchor_name, product, {:title => product.anchor_name} %></li>
+                        <% end %>
+                      </ul>
+                    <% else %>
+                      <a href="<%= seo_url(child) %>" title="<%= child.name %>"><%= child.name %></a>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
+            </dd>
+          <% end %>
+        </dl>
+        <a id="btnNWBlog" href="/blog" title="Natural Wellbeing Blog">Natural Wellbeing Blog</a>
+        <img src="/nwb/images/img_comodo.png" alt="Comodo" />
+        <img src="/nwb/images/img_paypal.png" alt="PayPal" />
+      </div>
+      <hr />
+      <div id="body">
+        <%= breadcrumbs(@taxon) %>
+        <%= yield %>
+      </div>
     </div>
-    <%= render :partial => 'shared/footer'%>
+    <hr />
+    <%= render :partial => "shared/nwb_footer" %>
   </div>
 </body>
 </html>
+
