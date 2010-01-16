@@ -5,7 +5,7 @@
   <h1>Top Selling Products</h1>
   <ul class="productList">
     <% @best_selling_products.each do |product| %>
-      <%= render "product", :product => product %>
+      <%= render "product", :product => product, :products => @best_selling_products %>
     <% end %>
   </ul>
 </div>

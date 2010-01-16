@@ -1,4 +1,4 @@
-<li>
+<li class="<%= ((products.size - products.index(product)) < (3 - (products.size % 2))) ? "" : "border" %>">
   <%= link_to small_image(product, {:style => "max-width:70px;"}), product, {:class => "photo"} %>
   <div class="info">
     <h2><%= link_to truncate(product.name, 26), product, :title => product.name %></h2>
