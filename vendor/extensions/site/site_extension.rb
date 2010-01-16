@@ -39,7 +39,11 @@ class SiteExtension < Spree::Extension
        if (@product.store.nil? || (@product.store.code != @site.code)) || (RAILS_ENV == "production" && params[:id].is_integer?)
          render :file => "public/404.html", :status => 404
        end
+
+       #load taxon if not set (where referrer fails)
+       @taxon ||= (@product.taxons & @categories.taxons).first
       end
+
     end
 
     Variant.additional_fields += [ {:name => 'Store Id', :only => [:product], :use => 'select', :value => lambda { |controller, field| Store.all.collect {|s| [s.name, s.id ]}  } } ]
@@ -90,9 +94,9 @@ class SiteExtension < Spree::Extension
         update_attribute("state", state_events.last.previous_state)
       end
     end
-    
-    InventoryUnit.class_eval do    
-      InventoryUnit.state_machines[:state] = StateMachine::Machine.new(InventoryUnit, :initial => 'on_hand') do    
+
+    InventoryUnit.class_eval do
+      InventoryUnit.state_machines[:state] = StateMachine::Machine.new(InventoryUnit, :initial => 'on_hand') do
         event :fill_backorder do
           transition :to => 'sold', :from => 'backordered'
         end
@@ -102,15 +106,15 @@ class SiteExtension < Spree::Extension
         event :backorder do
           transition :to => 'backordered', :from => 'sold'
         end
-      end      
+      end
     end
-    
+
     Shipment.class_eval do
       def editable_by?(user)
         %w(pending ready_to_ship unable_to_ship needs_fulfilment).include?(state) or user.has_role?(:admin)
       end
-      
-      Shipment.state_machines[:state] = StateMachine::Machine.new(Shipment, :initial => 'pending') do 
+
+      Shipment.state_machines[:state] = StateMachine::Machine.new(Shipment, :initial => 'pending') do
         event :ready do
           transition :from => 'pending', :to => 'ready_to_ship'
         end
@@ -120,10 +124,10 @@ class SiteExtension < Spree::Extension
         event :ship do
           transition :from => ['needs_fulfilment', 'acknowledged'], :to => 'shipped'
         end
-        event :transmit do 
+        event :transmit do
           transition :from => 'ready_to_ship', :to => 'transmitted'
         end
-        event :acknowledge do 
+        event :acknowledge do
           transition :from => 'transmitted', :to => 'acknowledged'
         end
         event :flag do
@@ -133,7 +137,7 @@ class SiteExtension < Spree::Extension
           transition :from => ['transmitted', 'acknowledged', 'needs_fulfilment'], :to => 'unable_to_ship'
         end
         after_transition :to => 'shipped', :do => :transition_order
-      end       
+      end
     end
 
     OrdersController.class_eval do

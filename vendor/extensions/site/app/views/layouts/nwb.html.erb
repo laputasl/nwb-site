@@ -42,25 +42,35 @@
 
         <dl id="subNav">
           <% @categories.root.children.each do |taxon| %>
-            <dt><a href="<%= seo_url(taxon) %>" title="<%= taxon.name %>"<strong><%= taxon.name %></strong></a></dt>
-            <dd>
-              <ul>
-                <% taxon.children.each do |child| %>
-                  <li>
-                    <% if @contoller_name = "taxon" && (child == @taxon || child.children.include?(@taxon) ) %>
-                      <p><%= child.name %></p>
-                      <ul>
-                        <% child.products.each do |product| %>
-                          <li><%= link_to product.anchor_name, product, {:title => product.anchor_name} %></li>
-                        <% end %>
-                      </ul>
-                    <% else %>
-                      <a href="<%= seo_url(child) %>" title="<%= child.name %>"><%= child.name %></a>
-                    <% end %>
-                  </li>
-                <% end %>
-              </ul>
-            </dd>
+            <% if (taxon == @taxon || taxon.children.include?(@taxon) ) %>
+              <dt class="selected"><strong><%= taxon.name %></strong></dt>
+              <dd>
+                <ul>
+                  <% taxon.children.each do |child| %>
+                    <li>
+                      <% if (child == @taxon || child.children.include?(@taxon) ) %>
+                        <p><%= child.name %></p>
+                        <ul>
+                          <% child.products.each do |product| %>
+                            <li>
+                              <% if product == @product %>
+                                <%= link_to product.anchor_name, product, {:title => product.anchor_name, :style => "font-weight:bold;"} %>
+                              <% else %>
+                                <%= link_to product.anchor_name, product, {:title => product.anchor_name} %>
+                              <% end %>
+                            </li>
+                          <% end %>
+                        </ul>
+                      <% else %>
+                        <a href="<%= seo_url(child) %>" title="<%= child.name %>"><%= child.name %></a>
+                      <% end %>
+                    </li>
+                  <% end %>
+                </ul>
+              </dd>
+            <% else %>
+              <dt><a href="<%= seo_url(taxon) %>" title="<%= taxon.name %>"<strong><%= taxon.name %></strong></a></dt>
+            <% end %>
           <% end %>
         </dl>
         <a id="btnNWBlog" href="/blog" title="Natural Wellbeing Blog">Natural Wellbeing Blog</a>

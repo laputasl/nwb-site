@@ -49,7 +49,7 @@
               <ul>
                 <% taxon.children.each do |child| %>
                   <li>
-                    <% if @contoller_name = "taxon" && (child == @taxon || child.children.include?(@taxon) ) %>
+                    <% if (child == @taxon || child.children.include?(@taxon) ) %>
                       <p><%= child.name %></p>
                       <ul>
                         <% child.products.each do |product| %>

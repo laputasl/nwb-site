@@ -247,26 +247,34 @@ a:hover, a:active {color: #1c3c80;}
   font-family: Verdana, Arial, sans-serif;
 }
 #subNav dt {
-  background: #ABCBE5;
+  background-color: #FBF9ED;
+  border-top:1px dashed #D8D5C3;
 }
+#subNav dt a:visited{ color: #0342C9; }
 #subNav dt a,
 #subNav dt p {
   padding: 6px 0 6px 13px;
   display: block;
 }
+#subNav dt a:hover {background: #FFFEF4;}
 #subNav ul {
   border-top: 1px dashed #d8d5c3;
+}
+#subNav .selected{
+  padding: 6px 0 6px 13px;
+
 }
 #subNav li {display:inline;}
 #subNav li a,
 #subNav li p {
   background: #FEFEFC;
   border-bottom: 1px dashed #d8d5c3;
-  padding: 5px 5px 5px 13px;
+  padding: 5px 5px 5px 17px;
   display: block;
   line-height: 16px;
 }
 #subNav li a:hover {background: #FFFEF4;}
+#subNav li a:visited{ color: #0342C9; }
 /*---------------------*/
 /* Sub Nav Tier -------*/
 /*---------------------*/
