@@ -5,13 +5,13 @@
   <h1>Top Selling Dog Supplies</h1>
   <ul class="productList">
     <% @best_selling_dogs.each do |product| %>
-      <%= render "product", :product => product %>
+      <%= render "product", :product => product, :products => @best_selling_dogs %>
     <% end %>
   </ul>
   <h1>Top Selling Cat Supplies</h1>
   <ul class="productList">
     <% @best_selling_cats.each do |product| %>
-      <%= render "product", :product => product %>
+      <%= render "product", :product => product, :products => @best_selling_cats %>
     <% end %>
   </ul>
 </div>
