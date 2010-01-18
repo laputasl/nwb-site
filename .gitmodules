@@ -22,3 +22,6 @@
 [submodule "vendor/extensions/order_comments"]
   path = vendor/extensions/order_comments
   url = git://github.com/BDQ/spree-order-comments.git
+[submodule "vendor/extensions/snippets"]
+	path = vendor/extensions/snippets
+	url = git://github.com/BDQ/spree-snippets.git
