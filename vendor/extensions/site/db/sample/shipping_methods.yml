@@ -1,0 +1,24 @@
+ups_ground:
+  name: UPS Ground
+  zone_id: 2
+ups_three_day_select:
+  name: UPS Three Day Select
+  zone_id: 2
+ups_second_day_air:
+  name: UPS Second Day Air
+  zone_id: 2
+ups_next_day_air:
+  name: UPS Next Day Air
+  zone_id: 2
+ups_worldwide_expedited:
+  name: UPS Worldwide Expedited
+  zone_id: 1
+usps_us:
+  name: United States Postal Service
+  zone_id: 2
+usps_can:
+  name: USPS (to Canada)
+  zone_id: 3
+canada_post:
+  Name: CanadaPost
+  zone_id: 3

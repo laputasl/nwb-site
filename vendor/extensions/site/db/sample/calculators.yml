@@ -1,0 +1,36 @@
+ups_ground_calc:
+  calculable: ups_ground
+  calculable_type: ShippingMethod
+  type: Calculator::Ups::Ground
+ups_three_day_select_calc:
+  calculable: ups_three_day_select
+  calculable_type: ShippingMethod
+  type: Calculator::Ups::ThreeDaySelect
+ups_second_day_air_calc:
+  calculable: ups_second_day_air
+  calculable_type: ShippingMethod
+  type: Calculator::Ups::SecondDayAir
+ups_next_day_air_calc:
+  calculable: ups_next_day_air
+  calculable_type: ShippingMethod
+  type: Calculator::Ups::NextDayAir
+ups_worldwide_expedited_calc:
+  calculable: ups_worldwide_expedited
+  calculable_type: ShippingMethod
+  type: Calculator::Ups::WorldwideExpedited
+usps_us_calc:
+  calculable: usps_us
+  calculable_type: ShippingMethod
+  type: Calculator::FlatRate
+usps_can_calc:
+  calculable: usps_can
+  calculable_type: ShippingMethod
+  type: Calculator::FlatRate
+canada_post_calc:
+  calculable: canada_post
+  calculable_type: ShippingMethod
+  type: Calculator::FlatRate
+flat_rate_coupon_calculator_calc:
+  calculable: spree_coupon
+  calculable_type: Coupon
+  type: Calculator::FlatRate

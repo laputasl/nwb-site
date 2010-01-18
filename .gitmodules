@@ -25,3 +25,6 @@
 [submodule "vendor/extensions/snippets"]
 	path = vendor/extensions/snippets
 	url = git://github.com/BDQ/spree-snippets.git
+[submodule "vendor/extensions/active_shipping"]
+	path = vendor/extensions/active_shipping
+	url = git://github.com/railsdog/spree-active-shipping.git
