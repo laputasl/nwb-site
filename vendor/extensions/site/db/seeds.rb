@@ -13,3 +13,7 @@ Spree::ActiveShipping::Config.set(:origin_zip => '30354')
 Spree::ActiveShipping::Config.set(:ups_login => 'naturalwellbeing')
 Spree::ActiveShipping::Config.set(:ups_password => 'th33mp1r3')
 Spree::ActiveShipping::Config.set(:ups_key => 'ABA12A047F52CA84')
+
+
+#reasons to hold order as suspicious
+Spree::Config.set(:hold_order_amount_over => 100.00)

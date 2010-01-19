@@ -75,11 +75,11 @@ class SiteExtension < Spree::Extension
 
     fsm = Order.state_machines[:state]
     fsm.event :hold do
-      transition :to => 'pending', :from => ['paid', 'new']
+      transition :to => 'held', :from => ['paid', 'new']
     end
 
     fsm.event :approve do
-      transition :to => 'approved', :from => 'pending', :if => :allow_resume?
+      transition :to => 'approved', :from => 'held', :if => :allow_resume?
     end
 
     fsm.after_transition :to => 'approved', :do => :restore_state
@@ -283,6 +283,28 @@ class SiteExtension < Spree::Extension
         end
       end
     end
+
+    StateMonitor.class_eval do
+      include ActionView::Helpers::NumberHelper
+
+      alias_method :after_transition_original, :after_transition
+
+      def after_transition(order, transition)
+        after_transition_original(order, transition)
+        order.state_events.reload
+
+        upper_amount = Spree::Config.get(:hold_order_amount_over).to_f
+
+        #automatically hold orders
+        if order.total >= upper_amount && order.can_hold? && !order.state_events.map(&:name).include?("approve")
+          order.hold!
+          admin = User.first(:include => :roles, :conditions => ["roles.name = 'admin'"])
+          order.comments.create(:title => "Order Held", :comment => "Held as suspicious becase amount exceeds #{number_to_currency(upper_amount)}", :user => admin)
+        end
+      end
+
+    end
+
  end
 
 end
