@@ -271,6 +271,18 @@ class SiteExtension < Spree::Extension
         @order_events = %w{cancel hold approve resume}
       end
     end
-  end
+
+    ShippingMethod.class_eval do
+      def available_to_address?(address)
+        po_regex = /\b((A|a|F|f)?[P|p](OST|ost)?\.?\s?[O|o|0](ffice|FFICE)?\.?\s)?([B|b][O|o|0][X|x])\s(\d+)/
+
+        if self.name.upcase.include?("UPS") && (address.address1 =~ po_regex || address.address2 =~ po_regex)
+          return false
+        else
+          available? && zone.include?(address)
+        end
+      end
+    end
+ end
 
 end
