@@ -83,8 +83,10 @@ class SiteExtension < Spree::Extension
     end
 
     fsm.after_transition :to => 'approved', :do => :restore_state
+    fsm.after_transition :to => 'paid', :do => :monitor_suspicious_orders
 
     Order.class_eval do
+      include ActionView::Helpers::NumberHelper
       belongs_to :store
 
       private
@@ -92,6 +94,34 @@ class SiteExtension < Spree::Extension
         # pop the resume / approve event so we can see what the event before that was
         state_events.pop if ["resume", "approve"].include? state_events.last.name
         update_attribute("state", state_events.last.previous_state)
+      end
+
+      def monitor_suspicious_orders
+        state_events.reload
+
+        upper_amount = Spree::Config[:hold_order_amount_over].to_f
+
+        #automatically hold orders
+        if can_hold? && !state_events.map(&:name).include?("approve")
+          admin = User.first(:include => :roles, :conditions => ["roles.name = 'admin'"])
+
+          avs = Spree::Config[:hold_order_with_avs].split(",").each(&:strip!)
+          countries = Spree::Config[:hold_order_ship_countries].split(",").each(&:strip!)
+
+          if total >= upper_amount
+            hold!
+            self.comments.create(:title => "Order Held", :comment => "Held as suspicious because amount exceeds #{number_to_currency(upper_amount)}.", :user => admin)
+          elsif bill_address != ship_address
+            hold!
+            self.comments.create(:title => "Order Held", :comment => "Held as suspicious because billing and shipping addresses are different.", :user => admin)
+          elsif !countries.include?(ship_address.country.iso3)
+            hold!
+            self.comments.create(:title => "Order Held", :comment => "Held as suspicious because shipping country is not white listed.", :user => admin)
+          elsif payments.any? {|payment| payment.txns.any? { |txn| !avs.include?(txn.avs_response) } }
+            hold!
+            self.comments.create(:title => "Order Held", :comment => "Held as suspicious because AVS code is not white listed.", :user => admin)
+          end
+        end
       end
     end
 
@@ -284,27 +314,17 @@ class SiteExtension < Spree::Extension
       end
     end
 
-    StateMonitor.class_eval do
-      include ActionView::Helpers::NumberHelper
-
-      alias_method :after_transition_original, :after_transition
-
-      def after_transition(order, transition)
-        after_transition_original(order, transition)
-        order.state_events.reload
-
-        upper_amount = Spree::Config.get(:hold_order_amount_over).to_f
-
-        #automatically hold orders
-        if order.total >= upper_amount && order.can_hold? && !order.state_events.map(&:name).include?("approve")
-          order.hold!
-          admin = User.first(:include => :roles, :conditions => ["roles.name = 'admin'"])
-          order.comments.create(:title => "Order Held", :comment => "Held as suspicious becase amount exceeds #{number_to_currency(upper_amount)}", :user => admin)
+    Address.class_eval do
+      def ==(other_address)
+        self_attrs = self.attributes
+        other_attrs = other_address.respond_to?(:attributes) ? other_address.attributes : {}
+        [self_attrs, other_attrs].each do |attrs|
+          %w(id created_at updated_at order_id).each {|attr| attrs.delete(attr) }
         end
+
+        self_attrs == other_attrs
       end
-
     end
-
  end
 
 end

@@ -29,4 +29,8 @@ class SiteHooks < Spree::ThemeSupport::HookListener
   insert_after :admin_exact_target_lists_form, :partial => "admin/exact_target_lists/form_fields"
 
   insert_after :signup_below_password_fields, :partial => "users/set_store"
+
+  insert_after :admin_configurations_menu do
+    "<%= configurations_menu_item('Suspicious Order Settings', edit_admin_suspicious_order_settings_path, 'Manage settings for marking orders as suspicious') %>"
+  end
 end
