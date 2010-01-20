@@ -251,7 +251,7 @@ class SiteExtension < Spree::Extension
 
           list = autosubscribe_list(checkout.order.store) if checkout
         else
-           list = autosubscribe_list(user.store)
+          list = autosubscribe_list(user.store)
         end
 
 
@@ -262,7 +262,7 @@ class SiteExtension < Spree::Extension
 
           begin
             if user.is_a? String
-              subscriber_id = subscriber.add(user.email, list.list_id)
+              subscriber_id = subscriber.add(user, list.list_id)
             else
               subscriber_id = subscriber.add(user.email, list.list_id, {:Customer_ID => user.id, :Customer_ID_NWB => user.id, :Customer_ID_PWB => user.id})
             end
