@@ -262,7 +262,14 @@ class SiteExtension < Spree::Extension
       end
 
       def create_subscriber(user)
-        list = autosubscribe_list(user.store)
+        if user.is_a? String
+          checkout = Checkout.find_by_email user
+
+          list = autosubscribe_list(checkout.order.store) if checkout
+        else
+          list = autosubscribe_list(user.store)
+        end
+
 
         if list.nil?
           subscriber_id = -1
@@ -270,7 +277,11 @@ class SiteExtension < Spree::Extension
           subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
           begin
-            subscriber_id = subscriber.add(user.email, list.list_id, {:Customer_ID => user.id, :Customer_ID_NWB => user.id, :Customer_ID_PWB => user.id})
+            if user.is_a? String
+              subscriber_id = subscriber.add(user, list.list_id)
+            else
+              subscriber_id = subscriber.add(user.email, list.list_id, {:Customer_ID => user.id, :Customer_ID_NWB => user.id, :Customer_ID_PWB => user.id})
+            end
             user.exact_target_lists << list
             user.save!
           rescue
@@ -278,8 +289,10 @@ class SiteExtension < Spree::Extension
           end
         end
 
-        user.exact_target_subscriber_id = subscriber_id
-        user.save!
+        unless user.is_a? String
+          user.exact_target_subscriber_id = subscriber_id
+          user.save!
+        end
       end
     end
 
