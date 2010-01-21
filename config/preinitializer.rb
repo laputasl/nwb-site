@@ -1,1 +1,1 @@
-SPREE_EXTENSIONS_LOAD_ORDER = [:theme_default, :all, :static_content, :exact_target, :site]
+SPREE_EXTENSIONS_LOAD_ORDER = [:theme_default, :all, :static_content, :exact_target, :site, :theme_nwb]
