@@ -179,6 +179,19 @@ class SiteExtension < Spree::Extension
       end
 
     end
+        
+
+    Checkout.class_eval do
+      Checkout.state_machines[:state] = StateMachine::Machine.new(Checkout, :initial => 'address') do
+        after_transition :to => 'complete', :do => :complete_order
+        before_transition :to => 'complete', :do => :process_payment
+        event :next do
+          transition :to => 'delivery', :from  => 'address'
+          transition :to => 'confirm', :from => 'delivery'
+          transition :to => 'complete', :from => 'confirm'
+        end
+      end
+    end    
 
     Spree::Search.module_eval do
       def retrieve_products
@@ -233,6 +246,9 @@ class SiteExtension < Spree::Extension
     end
 
     CheckoutsController.class_eval do
+      # register edit and update hooks for extra checkout steps
+      class_scoping_reader :confirm, Spree::Checkout::ActionOptions.new
+      
       private
       def get_exact_target_lists
         @site ||= Store.find(:first, :conditions => {:code => request.headers['wellbeing-site']})
