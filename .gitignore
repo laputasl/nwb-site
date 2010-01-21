@@ -28,6 +28,9 @@ config/s3.yml
 public/MailFaxOrder.pdf
 db/xapiandb/
 
+# compiled less
+vendor/extensions/theme_nwb/app/stylesheets/*.css
+
 # from capistrano
 mkmf.log
 

@@ -35,12 +35,12 @@ a:hover, a:active {color: #1c3c80;}
   padding: 5px 0 0 0;
 }
 #header h1 a {
-  background: url(/nwb/images/nwb_logo.gif) top left no-repeat;
+  background: url(/pwb/images/pwb_logo.jpg) top left no-repeat;
   float: left;
   display: inline;
   text-indent: -999em;
   overflow: hidden;
-  width: 400px;
+  width: 341px;
   height: 64px;
 }
 #header li {
@@ -51,7 +51,7 @@ a:hover, a:active {color: #1c3c80;}
 #header #miscNav {
   float: right;
   display: inline;
-  width: 340px;
+  width: 400px;
 }
 #header #miscNav li {
   float: right;
@@ -76,19 +76,15 @@ a:hover, a:active {color: #1c3c80;}
 #header #searchForm p {
   clear: both;
 }
-#header #searchForm fieldset {
-  margin-top: 18px;
-}
 #header #searchForm legend {display:none;}
 #header #searchForm input {
   float: left;
   display: inline;
   width: 118px;
   padding: 1px 2px;
-  border: 1px solid #7FADCE;
 }
 #header #searchForm #btnSearch {
-  background: url(/nwb/images/btn-search.gif) top left no-repeat;
+  background: url(/pwb/images/btn_search.png) top left no-repeat;
   float: right;
   text-indent: -999em;
   overflow: hidden;
@@ -125,36 +121,37 @@ a:hover, a:active {color: #1c3c80;}
   background-position: bottom;
 }
 #navHome {
-  background: url(/nwb/images/nav_home.png) top left no-repeat;
+  background: url(/pwb/images/nav_home.png) top left no-repeat;
   width: 55px;
 }
 #navShipping {
-  background: url(/nwb/images/nav_shipping.png) top left no-repeat;
+  background: url(/pwb/images/nav_shipping.png) top left no-repeat;
   width: 149px;
 }
 #navSecure {
-  background: url(/nwb/images/nav_secure.png) top left no-repeat;
+  background: url(/pwb/images/nav_secure.png) top left no-repeat;
   width: 115px;
   padding-left: 15px !important;
 }
 #navGuarantee {
-  background: url(/nwb/images/nav_guarantee.png) top left no-repeat;
+  background: url(/pwb/images/nav_guarantee.png) top left no-repeat;
   width: 182px;
 }
 #navCart {
-  background: url(/nwb/images/nav_cart.png) top left no-repeat;
+  background: url(/pwb/images/nav_cart.png) top left no-repeat;
   width: 120px;
   padding-left: 15px !important;
 }
 #navAccount {
-  background: url(/nwb/images/nav_account.png) top left no-repeat;
+  background: url(/pwb/images/nav_account.png) top left no-repeat;
   width: 94px;
 }
 /*---------------------*/
 /* Main ---------------*/
 /*---------------------*/
 #main {
-  background: url(/nwb/images/bg_main.png) top left repeat-y;
+  background: url(/pwb/images/bg_main.png) top left repeat-y;
+  border-top: 1px solid #ddd;
   width: 745px;
   overflow: hidden;
   padding: 5px 0 0 0;
@@ -168,11 +165,11 @@ a:hover, a:active {color: #1c3c80;}
   float: left;
   display: inline;
 }
-#sidebar #peopleBtns {
+#sidebar #petBtns {
   padding: 0 7px 5px 7px;
   margin: 0 0 10px 0;
 }
-#sidebar #peopleBtns a {
+#sidebar #petBtns a {
   display: block;
   text-indent: -999em;
   overflow: hidden;
@@ -180,14 +177,14 @@ a:hover, a:active {color: #1c3c80;}
   height: 27px;
   margin: 0 0 8px 0;
 }
-#sidebar #btnMen {background: url(/nwb/images/products_men.gif) top left no-repeat;}
-#sidebar #btnWomen {background: url(/nwb/images/products_women.gif) top left no-repeat;}
+#sidebar #btnDogs {background: url(/pwb/images/btn_dogs.png) top left no-repeat;}
+#sidebar #btnCats {background: url(/pwb/images/btn_cats.png) top left no-repeat;}
 #sidebar img {
   display: block;
   margin: 10px auto;
 }
-#sidebar #btnNWBlog {
-  background: url(/nwb/images/btn_blog.png) top left no-repeat;
+#sidebar #btnPHBlog {
+  background: url(/pwb/images/btn_blog.png) top left no-repeat;
   display: block;
   text-indent: -999em;
   overflow: hidden;
@@ -196,7 +193,7 @@ a:hover, a:active {color: #1c3c80;}
   margin: 10px auto;
 }
 #sidebar #btnChatLive {
-  background: url(/nwb/images/btn_live_chat.png) top left no-repeat;
+  background: url(/pwb/images/btn_live_chat.png) top left no-repeat;
   display: block;
   text-indent: -999em;
   overflow: hidden;
@@ -208,12 +205,12 @@ a:hover, a:active {color: #1c3c80;}
 /* Cart Preview -------*/
 /*---------------------*/
 #cartPreview {
-  background: #F7FBFD;
-  border: 1px solid #81B6E2;
+  background: #e9efe4;
+  border: 1px solid #a7b79a;
   margin: 8px 0 0 0;
 }
 #cartPreview h3 a {
-  background: #81B6E2;
+  background: #a7b79a;
   color: #fff;
   display: block;
   text-align: center;
@@ -247,34 +244,25 @@ a:hover, a:active {color: #1c3c80;}
   font-family: Verdana, Arial, sans-serif;
 }
 #subNav dt {
-  background-color: #FBF9ED;
-  border-top:1px dashed #D8D5C3;
+  background: #d3d9be;
 }
-#subNav dt a:visited{ color: #0342C9; }
 #subNav dt a,
 #subNav dt p {
   padding: 6px 0 6px 13px;
   display: block;
 }
-#subNav dt a:hover {background: #FFFEF4;}
 #subNav ul {
   border-top: 1px dashed #d8d5c3;
-}
-#subNav .selected{
-  padding: 6px 0 6px 13px;
-
 }
 #subNav li {display:inline;}
 #subNav li a,
 #subNav li p {
-  background: #FEFEFC;
   border-bottom: 1px dashed #d8d5c3;
-  padding: 5px 5px 5px 17px;
+  padding: 5px 5px 5px 13px;
   display: block;
   line-height: 16px;
 }
-#subNav li a:hover {background: #FFFEF4;}
-#subNav li a:visited{ color: #0342C9; }
+#subNav li a:hover {background: #e9efe4;}
 /*---------------------*/
 /* Sub Nav Tier -------*/
 /*---------------------*/
@@ -304,7 +292,7 @@ a:hover, a:active {color: #1c3c80;}
   display: inline;
 }
 #body .banner h2 {
-  background: url(/nwb/images/banner_home.jpg) top left no-repeat;
+  background: url(/pwb/images/banner_home.jpg) top left no-repeat;
   display: block;
   text-indent: -999em;
   overflow: hidden;
@@ -313,7 +301,7 @@ a:hover, a:active {color: #1c3c80;}
   margin: 0 0 5px 0;
 }
 #body #breadcrumbs {
-  margin: 5px 0px 10px 13px;
+  margin: 10px 0px 10px 13px;
 }
 #body #breadcrumbs li {
   list-style: none;
@@ -325,9 +313,9 @@ a:hover, a:active {color: #1c3c80;}
 /* Text Content -------*/
 /*---------------------*/
 #body .content {
-  border: 1px solid #C4E9FF;
+  border: 1px solid #e9efe4;
   margin: 10px 0 20px 13px;
-  background: ##F7FCFF;
+  background: #fbfff7;
   padding: 10px;
   line-height: 16px;
   overflow: hidden;
@@ -357,7 +345,7 @@ a:hover, a:active {color: #1c3c80;}
 }
 #body .content ul {margin: 0 0 10px 25px;}
 #body .content ul li {
-  background: url(/nwb/images/icon_bullet.gif) 0 3px no-repeat;
+  background: url(/pwb/images/icon_bullet.gif) 0 3px no-repeat;
   list-style: none;
   list-style-position: outside;
   padding: 0 0 0 14px;
@@ -404,7 +392,7 @@ a:hover, a:active {color: #1c3c80;}
 }
 .product .info ul {margin: 0 0 10px 25px;}
 .product .info li {
-  background: url(/nwb/images/icon_bullet.gif) 0 3px no-repeat;
+  background: url(/pwb/images/icon_bullet.gif) 0 3px no-repeat;
   list-style: none;
   list-style-position: outside;
   padding: 0 0 0 14px;
@@ -494,7 +482,7 @@ a:hover, a:active {color: #1c3c80;}
   margin: 25px 0 0 13px;
 }
 .productMenu {
-  background: url(/nwb/images/bg_tab_menu.png) bottom left repeat-x;
+  background: url(/pwb/images/bg_tab_menu.png) bottom left repeat-x;
   overflow: hidden;
   width: 565px;
 }
@@ -518,41 +506,41 @@ a:hover, a:active {color: #1c3c80;}
 .productMenu .active a:hover {background-position: bottom left !important;}
 .productMenu li a:hover {background-position: center left !important;}
 #tabDescription {
-  background: url(/nwb/images/tab_description.png) top left no-repeat;
+  background: url(/pwb/images/tab_description.png) top left no-repeat;
   width: 91px;
 }
 #tabReviews {
-  background: url(/nwb/images/tab_reviews.png) top left no-repeat;
+  background: url(/pwb/images/tab_reviews.png) top left no-repeat;
   width: 101px;
 }
 #tabDirections {
-  background: url(/nwb/images/tab_directions.png) top left no-repeat;
+  background: url(/pwb/images/tab_directions.png) top left no-repeat;
   width: 155px;
 }
 #tabIngredients {
-  background: url(/nwb/images/tab_ingredients.png) top left no-repeat;
+  background: url(/pwb/images/tab_ingredients.png) top left no-repeat;
   width: 96px;
 }
 /*---------------------*/
 /* Product List -------*/
 /*---------------------*/
 .products {
-  border: 1px solid #D7D5C6;
+  border: 1px solid #a7b79a;
   border-top: 0;
   margin: 0 0 20px 13px;
 }
 .products h1 {
-  background: #FBF9ED;
+  background: #cad8bd;
   font-size: 15px;
-  color: #DA5789;
+  color: #324a21;
   padding: 3px 10px 5px 10px;
-  border-top: 1px solid #D7D5C6;
-  border-bottom: 1px solid #D7D5C6;
+  border-top: 1px solid #a7b79a;
+  border-bottom: 1px solid #a7b79a;
 }
-.products h1 a {color: #DA5789;}
-.products h1 a:hover {color: #DA5789;}
+.products h1 a {color: #324a21;}
+.products h1 a:hover {color: #496337;}
 .products ul {
-  background: url(/nwb/images/bg_dotted.png) 265px 0 repeat-y;
+  background: url(/pwb/images/bg_dotted.png) 265px 0 repeat-y;
   margin: 10px;
   width: 545px;
   overflow: hidden;
@@ -654,7 +642,7 @@ a:hover, a:active {color: #1c3c80;}
 }
 .price form .btnBuyNow,
 .price form .btnAddCart {
-  background: url(/nwb/images/btn_buy_now.gif) top left no-repeat;
+  background: url(/pwb/images/btn_buy_now.png) top left no-repeat;
   float: left;
   display: inline;
   text-indent: -999em;
@@ -668,7 +656,7 @@ a:hover, a:active {color: #1c3c80;}
 }
 .product .price form .btnAddCart,
 .productList .price form .btnAddCart {
-  background: url(/nwb/images/btn_add_cart.gif) top left no-repeat;
+  background: url(/pwb/images/btn_add_cart.png) top left no-repeat;
   width: 84px;
   float: none;
   display: block;
@@ -717,3 +705,6 @@ a:hover, a:active {color: #1c3c80;}
 }
 #footer ul a {color: #fff}
 #footer li.first {border: 0;}
+
+@import "_checkout"; 
+@import "_cart"; 
