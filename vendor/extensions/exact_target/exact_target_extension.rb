@@ -16,7 +16,7 @@ class ExactTargetExtension < Spree::Extension
     end
 
     UsersController.class_eval do
-      include Spree::BaseControllerOverrides
+      include Spree::MultiStore::BaseControllerOverrides
       include Spree::ExactTarget
 
       show.before << :get_exact_target_lists
@@ -26,7 +26,7 @@ class ExactTargetExtension < Spree::Extension
     end
 
     CheckoutsController.class_eval do
-      include Spree::BaseControllerOverrides
+      include Spree::MultiStore::BaseControllerOverrides
       include Spree::ExactTarget
 
       before_filter :get_exact_target_lists, :only =>:register

@@ -31,12 +31,13 @@ class MultiStoreExtension < Spree::Extension
     #   end
     # end
 
+    Spree::BaseController.send(:include, Spree::MultiStore::BaseControllerOverrides)
+
     Tracker.class_eval do
       belongs_to :store
 
       def self.current
         trackers = Tracker.find(:all, :conditions => {:active => true, :environment => ENV['RAILS_ENV']})
-debugger
         trackers.select { |t| t.store.name == Spree::Config[:site_name] }.first
       end
     end

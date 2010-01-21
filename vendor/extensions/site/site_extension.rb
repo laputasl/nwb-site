@@ -22,8 +22,6 @@ class SiteExtension < Spree::Extension
       RAILS_ENV=="production" ? require(c) : load(c)
     end
 
-    Spree::BaseController.send(:include, Spree::BaseControllerOverrides)
-
     Admin::ProductsController.class_eval do
       def additional_fields
         load_object
