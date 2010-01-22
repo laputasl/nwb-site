@@ -27,13 +27,20 @@
     <hr />
     <div id="checkout-main">
       <hr />
-      <div id="checkout-body">
+      <div id="checkout-body"> 
+        <% if flash[:notice] %>
+          <div class="flash notice"><%= flash[:notice] %></div>
+        <% end %>
+        <% if flash[:error] %>
+          <div class="flash errors"><%= flash[:error] %></div>
+        <% end %>        
         <%= yield %>
       </div>
     </div>
     <hr />
     <%= render :partial => "shared/nwb_footer" %>
   </div>
+  <%= render 'shared/google_analytics' %>  
 </body>
 </html>
 

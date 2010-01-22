@@ -27,7 +27,14 @@
       </ul>
     </div>
     <hr />
-    <div id="main">
+    <div id="main">  
+      <% if flash[:notice] %>
+        <div class="flash notice"><%= flash[:notice] %></div>
+      <% end %>
+      <% if flash[:error] %>
+        <div class="flash errors"><%= flash[:error] %></div>
+      <% end %>        
+      
       <div id="sidebar">
         <ul id="petBtns">
           <% @categories.root.children.each do |taxon| %>
@@ -79,7 +86,7 @@
       </div>
     </div>
     <hr />
-    <%= render :partial => "shared/nwb_footer" %>
+    <%= render :partial => "shared/nwb_footer" %> 
   </div>
   <%= render 'shared/google_analytics' %>
 </body>
