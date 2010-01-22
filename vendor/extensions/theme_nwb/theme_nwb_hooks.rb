@@ -40,4 +40,5 @@ class ThemeNwbHooks < Spree::ThemeSupport::HookListener
   #   end
   #
 
+  remove :checkout_summary_box
 end

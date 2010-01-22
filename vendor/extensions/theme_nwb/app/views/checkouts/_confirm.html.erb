@@ -1,6 +1,17 @@
 <h2>Confirm Your Order</h2>
 
-[TODO - add confirmation summary here]     
+<fieldset id="order_details">         
+	<div class="clear"></div>
+  <legend>Order Details</legend>
+	<%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>      
+</fieldset>
+
+<fieldset id="payment_details">         
+	<div class="clear"></div>
+  <legend>Payment Details</legend>
+  <p>Credit Card: <%= @checkout.creditcard.display_number %></p>
+  <p>Expiration: <%= @checkout.creditcard.month %> / <%= @checkout.creditcard.year %></p>
+</fieldset>
 
 
 <div class="form-buttons">
