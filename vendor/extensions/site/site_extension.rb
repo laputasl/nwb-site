@@ -246,6 +246,7 @@ class SiteExtension < Spree::Extension
     CheckoutsController.class_eval do
       # register edit and update hooks for extra checkout steps
       class_scoping_reader :confirm, Spree::Checkout::ActionOptions.new
+      layout 'checkouts'
       
       private
       def get_exact_target_lists
