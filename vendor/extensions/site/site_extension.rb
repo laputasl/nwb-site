@@ -188,7 +188,9 @@ class SiteExtension < Spree::Extension
           transition :to => 'confirm', :from => 'delivery'
           transition :to => 'complete', :from => 'confirm'
         end
-      end
+      end   
+      
+      validation_group :delivery, :fields => ["creditcard.number", "creditcard.verification_value"]
     end    
 
     Spree::Search.module_eval do
