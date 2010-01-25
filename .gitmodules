@@ -28,3 +28,6 @@
 [submodule "vendor/extensions/active_shipping"]
 	path = vendor/extensions/active_shipping
 	url = git://github.com/railsdog/spree-active-shipping.git
+[submodule "vendor/extensions/paypal_express"]
+	path = vendor/extensions/paypal_express
+	url = git://github.com/railsdog/spree-paypal-express.git

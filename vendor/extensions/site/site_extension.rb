@@ -177,7 +177,7 @@ class SiteExtension < Spree::Extension
       end
 
     end
-        
+
 
     Checkout.class_eval do
       Checkout.state_machines[:state] = StateMachine::Machine.new(Checkout, :initial => 'address') do
@@ -188,10 +188,10 @@ class SiteExtension < Spree::Extension
           transition :to => 'confirm', :from => 'delivery'
           transition :to => 'complete', :from => 'confirm'
         end
-      end   
-      
+      end
+
       validation_group :delivery, :fields => ["creditcard.number", "creditcard.verification_value"]
-    end    
+    end
 
     Spree::Search.module_eval do
       def retrieve_products
@@ -249,7 +249,9 @@ class SiteExtension < Spree::Extension
       # register edit and update hooks for extra checkout steps
       class_scoping_reader :confirm, Spree::Checkout::ActionOptions.new
       layout 'checkouts'
-      
+
+        delivery.edit_hook << :load_available_integrations
+
       private
       def get_exact_target_lists
         @site ||= Store.find(:first, :conditions => {:code => request.headers['wellbeing-site']})
