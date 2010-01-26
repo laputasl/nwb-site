@@ -357,6 +357,14 @@ class SiteExtension < Spree::Extension
         self_attrs == other_attrs
       end
     end
+
+    #hide dashboard for admin area.
+    Admin::OverviewController.class_eval do
+      private
+      def show_dashboard
+        false
+      end
+    end
  end
 
 end
