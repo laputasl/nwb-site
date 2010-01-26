@@ -159,7 +159,7 @@ div.inner input[type=text], div.inner select { width: 80%; }
 
 <hr class="space" />
 <div class="form-buttons">
-  <input type="submit" class="continue button primary" value="<%=t("save_and_continue") %>" onclick="$('#checkout_form_address').validate();" />
+  <input type="submit" class="continue button primary" value="<%=t("save_and_continue") %>" />
 </div>
 
 <% content_for :head do %>
@@ -182,19 +182,28 @@ div.inner input[type=text], div.inner select { width: 80%; }
       disp.val($("select#checkout_ship_address_attributes_country_id :selected").text());
     })
 
-    QadApi({ timeout: 10, key: <%= Spree::Config[:qualified_address_key] %>, busySubmit: false }, { busyId: "QadBusy" },
-      [ {
-        name: "Billing Address",
-        street: "checkout_bill_address_attributes_address1",
-        street2: "checkout_bill_address_attributes_address2",
-        city: "checkout_bill_address_attributes_city",
-        state: "checkout_bill_address_attributes_state_id",
-        zip: "checkout_bill_address_attributes_zipcode",
-        country: "checkout_bill_address_attributes_country_display"
-      } ]
-    );
+    $('#checkout_form_address').submit(function(){
 
-
+      QadApi({ timeout: 10, key: <%= Spree::Config[:qualified_address_key] %>, busySubmit: false }, { busyId: "QadBusy" },
+        [ {
+          name: "Billing Address",
+          street: "checkout_bill_address_attributes_address1",
+          street2: "checkout_bill_address_attributes_address2",
+          city: "checkout_bill_address_attributes_city",
+          state: "checkout_bill_address_attributes_state_id",
+          zip: "checkout_bill_address_attributes_zipcode",
+          country: "checkout_bill_address_attributes_country_display"
+        },{
+          name: "Shipping Address",
+          street: "checkout_ship_address_attributes_address1",
+          street2: "checkout_ship_address_attributes_address2",
+          city: "checkout_ship_address_attributes_city",
+          state: "checkout_ship_address_attributes_state_id",
+          zip: "checkout_ship_address_attributes_zipcode",
+          country: "checkout_ship_address_attributes_country_display"
+        } ]
+      );
+    });
 
   });
 
