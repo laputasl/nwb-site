@@ -172,38 +172,46 @@ div.inner input[type=text], div.inner select { width: 80%; }
 
 <script type="text/javascript">
   jQuery(document).ready(function(){
-    $("select#checkout_bill_address_attributes_country_id").change(function(input){
+
+    function set_bill_country(){
       var disp = $("input#checkout_bill_address_attributes_country_display");
       disp.val($("select#checkout_bill_address_attributes_country_id :selected").text());
-    })
+    }
 
-    $("select#checkout_ship_address_attributes_country_id").change(function(input){
+    function set_ship_country(){
       var disp = $("input#checkout_ship_address_attributes_country_display");
       disp.val($("select#checkout_ship_address_attributes_country_id :selected").text());
-    })
+    }
 
-    $('#checkout_form_address').submit(function(){
+    $("select#checkout_bill_address_attributes_country_id").change(set_bill_country());
 
-      QadApi({ timeout: 10, key: <%= Spree::Config[:qualified_address_key] %>, busySubmit: false }, { busyId: "QadBusy" },
-        [ {
-          name: "Billing Address",
-          street: "checkout_bill_address_attributes_address1",
-          street2: "checkout_bill_address_attributes_address2",
-          city: "checkout_bill_address_attributes_city",
-          state: "checkout_bill_address_attributes_state_id",
-          zip: "checkout_bill_address_attributes_zipcode",
-          country: "checkout_bill_address_attributes_country_display"
-        },{
-          name: "Shipping Address",
-          street: "checkout_ship_address_attributes_address1",
-          street2: "checkout_ship_address_attributes_address2",
-          city: "checkout_ship_address_attributes_city",
-          state: "checkout_ship_address_attributes_state_id",
-          zip: "checkout_ship_address_attributes_zipcode",
-          country: "checkout_ship_address_attributes_country_display"
-        } ]
-      );
-    });
+    $("select#checkout_ship_address_attributes_country_id").change(set_ship_country());
+
+    QadApi({  timeout: 10,
+             key: <%= Spree::Config[:qualified_address_key] %>,
+            busySubmit: false,
+            autoClean: false,
+            demo: false,
+            onComplete: function () {setTimeout($('#checkout_form_address').submit(), 250); return false;} }, { busyId: "QadBusy" },
+      [ {
+        name: "Billing Address",
+        street: "checkout_bill_address_attributes_address1",
+        street2: "checkout_bill_address_attributes_address2",
+        city: "checkout_bill_address_attributes_city",
+        state: "checkout_bill_address_attributes_state_id",
+        zip: "checkout_bill_address_attributes_zipcode",
+        country: "checkout_bill_address_attributes_country_display"
+      },{
+        name: "Shipping Address",
+        street: "checkout_ship_address_attributes_address1",
+        street2: "checkout_ship_address_attributes_address2",
+        city: "checkout_ship_address_attributes_city",
+        state: "checkout_ship_address_attributes_state_id",
+        zip: "checkout_ship_address_attributes_zipcode",
+        country: "checkout_ship_address_attributes_country_display"
+      } ]
+    );
+
 
   });
 
