@@ -73,11 +73,11 @@ class SiteExtension < Spree::Extension
 
     fsm = Order.state_machines[:state]
     fsm.event :hold do
-      transition :to => 'held', :from => ['paid', 'new']
+      transition :to => 'on_hold', :from => ['paid', 'new']
     end
 
     fsm.event :approve do
-      transition :to => 'approved', :from => 'held', :if => :allow_resume?
+      transition :to => 'approved', :from => 'on_hold', :if => :allow_resume?
     end
 
     fsm.after_transition :to => 'approved', :do => :restore_state
@@ -108,16 +108,16 @@ class SiteExtension < Spree::Extension
 
           if total >= upper_amount
             hold!
-            self.comments.create(:title => "Order Held", :comment => "Held as suspicious because amount exceeds #{number_to_currency(upper_amount)}.", :user => admin)
+            self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because amount exceeds #{number_to_currency(upper_amount)}.", :user => admin)
           elsif bill_address != ship_address
             hold!
-            self.comments.create(:title => "Order Held", :comment => "Held as suspicious because billing and shipping addresses are different.", :user => admin)
+            self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because billing and shipping addresses are different.", :user => admin)
           elsif !countries.include?(ship_address.country.iso3)
             hold!
-            self.comments.create(:title => "Order Held", :comment => "Held as suspicious because shipping country is not white listed.", :user => admin)
+            self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because shipping country is not white listed.", :user => admin)
           elsif payments.any? {|payment| payment.txns.any? { |txn| !avs.include?(txn.avs_response) } }
             hold!
-            self.comments.create(:title => "Order Held", :comment => "Held as suspicious because AVS code is not white listed.", :user => admin)
+            self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because AVS code is not white listed.", :user => admin)
           end
         end
       end
@@ -251,7 +251,7 @@ class SiteExtension < Spree::Extension
 
       delivery.edit_hook << :load_available_integrations
 
-      update.before << :correct_state_values
+      update.before :correct_state_values
 
       private
       def get_exact_target_lists
@@ -316,6 +316,8 @@ class SiteExtension < Spree::Extension
       end
     end
 
+    SiteShipmentObserver.instance
+
     ExactTargetList.class_eval do
       belongs_to :store
 
@@ -326,6 +328,44 @@ class SiteExtension < Spree::Extension
           errors.add_to_base I18n.translate("exact_target.only_list_can_subscribe_all") if self.subscribe_all_new_users && ExactTargetList.exists?(["subscribe_all_new_users = ? AND id <> ? AND store_id = ?" , true, self.id, self.store_id])
         end
       end
+    end
+
+    ETUserObserver.class_eval do
+
+      def after_create(user)
+        create_subscriber(user)
+
+        #send account info email
+        trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+
+        external_key = (user.store.code == "nwb" ? "nwb-accountinfo" : "pwb-accountInfo")
+        result = trigger.deliver(user.email, external_key, {:First_Name => "Customer", :emailaddr => user.email})
+      end
+    end
+
+    ETOrderObserver.class_eval do
+
+      def after_hold(order, transition)
+        avs = Spree::Config[:hold_order_with_avs].split(",").each(&:strip!)
+
+        if order.payments.any? {|payment| payment.txns.any? { |txn| !avs.include?(txn.avs_response) } }
+          trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+
+          external_key = (order.store.code == "nwb" ? "nwb-ordersecurity" : "pwb-custordersecurity")
+          result = trigger.deliver(order.checkout.email, external_key, { :First_Name => order.bill_address.firstname,
+                                                                         :Last_name => order.bill_address.lastname})
+        end
+      end
+
+      def after_ship(order, transition)
+        trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+
+        external_key = (order.store.code == "nwb" ? "nwb-ordershipped" : "pwb-custordershipped ")
+        result = trigger.deliver(order.checkout.email, external_key, { :First_Name => order.bill_address.firstname,
+                                                                       :Last_name => order.bill_address.lastname,
+                                                                       :SENDTIME_CONTENT2 => "Your order has been shipped"})
+      end
+
     end
 
     User.class_eval do

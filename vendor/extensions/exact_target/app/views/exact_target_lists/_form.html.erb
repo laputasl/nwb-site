@@ -1,15 +1,17 @@
-<% @exact_target_lists.each do |exact_target_list| %>
-  <tr>
-    <td><%= exact_target_list.title %></td>
-    <td>
-      <label class="sub">
-      <%= radio_button_tag("exact_target_list[#{exact_target_list.id}]", true, @user.exact_target_lists.include?(exact_target_list)  ) %>
-      <%= t("yes") %>
-      </label> &nbsp;
-      <label class="sub">
-       <%= radio_button_tag("exact_target_list[#{exact_target_list.id}]", false, !@user.exact_target_lists.include?(exact_target_list)   ) %>
-       <%= t("no") %>
-     </label>
-    </td>
-  </tr>
+<% unless @exact_target_lists.nil? %>
+  <% @exact_target_lists.each do |exact_target_list| %>
+    <tr>
+      <td><%= exact_target_list.title %></td>
+      <td>
+        <label class="sub">
+        <%= radio_button_tag("exact_target_list[#{exact_target_list.id}]", true, @user.exact_target_lists.include?(exact_target_list)  ) %>
+        <%= t("yes") %>
+        </label> &nbsp;
+        <label class="sub">
+         <%= radio_button_tag("exact_target_list[#{exact_target_list.id}]", false, !@user.exact_target_lists.include?(exact_target_list)   ) %>
+         <%= t("no") %>
+       </label>
+      </td>
+    </tr>
+  <% end %>
 <% end %>

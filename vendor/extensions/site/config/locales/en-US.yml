@@ -1,9 +1,9 @@
 en-US:
-  held: Held
+  on_hold: On Hold
   hold: hold
   approve: approve
   approved: Approved
   checkout_steps:
     # keys correspond to Checkout state names:
     delivery: Shipping and Payment
-    confirm: Confirm  
+    confirm: Confirm
