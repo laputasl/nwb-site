@@ -178,7 +178,6 @@ class SiteExtension < Spree::Extension
 
     end
 
-
     Checkout.class_eval do
       Checkout.state_machines[:state] = StateMachine::Machine.new(Checkout, :initial => 'address') do
         after_transition :to => 'complete', :do => :complete_order
@@ -250,13 +249,31 @@ class SiteExtension < Spree::Extension
       class_scoping_reader :confirm, Spree::Checkout::ActionOptions.new
       layout 'checkouts'
 
-        delivery.edit_hook << :load_available_integrations
+      delivery.edit_hook << :load_available_integrations
+
+      update.before << :correct_state_values
 
       private
       def get_exact_target_lists
         @site ||= Store.find(:first, :conditions => {:code => request.headers['wellbeing-site']})
         @exact_target_lists = ExactTargetList.find(:all, :conditions => {:visible => true, :store_id => @site.id})
       end
+
+      def correct_state_values
+        return unless params.has_key? :checkout
+        if params[:checkout].has_key? :bill_address_attributes
+          if params[:checkout][:bill_address_attributes][:state_id].size == 2
+            params[:checkout][:bill_address_attributes][:state_id] = State.find_by_abbr_and_country_id(params[:checkout][:bill_address_attributes][:state_id], params[:checkout][:bill_address_attributes][:country_id]).id
+          end
+        end
+
+        if params[:checkout].has_key? :ship_address_attributes
+          if params[:checkout][:ship_address_attributes][:state_id].size == 2
+            params[:checkout][:ship_address_attributes][:state_id] = State.find_by_abbr_and_country_id(params[:checkout][:ship_address_attributes][:state_id], params[:checkout][:ship_address_attributes][:country_id]).id
+          end
+        end
+      end
+
     end
 
     Spree::ExactTarget.module_eval do
