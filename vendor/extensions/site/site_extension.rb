@@ -80,7 +80,9 @@ class SiteExtension < Spree::Extension
       transition :to => 'approved', :from => 'on_hold', :if => :allow_resume?
     end
 
+    fsm.after_transition :to => 'on_hold', :do => :make_shipments_pending
     fsm.after_transition :to => 'approved', :do => :restore_state
+    fsm.after_transition :to => 'approved', :do => :make_shipments_ready
     fsm.after_transition :to => 'paid', :do => :monitor_suspicious_orders
 
     Order.class_eval do
