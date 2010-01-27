@@ -31,13 +31,13 @@
     </tbody>
   </table>
   <p><a href="/pwb/shipping" title="Free Same Day Shipping at $50.00">Free Same Day Shipping at $50.00</a></p>
-  <h3><a href="#" title="Shopping Calculator">Shipping Calculator</a></h3>
-  <div id="shipping_calculator">
-    <p>
-      <%= radio_button_tag :calculator_zone, :usa %> USA
-      <%= radio_button_tag :calculator_zone, :international %> International
-    </p>
-    <% unless order.nil? %>
+  <% unless order.nil? %>
+    <h3><a href="#" title="Shopping Calculator">Shipping Calculator</a></h3>
+    <div id="shipping_calculator">
+      <p>
+        <%= radio_button_tag :calculator_zone, :usa %> USA
+        <%= radio_button_tag :calculator_zone, :international %> International
+      </p>
       <div id="usa_options">
         <%= text_field_tag :calculator_zipcode, "enter zip" %>
         <%= image_submit_tag "/#{@site.code}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
@@ -51,9 +51,9 @@
         Select Shipping Method
         <select id="calculator_available_methods"></select>
       </p>
-    <% end %>
-    <%= image_tag "/#{@site.code}/images/verifying.gif", {:id => "calculator_progress"} %>
-  </div>
+      <%= image_tag "/#{@site.code}/images/verifying.gif", {:id => "calculator_progress"} %>
+    </div>
+  <% end %>
 </div>
 
 <script type="text/javascript">
