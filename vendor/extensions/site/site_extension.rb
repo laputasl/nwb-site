@@ -259,19 +259,26 @@ class SiteExtension < Spree::Extension
         @exact_target_lists = ExactTargetList.find(:all, :conditions => {:visible => true, :store_id => @site.id})
       end
 
+      #Resets state ABBR values for QualifiedAddress changed states.
       def correct_state_values
         return unless params.has_key? :checkout
-        if params[:checkout].has_key? :bill_address_attributes
+        if params[:checkout].has_key?(:bill_address_attributes) && params[:checkout][:bill_address_attributes].has_key?(:state_id)
           if params[:checkout][:bill_address_attributes][:state_id].size == 2
             params[:checkout][:bill_address_attributes][:state_id] = State.find_by_abbr_and_country_id(params[:checkout][:bill_address_attributes][:state_id], params[:checkout][:bill_address_attributes][:country_id]).id
           end
         end
 
-        if params[:checkout].has_key? :ship_address_attributes
+        if params[:checkout].has_key?(:ship_address_attributes) && params[:checkout][:ship_address_attributes].has_key?(:state_id)
           if params[:checkout][:ship_address_attributes][:state_id].size == 2
             params[:checkout][:ship_address_attributes][:state_id] = State.find_by_abbr_and_country_id(params[:checkout][:ship_address_attributes][:state_id], params[:checkout][:ship_address_attributes][:country_id]).id
           end
         end
+      end
+
+      #sorting by (and selecting) cheapest shipping method
+      def load_available_methods
+        @available_methods = rate_hash.sort_by{ |sm| sm[:rate] }
+        @checkout.shipping_method_id ||= @available_methods.first[:id]
       end
 
     end
@@ -422,6 +429,8 @@ class SiteExtension < Spree::Extension
         false
       end
     end
+
+    Calculator::FlatOverValue.register
  end
 
 end

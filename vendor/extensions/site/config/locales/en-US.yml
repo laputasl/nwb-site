@@ -3,6 +3,8 @@ en-US:
   hold: hold
   approve: approve
   approved: Approved
+  flat_rate_over_value: Flat Rate when order Over Value
+  order_must_be_over: Order must be over
   checkout_steps:
     # keys correspond to Checkout state names:
     delivery: Shipping and Payment
