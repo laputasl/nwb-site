@@ -173,6 +173,25 @@ class SiteExtension < Spree::Extension
     OrdersController.class_eval do
       create.before << :assign_to_store
 
+      def calculate_shipping
+        load_object
+        if params.key? :zipcode
+          addr = Address.new(:zipcode => params[:zipcode], :country_id => 214, :state_name => "")
+        else
+          addr = Address.new(:zipcode => "", :country_id => params[:country_id], :state_name => "")
+        end
+        addr.save(false)
+        @order.ship_address = addr
+
+        rates =  ShippingMethod.all_available_to_address(addr).collect do |ship_method|
+          { :id => ship_method.id,
+            :name => ship_method.name,
+            :rate => ship_method.calculate_cost(@order.checkout.shipment) }
+        end
+
+        render :json => rates.to_json
+      end
+
       private
       def assign_to_store
         @order.store = @site

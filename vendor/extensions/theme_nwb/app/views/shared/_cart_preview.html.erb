@@ -5,21 +5,23 @@
   <table summary="My Shopping Cart" cellspacing="0">
     <tbody>
       <% unless order.nil? || order.line_items.empty? -%>
-        <tr>
-          <td class="right"><%= link_to "Item #", edit_order_url(order) %></td>
-          <td><%= order.line_items.inject(0) { |kount, line_item| kount + line_item.quantity } %></td>
-        </tr>
+        <% order.line_items.each do |line_item| %>
+          <tr>
+            <td class="right"><%= link_to line_item.variant.sku, product_url(line_item.variant.product) %></td>
+            <td><%= number_to_currency(line_item.variant.price) %></td>
+          </tr>
+        <% end %>
         <tr>
           <td class="right">Sub Total:</td>
           <td><%= number_to_currency(order.item_total) %></td>
         </tr>
         <tr>
           <td class="right">Shipping:</td>
-          <td>-</td>
+          <td id="cart_preview_shipping">-</td>
         </tr>
         <tr>
           <td class="right">Total:</td>
-          <td><strong><%= number_to_currency(order.total) %></strong></td>
+          <td><strong id="cart_preview_total"><%= number_to_currency(order.total) %></strong></td>
         </tr>
       <% else %>
         <tr>
@@ -29,5 +31,113 @@
     </tbody>
   </table>
   <p><a href="/pwb/shipping" title="Free Same Day Shipping at $50.00">Free Same Day Shipping at $50.00</a></p>
-
+  <h3><a href="#" title="Shopping Calculator">Shipping Calculator</a></h3>
+  <div id="shipping_calculator">
+    <p>
+      <%= radio_button_tag :calculator_zone, :usa %> USA
+      <%= radio_button_tag :calculator_zone, :international %> International
+    </p>
+    <% unless order.nil? %>
+      <div id="usa_options">
+        <%= text_field_tag :calculator_zipcode, "enter zip" %>
+        <%= image_submit_tag "/#{@site.code}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
+      </div>
+      <div id="international_options">
+        International Options
+        <%= select_tag :calculator_country, options_for_select(Checkout.countries.sort.map{|c| [c.name, c.id]}) %>
+        <%= image_submit_tag "/#{@site.code}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
+      </div>
+      <p id="calculator_methods">
+        Select Shipping Method
+        <select id="calculator_available_methods"></select>
+      </p>
+    <% end %>
+    <%= image_tag "/#{@site.code}/images/verifying.gif", {:id => "calculator_progress"} %>
+  </div>
 </div>
+
+<script type="text/javascript">
+  jQuery(document).ready(function(){
+    var order_total = <%= order.nil? ? 0 : order.total %>;
+    var shipping_methods = [];
+
+    function format_currency(num) {
+      num = isNaN(num) || num === '' || num === null ? 0.00 : num;
+      return parseFloat(num).toFixed(2);
+    }
+
+    function get_shipping_methods(){
+      $('img#calculator_progress').slideDown();
+      $('p#calculator_methods').slideUp();
+      zip = $("input[name='calculator_zipcode']").val();
+
+      if($("#shipping_calculator input[name='calculator_zone']:checked").val()=="usa"){
+        opts = {zipcode: zip};
+      }else{
+        opts = {country_id: $("select#calculator_country").val()}
+      }
+
+      jQuery.getJSON("<%= calculate_shipping_order_url(order.nil? ? Order.new : order) %>", opts,
+        function(data){
+          shipping_methods = data;
+          $("#calculator_available_methods").html('');
+
+          $.each(data, function(i,rate){
+            $("#calculator_available_methods").append(new Option(rate.name + " - $" + rate.rate  , rate.id));
+            if(i==0){
+              $('td#cart_preview_shipping').html("$" + format_currency(rate.rate));
+              $('strong#cart_preview_total').html("$" + format_currency(order_total + rate.rate));
+            }
+          });
+          $('img#calculator_progress').slideUp();
+          $('p#calculator_methods').slideDown();
+       });
+    }
+
+    $("#shipping_calculator input[name='calculator_zone']").click(function(){
+      $('p#calculator_methods').slideUp();
+      $('td#cart_preview_shipping').html("-");
+      $('strong#cart_preview_total').html("$" + format_currency(order_total));
+
+      if($(this).val()=="usa"){
+        $("#shipping_calculator #international_options").slideUp();
+        $("#shipping_calculator #usa_options").slideDown();
+      }else{
+        $("#shipping_calculator #usa_options").slideUp();
+        $("#shipping_calculator #international_options").slideDown();
+      }
+    });
+
+    $("input[name='calculator_zipcode']").click(function(){
+      if($(this).val() == "enter zip"){
+        $(this).val('');
+      }
+    });
+
+    $("input[name='calculator_zipcode']").bind('keypress', function(e) {
+      var code = (e.keyCode ? e.keyCode : e.which);
+       if(code == 13) {
+        get_shipping_methods();
+       }
+    });
+
+    $("#calculator_available_methods").change(function(){
+      var value = $(this).val();
+      $.each(shipping_methods, function(i,rate){
+        if(rate.id+"" == value){
+          $('td#cart_preview_shipping').html("$" + format_currency(rate.rate));
+          $('strong#cart_preview_total').html("$" + format_currency(order_total + rate.rate));
+        }
+      });
+    });
+
+    $("#shipping_calculator input[type='image']").click(function(){
+      get_shipping_methods();
+    });
+
+    $('#shipping_calculator select#calculator_country').change(function(){
+      get_shipping_methods();
+    });
+
+  });
+</script>
