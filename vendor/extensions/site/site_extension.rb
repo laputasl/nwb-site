@@ -72,22 +72,31 @@ class SiteExtension < Spree::Extension
     end
 
     fsm = Order.state_machines[:state]
+    fsm.event :pay do
+      transition :to => 'paid', :if => :allow_pay?
+      transition :to => 'on_hold', :if => :suspicious_order?
+    end
+
     fsm.event :hold do
-      transition :to => 'on_hold', :from => ['paid', 'new']
+      transition :to => 'on_hold', :from => 'paid'
     end
 
     fsm.event :approve do
-      transition :to => 'approved', :from => 'on_hold', :if => :allow_resume?
+      transition :to => 'paid', :from => 'on_hold'
     end
 
     fsm.after_transition :to => 'on_hold', :do => :make_shipments_pending
-    fsm.after_transition :to => 'approved', :do => :restore_state
+    fsm.after_transition :to => 'on_hold', :do => :record_on_hold_reason
     fsm.after_transition :to => 'approved', :do => :make_shipments_ready
-    fsm.after_transition :to => 'paid', :do => :monitor_suspicious_orders
 
     Order.class_eval do
       include ActionView::Helpers::NumberHelper
       belongs_to :store
+
+      def allow_pay?
+        return false if suspicious_order?
+        checkout_complete
+      end
 
       private
       def restore_state
@@ -96,32 +105,50 @@ class SiteExtension < Spree::Extension
         update_attribute("state", state_events.last.previous_state)
       end
 
-      def monitor_suspicious_orders
+      def suspicious_order?
         state_events.reload
 
         upper_amount = Spree::Config[:hold_order_amount_over].to_f
 
         #automatically hold orders
-        if can_hold? && !state_events.map(&:name).include?("approve")
-          admin = User.first(:include => :roles, :conditions => ["roles.name = 'admin'"])
-
+        if !state_events.map(&:name).include?("approve")
           avs = Spree::Config[:hold_order_with_avs].split(",").each(&:strip!)
           countries = Spree::Config[:hold_order_ship_countries].split(",").each(&:strip!)
 
           if total >= upper_amount
-            hold!
-            self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because amount exceeds #{number_to_currency(upper_amount)}.", :user => admin)
+            return true
           elsif bill_address != ship_address
-            hold!
-            self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because billing and shipping addresses are different.", :user => admin)
+            return true
           elsif !countries.include?(ship_address.country.iso3)
-            hold!
-            self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because shipping country is not white listed.", :user => admin)
+            return true
           elsif payments.any? {|payment| payment.txns.any? { |txn| !avs.include?(txn.avs_response) } }
-            hold!
-            self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because AVS code is not white listed.", :user => admin)
+            return true
           end
         end
+
+        return false
+      end
+
+      def record_on_hold_reason
+        admin = User.first(:include => :roles, :conditions => ["roles.name = 'admin'"])
+        upper_amount = Spree::Config[:hold_order_amount_over].to_f
+        avs = Spree::Config[:hold_order_with_avs].split(",").each(&:strip!)
+        countries = Spree::Config[:hold_order_ship_countries].split(",").each(&:strip!)
+
+        if total >= upper_amount
+          self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because amount exceeds #{number_to_currency(upper_amount)}.", :user => admin)
+
+        elsif bill_address != ship_address
+          self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because billing and shipping addresses are different.", :user => admin)
+
+        elsif !countries.include?(ship_address.country.iso3)
+          self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because shipping country is not white listed.", :user => admin)
+
+        elsif payments.any? {|payment| payment.txns.any? { |txn| !avs.include?(txn.avs_response) } }
+          self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because AVS code is not white listed.", :user => admin)
+
+        end
+
       end
     end
 
