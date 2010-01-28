@@ -301,6 +301,8 @@ class SiteExtension < Spree::Extension
 
       update.before :correct_state_values
 
+      before_filter :set_shipping_method, :only => [:paypal_payment]
+
       private
       def get_exact_target_lists
         @site ||= Store.find(:first, :conditions => {:code => request.headers['wellbeing-site']})
@@ -327,6 +329,13 @@ class SiteExtension < Spree::Extension
       def load_available_methods
         @available_methods = rate_hash.sort_by{ |sm| sm[:rate] }
         @checkout.shipping_method_id ||= @available_methods.first[:id]
+      end
+
+      # sets shipping medthod for checkout when using paypal payment option
+      def set_shipping_method
+        load_object
+        @checkout.update_attribute(:shipping_method_id, params[:shipping_method])
+        @checkout.order.update_totals!
       end
 
     end
@@ -479,6 +488,26 @@ class SiteExtension < Spree::Extension
     end
 
     Calculator::FlatOverValue.register
+
+
+    #Need to redirect to delivery step on failure (not the default payment)
+    Spree::PaypalExpress.module_eval do
+      def paypal_payment
+        load_object
+        opts = all_opts(@order, 'payment')
+        opts.merge!(address_options(@order))
+        gateway = paypal_gateway
+
+        response = gateway.setup_authorization(opts[:money], opts)
+        unless response.success?
+          gateway_error(response)
+          redirect_to edit_order_checkout_url(@order, :step => "delivery")
+          return
+        end
+
+        redirect_to (gateway.redirect_url_for response.token)
+      end
+    end
  end
 
 end

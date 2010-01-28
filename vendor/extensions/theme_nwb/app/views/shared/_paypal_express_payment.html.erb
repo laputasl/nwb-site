@@ -1,0 +1,15 @@
+<a id="ppx_payment" href="<%= paypal_payment_order_checkout_url @checkout.order, :integration_id => integration %>" style="text-align: center;">
+  <img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right:7px;"/>
+</a>
+
+<script type="text/javascript">
+  jQuery(document).ready(function(){
+    $("a#ppx_payment").click(function(){
+      var url = $(this).attr("href");
+
+      url += "&shipping_method=" + $("input[name='checkout[shipping_method_id]']:checked").val();
+      window.location = url;
+      return false;
+    });
+  });
+</script>
