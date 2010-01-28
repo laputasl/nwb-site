@@ -23,3 +23,5 @@ Spree::Config.set(:hold_order_ship_countries => "USA,CAN" )
 Spree::Config.set(:hold_order_with_avs =>  "N,W,B" )
 
 Spree::Config.set(:qualified_address_key => 68161790)
+
+Spree::Config.set(:checkout_zone => "All Shipping Zones")

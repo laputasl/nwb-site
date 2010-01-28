@@ -4,3 +4,9 @@ zones_003:
   updated_at: 2009-06-04 17:22:41
   id: "3"
   description: Canada Only
+zones_004:
+  name: All Shipping Zones
+  created_at: 2009-06-04 17:22:41
+  updated_at: 2009-06-04 17:22:41
+  id: "4"
+  description: All Shipping Zones
