@@ -210,7 +210,7 @@ class SiteExtension < Spree::Extension
         addr.save(false)
         @order.ship_address = addr
 
-        rates =  ShippingMethod.all_available_to_address(addr).collect do |ship_method|
+        rates =  ShippingMethod.all_available(@order).collect do |ship_method|
           { :id => ship_method.id,
             :name => ship_method.name,
             :rate => ship_method.calculate_cost(@order.checkout.shipment) }
@@ -494,7 +494,6 @@ class SiteExtension < Spree::Extension
     end
 
     Calculator::FlatOverValue.register
-
 
     #Need to redirect to delivery step on failure (not the default payment)
     Spree::PaypalExpress.module_eval do

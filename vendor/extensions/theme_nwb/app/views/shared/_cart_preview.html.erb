@@ -83,10 +83,23 @@
           $("#calculator_available_methods").html('');
 
           $.each(data, function(i,rate){
-            $("#calculator_available_methods").append(new Option(rate.name + " - $" + rate.rate  , rate.id));
-            if(i==0){
-              $('td#cart_preview_shipping').html("$" + format_currency(rate.rate));
-              $('strong#cart_preview_total').html("$" + format_currency(order_total + rate.rate));
+            var disp = " - $" + rate.rate;
+
+            if(rate.rate==0){
+              $('td#cart_preview_shipping').html("Free");
+              $('strong#cart_preview_total').html("$" + format_currency(order_total));
+
+              disp = "";
+            }else{
+              if(i==0){
+                $('td#cart_preview_shipping').html("$" + format_currency(rate.rate));
+                $('strong#cart_preview_total').html("$" + format_currency(order_total + rate.rate));
+              }
+            }
+
+            $("#calculator_available_methods").append(new Option(rate.name + disp, rate.id));
+            if(rate.rate==0){
+              $("#calculator_available_methods option:contains('" + rate.name + "')").attr("selected", true);
             }
           });
           $('img#calculator_progress').slideUp();
@@ -125,8 +138,13 @@
       var value = $(this).val();
       $.each(shipping_methods, function(i,rate){
         if(rate.id+"" == value){
-          $('td#cart_preview_shipping').html("$" + format_currency(rate.rate));
-          $('strong#cart_preview_total').html("$" + format_currency(order_total + rate.rate));
+          if(rate.rate==0){
+            $('td#cart_preview_shipping').html("Free");
+            $('strong#cart_preview_total').html("$" + format_currency(order_total));
+          }else{
+            $('td#cart_preview_shipping').html("$" + format_currency(rate.rate));
+            $('strong#cart_preview_total').html("$" + format_currency(order_total + rate.rate));
+          }
         }
       });
     });
