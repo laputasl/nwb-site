@@ -33,4 +33,14 @@ class SiteHooks < Spree::ThemeSupport::HookListener
   insert_after :admin_configurations_menu do
     "<%= configurations_menu_item('Suspicious Order Settings', edit_admin_suspicious_order_settings_path, 'Manage settings for marking orders as suspicious') %>"
   end
+
+  insert_before :admin_dashboard_center, :partial => "admin/shared/orders_dashboard"
+  insert_after :admin_dashboard_javascript do
+    %(<script type="text/javascript">
+      jQuery(document).ready(function(){
+        $('div.dashboard_main:not(#orders_dashboard)').hide();
+      });
+    </script>)
+  end
+
 end

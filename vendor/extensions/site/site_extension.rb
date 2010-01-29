@@ -485,14 +485,6 @@ class SiteExtension < Spree::Extension
       end
     end
 
-    #hide dashboard for admin area.
-    Admin::OverviewController.class_eval do
-      private
-      def show_dashboard
-        false
-      end
-    end
-
     Calculator::FlatOverValue.register
 
     #Need to redirect to delivery step on failure (not the default payment)
@@ -511,6 +503,18 @@ class SiteExtension < Spree::Extension
         end
 
         redirect_to (gateway.redirect_url_for response.token)
+      end
+    end
+
+    #set variables for dashboard tables
+    Admin::OverviewController.class_eval do
+      before_filter :load_orders, :only => :index
+
+      private
+      def load_orders
+        @problem_orders = Order.find(:all, :include => 'shipments', :conditions => ["orders.state != 'shipped' AND shipments.state == 'unable_to_ship'"])
+
+        @vancouver_orders = Order.find(:all, :include => 'shipments', :conditions => ["orders.state != 'shipped' AND shipments.state == 'needs_fulfilment'"])
       end
     end
  end
