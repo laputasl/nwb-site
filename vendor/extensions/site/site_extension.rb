@@ -511,9 +511,9 @@ class SiteExtension < Spree::Extension
 
       private
       def load_orders
-        @problem_orders = Order.find(:all, :include => 'shipments', :conditions => ["orders.state != 'shipped' AND shipments.state == 'unable_to_ship'"])
+        @problem_orders = Order.find(:all, :include => 'shipments', :conditions => ["orders.state != 'shipped' AND shipments.state = 'unable_to_ship'"])
 
-        @vancouver_orders = Order.find(:all, :include => 'shipments', :conditions => ["orders.state != 'shipped' AND shipments.state == 'needs_fulfilment'"])
+        @vancouver_orders = Order.find(:all, :include => 'shipments', :conditions => ["orders.state != 'shipped' AND shipments.state = 'needs_fulfilment'"])
       end
     end
  end
