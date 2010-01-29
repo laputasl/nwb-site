@@ -87,7 +87,6 @@ class SiteExtension < Spree::Extension
 
     fsm.after_transition :to => 'on_hold', :do => :make_shipments_pending
     fsm.after_transition :to => 'on_hold', :do => :record_on_hold_reason
-    fsm.after_transition :to => 'approved', :do => :make_shipments_ready
 
     Order.class_eval do
       include ActionView::Helpers::NumberHelper
