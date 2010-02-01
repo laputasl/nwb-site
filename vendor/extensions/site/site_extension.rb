@@ -526,6 +526,14 @@ class SiteExtension < Spree::Extension
     ::CouponCredit
     ::ReturnAuthorizationCredit
 
+    Admin::UsersController.class_eval do
+      before_filter :load_stores
+
+      private
+      def load_stores
+        @stores = Store.all.collect {|s| [s.name, s.id ]}
+      end
+    end
  end
 
 end

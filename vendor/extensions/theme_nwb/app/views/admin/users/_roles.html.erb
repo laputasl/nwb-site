@@ -1,0 +1,11 @@
+<% if @current_user.has_role? :admin %>
+  <p>
+    <label><%= t("roles") %></label><br />
+    <% for role in @roles %>
+      <label class="sub">
+        <%= check_box_tag "user[role][#{role.name}]", 1, @user.has_role?(role.name) %>
+        <%= role.name %>
+      </label> &nbsp;
+    <% end %>
+  </p>
+<% end %>

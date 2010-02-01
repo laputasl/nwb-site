@@ -45,4 +45,6 @@ class SiteHooks < Spree::ThemeSupport::HookListener
 
   replace :cart_item_description, :partial => "orders/cart_item_description"
 
+  insert_after :admin_user_form_fields, :partial => "admin/users/store"
+  replace :admin_user_form_roles, :partial => "admin/users/roles"
 end

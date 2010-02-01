@@ -1,0 +1,5 @@
+<% f.field_container :store_id do %>
+  <%= f.label :store_id, "Store" %><br />
+  <%= f.select :store_id, @stores  %>
+  <%= f.error_message_on :store_id %>
+<% end %>
