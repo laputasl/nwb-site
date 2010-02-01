@@ -516,6 +516,16 @@ class SiteExtension < Spree::Extension
         @vancouver_orders = Order.find(:all, :include => 'shipments', :conditions => ["orders.state != 'shipped' AND shipments.state = 'needs_fulfilment'"])
       end
     end
+
+    #manually touch all credits / charges (workaround for Rails STI issue)
+    ::Adjustment
+    ::Charge
+    ::Credit
+    ::TaxCharge
+    ::ShippingCharge
+    ::CouponCredit
+    ::ReturnAuthorizationCredit
+
  end
 
 end
