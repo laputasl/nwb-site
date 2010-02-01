@@ -207,7 +207,7 @@ class SiteExtension < Spree::Extension
           addr = Address.new(:zipcode => "", :country_id => params[:country_id], :state_name => "")
         end
         addr.save(false)
-        @order.ship_address = addr
+        @order.checkout.update_attribute(:ship_address_id, addr.id)
 
         rates =  ShippingMethod.all_available(@order).collect do |ship_method|
           { :id => ship_method.id,
