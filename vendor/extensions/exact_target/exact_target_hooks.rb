@@ -4,5 +4,5 @@ class ExactTargetHooks < Spree::ThemeSupport::HookListener
   end
 
   insert_after :account_my_orders, :partial => "exact_target_lists/edit"
-  insert_after :signup_below_password_fields, :partial => "exact_target_lists/signup"
+  insert_after :signup_inside_form, :partial => "exact_target_lists/signup"
 end
