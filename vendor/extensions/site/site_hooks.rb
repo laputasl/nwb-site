@@ -43,4 +43,6 @@ class SiteHooks < Spree::ThemeSupport::HookListener
     </script>)
   end
 
+  replace :cart_item_description, :partial => "orders/cart_item_description"
+
 end
