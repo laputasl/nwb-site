@@ -327,7 +327,7 @@ class SiteExtension < Spree::Extension
       #sorting by (and selecting) cheapest shipping method
       def load_available_methods
         @available_methods = rate_hash.sort_by{ |sm| sm[:rate] }
-        @checkout.shipping_method_id ||= @available_methods.first[:id]
+        @checkout.shipping_method_id ||= @available_methods.first[:id] unless @available_methods.empty?
       end
 
       # sets shipping medthod for checkout when using paypal payment option
