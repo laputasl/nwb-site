@@ -166,6 +166,8 @@ class SiteExtension < Spree::Extension
     end
 
     Shipment.class_eval do
+      after_create :check_order_state
+
       def editable_by?(user)
         %w(pending ready_to_ship unable_to_ship needs_fulfilment).include?(state) or user.has_role?(:admin)
       end
@@ -193,6 +195,11 @@ class SiteExtension < Spree::Extension
           transition :from => ['transmitted', 'acknowledged', 'needs_fulfilment'], :to => 'unable_to_ship'
         end
         after_transition :to => 'shipped', :do => :transition_order
+      end
+
+      private
+      def check_order_state
+        self.ready! if (order.paid? && !inventory_units.any? {|unit| unit.backordered? })
       end
     end
 
@@ -534,6 +541,7 @@ class SiteExtension < Spree::Extension
         @stores = Store.all.collect {|s| [s.name, s.id ]}
       end
     end
+
  end
 
 end
