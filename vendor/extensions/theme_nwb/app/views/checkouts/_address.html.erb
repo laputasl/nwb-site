@@ -212,8 +212,12 @@ div.inner input[type=text], div.inner select { width: 80%; }
             autoClean: false,
             demo: false,
             onComplete: function () {
-              set_actual_value('bill', 'state');
-              set_actual_value('ship', 'state');
+              if($("select#checkout_bill_address_attributes_country_id").val()==214){
+                set_actual_value('bill', 'state');
+              }
+              if($("select#checkout_ship_address_attributes_country_id").val()==214){
+                set_actual_value('ship', 'state');
+              }
               setTimeout($('#checkout_form_address').submit(), 250);
               return false;
             } }, {},
