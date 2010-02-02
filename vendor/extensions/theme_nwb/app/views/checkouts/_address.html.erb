@@ -171,21 +171,19 @@ div.inner input[type=text], div.inner select { width: 80%; }
 <%= hidden_field_tag :checkout_ship_address_attributes_country_display %>
 
 <script type="text/javascript">
+  function set_display_value(address, field){
+    var disp = $("input#checkout_" + address + "_address_attributes_" + field + "_display");
+    disp.val($("select#checkout_" + address + "_address_attributes_" + field + "_id :selected").text());
+  }
+
   jQuery(document).ready(function(){
+    //call once to set initial values
+    set_display_value('bill', 'country');
+    set_display_value('ship', 'country');
 
-    function set_bill_country(){
-      var disp = $("input#checkout_bill_address_attributes_country_display");
-      disp.val($("select#checkout_bill_address_attributes_country_id :selected").text());
-    }
-
-    function set_ship_country(){
-      var disp = $("input#checkout_ship_address_attributes_country_display");
-      disp.val($("select#checkout_ship_address_attributes_country_id :selected").text());
-    }
-
-    $("select#checkout_bill_address_attributes_country_id").change(set_bill_country());
-
-    $("select#checkout_ship_address_attributes_country_id").change(set_ship_country());
+    //setup handlers for changes
+    $("select#checkout_bill_address_attributes_country_id").change(function(){set_display_value('bill', 'country')});
+    $("select#checkout_ship_address_attributes_country_id").change(function(){set_display_value('ship', 'country')});
 
     QadApi({  timeout: 10,
              key: <%= Spree::Config[:qualified_address_key] %>,
