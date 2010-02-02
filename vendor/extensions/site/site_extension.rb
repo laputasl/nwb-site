@@ -192,7 +192,7 @@ class SiteExtension < Spree::Extension
           transition :from => 'ready_to_ship', :to => 'needs_fulfilment'
         end
         event :problem do
-          transition :from => ['transmitted', 'acknowledged', 'needs_fulfilment'], :to => 'unable_to_ship'
+          transition :from => ['transmitted', 'acknowledged', 'needs_fulfilment', 'ready_to_ship'], :to => 'unable_to_ship'
         end
         after_transition :to => 'shipped', :do => :transition_order
       end
