@@ -169,11 +169,22 @@ div.inner input[type=text], div.inner select { width: 80%; }
 
 <%= text_field_tag :checkout_bill_address_attributes_country_display, {}, {:style => "display:none;"} %>
 <%= text_field_tag :checkout_ship_address_attributes_country_display, {}, {:style => "display:none;"} %>
+<%= text_field_tag :checkout_bill_address_attributes_state_display, {}, {:style => "display:none;"} %>
+<%= text_field_tag :checkout_ship_address_attributes_state_display, {}, {:style => "display:none;"} %>
 
 <script type="text/javascript">
   function set_display_value(address, field){
     var disp = $("input#checkout_" + address + "_address_attributes_" + field + "_display");
     disp.val($("select#checkout_" + address + "_address_attributes_" + field + "_id :selected").text());
+
+    if(field=='country'){
+      set_display_value(address, 'state');
+    }
+  }
+
+  function set_actual_value(address, field){
+    var actual = $("select#checkout_" + address + "_address_attributes_" + field + "_id :selected");
+    actual.val($("input#checkout_" + address + "_address_attributes_" + field + "_display").val());
   }
 
   jQuery(document).ready(function(){
@@ -184,6 +195,8 @@ div.inner input[type=text], div.inner select { width: 80%; }
     //setup handlers for changes
     $("select#checkout_bill_address_attributes_country_id").change(function(){set_display_value('bill', 'country')});
     $("select#checkout_ship_address_attributes_country_id").change(function(){set_display_value('ship', 'country')});
+    $("select#checkout_bill_address_attributes_state_id").change(function(){set_display_value('bill', 'state')});
+    $("select#checkout_ship_address_attributes_state_id").change(function(){set_display_value('ship', 'state')});
 
     $('input#checkout_use_billing').click(function() {
       if(this.checked){
@@ -198,13 +211,18 @@ div.inner input[type=text], div.inner select { width: 80%; }
             busySubmit: false,
             autoClean: false,
             demo: false,
-            onComplete: function () {setTimeout($('#checkout_form_address').submit(), 250); return false;} }, { busyId: "QadBusy" },
+            onComplete: function () {
+              set_actual_value('bill', 'state');
+              set_actual_value('ship', 'state');
+              setTimeout($('#checkout_form_address').submit(), 250);
+              return false;
+            } }, {},
       [ {
         name: "Billing Address",
         street: "checkout_bill_address_attributes_address1",
         street2: "checkout_bill_address_attributes_address2",
         city: "checkout_bill_address_attributes_city",
-        state: "checkout_bill_address_attributes_state_id",
+        state: "checkout_bill_address_attributes_state_display",
         zip: "checkout_bill_address_attributes_zipcode",
         country: "checkout_bill_address_attributes_country_display"
       },{
@@ -212,7 +230,7 @@ div.inner input[type=text], div.inner select { width: 80%; }
         street: "checkout_ship_address_attributes_address1",
         street2: "checkout_ship_address_attributes_address2",
         city: "checkout_ship_address_attributes_city",
-        state: "checkout_ship_address_attributes_state_id",
+        state: "checkout_ship_address_attributes_state_display",
         zip: "checkout_ship_address_attributes_zipcode",
         country: "checkout_ship_address_attributes_country_display"
       } ]
