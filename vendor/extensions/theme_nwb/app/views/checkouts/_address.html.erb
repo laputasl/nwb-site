@@ -167,8 +167,8 @@ div.inner input[type=text], div.inner select { width: 80%; }
   <%= javascript_include_tag 'https://api.qualifiedaddress.com/Scripts/Qad.js' %>
 <% end %>
 
-<%= hidden_field_tag :checkout_bill_address_attributes_country_display %>
-<%= hidden_field_tag :checkout_ship_address_attributes_country_display %>
+<%= text_field_tag :checkout_bill_address_attributes_country_display, {}, {:style => "display:none;"} %>
+<%= text_field_tag :checkout_ship_address_attributes_country_display, {}, {:style => "display:none;"} %>
 
 <script type="text/javascript">
   function set_display_value(address, field){
@@ -184,6 +184,14 @@ div.inner input[type=text], div.inner select { width: 80%; }
     //setup handlers for changes
     $("select#checkout_bill_address_attributes_country_id").change(function(){set_display_value('bill', 'country')});
     $("select#checkout_ship_address_attributes_country_id").change(function(){set_display_value('ship', 'country')});
+
+    $('input#checkout_use_billing').click(function() {
+      if(this.checked){
+        $("input#checkout_ship_address_attributes_country_display").val("Use Billing")
+      }else{
+        set_display_value('ship', 'country');
+      }
+    })
 
     QadApi({  timeout: 10,
              key: <%= Spree::Config[:qualified_address_key] %>,
