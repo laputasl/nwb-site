@@ -1,0 +1,27 @@
+<% @body_id = 'cart' %>
+
+<div class="inner">
+  
+  <h1><%= t("shopping_cart")%></h1>
+
+  <% form_for(@order, :url => object_url, :html => { :method => :put, :id => 'updatecart' }) do |order_form| %>
+  <% hook :inside_cart_form do %>
+
+    <% hook :cart_items do %>
+      <%= render :partial => 'form', :locals => {:order_form => order_form} %>
+    <% end %>
+
+    <% unless @order.line_items.empty? -%>
+    <div id="subtotal">
+      <h3><%= "#{t("subtotal")}: #{order_price(@order)}" %></h3>
+      <div class="links">
+        <%= link_to image_tag('/images/button_return_to_store.gif'), products_path %>
+        <%= link_to image_tag('/images/button_recalculate.gif', :alt => t("update")), '#', :class => 'button checkout primary', :onclick => "$('form#updatecart').submit(); return false;" %>
+        <%= link_to image_tag('/images/button_proceed_checkout.gif', :alt => t("checkout")), edit_order_checkout_url(@order), :class => 'button checkout primary' %>
+      </div>
+    </div>
+    <% end -%>
+  <% end %>
+  <% end -%>
+
+</div>

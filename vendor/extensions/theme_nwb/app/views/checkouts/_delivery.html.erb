@@ -2,22 +2,18 @@
   <legend><%= t("shipping_method") %></legend>
   <% checkout_form.fields_for :ship_address do |ship_address_form| %>
     <div class="inner">
-      <div id="methods">
-
-        <p class="field radios">
-          <% if @available_methods.empty? %>
-            <%= t("no_shipping_methods_available") %>
-          <% else %>
-            <% @available_methods.each do |shipping_method| %>
-              <label>
-                <%= radio_button(:checkout, :shipping_method_id, shipping_method[:id]) %>
-                <%= shipping_method[:name] %> <%= shipping_method[:rate] %>
-              </label><br />
-            <% end %>
+      <p class="field radios">
+        <% if @available_methods.empty? %>
+          <%= t("no_shipping_methods_available") %>
+        <% else %>
+          <% @available_methods.each do |shipping_method| %>
+            <label>
+              <%= radio_button(:checkout, :shipping_method_id, shipping_method[:id]) %>
+              <%= shipping_method[:name] %> <%= shipping_method[:rate] %>
+            </label><br />
           <% end %>
-        </p>
-
-      </div>
+        <% end %>
+      </p>
       <% if Spree::Config[:shipping_instructions] %>
         <p id="minstrs">
           <label for=""><%= t("shipping_instructions") %></label>
@@ -29,24 +25,22 @@
 </fieldset>
 
 <fieldset id='payment' style="width:70%;">
-
   <% checkout_form.fields_for :creditcard do |creditcard_form| %>
     <legend><%= t("payment_information") %></legend>
-
     <div class="payment_option">
       <h3><%= t("secure_creditcard") %></h3>
 
-      <%= image_tag "creditcard.gif", :id => 'creditcard-image' %>
-      <hr class="space" />
+      <p><%= image_tag "creditcard.gif", :id => 'creditcard-image' %></p>
+
       <p class="field">
         <label for=""><%= t("card_number") %></label><br />
-      <%= creditcard_form.text_field :number, :size=> 19, :max_length => 19, :class => 'required' -%><span class="req">*</span>
-                  &nbsp;
-                  <span id="card_type" style="display:none;">
-                    ( <span id="looks_like" ><%= t('card_type_is') %> <span id="type"></span></span>
-                      <span id="unrecognized"><%= t('unrecognized_card_type') %></span>
-                    )
-                  </span>
+        <%= creditcard_form.text_field :number, :size=> 19, :max_length => 19, :class => 'required' -%><span class="req">*</span>
+        &nbsp;
+        <span id="card_type" style="display:none;">
+          ( <span id="looks_like" ><%= t('card_type_is') %> <span id="type"></span></span>
+            <span id="unrecognized"><%= t('unrecognized_card_type') %></span>
+          )
+        </span>
       </p>
       <p class="field">
         <label for=""><%= t("expiration") %></label><br />
