@@ -81,7 +81,7 @@ div.inner input[type=text], div.inner select { width: 80%; }
     <legend><%= t("shipping_address")%></legend>
     <p class="field checkbox">
       <label for="checkout_same_address" id="use_billing">
-        <%= check_box_tag 'checkout[use_billing]', '1', @checkout.use_billing %> <%= t("use_billing_address") %>
+        <%= check_box_tag 'checkout[use_billing]', '1', (!(@checkout.bill_address.empty? && @checkout.ship_address.empty?) && @checkout.bill_address.eql?(@checkout.ship_address)) %> <%= t("use_billing_address") %>
       </label>
     </p>
     <div class="inner">
@@ -183,7 +183,10 @@ div.inner input[type=text], div.inner select { width: 80%; }
 
   function set_actual_value(address, field){
     var actual = $("select#checkout_" + address + "_address_attributes_" + field + "_id :selected");
-    actual.val($("input#checkout_" + address + "_address_attributes_" + field + "_display").val());
+    var value = $("input#checkout_" + address + "_address_attributes_" + field + "_display").val();
+    if(value.length==2){ //only update if the value is a 2 digital state abbr
+      actual.val(value);
+    }
   }
 
   jQuery(document).ready(function(){
@@ -211,8 +214,12 @@ div.inner input[type=text], div.inner select { width: 80%; }
             autoClean: false,
             demo: false,
             onComplete: function () {
-              set_actual_value('bill', 'state');
-              set_actual_value('ship', 'state');
+              if($("select#checkout_bill_address_attributes_country_id").val()==214){
+                set_actual_value('bill', 'state');
+              }
+              if($("select#checkout_ship_address_attributes_country_id").val()==214){
+                set_actual_value('ship', 'state');
+              }
               setTimeout($('#checkout_form_address').submit(), 250);
               return false;
             } }, {},
@@ -235,8 +242,6 @@ div.inner input[type=text], div.inner select { width: 80%; }
       } ]
     );
 
-
   });
-
 </script>
 

@@ -479,18 +479,6 @@ class SiteExtension < Spree::Extension
       end
     end
 
-    Address.class_eval do
-      def ==(other_address)
-        self_attrs = self.attributes
-        other_attrs = other_address.respond_to?(:attributes) ? other_address.attributes : {}
-        [self_attrs, other_attrs].each do |attrs|
-          %w(id created_at updated_at order_id).each {|attr| attrs.delete(attr) }
-        end
-
-        self_attrs == other_attrs
-      end
-    end
-
     Calculator::FlatOverValue.register
 
     #Need to redirect to delivery step on failure (not the default payment)
