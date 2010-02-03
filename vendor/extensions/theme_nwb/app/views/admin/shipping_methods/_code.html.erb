@@ -1,0 +1,5 @@
+<% f.field_container :code do %>
+  <%= f.label :code, t("code") %><br />
+  <%= f.text_field :code  %>
+  <%= error_message_on :shipping_method, :code%>
+<% end %>

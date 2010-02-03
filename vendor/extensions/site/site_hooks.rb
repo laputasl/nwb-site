@@ -47,4 +47,6 @@ class SiteHooks < Spree::ThemeSupport::HookListener
 
   insert_after :admin_user_form_fields, :partial => "admin/users/store"
   replace :admin_user_form_roles, :partial => "admin/users/roles"
+
+  insert_before :admin_shipping_method_form_calculator_fields, :partial => "admin/shipping_methods/code"
 end
