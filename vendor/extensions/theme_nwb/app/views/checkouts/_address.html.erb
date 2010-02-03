@@ -184,7 +184,10 @@ div.inner input[type=text], div.inner select { width: 80%; }
 
   function set_actual_value(address, field){
     var actual = $("select#checkout_" + address + "_address_attributes_" + field + "_id :selected");
-    actual.val($("input#checkout_" + address + "_address_attributes_" + field + "_display").val());
+    var value = $("input#checkout_" + address + "_address_attributes_" + field + "_display").val();
+    if(value.length==2){ //only update if the value is a 2 digital state abbr
+      actual.val(value);
+    }
   }
 
   jQuery(document).ready(function(){
