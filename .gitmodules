@@ -13,9 +13,6 @@
 [submodule "vendor/extensions/ckeditor"]
   path = vendor/extensions/ckeditor
   url = git://github.com/BDQ/spree-ckeditor.git
-[submodule "vendor/extensions/static_content"]
-  path = vendor/extensions/static_content
-  url = git://github.com/PeterBerkenbosch/spree-static-content.git
 [submodule "vendor/extensions/xapit_search"]
   path = vendor/extensions/xapit_search
   url = git://github.com/romul/spree-xapit-search.git
@@ -32,5 +29,5 @@
   path = vendor/extensions/print_invoice
   url = http://github.com/BDQ/spree-print-invoice.git
 [submodule "vendor/extensions/comments"]
-	path = vendor/extensions/comments
-	url = git://github.com/BDQ/spree-comments.git
+  path = vendor/extensions/comments
+  url = git://github.com/BDQ/spree-comments.git
