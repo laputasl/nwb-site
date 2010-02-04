@@ -19,9 +19,6 @@
 [submodule "vendor/extensions/xapit_search"]
   path = vendor/extensions/xapit_search
   url = git://github.com/romul/spree-xapit-search.git
-[submodule "vendor/extensions/order_comments"]
-  path = vendor/extensions/order_comments
-  url = git://github.com/BDQ/spree-order-comments.git
 [submodule "vendor/extensions/snippets"]
   path = vendor/extensions/snippets
   url = git://github.com/BDQ/spree-snippets.git
@@ -29,8 +26,8 @@
   path = vendor/extensions/active_shipping
   url = git://github.com/railsdog/spree-active-shipping.git
 [submodule "vendor/extensions/paypal_express"]
-	path = vendor/extensions/paypal_express
-	url = git://github.com/railsdog/spree-paypal-express.git
+  path = vendor/extensions/paypal_express
+  url = git://github.com/railsdog/spree-paypal-express.git
 [submodule "vendor/extensions/print_invoice"]
-	path = vendor/extensions/print_invoice
-	url = http://github.com/BDQ/spree-print-invoice.git
+  path = vendor/extensions/print_invoice
+  url = http://github.com/BDQ/spree-print-invoice.git
