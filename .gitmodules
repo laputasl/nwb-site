@@ -31,3 +31,6 @@
 [submodule "vendor/extensions/print_invoice"]
   path = vendor/extensions/print_invoice
   url = http://github.com/BDQ/spree-print-invoice.git
+[submodule "vendor/extensions/comments"]
+	path = vendor/extensions/comments
+	url = git://github.com/BDQ/spree-comments.git
