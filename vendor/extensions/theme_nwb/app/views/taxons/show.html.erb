@@ -11,7 +11,7 @@
 <% end %>
 <div class="products">
   <h1><%= taxon_header(@taxon) %></h1>
-  <%= render "shared/products", :products => @taxon.products %>
+  <%= render "shared/products", :products => @products %>
 </div>
 <% unless @taxon.footer %>
   <div class="content">

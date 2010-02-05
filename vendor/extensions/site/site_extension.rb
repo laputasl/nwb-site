@@ -253,9 +253,12 @@ class SiteExtension < Spree::Extension
         # add taxon id to params for searcher
         params[:taxon] = @taxon.id if @taxon
         @keywords = params[:keywords]
-        per_page = params[:per_page] || Spree::Config[:products_per_page]
+
+        per_page = params[:per_page].to_i
+        per_page = per_page > 0 ? per_page : Spree::Config[:products_per_page]
         params[:per_page] = per_page
-        curr_page = Spree::Config.searcher.manage_pagination ? 1 : params[:page]
+        params[:page] = 1 if (params[:page].to_i <= 0)
+
         # Prepare a search within the parameters
         Spree::Config.searcher.prepare(params)
 
@@ -276,9 +279,10 @@ class SiteExtension < Spree::Extension
 
         params[:search] = @product_group.scopes_to_hash if @keywords.blank?
 
-        base_scope = Spree::Config[:allow_backorders] ? Product.active : Product.active.on_hand
+        base_scope = Spree::Config[:show_zero_stock_products] ? Product.active : Product.active.on_hand
         @products_scope = @product_group.apply_on(base_scope)
 
+        curr_page = Spree::Config.searcher.manage_pagination ? 1 : params[:page]
         @products = @products_scope.paginate({
             :include  => [:images, :master],
             :per_page => per_page,
