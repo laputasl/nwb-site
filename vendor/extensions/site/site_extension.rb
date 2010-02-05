@@ -534,6 +534,54 @@ class SiteExtension < Spree::Extension
       end
     end
 
+
+    #support short SEO taxon urls
+    TaxonsController.class_eval do
+      def object
+        if params.key? "id"
+          @object ||= end_of_association_chain.find_by_permalink(params[:id].join("/") + "/")
+        else
+          permalink = request.path[1..-1]
+          permalink += "/" unless permalink[-1..-1] == "/"
+          @object ||= end_of_association_chain.find(:first, :include => :taxonomy, :conditions => ["taxons.permalink = ? AND taxonomies.store_id = ?", permalink  , @site.id])
+        end
+      end
+    end
+
+    #support short SEO taxon urls
+    SeoAssist.class_eval do
+      def self.call(env)
+        request = Rack::Request.new(env)
+        params = request.params
+        taxon_id = params['taxon']
+        if !taxon_id.blank? && !taxon_id.is_a?(Hash) && @taxon = Taxon.find(taxon_id)
+          params.delete('taxon')
+          query = build_query(params)
+          return [301, { 'Location'=> "/t/#{@taxon.permalink}?#{query}" }, []]
+        elsif env["PATH_INFO"] =~ /^\/products\/\S+\/$/
+          return [301, { 'Location'=> env["PATH_INFO"][0...-1] }, []] #ensures no trailing / for product urls
+        elsif env["PATH_INFO"] =~ /^\/t\/\S+\/$/ || env["PATH_INFO"] =~ /^\/b\/\S+\/$/ || env["PATH_INFO"] =~ /^\/c\/\S+\/$/
+          return [301, { 'Location'=> env["PATH_INFO"][0...-1] }, []] #ensures no trailing / for taxon urls
+        end
+        [404, {"Content-Type" => "text/html"}, "Not Found"]
+      end
+    end
+
+    Spree::BaseHelper.class_eval do
+      # Avoid using products_path ("/products")
+      def products_path
+        '/'
+      end
+    end
+
+    ProductsController.class_eval do
+      before_filter :redirect_products_path_to_home, :only => :index
+
+      def redirect_products_path_to_home
+        redirect_to '/', :status => 301 if '/products' == request.path
+      end
+    end
+
  end
 
 end

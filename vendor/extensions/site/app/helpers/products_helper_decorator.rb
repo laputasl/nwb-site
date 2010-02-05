@@ -1,6 +1,6 @@
 ProductsHelper.module_eval do
   def seo_url(taxon, product = nil)
-    return "#{ActionController::Base.relative_url_root}/t/" + taxon.permalink if product.nil?
+    return "#{ActionController::Base.relative_url_root}/" + taxon.permalink if product.nil?
   end
 
   def buy_button(product, css_class = "btn btnBuyNowSml")

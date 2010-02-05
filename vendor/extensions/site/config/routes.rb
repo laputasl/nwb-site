@@ -6,3 +6,6 @@ map.namespace :admin do |admin|
    admin.resources :products, :member => {:additional_fields => :get}
    admin.resource  :suspicious_order_settings
 end
+
+map.brand_taxon '/b/*path', :controller => 'taxons', :action => 'show'
+map.brand_taxon '/c/*path', :controller => 'taxons', :action => 'show'
