@@ -567,13 +567,6 @@ class SiteExtension < Spree::Extension
       end
     end
 
-    Spree::BaseHelper.class_eval do
-      # Avoid using products_path ("/products")
-      def products_path
-        '/'
-      end
-    end
-
     ProductsController.class_eval do
       before_filter :redirect_products_path_to_home, :only => :index
 

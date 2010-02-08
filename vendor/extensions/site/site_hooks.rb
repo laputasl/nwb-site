@@ -49,4 +49,8 @@ class SiteHooks < Spree::ThemeSupport::HookListener
   replace :admin_user_form_roles, :partial => "admin/users/roles"
 
   insert_before :admin_shipping_method_form_calculator_fields, :partial => "admin/shipping_methods/code"
+
+  insert_after :admin_shipments_index_row_actions do
+    %( | <%= link_to t('comments'), comments_admin_order_shipment_url(@order, shipment) %> )
+  end
 end
