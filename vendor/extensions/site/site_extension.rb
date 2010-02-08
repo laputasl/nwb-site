@@ -578,6 +578,7 @@ class SiteExtension < Spree::Extension
       before_filter :redirect_products_path_to_home, :only => :index
 
       def redirect_products_path_to_home
+        return if params.key? :keywords
         redirect_to '/', :status => 301 if '/products' == request.path
       end
     end
