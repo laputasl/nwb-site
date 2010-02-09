@@ -1,0 +1,3 @@
+class FreebieCredit < Credit
+
+end

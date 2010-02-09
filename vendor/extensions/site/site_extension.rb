@@ -524,6 +524,16 @@ class SiteExtension < Spree::Extension
     ::ShippingCharge
     ::CouponCredit
     ::ReturnAuthorizationCredit
+    ::FreebieCredit
+
+    Admin::AdjustmentsController.class_eval do
+      def list_adjustment_types
+        @adjustment_types ||= [
+            [ 'Credits', ["FreebieCredit"] ],
+            [ 'Charges', ["TaxCharge", "ShippingCharge"]]
+          ]
+      end
+    end
 
     Admin::UsersController.class_eval do
       before_filter :load_stores
