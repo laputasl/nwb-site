@@ -18,7 +18,7 @@ set :user, "railsdog"
 
 ssh_options[:forward_agent] = true
 
-set :deploy_to, "/mnt/apps/#{application}"
+set :deploy_to, "/var/apps/#{application}"
 
 namespace :deploy do
   task :start do; end
