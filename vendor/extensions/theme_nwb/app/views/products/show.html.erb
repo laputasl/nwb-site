@@ -16,10 +16,12 @@
   </div>
   <div class="rateShare">
     <div class="rating">
-      <script type="text/javascript">
-      var pr_snippet_min_reviews=1;
-      POWERREVIEWS.display.snippet(document, { pr_page_id : "<%= @product.legacy_id %>" });
-      </script>
+      <div class="pr_snippet_product">
+        <script type="text/javascript">
+        var pr_snippet_min_reviews=1;
+        POWERREVIEWS.display.snippet(document, { pr_page_id : "<%= @product.legacy_id %>" });
+        </script>
+      </div>
     </div>
     <div class="share">
       <p><strong>Share This</strong></p>
@@ -43,9 +45,11 @@
   </div>
   <div id="Reviews" style="display:none;" class="content">
     <h3>Reviews</h3>
-    <script type="text/javascript">
-      POWERREVIEWS.display.engine(document, { pr_page_id : "<%= @product.legacy_id %>" });
-    </script>
+    <div class="pr_review_summary">
+      <script type="text/javascript">
+        POWERREVIEWS.display.engine(document, { pr_page_id : "<%= @product.legacy_id %>" });
+      </script>
+    </div>
     <p class="right"><a href="#" title="Back to Top &raquo;">Back to Top &raquo;</a></p>
   </div>
   <div id="Directions" style="display:none;" class="content">

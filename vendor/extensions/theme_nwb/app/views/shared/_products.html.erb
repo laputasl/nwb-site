@@ -7,10 +7,12 @@
         <p class="itemNum">Item # <%= product.sku %></p>
         <p class="description"><%= product.subtitle_main %></p>
         <div class="rating">
-          <script type="text/javascript">
-          var pr_snippet_min_reviews=1;
-          POWERREVIEWS.display.snippet(document, { pr_page_id : "<%= product.legacy_id %>" });
-          </script>
+          <div class="pr_snippet_category">
+            <script type="text/javascript">
+            var pr_snippet_min_reviews=1;
+            POWERREVIEWS.display.snippet(document, { pr_page_id : "<%= product.legacy_id %>" });
+            </script>
+          </div>
         </div>
         <p class="price"><%= product_price(product) %> USD</p>
         <p class="more"><a href="#" title="Product Info &raquo;">Product Info &raquo;</a></p>
