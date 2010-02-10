@@ -459,7 +459,7 @@ class SiteExtension < Spree::Extension
     end
 
     Admin::OrdersController.class_eval do
-      after_filter :assign_to_store, :only => [:create, :update]
+      after_filter :assign_to_store, :only => [:new, :create, :update]
 
       private
       def initialize_order_events
