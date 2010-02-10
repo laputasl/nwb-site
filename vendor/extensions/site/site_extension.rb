@@ -7,7 +7,7 @@ class SiteExtension < Spree::Extension
   url "http://yourwebsite.com/site"
 
   def self.require_gems(config)
-    config.gem 'right_aws'
+    #config.gem 'right_aws'
   end
 
   def activate
