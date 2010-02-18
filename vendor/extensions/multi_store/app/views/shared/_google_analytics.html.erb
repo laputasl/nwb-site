@@ -5,21 +5,16 @@
     document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
   </script>
 
+  <% if @analytics_page %>
+    <script type="text/javascript">document.strTrackPageView="<%= @analytics_page %>";</script>
+  <% end %>
+
   <!-- Primary Tracking -->
   <script type="text/javascript" src="/javascripts/VKIga.js"></script>
 
-  <script type="text/javascript">
-    var pageTracker = _gat._getTracker("<%= tracker.analytics_id %>");
-    pageTracker._initData();
+  <% if flash[:commerce_tracking] %>
+    <script type="text/javascript">
 
-    /* Standard analytics or "virtual page" (useful for goal tracking and funnel stuff) plus optional E-Commerce conversion */
-    <% if flash[:analytics] %>
-      pageTracker._trackPageview("<%=flash[:analytics]%>");
-    <% else %>
-      pageTracker._trackPageview();
-    <% end %>
-
-    <% if flash[:commerce_tracking] %>
       try {
         // report e-commerce transaction information when applicable
         /*
@@ -47,7 +42,7 @@
           "<%= "#{"QA-" if request.server_name =~ /^(dev.|localhost)/ }#{@order.number}" %>",
           "<%= line_item.variant.sku %>",
           "<%= line_item.variant.product.name %>",
-          "-"
+          "-",
           "<%= line_item.price %>",
           "<%= line_item.quantity %>"
         );
@@ -55,6 +50,7 @@
         VKIPageTracker._trackTrans();
       } catch (err) {
       }
-    <% end %>
-  </script>
+
+    </script>
+  <% end %>
 <% end %>

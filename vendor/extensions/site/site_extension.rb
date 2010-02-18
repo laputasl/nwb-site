@@ -204,6 +204,7 @@ class SiteExtension < Spree::Extension
     end
 
     OrdersController.class_eval do
+      before_filter :set_analytics
       create.before << :assign_to_store
 
       def calculate_shipping
@@ -230,6 +231,17 @@ class SiteExtension < Spree::Extension
         @order.store = @site
       end
 
+      def set_analytics
+        if @current_action == "show"
+          if params.key? :checkout_complete
+            @analytics_page = "/checkout/receipt"
+          else
+            @analytics_page = "/account/order-details"
+          end
+        else
+          @analytics_page = "/checkout/basket"
+        end
+      end
     end
 
     Checkout.class_eval do
@@ -295,10 +307,16 @@ class SiteExtension < Spree::Extension
     end
 
     UsersController.class_eval do
+      before_filter :set_analytics
+
       private
       def get_exact_target_lists
         @site ||= Store.find(:first, :conditions => {:code => request.headers['wellbeing-site']})
         @exact_target_lists = ExactTargetList.find(:all, :conditions => {:visible => true, :store_id => @site.id})
+      end
+
+      def set_analytics
+        @analytics_page = "/account"
       end
     end
 
@@ -312,6 +330,7 @@ class SiteExtension < Spree::Extension
       update.before :correct_state_values
 
       before_filter :set_shipping_method, :only => [:paypal_payment]
+      before_filter :set_analytics
 
       private
       def get_exact_target_lists
@@ -346,6 +365,29 @@ class SiteExtension < Spree::Extension
         load_object
         @checkout.update_attribute(:shipping_method_id, params[:shipping_method])
         @checkout.order.update_totals!
+      end
+
+      def next_step
+        @checkout.next!
+        # call edit hooks for this next step since we're going to just render it (instead of issuing a redirect)
+        edit_hooks
+
+        set_analytics
+      end
+
+      def set_analytics
+        load_object
+
+        if @current_action == "register"
+          @analytics_page = "/checkout/register"
+        elsif object.state == "address"
+          @analytics_page = "/checkout/address"
+        elsif object.state == "delivery"
+          @analytics_page = "/checkout/payment"
+        elsif object.state == "confirm"
+          @analytics_page = "/checkout/confirm"
+        end
+
       end
 
     end
