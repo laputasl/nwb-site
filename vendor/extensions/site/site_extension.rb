@@ -650,7 +650,7 @@ class SiteExtension < Spree::Extension
           return
         end
 
-        redirect_to (gateway.redirect_url_for response.token, :review => review)
+        redirect_to (gateway.redirect_url_for response.token, :review => payment_method.preferred_review)
       end
     end
 
