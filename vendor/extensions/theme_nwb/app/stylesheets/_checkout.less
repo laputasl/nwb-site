@@ -1,0 +1,39 @@
+@import "_colors";
+@import "_mixins";
+@import "_checkout_progress";
+
+div#checkout {
+  position: relative;
+
+  .progress-steps {
+    position: absolute;
+    top: 0.5em;
+    right: 0;
+  }
+
+  form {
+    background-position: top right; background-repeat: no-repeat;
+  }
+
+  #checkout_form_address {
+    #billing { .column(8); }
+    #shipping {  .column-last(8); }
+  }
+
+  #checkout_form_delivery {
+  }
+
+  #checkout_form_payment {
+    select { width: 75px; }
+
+    #payment { .column(8); }
+    #order_details { .column(12); }
+  }
+
+  .payment_option {
+    margin-left: 20px;
+    width: 46%;
+    float: left;
+  }
+
+}

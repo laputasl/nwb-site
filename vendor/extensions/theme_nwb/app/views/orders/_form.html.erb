@@ -1,24 +1,52 @@
-<%= error_messages_for :order  %>
-<table id="cart-detail">
-  <thead>
-    <tr>
-      <% hook :cart_items_headers do %>
-        <th colspan="2"><%= t("item") %></th>
-        <th><%= t("price") %></th>
-        <th><%= t("qty") %></th>
-        <th><%= t("total") %></th>
-      <% end %>
-    </tr>
-  </thead>
+<thead>
+  <tr>
+    <% hook :cart_items_headers do %>
+      <th><%= t("remove") %></th>
+      <th><%= t("qty") %></th>
+      <th colspan="2"><%= t("item") %></th>
+      <th><%= t("sku") %></th>
+      <th>In Stock</th>
+      <th>Each</th>
+      <th><%= t("total") %></th>
+    <% end %>
+  </tr>
+</thead>
+<% form_for(@order, :url => order_url(@order.number), :html => { :method => :put, :id => 'updatecart' }) do |order_form| %>
   <tbody id="line_items">
     <% order_form.fields_for :line_items do |item_form| %>
-      <%= render 'line_item', :variant => item_form.object.variant, :line_item => item_form.object, :item_form => item_form %>
+      <%= render 'orders/line_item', :variant => item_form.object.variant, :line_item => item_form.object, :item_form => item_form %>
+      <% if checkout %>
+        <%= hidden_field_tag :from_checkout, true %>
+      <% end %>
     <% end %>
 
     <% if @order.line_items.empty? -%>
       <tr id="none">
-        <td colspan="5"><%= t("your_cart_is_empty.") -%></td>
+        <td colspan="8"><%= t("your_cart_is_empty.") -%></td>
       </tr>
     <% end -%>
   </tbody>
-</table>
+<% end -%>
+<tfoot>
+  <tr>
+    <td colspan="<%= checkout ? 4 : 6 %>">
+      <% unless @order.line_items.empty? %>
+        <%= link_to image_tag("/#{@site.code}/images/button_recalculate.gif", :alt => t("update")), '#', :class => 'button checkout primary', :onclick => "$('form#updatecart').submit(); return false;" %>
+        <span style="vertical-align:super;font-size:9px;">&nbsp;&nbsp;Click Recalculate after changing quantities or removing items.</span>
+      <% end %>
+    </td>
+    <% if checkout %>
+      <td colspan="4">
+        <% form_for @checkout, :url => object_url, :html => { :id => 'checkout-summary-form', :class => "coupon_box"} do |summary_form| %>
+          <label><%= t(:coupon_code) %>: </label><%= summary_form.text_field :coupon_code, :id => 'coupon-code', :size => 10 %>&nbsp;
+          <input id="post-summary" type="image" src="/<%=@site.code%>/images/button_verify.gif" />
+          <p style="clear:both;"></p>
+        <% end %>
+      </td>
+    <% else %>
+      <td class="cart_total">Sub Total</td>
+      <td class="cart_total"><%= number_to_currency @order.line_items.total %></td>
+    <% end %>
+  </tr>
+
+

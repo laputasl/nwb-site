@@ -1,3 +1,7 @@
+<% content_for :breadcrumbs do %>
+  <%= breadcrumbs(@taxon, @product) %>
+<% end %>
+
 <div class="product">
   <div class="photo">
     <%= product_image(@product, {:style => "max-width:140px;"}) %>

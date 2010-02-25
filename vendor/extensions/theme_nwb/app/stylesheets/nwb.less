@@ -265,6 +265,15 @@ a:hover, a:active {color: #1c3c80;}
 #shipping_calculator #calculator_progress{
   display: none;
 }
+#shipping_calculator #free_shipping_at{
+  margin-top: 10px;
+  color:#DA5789;
+}
+.cart_total{
+  font-weight:bold;
+  text-align:right;
+  font-size:120%;
+}
 /*---------------------*/
 /* Sub Nav ------------*/
 /*---------------------*/
@@ -744,7 +753,6 @@ h1 {
 #footer ul a {color: #fff}
 #footer li.first {border: 0;}
 
-
 /* --- everything after this point was added after the original inclusion of Erika's styles -- */
 
 /*---------------------*/
@@ -757,12 +765,58 @@ h1 {
   margin: 5px 0 0 0;
 }
 
-
-
-
 @import "_forms";
 @import "_messages";
 @import "_checkout";
 @import "_cart";
 
 @import "_checkout_shared";
+
+#cart-detail th{
+  background-color: #fff;
+}
+#cart-detail td{
+  background-color: #EBF3F8;
+}
+#cart-detail tfoot .border{
+  border-bottom: 1px solid #C3CFD7;
+}
+#cart-detail tfoot td{
+  background-color: #fff;
+}
+#cart-detail tfoot #shipping_td{
+  background-color: #F4FBF4;
+}
+
+#cart-footer {background-color:#FBFBF6; border: 1px solid #CAC7B6;padding:10px;}
+#cart-footer strong { color: #D84577;}
+#cart-footer p { margin-bottom: 8px;}
+
+/*-------------------------------*/
+/* Custom Login / Register ------*/
+/*-------------------------------*/
+.register-login .left {float:left;width:46%;padding-right:20px;border-right:1px dashed #7FADCE;min-height:400px;}
+.register-login .right {float:left;width:46%;padding-left:20px;}
+.register-login .button_wrapper{text-align:center;padding-top:10px;}
+
+.register-login input[type="text"] {padding:4px 0;border:1px solid #7FADCE;width:150px;}
+.register-login input[type="password"] {padding:4px 0;border:1px solid #7FADCE;width:150px;}
+
+/*-------------------------------*/
+/* Custom Checkout         ------*/
+/*-------------------------------*/
+.address_box {background-color:#F8F9F4;border:1px solid #EAE8DB;padding:6px 10px;margin-bottom:10px;}
+.address_box p {margin-bottom: 0px; font-weight:bold;}
+.address_box .highlight {color:#D84577;}
+.address_box .field label {display:block; width:130px; float:left;}
+.address_box .submit-warning {font-size:9px;}
+
+.checkout-totals {width:100%;margin-bottom:20px;}
+.checkout-totals tr {text-align:right;}
+.checkout-totals td {padding:4px;}
+.checkout-totals .total {border-top: 1px solid #ABB5C0;font-weight:bold;}
+
+.coupon_box {background-color:#EDF9F0;border:1px solid #B4CCB9;font-size:11px;padding:8px 10px 0;text-align:center;}
+.coupon_box label {float:left;padding:2px 0px 0px 10px;}
+.coupon_box input {float:left;margin-left:10px;}
+

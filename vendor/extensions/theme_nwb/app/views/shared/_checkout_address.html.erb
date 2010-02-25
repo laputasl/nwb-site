@@ -1,0 +1,12 @@
+<%= address.full_name %><br />
+<%= address.address1 %><br />
+<% unless address.address2.blank? %>
+  <%= address.address2 %><br />
+<% end %>
+<%= address.city %>&nbsp;
+<% if address.state_id.blank? %>
+  <br /><%= address.state_name %><br />
+<% else %>
+  <%= address.state.abbr %><br />
+<% end %>
+<%= address.country.name %> <%= address.zipcode %>

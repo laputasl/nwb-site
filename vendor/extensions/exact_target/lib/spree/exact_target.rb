@@ -34,7 +34,11 @@ module Spree
       subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
       begin
-        subscription_id = subscriber.add(user.email, listid).inspect
+        if user.is_a? User
+          subscription_id = subscriber.add(user.email, listid).inspect
+        else
+          subscription_id = subscriber.add(user, listid).inspect
+        end
 
         return true
       rescue ET::Error => error
@@ -50,7 +54,11 @@ module Spree
       subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
       begin
-        result = subscriber.delete(nil, user.email, listid).inspect
+        if user.is_a? User
+          result = subscriber.delete(nil, user.email, listid).inspect
+        else
+          result = subscriber.delete(nil, user, listid).inspect
+        end
 
         return true
       rescue ET::Error => error

@@ -1,0 +1,45 @@
+<div id="order">
+
+  <% if params.has_key? :checkout_complete %>
+    <br/><br/>
+    <div id="cart-footer">
+      <h2><strong>Thank You</strong></h2><br/>
+      <%= flash[:notice] %>
+      <p>Thank you for shopping with <%= @site.name %>. An e-mail receipt has been sent to you for your records.</p>
+
+      <p>To ensure you receive your password, please add customerservice@naturalwellbeing-email.com to your approved senders list.</p>
+
+      <p>If you don't see the email shortly, be sure to check your Junk Mail or Spam folder.</p>
+
+      <p>After which, if you are still having difficulties, please call us at: 1-800-536-9353</p>
+
+      <p>Your authorization number is: <strong><%= @order.payments.empty? ? @order.checkout.payments.first.txns.last.id : @order.payments.first.txns.last.id %></strong></p>
+
+      <p>Your order number is: <strong><%= @order.number %></strong></p>
+    </div>
+
+  <% else %>
+    | <%= link_to t('my_account'), user_path(current_user) if current_user%>
+  <% end %>
+  <br/><br/>
+
+  <%= render :partial => 'shared/order_details', :locals => {:order => @order} -%>
+
+  <div class="address_box">
+    <h4 class="highlight">Your Customer Information</h4>
+    Email: <%= @order.checkout.email %>
+  </div>
+
+  <div class="address_box" style="float:left;margin-right:4%;  width:44%;">
+    <h4 class="highlight">Your Shipping Information</h4>
+    <%= render :partial => "shared/checkout_address", :locals => {:address => @order.ship_address } %>
+  </div>
+
+  <div class="address_box" style="float:left;width:44%;">
+    <h4 class="highlight">Your Billing Address</h4>
+    <%= render :partial => "shared/checkout_address", :locals => {:address => @order.bill_address } %>
+  </div>
+
+  <br/>
+  <%= link_to t('back_to_store'), products_path, :style => "clear:both;" %>
+</div>

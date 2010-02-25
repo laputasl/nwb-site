@@ -1,33 +1,39 @@
-<h1><%= t("registration")%></h1>
-<div id="registration">
+<% @body_id = 'signup' %>
 
-  <%= error_messages_for :user %>
-  <%= error_messages_for :checkout %>
+<%= error_messages_for :user %>
+<%= error_messages_for :checkout %>
 
-  <div id="account">
+<div class="register-login">
+  <div class="left">
+    <div id="guest_checkout">
+       <%= render 'guest_checkout' %>
+    </div>
+  </div>
 
-    <%= error_messages_for :user %>
-
-    <% @body_id = 'signup' %>
-
+  <div class="right">
     <div id="new-customer">
       <h2><%= t("new_customer") %></h2>
 
-      <% form_for(@user) do |f| %>
-
-        <% hook :signup_inside_form do %>
+      <% form_for(User.new) do |f| %>
+        <div style="text-align:right;">
           <%= render 'shared/user_form', :f => f %>
-          <p><%= submit_tag t("create"), :class => 'button primary' %></p>
-        <% end %>
-
+        </div>
+        <div class="button_wrapper">
+          <%= image_submit_tag "/#{@site.code}/images/button_next.gif" %>
+        </div>
       <% end %>
-      <%= t("or") %> <%= link_to t("login_as_existing"), login_path %>
     </div>
-
+    <br />
+    <div id="new-customer">
+      <h2>Express Checkout for Repeat Customers</h2>
+      <%= render 'shared/login' %>
+    </div>
   </div>
-  <% if Spree::Config[:allow_guest_checkout] %>
-    <div id="guest_checkout">
-      <%= render 'guest_checkout' %>
-    </div>
-  <% end %>
+
+  <div style="text-align:center;clear:both;">
+    <p style="padding-top:15px;">
+      <span style="color:red;">*</span> mandatory field
+    </p>
+    <%= link_to "Privacy Policy", "/#{@site.code}/privacy_policy" %>
+  </div>
 </div>

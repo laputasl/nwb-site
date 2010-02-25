@@ -2,6 +2,7 @@ a\#*
 **/*.db
 *~
 .#*
+*.tmproj
 .DS_Store
 .dotest
 .idea

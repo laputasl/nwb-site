@@ -1,7 +1,12 @@
+<%- locals = {:item_form => item_form, :variant => variant, :line_item => line_item} -%>
 <tr class="<%= cycle('', 'alt') %>">
+  <td style="text-align:center;">
+    <%= check_box_tag "remove[#{variant.id}]", true %>
+  </td>
   <td>
-    <%- locals = {:item_form => item_form, :variant => variant, :line_item => line_item} -%>
-
+    <%= item_form.text_field :quantity, :size => 3 %>
+  </td>
+  <td>
     <%= item_form.hidden_field :variant_id %>
     <%= item_form.hidden_field :order_id %>
     <% if variant.images.length == 0 %>
@@ -13,16 +18,17 @@
     <% end %>
   </td>
   <td>
-    <%= link_to variant.product.name,  product_path(variant.product) %> 
+    <%= link_to variant.product.name,  product_path(variant.product) %>
     <%= variant_options variant %>
   </td>
+  <td><%= line_item.variant.sku %></td>
+  <td><%= line_item.variant.in_stock? ? "Yes" : "No" %></td>
+
   <td>
     <%=  product_price(line_item) %>
   </td>
-  <td>
-    <%= item_form.text_field :quantity, :size => 3 %>
-  </td>
-  <td>
+
+  <td style="text-align:right;">
     <%= format_price(product_price(line_item, :format_as_currency => false) * line_item.quantity) unless line_item.quantity.nil? %>
   </td>
 </tr>

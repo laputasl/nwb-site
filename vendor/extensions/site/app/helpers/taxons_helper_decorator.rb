@@ -1,5 +1,5 @@
 TaxonsHelper.module_eval do
-  def breadcrumbs(taxon, separator="&nbsp;:&nbsp;")
+  def breadcrumbs(taxon, product=nil, separator="&nbsp;:&nbsp;")
 
     crumbs = [content_tag(:li, "Your Location")]
 
@@ -20,7 +20,13 @@ TaxonsHelper.module_eval do
       taxons = taxon.ancestors
       taxons.delete_at(0)
       crumbs << taxons.collect { |ancestor| content_tag(:li, separator + link_to(ancestor.name , seo_url(ancestor))) } unless taxons.empty?
-      crumbs << content_tag(:li, separator + content_tag(:span, taxon.name))
+
+      if product
+        crumbs << content_tag(:li, separator + link_to(taxon.name , seo_url(taxon)))
+        crumbs << content_tag(:li, separator + content_tag(:span, product.name))
+      else
+        crumbs << content_tag(:li, separator + content_tag(:span, taxon.name))
+      end
 
     end
     content_tag(:ul, crumbs.flatten.map{|li| li.mb_chars}.join, :id => 'breadcrumbs')

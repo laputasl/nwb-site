@@ -25,3 +25,11 @@ Spree::Config.set(:hold_order_with_avs =>  "N,W,B" )
 Spree::Config.set(:qualified_address_key => 68161790)
 
 Spree::Config.set(:checkout_zone => "All Shipping Zones")
+
+Spree::Config.set(:nwb_free_shipping_at => 75.00)
+Spree::Config.set(:pwb_free_shipping_at => 50.00)
+
+Spree::Config.set(:allow_openid => false)
+
+#skip local confirm for PPX
+Spree::Config.set(:paypal_express_review => false)

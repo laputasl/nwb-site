@@ -206,6 +206,13 @@ class SiteExtension < Spree::Extension
     OrdersController.class_eval do
       before_filter :set_analytics
       create.before << :assign_to_store
+      update.before :check_for_removed_items
+
+      update do
+        flash nil
+        success.wants.html { redirect_to (@from_checkout ? edit_order_checkout_url(object, :step => "delivery")  : edit_order_url(object)) }
+        failure.wants.html { render :template => "orders/edit" }
+      end
 
       def calculate_shipping
         load_object
@@ -221,6 +228,10 @@ class SiteExtension < Spree::Extension
           { :id => ship_method.id,
             :name => ship_method.name,
             :rate => ship_method.calculate_cost(@order.checkout.shipment) }
+        end
+
+        if rates.size > 0 && @order.checkout.shipping_method_id.nil?
+          @order.checkout.update_attribute(:shipping_method_id, rates[0][:id])
         end
 
         render :json => rates.to_json
@@ -242,6 +253,20 @@ class SiteExtension < Spree::Extension
           @analytics_page = "/checkout/basket"
         end
       end
+
+      def check_for_removed_items
+        @from_checkout = params.key? "from_checkout"
+
+        return unless params.key? "remove"
+
+        params[:remove].each do |variant_id, value|
+          @order.line_items.detect {|li| li.variant_id == variant_id.to_i }.destroy
+        end
+        @order.update_totals!
+        @order.reload
+
+      end
+
     end
 
     Checkout.class_eval do
@@ -250,9 +275,14 @@ class SiteExtension < Spree::Extension
         before_transition :to => 'complete', :do => :process_payment
         event :next do
           transition :to => 'delivery', :from  => 'address'
-          transition :to => 'confirm', :from => 'delivery'
-          transition :to => 'complete', :from => 'confirm'
+          transition :to => 'complete', :from => 'delivery'
         end
+      end
+
+      #need to reverse this (ie. bill_address is a copy of ship_address)
+      def clone_billing_address
+        self.bill_address = ship_address.clone
+        true
       end
 
       validation_group :delivery, :fields => ["creditcard.number", "creditcard.verification_value"]
@@ -309,6 +339,26 @@ class SiteExtension < Spree::Extension
     UsersController.class_eval do
       before_filter :set_analytics
 
+      def create
+        @user = User.new(params[:user])
+        @user.store = @site
+        @user.save do |result|
+          if result
+            flash[:notice] = t(:user_created_successfully) unless session[:return_to]
+            @user.roles << Role.find_by_name("admin") unless admin_created?
+            respond_to do |format|
+              format.html { redirect_back_or_default products_url }
+              format.js { render :js => true.to_json }
+            end
+          else
+            respond_to do |format|
+              format.html { render :action => :new }
+              format.js { render :js => @user.errors.to_json }
+            end
+          end
+        end
+      end
+
       private
       def get_exact_target_lists
         @site ||= Store.find(:first, :conditions => {:code => request.headers['wellbeing-site']})
@@ -321,19 +371,36 @@ class SiteExtension < Spree::Extension
     end
 
     CheckoutsController.class_eval do
-      # register edit and update hooks for extra checkout steps
-      class_scoping_reader :confirm, Spree::Checkout::ActionOptions.new
       layout 'checkouts'
 
-      delivery.edit_hook << :load_available_integrations
+      delivery.edit_hook << :load_available_payment_methods
 
       update.before :correct_state_values
 
-      before_filter :set_shipping_method, :only => [:paypal_payment]
+      before_filter :update_shipping_method, :only => [:paypal_payment]
       before_filter :set_analytics
+      before_filter :get_exact_target_lists, :only => [:edit]
+      before_filter :enforce_registration, :except => [:register, :set_shipping_method]
+
+      # sets shipping medthod for checkout when using paypal payment option
+      def set_shipping_method
+        render :json => update_shipping_method
+      end
 
       private
-      def get_exact_target_lists
+
+      def object_params
+        # For delivery (normally payment) step, filter checkout parameters to produce the expected nested attributes for a single payment and its source, discarding attributes for payment methods other than the one selected
+        if object.delivery?
+          if source_params = params.delete(:payment_source)[params[:checkout][:payments_attributes].first[:payment_method_id].underscore]
+            params[:checkout][:payments_attributes].first[:source_attributes] = source_params
+          end
+          params[:checkout][:payments_attributes].first[:amount] = @order.total
+        end
+        params[:checkout]
+      end
+
+      def get_exact_target_lists #make multi-store aware
         @site ||= Store.find(:first, :conditions => {:code => request.headers['wellbeing-site']})
         @exact_target_lists = ExactTargetList.find(:all, :conditions => {:visible => true, :store_id => @site.id})
       end
@@ -360,13 +427,6 @@ class SiteExtension < Spree::Extension
         @checkout.shipping_method_id ||= @available_methods.first[:id] unless @available_methods.empty?
       end
 
-      # sets shipping medthod for checkout when using paypal payment option
-      def set_shipping_method
-        load_object
-        @checkout.update_attribute(:shipping_method_id, params[:shipping_method])
-        @checkout.order.update_totals!
-      end
-
       def next_step
         @checkout.next!
         # call edit hooks for this next step since we're going to just render it (instead of issuing a redirect)
@@ -390,6 +450,19 @@ class SiteExtension < Spree::Extension
 
       end
 
+      def update_shipping_method
+        load_object
+        object.enable_validation_group(:register)
+
+        @checkout.order.shipping_charges.each(&:destroy) #remove all old shipping charges
+
+        if @checkout.update_attribute(:shipping_method_id, params[:shipping_method])
+          @checkout.order.update_totals!
+          true
+        else
+          false
+        end
+      end
     end
 
     Spree::ExactTarget.module_eval do
@@ -429,6 +502,41 @@ class SiteExtension < Spree::Extension
           user.exact_target_subscriber_id = subscriber_id
           user.save!
         end
+      end
+
+      #override as we subscribe during checkout (not login/register)
+      def update_exact_target_lists
+        return unless params.key? :exact_target_list
+
+        @user = @checkout.order.user
+
+        params[:exact_target_list].each do |id, subscribe|
+
+          list = ExactTargetList.find(id)
+
+          if @user.nil? #guest checkout
+            if subscribe == "true"
+              #subscribe
+              subscribe_to_list(@checkout.email, list.list_id)
+            else
+              #unsubscribe
+              unsubscribe_from_list(@checkout.email, list.list_id)
+            end
+          else #normal checkout
+            if subscribe == "true"
+              #subscribe
+              unless @user.exact_target_lists.include? list
+                @user.exact_target_lists << list if subscribe_to_list(@user, list.list_id)
+              end
+            else
+              #unsubscribe
+              if @user.exact_target_lists.include? list
+                @user.exact_target_lists.delete(list) if unsubscribe_from_list(@user, list.list_id)
+              end
+            end
+          end
+        end
+
       end
     end
 
@@ -531,7 +639,7 @@ class SiteExtension < Spree::Extension
     Spree::PaypalExpress.module_eval do
       def paypal_payment
         load_object
-        opts = all_opts(@order, 'payment')
+        opts = all_opts(@order, params[:payment_method_id], 'payment')
         opts.merge!(address_options(@order))
         gateway = paypal_gateway
 
@@ -542,7 +650,7 @@ class SiteExtension < Spree::Extension
           return
         end
 
-        redirect_to (gateway.redirect_url_for response.token)
+        redirect_to (gateway.redirect_url_for response.token, :review => review)
       end
     end
 
@@ -586,7 +694,6 @@ class SiteExtension < Spree::Extension
       end
     end
 
-
     #support short SEO taxon urls
     TaxonsController.class_eval do
       def object
@@ -619,12 +726,24 @@ class SiteExtension < Spree::Extension
       end
     end
 
+    #redirect /products url (except when searching)
     ProductsController.class_eval do
       before_filter :redirect_products_path_to_home, :only => :index
 
       def redirect_products_path_to_home
         return if params.key? :keywords
-        redirect_to '/', :status => 301 if '/products' == request.path
+        redirect_to '/', :status => 301 if ['/products', '/products/'].include? request.path
+      end
+    end
+
+    #ensure we have new user object for custom login.
+    UserSessionsController.class_eval do
+      layout 'checkouts'
+      before_filter :new_user, :only => [:create, :new]
+
+      private
+      def new_user
+        @user = User.new
       end
     end
 

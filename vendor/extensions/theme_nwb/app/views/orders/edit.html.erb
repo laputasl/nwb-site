@@ -1,27 +1,66 @@
+<% if @site.code == "pwb" %>
+  <% content_for :breadcrumbs do %>
+    <%= image_tag "/#{@site.code}/images/banner_shoppingcart2.jpg", :alt => "PetWellbeing.com" %>
+  <% end %>
+<% end %>
+
 <% @body_id = 'cart' %>
 
 <div class="inner">
-  
+
   <h1><%= t("shopping_cart")%></h1>
 
-  <% form_for(@order, :url => object_url, :html => { :method => :put, :id => 'updatecart' }) do |order_form| %>
-  <% hook :inside_cart_form do %>
+  <%= error_messages_for :order  %>
+  <table id="cart-detail">
+    <%= render "form", :checkout => false %>
+    <% unless @order.line_items.empty? %>
+        <tr class="border">
+          <td colspan="7" id="shipping_td">
+            <strong>Shipping Options</strong>
+            <div id="shipping_calculator" style="text-align:left;">
+              <p>
+                <%= radio_button_tag :calculator_zone, :usa %> USA
+                <%= radio_button_tag :calculator_zone, :international %> International
+              </p>
+              <p style="padding:5px 0px;">Please note that we do not ship on weekends and your order time does not include weekends.</p>
+              <div id="usa_options" style="float:left;">
+                <%= text_field_tag :calculator_zipcode, "enter zip", {:style => "width:50px;"} %>
+                <%= image_submit_tag "/#{@site.code}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
+              </div>
+              <div id="international_options" style="float:left;">
+                <%= select_tag :calculator_country, options_for_select(Checkout.countries.sort.map{|c| [c.name, c.id]}) %>
+                <%= image_submit_tag "/#{@site.code}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
+              </div>
+              <%= image_tag "/#{@site.code}/images/verifying.gif", {:id => "calculator_progress", :style => "float:left;margin:4px;"} %>
+              <p id="calculator_methods" style="float:left;">&nbsp;Select Shipping:&nbsp;
+                <select id="calculator_available_methods" style="width:200px;"></select>
+              </p>
 
-    <% hook :cart_items do %>
-      <%= render :partial => 'form', :locals => {:order_form => order_form} %>
-    <% end %>
-
-    <% unless @order.line_items.empty? -%>
-    <div id="subtotal">
-      <h3><%= "#{t("subtotal")}: #{order_price(@order)}" %></h3>
-      <div class="links">
-        <%= link_to image_tag('/images/button_return_to_store.gif'), products_path %>
-        <%= link_to image_tag('/images/button_recalculate.gif', :alt => t("update")), '#', :class => 'button checkout primary', :onclick => "$('form#updatecart').submit(); return false;" %>
-        <%= link_to image_tag('/images/button_proceed_checkout.gif', :alt => t("checkout")), edit_order_checkout_url(@order), :class => 'button checkout primary' %>
-      </div>
-    </div>
+              <p style="clear:both;padding-top:6px;">Estimated to ship: <strong><%= estimate_shipping_day %></strong></p>
+              <p id="free_shipping_at"><%= free_shipping_at(@order, @site) %></p>
+            </div>
+          </td>
+          <td id="cart_preview_shipping" class="cart_total">-</td>
+        </tr>
+        <tr>
+          <td colspan="7" class="cart_total">Total (USD):</td>
+          <td class="cart_total"><strong id="cart_preview_total"><%= number_to_currency @order.total %></strong></td>
+        </tr>
+        <tr>
+          <td colspan="6">
+            <%= link_to image_tag("/#{@site.code}/images/button_return_to_store.gif"), products_path %>
+          </td>
+          <td colspan="2">
+            <%= link_to image_tag("/#{@site.code}/images/button_proceed_checkout.gif", :alt => t("checkout")), edit_order_checkout_url(@order), :class => 'button checkout primary' %>
+          </td>
+        </tr>
+      </tfoot>
     <% end -%>
-  <% end %>
-  <% end -%>
+  </table>
 
+  <div id="cart-footer">
+    <%= render_snippet("#{@site.code}-cart-footer") %>
+  </div>
 </div>
+
+

@@ -1,0 +1,14 @@
+<div class="register-login">
+  <h2>Guest Checkout</h2>
+  <% form_for @checkout, :url => register_order_checkout_url(@order),
+                         :html => { :method => :post, :id => "checkout_form_registration"} do |f| %>
+
+    <p>If you prefer simply provide your email address so we can update you on the status of your order.</p>
+    <div style="text-align:right;">
+      E-mail Address<span style="color:red;">*</span>: <%= f.text_field :email, :class => 'title', :style => "border:1px solid #7FADCE;"  %>
+    </div>
+    <div style="text-align:center;padding-top:10px;">
+      <%= image_submit_tag "/#{@site.code}/images/button_next.gif" %>
+    </div>
+  <% end %>
+</div>

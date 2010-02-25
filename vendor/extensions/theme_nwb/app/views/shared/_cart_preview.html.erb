@@ -31,7 +31,7 @@
     </tbody>
   </table>
   <p><a href="/pwb/shipping" title="Free Same Day Shipping at $50.00">Free Same Day Shipping at $50.00</a></p>
-  <% unless order.nil? %>
+  <% unless order.nil? || @controller.controller_name == "orders" %>
     <h3><a href="#" title="Shopping Calculator">Shipping Calculator</a></h3>
     <div id="shipping_calculator">
       <p>
@@ -57,7 +57,7 @@
 
 <script type="text/javascript">
   jQuery(document).ready(function(){
-    var order_total = <%= order.nil? ? 0 : order.total %>;
+    var order_total = <%= order.nil? ? 0 : order.line_items.total %>;
     var shipping_methods = [];
 
     function format_currency(num) {
@@ -114,9 +114,12 @@
       if($(this).val()=="usa"){
         $("#shipping_calculator #international_options").slideUp();
         $("#shipping_calculator #usa_options").slideDown();
+        $("#shipping_calculator #free_shipping_at").show();
       }else{
         $("#shipping_calculator #usa_options").slideUp();
         $("#shipping_calculator #international_options").slideDown();
+
+        $("#shipping_calculator #free_shipping_at").hide();
       }
     });
 
@@ -135,17 +138,25 @@
 
     $("#calculator_available_methods").change(function(){
       var value = $(this).val();
-      $.each(shipping_methods, function(i,rate){
-        if(rate.id+"" == value){
-          if(rate.rate==0){
-            $('td#cart_preview_shipping').html("Free");
-            $('strong#cart_preview_total').html("$" + format_currency(order_total));
-          }else{
-            $('td#cart_preview_shipping').html("$" + format_currency(rate.rate));
-            $('strong#cart_preview_total').html("$" + format_currency(order_total + rate.rate));
-          }
-        }
-      });
+      var opts = {"shipping_method": value}
+
+      jQuery.post("<%= set_shipping_method_order_checkout_url(order.nil? ? Order.new : order) %>", opts,
+        function(data){
+           $.each(shipping_methods, function(i,rate){
+              if(rate.id+"" == value){
+                if(rate.rate==0){
+                  $('td#cart_preview_shipping').html("Free");
+                  $('strong#cart_preview_total').html("$" + format_currency(order_total));
+                }else{
+                  $('td#cart_preview_shipping').html("$" + format_currency(rate.rate));
+                  $('strong#cart_preview_total').html("$" + format_currency(order_total + rate.rate));
+                }
+              }
+            });
+      }, 'json');
+
+      $('td#cart_preview_shipping').html("Updating");
+      $('strong#cart_preview_total').html("$" + format_currency(order_total));
     });
 
     $("#shipping_calculator input[type='image']").click(function(){

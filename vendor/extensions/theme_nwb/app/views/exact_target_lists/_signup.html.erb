@@ -1,0 +1,16 @@
+<% unless @exact_target_lists.nil? %>
+  <%- @subscribe = @checkout.order.user.nil? ? true : !@checkout.order.user.exact_target_lists.include?(@exact_target_lists.first.id) -%>
+  <p id="snewsletters" class="field">
+    <label>Opt-in to our newsletter:</label>
+    <span class="sub">
+     <%= radio_button_tag("exact_target_list[#{@exact_target_lists.first.id}]", true, @subscribe ) %>
+     <%= t("yes") %>
+    </span> &nbsp;
+    <span class="sub">
+      <%= radio_button_tag("exact_target_list[#{@exact_target_lists.first.id}]", false, !@subscribe ) %>
+      <%= t("no") %>
+    </span>
+  </p>
+<% end %>
+
+
