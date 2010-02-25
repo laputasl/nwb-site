@@ -1,5 +1,11 @@
 <% f.field_container :code do %>
   <%= f.label :code, t("code") %><br />
   <%= f.text_field :code  %>
-  <%= error_message_on :shipping_method, :code%>
+  <%= error_message_on :shipping_method, :code %>
+<% end %>
+
+<% f.field_container :handling_fee do %>
+  <%= f.label :handling_fee, "Handling Fee" %><br />
+  <%= f.text_field :handling_fee  %>
+  <%= error_message_on :shipping_method, :handling_fee %>
 <% end %>

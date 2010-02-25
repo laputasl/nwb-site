@@ -622,6 +622,14 @@ class SiteExtension < Spree::Extension
     end
 
     ShippingMethod.class_eval do
+      #adds additional handling fee
+      alias_method :core_calculate_cost, :calculate_cost
+
+      def calculate_cost(shipment)
+        core_calculate_cost(shipment) + handling_fee.to_f
+      end
+
+      #excludes PO (APO / FPO) boxes
       def available_to_address?(address)
         po_regex = /\b((A|a|F|f)?[P|p](OST|ost)?\.?\s?[O|o|0](ffice|FFICE)?\.?\s)?([B|b][O|o|0][X|x])\s(\d+)/
 
