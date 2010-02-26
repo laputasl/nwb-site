@@ -1,0 +1,9 @@
+<p>This email is to inform you that your order has been sent to our shipping department to be processed for shipping on <%= Time.now.strftime("%B %d %Y at %I:%M %p") %>.</p>
+<p><strong>When your order is shipped, you will receive another email which will include your shipment tracking number.</strong></p>
+
+<p>
+Here are the details of the order we received on <%= order.completed_at.strftime("%B %d %Y at %I:%M %p") %>.
+</p>
+<p>Your order number is <strong class="pink"><%= order.number %></strong> Please keep it for reference if you speak to a customer service representative.</p>
+<p>Your <%= order.store.name %> order includes the following item(s):</p>
+<%= render "order_mailer/order_details_html", :order => order %>

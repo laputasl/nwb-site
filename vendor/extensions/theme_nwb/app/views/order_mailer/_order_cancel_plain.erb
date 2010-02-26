@@ -1,0 +1,7 @@
+This email is to inform you that your order has been CANCELLED on <%= order.completed_at.strftime("%B %d %Y at %I:%M %p") %>.
+
+Your order number is <%= order.number %> Please keep it for reference if you speak to a customer service  representative.
+
+Your <%= order.store.name %> order included the following item(s):
+
+<%= render "order_details_plain", :order => order %>

@@ -1,0 +1,11 @@
+This email is to inform you that your order has been sent to our shipping department to be processed for shipping on <%= Time.now.strftime("%B %d %Y at %I:%M %p") %>.
+
+When your order has been shipped, you will receive another email which will include your shipment tracking number.
+
+Here are the details of the order we received on <%= order.completed_at.strftime("%B %d %Y at %I:%M %p") %>.
+
+Your order number is <%= order.number %> Please keep it for reference if you speak to a customer service representative.
+
+Your <%= order.store.name %> order includes the following item(s):
+
+<%= render "order_mailer/order_details_plain", :order => order %>

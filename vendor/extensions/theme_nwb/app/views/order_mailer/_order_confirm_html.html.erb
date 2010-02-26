@@ -1,0 +1,4 @@
+<p>Here are the details of your order received  on <%= order.completed_at.strftime("%B %d %Y at %I:%M %p") %>.</p>
+<p>Your order number is <strong class="pink"><%= order.number %></strong> Please keep it for reference if you speak to a customer service representative.</p>
+<p>Your <%= order.store.name %> order includes the following item(s):</p>
+<%= render "order_details_html", :order => order %>

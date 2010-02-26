@@ -1,0 +1,21 @@
+Item(s):
+<% order.line_items.each_with_index do |item, i| %>
+<%= "#{i}. #{item.variant.product.name} - SKU: #{item.variant.sku} - #{item.quantity} @ #{number_to_currency item.price} ea." %>
+<% end %>
+
+Items Subtotal: <%= number_to_currency order.item_total %>
+<% order.adjustments.each do |adjustment| %>
+<%= adjustment.description %>: <%= number_to_currency adjustment.amount %>
+<% end %>
+======================
+
+TOTAL: <%= number_to_currency order.total %>
+
+These items will be shipped to:
+<%= order.ship_address.full_name %>
+
+<%= order.ship_address.address1 %> <%= order.ship_address.address2 unless order.ship_address.address2.blank?%>
+
+<%= order.ship_address.city %> <%= order.ship_address.state_id.blank? ? order.ship_address.state_name :  order.ship_address.state.abbr%>
+
+<%= order.ship_address.country.name %> <%= order.ship_address.zipcode %>

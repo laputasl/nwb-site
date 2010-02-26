@@ -1,0 +1,20 @@
+<p>This email is to inform you that your order has been shipped on <%= Time.now.strftime("%B %d %Y at %I:%M %p") %>.</p>
+
+<p>
+  <strong>Your tracking details:</strong><br />
+  Package ID: <%= order.shipment.number %><br />
+  Sent date: <%= order.shipment.updated_at.strftime("%B %d %Y at %I:%M %p") %><br />
+  Shipped via: <%= order.shipment.shipping_method.code %><br /><br />
+  <% if order.shipment.shipping_method.code != "USPS" %>
+    UPS Tracking Number: <%= order.shipment.tracking %><br /><br />
+    To track your package, go to:<br />
+    <a href="http://wwwapps.ups.com/etracking/tracking.cgi?build_ttn=yes">UPS Tracking</a>
+  <% end %>
+</p>
+
+<p>
+Here are the details of the order we received on <%= order.completed_at.strftime("%B %d %Y at %I:%M %p") %>.
+</p>
+<p>Your order number is <strong class="pink"><%= order.number %></strong> Please keep it for reference if you speak to a customer service representative.</p>
+<p>Your <%= order.store.name %> order includes the following item(s):</p>
+<%= render "order_mailer/order_details_html", :order => order %>

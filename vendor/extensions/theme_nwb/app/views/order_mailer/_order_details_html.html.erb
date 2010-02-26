@@ -1,0 +1,51 @@
+<div align="center">
+  <table border="0" cellspacing="1" cellpadding="5" class="products" width="500">
+    <tr>
+      <td valign="top" align="center"><strong>QTY</strong></td>
+      <td valign="top"><strong>Name</strong></td>
+      <td valign="top" align="center"><strong>SKU</strong></td>
+      <td valign="top" align="center"><strong>Each</strong></td>
+      <td valign="top" align="center"><strong>Total</strong></td>
+    </tr>
+    <% order.line_items.each do |item| %>
+      <tr>
+        <td valign="middle" align="center" bgcolor="#ebf3f8"><%= item.quantity %></td>
+        <td valign="middle" align="left" bgcolor="#ebf3f8"><%= item.variant.product.name %></td>
+        <td valign="middle" align="center" bgcolor="#ebf3f8"><%= item.variant.sku %></td>
+        <td valign="middle" align="center" bgcolor="#ebf3f8"><%= number_to_currency item.price %></td>
+        <td valign="middle" align="right" bgcolor="#ebf3f8"><%= number_to_currency(item.price * item.quantity) %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td valign="top" align="left" colspan="2" rowspan="6" class="bigger">
+        <br />
+        <p><strong>These items will be shipped to:</strong><br />
+          <%= order.ship_address.full_name %><br />
+          <%= order.ship_address.address1 %><br />
+          <% unless order.ship_address.address2.blank? %>
+            <%= order.ship_address.address2 %><br />
+          <% end %>
+          <%= order.ship_address.city %>
+          <% if order.ship_address.state_id.blank? %>
+            <br /><%= order.ship_address.state_name %><br />
+          <% else %>
+            <%= order.ship_address.state.abbr %><br />
+          <% end %>
+          <%= order.ship_address.country.name %> <%= order.ship_address.zipcode %>
+        </p>
+      </td>
+      <td valign="middle" align="right" colspan="2">Sub Total</td>
+      <td valign="middle" align="right"><%= number_to_currency order.item_total %></td>
+    </tr>
+    <% order.adjustments.each do |adjustment| %>
+      <tr>
+        <td valign="middle" align="right" colspan="2"><%= adjustment.description %></td>
+        <td valign="middle" align="right"><%= number_to_currency adjustment.amount %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td valign="middle" align="right" colspan="2"><strong>Total (USD)</strong></td>
+      <td valign="middle" align="right"><strong><%= number_to_currency order.total %></strong></td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,7 @@
+Here are the details of your order received on <%= order.completed_at.strftime("%B %d %Y at %I:%M %p") %>.
+
+Your order number is <%= order.number %> Please keep it for reference if you speak to a customer service  representative.
+
+Your <%= order.store.name %> order includes the following item(s):
+
+<%= render "order_details_plain", :order => order %>

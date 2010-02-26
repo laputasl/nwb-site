@@ -1,0 +1,21 @@
+This email is to inform you that your order has been shipped on <%= Time.now.strftime("%B %d %Y at %I:%M %p") %>.
+
+Your tracking details:
+Package ID: <%= order.shipment.number %>
+Sent date: <%= order.shipment.updated_at.strftime("%B %d %Y at %I:%M %p") %>
+Shipped via: <%= order.shipment.shipping_method.code %>
+
+<% if order.shipment.shipping_method.code != "USPS" %>
+UPS Tracking Number: <%= order.shipment.tracking %>
+
+To track your package, go to:
+http://wwwapps.ups.com/etracking/tracking.cgi?build_ttn=yes
+<% end %>
+
+Here are the details of the order we received on <%= order.completed_at.strftime("%B %d %Y at %I:%M %p") %>.
+
+Your order number is <%= order.number %> Please keep it for reference if you speak to a customer service representative.
+
+Your <%= order.store.name %> order includes the following item(s):
+
+<%= render "order_mailer/order_details_plain", :order => order %>
