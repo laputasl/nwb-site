@@ -609,16 +609,16 @@ class SiteExtension < Spree::Extension
     end
 
     Admin::OrdersController.class_eval do
-      after_filter :assign_to_store, :only => [:new, :create, :update]
+      #after_filter :assign_to_store, :only => [:new, :create, :update]
 
       private
       def initialize_order_events
         @order_events = %w{cancel hold approve resume}
       end
 
-      def assign_to_store
-        @order.update_attribute(:store_id, Store.find_by_code("nwb").id) if @order.store.nil?
-      end
+      # def assign_to_store
+      #   @order.update_attribute(:store_id, Store.find_by_code("nwb").id) if @order.store.nil?
+      # end
     end
 
     ShippingMethod.class_eval do

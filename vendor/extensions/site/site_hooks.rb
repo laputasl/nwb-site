@@ -53,4 +53,6 @@ class SiteHooks < Spree::ThemeSupport::HookListener
   insert_after :admin_shipments_index_row_actions do
     %( | <%= link_to t('comments'), comments_admin_order_shipment_url(@order, shipment) %> )
   end
+
+  insert_after :admin_order_form_total, :partial => "admin/orders/store"
 end

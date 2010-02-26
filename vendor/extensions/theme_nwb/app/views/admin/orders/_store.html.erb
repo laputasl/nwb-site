@@ -1,0 +1,7 @@
+<tbody id='subtotal'>
+  <tr id="subtotal-row">
+    <td><b>Store:</b></td>
+    <td><%= collection_select(:order, :store_id, Store.all, :id, :name, {}) %></td>
+    <td colspan="3"></td>
+  </tr>
+</tbody>
