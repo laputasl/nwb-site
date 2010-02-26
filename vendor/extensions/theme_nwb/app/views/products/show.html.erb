@@ -18,6 +18,11 @@
   <div class="price">
     <%= render "pwb_pricing" %>
   </div>
+  <% unless @product.featured_testimonial.nil? %>
+    <div class="testimonial">
+      <%= @product.featured_testimonial %>
+    </div>
+  <% end %>
   <div class="rateShare">
     <div class="rating">
       <div class="pr_snippet_product">
