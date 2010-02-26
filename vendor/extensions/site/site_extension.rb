@@ -111,8 +111,8 @@ class SiteExtension < Spree::Extension
 
         #automatically hold orders
         if !state_events.map(&:name).include?("approve")
-          avs = Spree::Config[:hold_order_with_avs].split(",").each(&:strip!)
-          countries = Spree::Config[:hold_order_ship_countries].split(",").each(&:strip!)
+          avs = Spree::Config[:hold_order_with_avs].to_s.split(",").each(&:strip!)
+          countries = Spree::Config[:hold_order_ship_countries].to_s.split(",").each(&:strip!)
 
           if total >= upper_amount
             return true
@@ -131,8 +131,8 @@ class SiteExtension < Spree::Extension
       def record_on_hold_reason
         admin = User.first(:include => :roles, :conditions => ["roles.name = 'admin'"])
         upper_amount = Spree::Config[:hold_order_amount_over].to_f
-        avs = Spree::Config[:hold_order_with_avs].split(",").each(&:strip!)
-        countries = Spree::Config[:hold_order_ship_countries].split(",").each(&:strip!)
+        avs = Spree::Config[:hold_order_with_avs].to_s.split(",").each(&:strip!)
+        countries = Spree::Config[:hold_order_ship_countries].to_s.split(",").each(&:strip!)
 
         if total >= upper_amount
           self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because amount exceeds #{number_to_currency(upper_amount)}.", :user => admin)
@@ -375,7 +375,7 @@ class SiteExtension < Spree::Extension
 
       delivery.edit_hook << :load_available_payment_methods
 
-      update.before :correct_state_values
+      update.before :clear_payments_if_in_payment_state, :correct_state_values
 
       before_filter :update_shipping_method, :only => [:paypal_payment]
       before_filter :set_analytics
@@ -398,6 +398,12 @@ class SiteExtension < Spree::Extension
           params[:checkout][:payments_attributes].first[:amount] = @order.total
         end
         params[:checkout]
+      end
+
+      def clear_payments_if_in_payment_state
+        if @checkout.delivery?
+          @checkout.payments.clear
+        end
       end
 
       def get_exact_target_lists #make multi-store aware
