@@ -763,6 +763,13 @@ class SiteExtension < Spree::Extension
       end
     end
 
+    #set default country_id (around geo_locate ext)
+    ApplicationHelper.module_eval do
+      def country_id
+        (country_from_ip(request.remote_ip) || Country.find(214) ).id
+      end
+    end
+
  end
 
 end

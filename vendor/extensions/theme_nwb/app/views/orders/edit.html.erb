@@ -19,16 +19,16 @@
             <strong>Shipping Options</strong>
             <div id="shipping_calculator" style="text-align:left;">
               <p>
-                <%= radio_button_tag :calculator_zone, :usa %> USA
-                <%= radio_button_tag :calculator_zone, :international %> International
+                <%= radio_button_tag :calculator_zone, :usa, country_id == 214 %> USA
+                <%= radio_button_tag :calculator_zone, :international, country_id != 214 %> International
               </p>
               <p style="padding:5px 0px;">Please note that we do not ship on weekends and your order time does not include weekends.</p>
-              <div id="usa_options" style="float:left;">
+              <div id="usa_options" style="float:left;<%= 'display:block' if country_id == 214 %>">
                 <%= text_field_tag :calculator_zipcode, "enter zip", {:style => "width:50px;"} %>
                 <%= image_submit_tag "/#{@site.code}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
               </div>
-              <div id="international_options" style="float:left;">
-                <%= select_tag :calculator_country, options_for_select(Checkout.countries.sort.map{|c| [c.name, c.id]}) %>
+              <div id="international_options" style="float:left;<%= 'display:block' if country_id != 214 %>">
+                <%= select_tag :calculator_country, options_for_select(Checkout.countries.sort.map{|c| [c.name, c.id]}, country_id) %>
                 <%= image_submit_tag "/#{@site.code}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
               </div>
               <%= image_tag "/#{@site.code}/images/verifying.gif", {:id => "calculator_progress", :style => "float:left;margin:4px;"} %>
@@ -40,7 +40,7 @@
               <p id="free_shipping_at"><%= free_shipping_at(@order, @site) %></p>
             </div>
           </td>
-          <td id="cart_preview_shipping" class="cart_total">-</td>
+          <td id="cart_preview_shipping" class="cart_total"><%= @order.checkout.shipping_method ? number_to_currency(@order.ship_total) : "-" %></td>
         </tr>
         <tr>
           <td colspan="7" class="cart_total">Total (USD):</td>

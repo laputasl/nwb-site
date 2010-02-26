@@ -15,7 +15,7 @@
     <strong>1-877-633-2401</strong><br />
     <a href="mailto:customerservice@petwellbeing.com" title="Contact Customer Service">customerservice@petwellbeing.com</a>
   </p>
-  <p>All Products Shipped From Georgia State USA<br />NaturalWellbeing Distribution Inc.<br />Copyright &copy; 2001-2009</p>
-  <img src="/nwb/images/icon_flag.png" alt="USA Flag" />
+  <p>All Products Shipped From <%= country_id == 35 ? "Canada" : "Georgia State USA" %><br />NaturalWellbeing Distribution Inc.<br />Copyright &copy; 2001-2009</p>
+  <img src="/nwb/images/<%= country_id == 35 ? "ca" : "us" %>flag.png" alt="USA Flag" />
   <p><a href="/MailFaxOrder.pdf" title="Fax/Mail Order Form">Fax/Mail Order Form</a><br /><a href="http://get.adobe.com/reader/" title="Get Adobe Acrobat">Requires Adobe Acrobat</a></p>
 </div>

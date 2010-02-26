@@ -1,5 +1,4 @@
 <%- order = Order.find_or_create_by_id(session[:order_id]) unless session[:order_id].blank? -%>
-
 <div id="cartPreview">
   <h3><a href="#" title="Shopping Cart">Shopping Cart</a></h3>
   <table summary="My Shopping Cart" cellspacing="0">
@@ -35,15 +34,15 @@
     <h3><a href="#" title="Shopping Calculator">Shipping Calculator</a></h3>
     <div id="shipping_calculator">
       <p>
-        <%= radio_button_tag :calculator_zone, :usa %> USA
-        <%= radio_button_tag :calculator_zone, :international %> International
+        <%= radio_button_tag :calculator_zone, :usa, country_id == 214 %> USA
+        <%= radio_button_tag :calculator_zone, :international, country_id != 214 %> International
       </p>
-      <div id="usa_options">
+      <div id="usa_options" <%= 'style="display:block"' if country_id == 214 %>>
         <%= text_field_tag :calculator_zipcode, "enter zip" %>
         <%= image_submit_tag "/#{@site.code}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
       </div>
-      <div id="international_options">
-        <%= select_tag :calculator_country, options_for_select(Checkout.countries.sort.map{|c| [c.name, c.id]}) %>
+      <div id="international_options"<%= 'style="display:block"' if country_id != 214 %>>
+        <%= select_tag :calculator_country, options_for_select(Checkout.countries.sort.map{|c| [c.name, c.id]}, country_id) %>
         <%= image_submit_tag "/#{@site.code}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
       </div>
       <p id="calculator_methods">
@@ -57,6 +56,7 @@
 
 <script type="text/javascript">
   jQuery(document).ready(function(){
+    var country_id = <%= country_id %>;
     var order_total = <%= order.nil? ? 0 : order.line_items.total %>;
     var shipping_methods = [];
 
