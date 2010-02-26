@@ -1,4 +1,4 @@
-<% unless @exact_target_lists.nil? %>
+<% unless @exact_target_lists.blank? %>
   <%- @subscribe = @checkout.order.user.nil? ? true : !@checkout.order.user.exact_target_lists.include?(@exact_target_lists.first.id) -%>
   <p id="snewsletters" class="field">
     <label>Opt-in to our newsletter:</label>
