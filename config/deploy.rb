@@ -64,6 +64,11 @@ namespace :spree do
      #end
   end
 
+  desc "Compiles less stylesheets"
+  task :less_compile, :roles => :app do
+    run "cd #{release_path} && /usr/bin/env rake spree:dev:less RAILS_ENV=production"
+  end
+
   namespace :gems do
     desc "Install gems"
     task :install, :roles => :app do
@@ -99,3 +104,4 @@ end
 
 after 'deploy:update_code', 'spree:create_symlinks'
 after 'spree:create_symlinks', 'spree:gems:install'
+after 'spree:gems:install', 'spree:less_compile'
