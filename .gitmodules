@@ -31,3 +31,6 @@
 [submodule "vendor/extensions/static_content"]
 	path = vendor/extensions/static_content
 	url = git://github.com/BDQ/spree-static-content.git
+[submodule "vendor/extensions/print_invoice"]
+	path = vendor/extensions/print_invoice
+	url = git://github.com/BDQ/spree-print-invoice.git
