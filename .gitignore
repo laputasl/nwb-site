@@ -9,6 +9,7 @@ a\#*
 .loadpath
 .project
 config/database.yml
+config/ey-cloud.yml
 db/*.sqlite3*
 db/schema.rb
 doc/**/*
