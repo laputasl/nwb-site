@@ -7,4 +7,3 @@
 ::ShippingCharge
 ::CouponCredit
 ::ReturnAuthorizationCredit
-
