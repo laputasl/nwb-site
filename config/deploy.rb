@@ -38,7 +38,7 @@ task :nwb_staging do
   set :user,          'deploy'
   set :runner,        'deploy'
   set :rails_env,     'production'
-  set :shared_assets, ['db/xapiandb']
+  set :shared_assets, %w(config/s3.yml db/xapiandb) #['config/s3.yml,db/xapiandb']
 end
 
 namespace :spree do
