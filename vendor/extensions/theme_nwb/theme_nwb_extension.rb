@@ -13,10 +13,36 @@ class ThemeNwbExtension < Spree::Extension
   # end
   
   def activate
-
     # make your helper avaliable in all views
-    # Spree::BaseController.class_eval do
-    #   helper YourHelper
-    # end
+    Spree::BaseController.class_eval do
+      helper NwbThemeHelper
+    end
+    
+    Spree::BaseHelper.module_eval do
+      def mini_image(product, options={})
+        if product.images.empty?
+          image_tag "/#{@site.code}/images/noimage/mini.jpg", options
+        else
+          image_tag product.images.first.attachment.url(:mini), options
+        end
+      end
+
+      def small_image(product, options={})
+        if product.images.empty?
+          image_tag "/#{@site.code}/images/noimage/small.jpg", options
+        else
+          image_tag product.images.first.attachment.url(:small), options
+        end
+      end
+
+      def product_image(product, options={})
+        if product.images.empty?
+          image_tag "/#{@site.code}/images/noimage/product.jpg", options
+        else
+          image_tag product.images.first.attachment.url(:product), options
+        end
+      end
+      
+    end
   end
 end
