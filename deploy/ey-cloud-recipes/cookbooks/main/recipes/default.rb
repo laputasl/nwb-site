@@ -5,7 +5,7 @@ execute "testing" do
 end
 
 #configure s3 for paperclip, etc.
-require_recipe "s3"
+#require_recipe "s3"
 
 #install xapian bindings and create symlinks for xapiandb
-require_recipe "xapian"
+#require_recipe "xapian"
