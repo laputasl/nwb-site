@@ -7,15 +7,14 @@
     <%= product_image(@product, {:style => "max-width:140px;"}) %>
     <p class="itemNum">
       Item # <%= @product.sku %><br />
-      In Stock: <%= @product.has_stock? ? "Yes" : "No" %>
+      In Stock: <%= @product.has_stock? ? "Yes" : "No" %><br />
+      <%= render_snippet("#{@site.code}-ships-from-canada") if @product.taxons.exists?(:id => 9994) && country_id == 35%>
     </p>
   </div>
   <div class="info">
     <h2><%= link_to @product.name, @product, :title => @product.name %></h2>
     <p><%= @product.subtitle_main %></p>
     <p><%= @product.sales_copy %></p>
-
-    <%= render_snippet("#{@site.code}-ships-from-canada") if @product.taxons.exists?(:id => 9994) && country_id == 35%>
   </div>
   <div class="price">
     <%= render "pwb_pricing" %>
