@@ -28,10 +28,8 @@ a:active { color: #1c3c80; }
   padding: 5px 0 0 0;
 }
 #header h1 a {
-  background: url(/nwb/images/nwb_logo.gif) top left no-repeat;
   float: left;
   display: inline;
-  text-indent: -999em;
   overflow: hidden;
   width: 400px;
   height: 64px;
@@ -139,7 +137,7 @@ a:active { color: #1c3c80; }
   width: 745px;
   overflow: hidden;
   padding: 5px 0 0 0;
-  margin: 5px 0 0 0;
+  margin: 0;
 }
 #sidebar {
   width: 163px;
@@ -154,12 +152,13 @@ a:active { color: #1c3c80; }
   display: block;
   text-indent: -999em;
   overflow: hidden;
-  width: 144px;
+  width: 150px;
   height: 27px;
   margin: 0 0 8px 0;
 }
 #sidebar #btnMen { background: url(/nwb/images/products_men.gif) top left no-repeat; }
 #sidebar #btnWomen { background: url(/nwb/images/products_women.gif) top left no-repeat; }
+#sidebar #btnPets { background: url(/nwb/images/products_pet.gif) top left no-repeat; }
 #sidebar img {
   display: block;
   margin: 10px auto;
@@ -359,31 +358,41 @@ h1 {
   width: 565px;
 }
 .product .photo {
-  float: left;
-  display: inline;
-  width: 125px;
+  width: 160px;
+  min-height: 100px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0px;
+  zoom: 1;
+  *display: inline;
+  _height: 100px;
   text-align: center;
 }
 .product .info {
-  float: right;
-  display: inline;
-  width: 420px;
+  width: 380px;
+  font-size: 1.1em;
+  min-height: 100px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0px;
+  zoom: 1;
+  *display: inline;
+  _height: 100px;
 }
 .product h2 { margin: 0 0 10px 0; }
 .product h2 a {
-  color: #708369;
   text-decoration: none;
-  font-weight: normal;
-  font-size: 18px;
+  color: #da5789;
+  font-size: 1.3em;
+  font-weight: bold;
+  margin: 0.67em 0;
 }
 .product .info p { margin: 0 0 10px 0; }
-.product .info ul { margin: 0 0 10px 25px; }
-.product .info li {
-  background: url(/nwb/images/icon_bullet.gif) 0 3px no-repeat;
-  list-style: none;
-  list-style-position: outside;
-  padding: 0 0 0 14px;
-  margin: 0 0 3px 0;
+.product .info ul {
+  margin: 1em 0;
+  padding-left: 40px;
 }
 .testimonial {
   margin: 10px 0px 19px;
@@ -400,11 +409,6 @@ h1 {
 }
 .product .price strong { color: #941c1c; }
 .product .price .strike { text-decoration: line-through; }
-.product .price input {
-  float: left;
-  display: inline;
-  margin: 0 5px 0 0;
-}
 .product .price label {
   float: left;
   display: inline;
@@ -662,6 +666,68 @@ h1 {
   float: left;
   display: inline;
 }
+.product .price form .vprices {
+  padding: 10px 5px 10px 1px;
+  width: 157px;
+  min-height: 75px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  margin: 5px 0;
+  zoom: 1;
+  *display: inline;
+  _height: 75px;
+}
+.product .price form .vprices .radio { width: 150px; }
+.product .price form .vprices .pricesave { margin: 0 8px 0 20px; }
+.product .price form .vprices .radio .add_to_cart {
+  display: block;
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-image: url(/nwb/images/sprite-add-to-cart.png);
+  height: 38px;
+  width: 150px;
+  text-indent: -1000px;
+  font-size: 0px;
+  cursor: pointer;
+}
+.product .price form .vprices .radio .add_to_cart_1 { background-position: -10px -10px; }
+.product .price form .vprices .radio .add_to_cart_1:hover { background-position: -10px -58px; }
+.product .price form .vprices .radio .add_to_cart_1:active { background-position: -10px -58px; }
+.product .price form .vprices .radio .add_to_cart_1_free { background-position: -1078px -10px; }
+.product .price form .vprices .radio .add_to_cart_1_free:hover { background-position: -1078px -58px; }
+.product .price form .vprices .radio .add_to_cart_1_free:active { background-position: -1078px -58px; }
+.product .price form .vprices .radio .add_to_cart_2 { background-position: -188px -10px; }
+.product .price form .vprices .radio .add_to_cart_2:hover { background-position: -188px -58px; }
+.product .price form .vprices .radio .add_to_cart_2:active { background-position: -188px -58px; }
+.product .price form .vprices .radio .add_to_cart_2_free { background-position: -1256px -10px; }
+.product .price form .vprices .radio .add_to_cart_2_free:hover { background-position: -1256px -58px; }
+.product .price form .vprices .radio .add_to_cart_2_free:active { background-position: -1256px -58px; }
+.product .price form .vprices .radio .add_to_cart_3 { background-position: -366px -10px; }
+.product .price form .vprices .radio .add_to_cart_3:hover { background-position: -366px -58px; }
+.product .price form .vprices .radio .add_to_cart_3:active { background-position: -366px -58px; }
+.product .price form .vprices .radio .add_to_cart_3_free { background-position: -1434px -10px; }
+.product .price form .vprices .radio .add_to_cart_3_free:hover { background-position: -1434px -58px; }
+.product .price form .vprices .radio .add_to_cart_3_free:active { background-position: -1434px -58px; }
+.product .price form .vprices .radio .add_to_cart_4 { background-position: -544px -10px; }
+.product .price form .vprices .radio .add_to_cart_4:hover { background-position: -544px -58px; }
+.product .price form .vprices .radio .add_to_cart_4:active { background-position: -544px -58px; }
+.product .price form .vprices .radio .add_to_cart_4_free { background-position: -1612px -10px; }
+.product .price form .vprices .radio .add_to_cart_4_free:hover { background-position: -1612px -58px; }
+.product .price form .vprices .radio .add_to_cart_4_free:active { background-position: -1612px -58px; }
+.product .price form .vprices .radio .add_to_cart_5 { background-position: -722px -10px; }
+.product .price form .vprices .radio .add_to_cart_5:hover { background-position: -722px -58px; }
+.product .price form .vprices .radio .add_to_cart_5:active { background-position: -722px -58px; }
+.product .price form .vprices .radio .add_to_cart_5_free { background-position: -1790px -10px; }
+.product .price form .vprices .radio .add_to_cart_5_free:hover { background-position: -1790px -58px; }
+.product .price form .vprices .radio .add_to_cart_5_free:active { background-position: -1790px -58px; }
+.product .price form .vprices .radio .add_to_cart_6 { background-position: -900px -10px; }
+.product .price form .vprices .radio .add_to_cart_6:hover { background-position: -900px -58px; }
+.product .price form .vprices .radio .add_to_cart_6:active { background-position: -900px -58px; }
+.product .price form .vprices .radio .add_to_cart_6_free { background-position: -1968px -10px; }
+.product .price form .vprices .radio .add_to_cart_6_free:hover { background-position: -1968px -58px; }
+.product .price form .vprices .radio .add_to_cart_6_free:active { background-position: -1968px -58px; }
 .price .quantity {
   float: left;
   display: inline;
