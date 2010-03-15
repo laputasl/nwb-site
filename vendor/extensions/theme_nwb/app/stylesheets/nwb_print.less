@@ -1,0 +1,130 @@
+body {
+  font-size: 11pt;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+hr {
+  display: none;
+}
+
+#container {
+  width: auto;
+  margin: .25in;
+
+  #header{
+    width: auto;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    #miscNav, #searchForm, #nav {
+      display: none;
+    }
+    h1{
+      font-size: 16pt; 
+      font-weight: bold;
+      display: block;
+      padding: 0;
+      margin: 0;
+      a {
+        display: inline;
+        border: none;
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+
+
+
+  h2 {
+    font-size: 15pt; 
+    font-weight: bold;
+    a {
+      display: inline;
+      border: none;
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+
+  #main {
+    background-image: none;
+    #sidebar {
+      display: none;
+    }
+    #body{
+      width: auto;
+      float: none; 
+      #breadcrumbs {
+        display: none;
+      }
+      .product {
+        width: auto;
+        .photo {
+          width: 160px;
+          float: left;
+          text-indent: none;
+          img {
+            display: block;
+          }
+        }
+        .info{
+          margin-left: 170px;
+        }
+        .price {
+          display: block;
+          clear: both;
+          input {
+            display: none;
+          }
+          fieldset {
+            border: 1px dashed black;
+            padding: 4px;
+            margin: 4px 0;
+          }
+          label {
+            display: block;
+            font-weight: normal;
+            padding: 0 0 8px 0;
+            br {
+              display: none;
+            }
+          }
+        }
+        .testimonial {
+          padding: 8px 0;
+          margin: 0 0 8px 0;
+        }
+        .rateShare {
+          display:none;
+        }
+        .productDetails {
+          .content {
+            border-style: none;
+          }
+        }
+      }
+      .prStars {
+        display:none;
+      }
+      .prSummaryAverageRatingDecimal {
+        display: block;
+      }
+
+    }  
+  }
+
+
+  #sidebar, #breadcrumbs, .rateShare, ul.productMenu{
+    display: none;
+  }
+  #footer{
+    ul {
+      display: none;
+    }
+  }
+
+
+
+}

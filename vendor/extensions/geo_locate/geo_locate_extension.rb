@@ -20,21 +20,41 @@ class GeoLocateExtension < Spree::Extension
       end
 
       def country_code_from_ip(ip)
-        geo_db_path = File.join(RAILS_ROOT, "vendor", "extensions", "geo_locate", "db", "GeoIP.dat")
+        mapping = IpMapping.find_by_ip_address(ip)
 
-        if FileTest.exist? geo_db_path
-          begin
-            result = GeoIP.new(geo_db_path).country(ip)
-            return nil if result.size < 4
-            return nil if result[3] == "--"
-            return result[3]
-          rescue Exception => e
-            return nil
+        begin
+          if mapping.nil?
+
+            res = Net::HTTP.get("geoip3.maxmind.com", "/a?l=dGGtRmYrWh5D&i=#{ip}")
+
+            if res.length < 4
+              IpMapping.create(:ip_address => ip, :iso => res)
+              return res
+            else
+              IpMapping.create(:ip_address => ip) if res.include? "IP_NOT_FOUND"
+              return nil
+            end
+          else
+            if mapping.updated_at > 7.days.ago
+              mapping.iso
+            else
+
+              res = Net::HTTP.get("geoip3.maxmind.com", "/a?l=dGGtRmYrWh5D&i=#{ip}")
+
+              if res.length < 4
+                mapping.update_attribute("iso", res)
+                return res
+              else
+                IpMapping.create(:ip_address => ip) if res.include? "IP_NOT_FOUND"
+                return nil
+              end
+            end
           end
-        else
+        rescue
           return nil
         end
       end
+
     end
   end
 end
