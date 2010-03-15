@@ -85,6 +85,10 @@ class SiteExtension < Spree::Extension
       transition :to => 'paid', :from => 'on_hold'
     end
 
+    fsm.event :archive do
+      transition :to => 'legacy', :if => false
+    end
+
     fsm.after_transition :to => 'on_hold', :do => :make_shipments_pending
     fsm.after_transition :to => 'on_hold', :do => :record_on_hold_reason
 
