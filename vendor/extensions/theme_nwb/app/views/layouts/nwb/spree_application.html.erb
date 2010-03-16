@@ -39,7 +39,7 @@
 
       <div id="sidebar">
         <ul id="peopleBtns">
-          <% @categories.root.children.each do |taxon| %>
+          <% global_categories.root.children.each do |taxon| %>
               <% if taxon.name.include? "Men's" %>
                 <li><a id="btnMen" href="<%= seo_url(taxon) %>" title="<%=taxon.name%>"><%=taxon.name%></a></li>
               <% elsif taxon.name.include? "Women's" %>

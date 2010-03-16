@@ -19,9 +19,16 @@ class ThemeNwbExtension < Spree::Extension
     end
     
     Spree::BaseHelper.module_eval do
+
+      def global_categories
+        current_site = Store.find_by_code(request.headers['wellbeing-domain'])
+        Taxonomy.find(:first, :conditions => {:store_id => current_site.id, :name => "Category"})
+      end
+
+
       def mini_image(product, options={})
         if product.images.empty?
-          image_tag "/#{@site.code}/images/noimage/mini.jpg", options
+          image_tag "/#{@site.code}/images/noimage/mini.png", options
         else
           image_tag product.images.first.attachment.url(:mini), options
         end
@@ -29,7 +36,7 @@ class ThemeNwbExtension < Spree::Extension
 
       def small_image(product, options={})
         if product.images.empty?
-          image_tag "/#{@site.code}/images/noimage/small.jpg", options
+          image_tag "/#{@site.code}/images/noimage/small.png", options
         else
           image_tag product.images.first.attachment.url(:small), options
         end
@@ -37,7 +44,7 @@ class ThemeNwbExtension < Spree::Extension
 
       def product_image(product, options={})
         if product.images.empty?
-          image_tag "/#{@site.code}/images/noimage/product.jpg", options
+          image_tag "/#{@site.code}/images/noimage/product.png", options
         else
           image_tag product.images.first.attachment.url(:product), options
         end
