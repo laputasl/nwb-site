@@ -754,6 +754,14 @@ class SiteExtension < Spree::Extension
         return if params.key? :keywords
         redirect_to '/', :status => 301 if ['/products', '/products/'].include? request.path
       end
+
+      private
+      def accurate_title
+        return nil if @product.nil?
+
+        @product.page_title.blank? ?  @product.name : @product.page_title
+
+      end
     end
 
     #ensure we have new user object for custom login.

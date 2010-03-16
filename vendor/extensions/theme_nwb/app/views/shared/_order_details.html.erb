@@ -1,4 +1,4 @@
-<table id="cart-detail">
+<table id="cart-detail" class="index">
   <tbody id='line-items'>
     <tr>
       <% hook :order_details_line_items_headers do %>
@@ -21,17 +21,15 @@
       </tr>
     <% end %>
   </tbody>
-  <% hook :order_details_subtotal do %>
-    <tfoot id='subtotal'>
-      <tr class="total" id="subtotal-row">
+  <tfoot>
+    <% hook :order_details_subtotal do %>
+      <tr id='subtotal' class="total" id="subtotal-row">
         <td colspan="2">&nbsp;</td>
         <td class="total"><b><%= t('subtotal') %>:</b></td>
         <td><span><%= number_to_currency @order.item_total -%></span></td>
       </tr>
-    </tbody>
-  <% end %>
-  <% hook :order_details_charges do %>
-    <tfoot id="order-charges">
+    <% end %>
+    <% hook :order_details_charges do %>
       <% @order.charges.each do |charge| %>
         <tr class="total">
           <td colspan="2">&nbsp;</td>
@@ -39,10 +37,8 @@
           <td><span><%= number_to_currency charge.amount -%></span></td>
         </tr>
       <% end %>
-    </tbody>
-  <% end %>
-  <% hook :order_details_credits do %>
-    <tfoot id="order-credits">
+    <% end %>
+    <% hook :order_details_credits do %>
       <% @order.credits.each do |credit| %>
         <tr class="total">
            <td colspan="2">&nbsp;</td>
@@ -50,15 +46,13 @@
           <td><span><%= number_to_currency credit.amount -%></span></td>
         </tr>
       <% end %>
-    </tbody>
-  <% end %>
-  <% hook :order_details_total do %>
-    <tfoot id='order-total'>
-      <tr class="total">
+    <% end %>
+    <% hook :order_details_total do %>
+      <tr id='order-total' class="total">
         <td colspan="2">&nbsp;</td>
         <td class="total"><b><%= t('order_total') %>:</b></td>
         <td><span id="order_total"><%= number_to_currency @order.total -%></span></td>
       </tr>
-    </tbody>
-  <% end %>
+    <% end %>
+  </tfoot>
 </table>
