@@ -16,7 +16,7 @@
 <% end %>
 
 <% unless @taxon.description.nil? %>
-  <div class="content">
+  <div class="content description">
     <%= @taxon.description %>
   </div>
 <% end %>
@@ -24,8 +24,8 @@
   <h1><%= taxon_header(@taxon) %></h1>
   <%= render "shared/products", :products => @products %>
 </div>
-<% unless @taxon.footer %>
-  <div class="content">
+<% unless @taxon.footer.nil? %>
+  <div class="content footer">
     <%= @taxon.footer %>
   </div>
 <% end %>

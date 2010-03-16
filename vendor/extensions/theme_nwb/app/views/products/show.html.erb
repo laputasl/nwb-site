@@ -1,9 +1,5 @@
 <% content_for :breadcrumbs do %>
   <%= breadcrumbs(@taxon, @product) %>
 <% end %>
-<% content_for :head do%>
-  <meta name="description" content="<%=@product.meta_description %>" />
-  <meta name="keywords" content="<%=@product.meta_keywords %>" />
-<% end %>
 
 <%= render "#{@site.code}_details" %>
