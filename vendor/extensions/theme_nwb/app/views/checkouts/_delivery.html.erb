@@ -78,7 +78,7 @@
 
   var shipping_methods = new Array();
   <% @available_methods.each do |sm| %>
-    shipping_methods[<%= sm[:id] %>] = <%= sm[:rate].gsub("$", "").to_f %>;
+    shipping_methods[<%= sm[:id] %>] = <%= sm[:rate].to_s.gsub("$", "").to_f %>;
   <% end %>
 
   function format_currency(num) {
