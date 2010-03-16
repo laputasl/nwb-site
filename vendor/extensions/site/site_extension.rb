@@ -228,11 +228,20 @@ class SiteExtension < Spree::Extension
         addr.save(false)
         @order.checkout.update_attribute(:ship_address_id, addr.id)
 
-        rates =  ShippingMethod.all_available(@order).collect do |ship_method|
-          { :id => ship_method.id,
-            :name => ship_method.name,
-            :rate => ship_method.calculate_cost(@order.checkout.shipment) }
+        begin
+
+          rates = ShippingMethod.all_available(@order).collect do |ship_method|
+            { :id => ship_method.id,
+              :name => ship_method.name,
+              :rate => ship_method.calculate_cost(@order.checkout.shipment),
+              :position => ship_method.position }
+          end
+        rescue Spree::ShippingError => ship_error
+          flash[:error] = ship_error.to_s
+          rates = []
         end
+
+        rates = rates.sort_by{ |r| r[:position] }
 
         if rates.size > 0 && @order.checkout.shipping_method_id.nil?
           @order.checkout.update_attribute(:shipping_method_id, rates[0][:id])
@@ -266,9 +275,9 @@ class SiteExtension < Spree::Extension
         params[:remove].each do |variant_id, value|
           @order.line_items.detect {|li| li.variant_id == variant_id.to_i }.destroy
         end
+
         @order.update_totals!
         @order.reload
-
       end
 
     end
@@ -433,7 +442,7 @@ class SiteExtension < Spree::Extension
 
       #sorting by (and selecting) cheapest shipping method
       def load_available_methods
-        @available_methods = rate_hash.sort_by{ |sm| sm[:rate] }
+        @available_methods = rate_hash
         @checkout.shipping_method_id ||= @available_methods.first[:id] unless @available_methods.empty?
       end
 
@@ -471,6 +480,23 @@ class SiteExtension < Spree::Extension
           true
         else
           false
+        end
+      end
+
+      #returns rates sorted by :position
+      def rate_hash
+        begin
+          rates = @checkout.shipping_methods.collect do |ship_method|
+            { :id => ship_method.id,
+              :name => ship_method.name,
+              :rate => ship_method.calculate_cost(@order.checkout.shipment),
+              :position => ship_method.position }
+          end
+
+          rates.sort_by{ |r| r[:position] }
+        rescue Spree::ShippingError => ship_error
+          flash[:error] = ship_error.to_s
+          []
         end
       end
     end
@@ -637,8 +663,14 @@ class SiteExtension < Spree::Extension
       #adds additional handling fee
       alias_method :core_calculate_cost, :calculate_cost
 
+      #add handling_fee or free for can_be_free calculators.
       def calculate_cost(shipment)
-        core_calculate_cost(shipment) + handling_fee.to_f
+        if can_be_free && shipment.order.line_items.total > Spree::Config.get("#{shipment.order.store.code}_free_shipping_at").to_f
+          0.0 #aka FREE!
+        else
+          core_calculate_cost(shipment) + handling_fee.to_f
+        end
+
       end
 
       #excludes PO (APO / FPO) boxes
@@ -781,6 +813,7 @@ class SiteExtension < Spree::Extension
         (country_from_ip(request.remote_ip) || Country.find(214) ).id
       end
     end
+
 
  end
 

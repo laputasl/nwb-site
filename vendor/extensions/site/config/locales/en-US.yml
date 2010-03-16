@@ -7,6 +7,7 @@ en-US:
   order_must_be_over: Order must be over
   legacy: Legacy
   page_title: Page Title
+  can_be_free: Can be free
   checkout_steps:
     # keys correspond to Checkout state names:
     delivery: Shipping and Payment

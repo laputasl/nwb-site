@@ -9,3 +9,21 @@
   <%= f.text_field :handling_fee  %>
   <%= error_message_on :shipping_method, :handling_fee %>
 <% end %>
+
+<% f.field_container :position do %>
+  <%= f.label :position, "Position" %><br />
+  <%= f.text_field :position  %>
+  <%= error_message_on :shipping_method, :position %>
+<% end %>
+
+<% f.field_container :can_be_free do %>
+  <%= f.label :can_be_free, "Can be free" %><br />
+  <label class="sub">
+    <%= radio_button(:shipping_method, :can_be_free, true ) %>
+    <%= t("yes") %>
+  </label> &nbsp;
+  <label class="sub">
+    <%= radio_button(:shipping_method, :can_be_free, false ) %>
+    <%= t("no") %>
+  </label>
+<% end %>
