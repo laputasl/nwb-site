@@ -211,6 +211,7 @@ class SiteExtension < Spree::Extension
       before_filter :set_analytics
       create.before << :assign_to_store
       update.before :check_for_removed_items
+      update.after :recalculate_totals
 
       update do
         flash nil
@@ -276,6 +277,9 @@ class SiteExtension < Spree::Extension
           @order.line_items.detect {|li| li.variant_id == variant_id.to_i }.destroy
         end
 
+      end
+
+      def recalculate_totals
         @order.update_totals!
         @order.reload
       end
@@ -684,8 +688,6 @@ class SiteExtension < Spree::Extension
         end
       end
     end
-
-    Calculator::FlatOverValue.register
 
     #Need to redirect to delivery step on failure (not the default payment)
     Spree::PaypalExpress.module_eval do
