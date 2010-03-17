@@ -7,6 +7,7 @@
   <div id="container">
     <div id="header">
       <h1><a href="/"><img src="/pwb/images/pwb_logo.jpg" alt="PetWellbeing.com - 1.877.633.2401" /></a></h1>
+      <div class="util">
       <ul id="miscNav">
         <% if current_user.nil? %>
           <li class="first"><%= link_to "Login", login_path %></li>
@@ -20,7 +21,7 @@
         <li><a href="/pwb/aboutus" title="About">About</a></li>
       </ul>
       <%= render "shared/pwb_search" %>
-
+      </div>
       <ul id="nav">
         <li><a id="navHome" href="/" title="Home">Home</a></li>
         <li><a id="navShipping" href="/pwb/shipping" title="Free Same Day Shipping">Free Same Day Shipping</a></li>
@@ -50,7 +51,9 @@
           <% end %>
           <li><a id="btnPeople" href="/people" title="People">People</a></li>
         </ul>
-
+        <div class="bbb">
+          <a target="_blank" href="https://www.bbb.org/online/consumer/cks.aspx?id=110020517059"><img title="Click to verify BBB accreditation and to see a BBB report." border="0" src="/pwb/images/bbb.gif" alt="Click to verify BBB accreditation and to see a BBB report."></a>
+        </div>
         <%= render 'shared/cart_preview' %>
 
         <dl id="subNav">
@@ -76,8 +79,22 @@
             </dd>
           <% end %>
         </dl>
-        <a id="btnPHBlog" href="/blog" title="Pet Health Blog">Pet Health Blog</a>
-        <img src="/pwb/images/img_comodo.png" alt="Comodo" />
+        <div id="scan">
+          <a href="https://www.scanalert.com/RatingVerify?ref=www.petwellbeing.com" rel="external nofollow" target="_blank"><img width="94" height="54" border="0" src="//images.scanalert.com/meter/survey/www.petwellbeing.com/13.gif" alt="HACKER SAFE certified sites prevent over 99.9% of hacker crime."></a>
+        </div>
+        <!--
+        TrustLogo Html Builder Code:
+        Shows the logo at URL http://www.petwellbeing.com/images/site/comodo_secure.gif
+        //-->
+        <script language="javascript" type="text/javascript">
+        //<![CDATA[
+        var tl_loc0=(window.location.protocol == "https:")? "https://secure.comodo.net/trustlogo/javascript/trustlogo.js" :
+        "http://www.trustlogo.com/trustlogo/javascript/trustlogo.js";
+        document.writeln('<scr' + 'ipt language="JavaScript" src="'+tl_loc0+'" type="text\/javascript">' + '<\/scr' + 'ipt>');
+        //]]>
+        </script>
+        <a href="http://www.instantssl.com" id="comodoTL">SSL</a>
+        <script type="text/javascript">TrustLogo("http://www.petwellbeing.com/images/site/comodo_secure.gif", "SC4", "none");</script>
         <img src="/pwb/images/img_paypal.png" alt="PayPal" />
       </div>
       <hr />
