@@ -1,0 +1,55 @@
+<%= render :partial => 'admin/shared/configuration_menu' %>
+
+<h1><%= t("taxon_edit")%></h1>
+
+<% form_for(:taxon, :url => admin_taxonomy_taxon_url, :html => { :method => :put }) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+
+  <% f.field_container :title do %>
+    <%= f.label :title, "Taxon Title"%><br />
+    <%= f.text_field :title, :class => 'fullwidth'  %>
+    <%= f.error_message_on :title %>
+  <% end %>
+
+  <% f.field_container :icon do %>
+    <%= f.label :icon, "Taxon Icon"%><br />
+    <%= f.file_field :icon %>
+    <%= f.error_message_on :icon %>
+  <% end %>
+
+  <% f.field_container :description do %>
+    <%= f.label :description, "Taxon Description"%><br />
+    <%= f.text_area :description, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :description %>
+  <% end %>
+
+  <% f.field_container :cross_sell do %>
+    <%= f.label :cross_sell, "Cross Sell Description"%><br />
+    <%= f.text_area :cross_sell, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :cross_sell %>
+  <% end %>
+
+  <% f.field_container :meta_description do %>
+    <%= f.label :meta_description, "Meta Description"%><br />
+    <%= f.text_area :meta_description, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :meta_description %>
+  <% end %>
+
+  <% f.field_container :meta_keywords do %>
+    <%= f.label :meta_keywords, "Meta Keywords"%><br />
+    <%= f.text_area :meta_keywords, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :meta_keywords %>
+  <% end %>
+
+  <% f.field_container :footer do %>
+    <%= f.label :footer, "Footer"%><br />
+    <%= f.text_area :footer, {:style=> "height:100px;", :class => 'fullwidth'} %>
+    <%= f.error_message_on :footer %>
+  <% end %>
+
+  <p class="form-buttons">
+    <%= button t("update") %> <%= t("or") %> <%= link_to t("cancel"), edit_admin_taxonomy_url(@taxonomy) %>
+  </p>
+<% end %>
+
+
