@@ -25,6 +25,20 @@ class ThemeNwbExtension < Spree::Extension
         Taxonomy.find(:first, :conditions => {:store_id => current_site.id, :name => "Category"})
       end
 
+      [:mini, :small, :product, :large].each do |style|
+        define_method "#{style}_image" do |product, *options|
+          options = options.first || {}
+          if product.images.empty?
+            options.reverse_merge! :alt => product.name
+            image_tag "/#{@site.code}/images/noimage/#{style}.png", options
+          else
+            image = product.images.first
+            options.reverse_merge! :alt => image.alt.blank? ? product.name : image.alt
+            image_tag image.attachment.url(style), options
+          end
+        end
+      end
+
     end
   end
 end
