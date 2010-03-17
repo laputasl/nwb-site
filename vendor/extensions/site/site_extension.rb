@@ -761,6 +761,12 @@ class SiteExtension < Spree::Extension
           @object ||= end_of_association_chain.find(:first, :include => :taxonomy, :conditions => ["taxons.permalink = ? AND taxonomies.store_id = ?", permalink  , @site.id])
         end
       end
+
+      def accurate_title
+        return nil if @taxon.nil?
+
+        @taxon.title.blank? ?  @taxon.name : @taxon.title
+      end
     end
 
     #support short SEO taxon urls
