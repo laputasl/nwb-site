@@ -273,8 +273,8 @@ class SiteExtension < Spree::Extension
 
         return unless params.key? "remove"
 
-        params[:remove].each do |variant_id, value|
-          @order.line_items.detect {|li| li.variant_id == variant_id.to_i }.destroy
+        params[:remove].each do |line_item, value|
+          LineItem.destroy line_item.to_i
         end
 
       end
