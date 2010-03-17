@@ -1,5 +1,10 @@
+<%
+  paginated_products = Spree::Config.searcher.products if params.key?(:keywords)
+  paginated_products ||= products
+%>
+
 <ul class="productList">
-  <% products.each do |product|   
+  <% products.each do |product|
     %><li class="<%= products.index(product) < 2 ? "" : "border" %>">
 <% if @site.code == "pwb" %>
       <%= link_to small_image(product, {:style => "max-width:70px;"}), product, {:class => "photo"} %>
@@ -65,3 +70,11 @@
     <li class="border">&nbsp;</li>
   <%end%>
 </ul>
+
+<% if paginated_products.respond_to?(:total_pages)
+      params.delete(:search)
+      params.delete(:taxon)
+%><%= will_paginate(paginated_products,
+                    :previous_label => "&#171; #{t('previous')}",
+                    :next_label => "#{t('next')} &#187;") %>
+<% end -%>

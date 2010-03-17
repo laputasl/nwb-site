@@ -22,7 +22,7 @@
 <% end %>
 <div class="products">
   <h1><%= taxon_header(@taxon) %></h1>
-  <%= render "shared/products", :products => @products %>
+  <%= render :partial => "shared/products", :locals => {:products => @products, :taxon => @taxon } %>
 </div>
 <% unless @taxon.footer.nil? %>
   <div class="content footer">

@@ -321,8 +321,11 @@ class SiteExtension < Spree::Extension
         # Prepare a search within the parameters
         Spree::Config.searcher.prepare(params)
 
-        if params[:product_group_name]
-          @product_group = ProductGroup.find_by_permalink(params[:product_group_name])
+        if !params[:order_by_price].blank?
+          @product_group = ProductGroup.new.from_route([params[:order_by_price]+"_by_master_price"])
+        elsif params[:product_group_name]
+          @cached_product_group = ProductGroup.find_by_permalink(params[:product_group_name])
+          @product_group = ProductGroup.new
         elsif params[:product_group_query]
           @product_group = ProductGroup.new.from_route(params[:product_group_query])
         else
@@ -336,13 +339,12 @@ class SiteExtension < Spree::Extension
         @product_group.add_scope('keywords', @keywords) unless @keywords.blank?
         @product_group = @product_group.from_search(params[:search]) if params[:search]
 
-        params[:search] = @product_group.scopes_to_hash if @keywords.blank?
-
-        base_scope = Spree::Config[:show_zero_stock_products] ? Product.active : Product.active.on_hand
+        base_scope = @cached_product_group ? @cached_product_group.products.active : Product.active
+        base_scope = base_scope.on_hand unless Spree::Config[:show_zero_stock_products]
         @products_scope = @product_group.apply_on(base_scope)
 
-        curr_page = Spree::Config.searcher.manage_pagination ? 1 : params[:page]
-        @products = @products_scope.paginate({
+        curr_page = Spree::Config.searcher.manage_pagination ? params[:page] : 1
+        @products = @products_scope.all.paginate({
             :include  => [:images, :master],
             :per_page => per_page,
             :page     => curr_page
@@ -758,6 +760,12 @@ class SiteExtension < Spree::Extension
           permalink += "/" unless permalink[-1..-1] == "/"
           @object ||= end_of_association_chain.find(:first, :include => :taxonomy, :conditions => ["taxons.permalink = ? AND taxonomies.store_id = ?", permalink  , @site.id])
         end
+      end
+
+      def accurate_title
+        return nil if @taxon.nil?
+
+        @taxon.title.blank? ?  @taxon.name : @taxon.title
       end
     end
 

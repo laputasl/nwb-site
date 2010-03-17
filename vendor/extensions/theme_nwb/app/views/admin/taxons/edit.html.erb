@@ -1,10 +1,9 @@
-<%= error_messages_for :taxon %>
-<% form_for @taxon, :url => admin_adv_edit_taxon_url(@taxon.id), :html => {:multipart => true} do |f| %>
-  <% f.field_container :name do %>
-    <%= f.label :name, "Taxon Name"%><br />
-    <%= f.text_field :name, :class => 'fullwidth'  %>
-    <%= f.error_message_on :name %>
-  <% end %>
+<%= render :partial => 'admin/shared/configuration_menu' %>
+
+<h1><%= t("taxon_edit")%></h1>
+
+<% form_for(:taxon, :url => admin_taxonomy_taxon_url, :html => { :method => :put }) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
 
   <% f.field_container :title do %>
     <%= f.label :title, "Taxon Title"%><br />
@@ -48,6 +47,9 @@
     <%= f.error_message_on :footer %>
   <% end %>
 
-  <%= submit_tag t(:update) %>
+  <p class="form-buttons">
+    <%= button t("update") %> <%= t("or") %> <%= link_to t("cancel"), edit_admin_taxonomy_url(@taxonomy) %>
+  </p>
 <% end %>
+
 

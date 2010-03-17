@@ -33,3 +33,6 @@ Spree::Config.set(:allow_openid => false)
 
 #skip local confirm for PPX
 Spree::Config.set(:paypal_express_review => false)
+
+#don't show site name in browser title
+Spree::Config.set(:always_put_site_name_in_title => false)
