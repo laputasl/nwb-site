@@ -49,6 +49,10 @@
           <li><a id="btnPets" href="/pets" title="Pets">Pets</a></li>
         </ul>
 
+      	<div id="bbb2">
+      		<a target="_blank" href="https://www.bbb.org/online/consumer/cks.aspx?id=110020517059"><img title="Click to verify BBB accreditation and to see a BBB report." border=0 src="/nwb/images/bbb.gif" alt="Click to verify BBB accreditation and to see a BBB report." /></a>
+</div>
+
         <%= render 'shared/cart_preview' %>
 
         <dl id="subNav">
@@ -84,10 +88,18 @@
             <% end %>
           <% end %>
         </dl>
-        <a id="btnNWBlog" href="/blog" title="Natural Wellbeing Blog">Natural Wellbeing Blog</a>
+        	<!-- START SCANALERT CODE -->
+      		<a target="_blank" href="https://www.scanalert.com/RatingVerify?ref=www.naturalwellbeing.com">
+      		<img width="94" height="54" border="0" src="//images.scanalert.com/meter/survey/www.naturalwellbeing.com/13.gif" alt="HACKER SAFE certified sites prevent over 99.9% of hacker crime." /></a>
+      		<!-- END SCANALERT CODE -->
+
         <img src="/nwb/images/img_comodo.png" alt="Comodo" />
-        <img src="/nwb/images/img_paypal.png" alt="PayPal" />
-      </div>
+        <!-- Begin Official PayPal Seal -->
+    		<a href="https://www.paypal.com/us/verified/pal=wdf%40naturalwellbeing%2ecom" target="_blank">
+    		<img src="/nwb/images/img_paypal.png" border="0" alt="Official PayPal Seal" width="100" height="100" />
+      </a>
+    		<!-- End Official PayPal Seal -->
+        </div>
       <hr />
       <div id="body">
         <%= yield :breadcrumbs %>

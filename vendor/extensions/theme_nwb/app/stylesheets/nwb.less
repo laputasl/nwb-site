@@ -365,7 +365,7 @@ a:hover, a:active {color: #1c3c80;}
 #body .content {
   border: 1px solid #C4E9FF;
   margin: 10px 0 20px 13px;
-  background: ##F7FCFF;
+  background: #F7FCFF;
   padding: 10px;
   line-height: 16px;
   overflow: hidden;
@@ -610,47 +610,45 @@ h1 {
 .products h1 a {color: #DA5789;}
 .products h1 a:hover {color: #DA5789;}
 .products ul {
-  background: url(/nwb/images/bg_dotted.png) 265px 0 repeat-y;
-  margin: 10px;
-  width: 545px;
+  margin: 10px 0px;
+  padding: 0px 5px;
+  width: 563px;
   overflow: hidden;
 }
-.productList .border {
-  border-bottom: 5px solid #F4F3F0;
-  padding-bottom: 10px !important;
-  margin-bottom: 20px;
-  
-  width: 262px;
-  min-height: 100px;
+.productList li {
+  width: 250px;
+  min-height: 150px;
   display: -moz-inline-stack;
   display: inline-block;
   vertical-align: top;
+  margin: 0;
+  padding:0 5px;
   zoom: 1;
   *display: inline;
   _height: 100px;  
+  overflow: hidden;
 }
+.productList .border {
+  border-top: 1px dashed #F4F3F0;
+  padding-top: 10px !important;
+  margin-top: 20px;
+}
+
 .productList .rating {
   margin: 10px 0 0 ;
   min-height: 20px;
 }
-.productList li {
-  width: 262px;
-  float: left;
-  display: inline;
-  padding: 0 10px 0 0;
-  min-height:195px;
-}
 .productList li .photo {
   float: left;
   display: inline;
-  width: 60px;
+  width: 70px;
+  text-align: right;
+  padding: 0 4px 4px 0;
 }
 .productList li .info {
-  float: right;
   display: inline;
-  width: 188px;
   overflow: hidden;
-  margin: 5px 0 5px 0;
+  margin: 0;
 }
 .productList li .info h2 {
   font-size: 14px;
@@ -659,11 +657,6 @@ h1 {
 .productList li .info p.itemNum {
   font-size: 11px;
   margin: 0;
-}
-.productList li .info p.description {
-  min-height: 50px;
-  max-height: 50px;
-  overflow: hidden;
 }
 .productList li .info p {
   font-size: 12px;
@@ -674,18 +667,9 @@ h1 {
   margin: 10px 0 0 ;
   min-height: 20px;
 }
-.productList .info p.price {
-  width: 95px;
-  margin: 0;
-  padding: 0;
-  float: left;
-  display: inline;
-}
 .productList .info p.more {
-  float: right;
-  display: inline;
+  text-align: right;
   clear: none;
-  width: 90px;
   margin: 0;
 }
 .productList li p.more {
@@ -693,6 +677,41 @@ h1 {
   font-size: 10px;
   margin: 0 0 10px 0;
 }
+
+.productList .action {
+  display:block;
+  float:none;
+  clear:both;
+
+  
+}
+
+.productList .action .price {
+  width: 90px;
+  min-height: 5px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+  padding:0 20px 0 0;
+  zoom: 1;
+  *display: inline;
+  _height: 5px;  
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 10px;  
+}
+
+.productList .action .price p{
+  display:block;
+  margin:0;
+  padding:0;
+}
+
+.productList .action form {
+  display:inline;
+}
+
 /*---------------------*/
 /* Review Snippet -----*/
 /*---------------------*/

@@ -1,11 +1,12 @@
 <ul class="productList">
-  <% products.each do |product| %>
-    <li class="<%= ((products.size - products.index(product)) < (3 - (products.size % 2))) ? "" : "border" %>">
+  <% products.each do |product|   
+    %><li class="<%= products.index(product) < 2 ? "" : "border" %>">
       <%= link_to small_image(product, {:style => "max-width:70px;"}), product, {:class => "photo"} %>
       <div class="info" style="min-height:145px;">
         <h2><%= link_to truncate(product.name, :length => 26), product, :title => product.name %></h2>
         <p class="itemNum">Item # <%= product.sku %></p>
         <p class="description"><%= product.subtitle_main %></p>
+        <p class="more"><a href="#" title="Product Info &raquo;">Product Info &raquo;</a></p>
         <div class="rating">
           <div class="pr_snippet_category">
             <script type="text/javascript">
@@ -14,20 +15,20 @@
             </script>
           </div>
         </div>
-        <p class="price"><%= product_price(product) %> USD</p>
-        <p class="more"><a href="#" title="Product Info &raquo;">Product Info &raquo;</a></p>
       </div>
-      <div class="price">
+      <div class="action">
+        <div class="price">
+          <p>Save <%= number_to_currency(product.base_price - product.master.volume_price(1)) %></p>
+          <p>Price <%= number_to_currency(product.master.volume_price(1)) %></p>
+        </div>
         <% form_for :order, :url => orders_url do |f| %>
-          <fieldset>
-             <div class="quantity">
-              <label>Quantity</label>
-              <%= text_field_tag("variants[#{product.master.id}]", 1)  %>
-            </div>
-            <%= submit_tag("Buy Now", :class => "btnAddCart") %>
-          </fieldset>
+          <%= hidden_field_tag("variants[#{product.master.id}]", 1)  %>
+          <%= submit_tag("Buy Now", :class => "btnAddCart", :type => "image", :src => "data:image/gif;base64,R0lGODlhSAAUALMAACB+LovPk0isTzCcOHnHfyuTNP///1O2WzulRf///wAAAAAAAAAAAAAAAAAAAAAAACH5BAEHAAkALAAAAABIABQAAAT/MIFJq704682rRGAojmRpnmgaHlPhvnAsz3Rt3y8L4Hzv+7qb4UcsygiTgXLJBBiY0Kh0Sq1OkYCq08rteqVY7dNAVj6XYzR0XEaTz+dBPA5OUp2GZD7u3A78Snh6ZhRyfod0UVgoTiF9Bo55CJCQIo0gjZcIfZOdlCmLJ5qPkZt7I6OQqaaPmiahJqmrpJaVpreYqnu0J7AlsrZkm52otpnGqp0AxChYAs/Q0XhvAgACb07P2dHVBtDZ1m/e2uPb3NzO598V69bW5Ofv2u3y1d/q5+n4++rj/P8A1QWYcKCgwYMIEx50orChw4cNBwKASLHggIoYMx6QSKCjx48gE0OKHEmypEmPAyV0WMmyZcsEEQAAOw==") %>
         <% end %>
       </div>
-    </li>
-  <% end %>
+    </li><% 
+  end %>
+  <%(products.size % 2).times do%>
+    <li class="border">&nbsp;</li>
+  <%end%>
 </ul>

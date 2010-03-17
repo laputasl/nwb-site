@@ -502,10 +502,21 @@ h1 {
   width: 545px;
   overflow: hidden;
 }
+.productList li {
+  width: 262px;
+  min-height: 100px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+  _height: 100px;
+  overflow: hidden;
+}
 .productList .border {
-  border-bottom: 5px solid #f4f3f0;
-  padding-bottom: 10px !important;
-  margin-bottom: 20px;
+  border-top: 5px solid #f4f3f0;
+  padding-top: 10px !important;
+  margin-top: 20px;
 }
 .productList .rating {
   margin: 10px 0 0;
