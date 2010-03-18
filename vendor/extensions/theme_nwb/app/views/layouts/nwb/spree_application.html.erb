@@ -41,9 +41,9 @@
         <ul id="peopleBtns">
           <% global_categories.root.children.each do |taxon| %>
               <% if taxon.name.include? "Men's" %>
-                <li><a id="btnMen" href="<%= seo_url(taxon) %>" title="<%=taxon.name%>"><%=taxon.name%></a></li>
+                <li><a id="btnMen" href="/<%= taxon.permalink %>" title="<%=taxon.name%>"><%=taxon.name%></a></li>
               <% elsif taxon.name.include? "Women's" %>
-                 <li><a id="btnWomen" href="<%= seo_url(taxon) %>" title="<%=taxon.name%>"><%=taxon.name%></a></li>
+                 <li><a id="btnWomen" href="/<%= taxon.permalink %>" title="<%=taxon.name%>"><%=taxon.name%></a></li>
               <% end %>
           <% end %>
           <li><a id="btnPets" href="/pets" title="Pets">Pets</a></li>

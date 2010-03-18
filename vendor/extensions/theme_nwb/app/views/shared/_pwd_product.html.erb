@@ -1,0 +1,32 @@
+<li class="<%= products.index(product) < 2 ? "" : "border" %>">
+  <%= link_to small_image(product, {:style => "max-width:70px;"}), product, {:class => "photo"} %>
+  <div class="info" style="min-height:145px;">
+    <h2><%= link_to truncate(product.name, :length => 26), product, :title => product.name %></h2>
+    <p class="itemNum">Item # <%= product.sku %></p>
+    <p class="description"><%=is_home ? product.short_home : product.subtitle_main %></p>
+    <div class="rating">
+      <div class="pr_snippet_category">
+        <script type="text/javascript">
+        var pr_snippet_min_reviews=1;
+        POWERREVIEWS.display.snippet(document, { pr_page_id : "<%= product.legacy_id %>" });
+        </script>
+      </div>
+    </div>
+    <p class="price"><%= product_price(product) %> USD</p>
+    <p class="more"><a href="#" title="Product Info &raquo;">Product Info &raquo;</a></p>
+  </div>
+  <div class="price">
+    <% form_for :order, :url => orders_url do |f| %>
+      <fieldset>
+         <div class="quantity">
+          <label>Quantity</label>
+          <%= text_field_tag("variants[#{product.master.id}]", 1)  %>
+        </div>
+        <%= submit_tag("Buy Now", :class => "btnAddCart") %>
+      </fieldset>
+    <% end %>
+  </div>
+</li><% 
+if (products.index(product) % 2) == 1 && (products.index(product) < (products.size-1))
+  %><li class="spacer">&nbsp;</li><%
+end %>

@@ -6,9 +6,14 @@
 <body>
   <div id="container">
     <div id="header">
-      <h1><a href="/" title="PetWellbeing.com">PetWellbeing.com - 1.877.633.2401</a></h1>
+      <h1><a href="/"><img src="/pwb/images/pwb_logo.jpg" alt="PetWellbeing.com - 1.877.633.2401" /></a></h1>
+      <div class="util">
       <ul id="miscNav">
-        <li class="first"><%= link_to "Login", login_path %></li>
+        <% if current_user.nil? %>
+          <li class="first"><%= link_to "Login", login_path %></li>
+        <% else %>
+          <li class="first"><%= link_to "Log Out", logout_path %></li>
+        <% end %>
         <li><a href="http://videos.petwellbeing.com/" title="Videos">Videos</a></li>
         <li><a href="http://pethealth.petwellbeing.com/wiki/Main_Page" title="Wiki">Wiki</a></li>
         <li><a href="/blog" title="Blog">Blog</a></li>
