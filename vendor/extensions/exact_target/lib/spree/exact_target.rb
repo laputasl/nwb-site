@@ -10,9 +10,9 @@ module Spree
       if list.nil?
         subscriber_id = -1
       else
-        subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-
         begin
+          subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+
           if user.is_a? String
             subscriber_id = subscriber.add(user, list.list_id)
           else
@@ -31,9 +31,9 @@ module Spree
     end
 
     def subscribe_to_list(user, listid)
-      subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-
       begin
+        subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+
         if user.is_a? User
           subscription_id = subscriber.add(user.email, listid).inspect
         else
@@ -51,9 +51,9 @@ module Spree
     end
 
     def unsubscribe_from_list(user, listid)
-      subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-
       begin
+        subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+
         if user.is_a? User
           result = subscriber.delete(nil, user.email, listid).inspect
         else
