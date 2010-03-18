@@ -47,7 +47,8 @@ class ExactTargetExtension < Spree::Extension
                 trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
                 result = trigger.deliver(mailer.mail.to, external_key, variables)
               rescue ET::Error => error
-
+                logger.error "Error sending ExactTarget triggered email"
+                logger.error error.to_yaml
               end
             end
           end

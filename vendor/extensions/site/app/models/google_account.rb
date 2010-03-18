@@ -5,4 +5,9 @@ class GoogleAccount < ActiveRecord::Base
   def actions
     []
   end
+
+  # fix for Payment#payment_profiles_supported?
+  def payment_gateway
+    false
+  end
 end

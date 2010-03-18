@@ -525,9 +525,9 @@ class SiteExtension < Spree::Extension
         if list.nil?
           subscriber_id = -1
         else
-          subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-
           begin
+            subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+
             if user.is_a? String
               subscriber_id = subscriber.add(user, list.list_id)
             else
@@ -602,10 +602,15 @@ class SiteExtension < Spree::Extension
         create_subscriber(user)
 
         #send account info email
-        trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+        begin
+          trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
-        external_key = (user.store.code == "nwb" ? "nwb-accountinfo" : "pwb-accountInfo")
-        result = trigger.deliver(user.email, external_key, {:First_Name => "Customer", :emailaddr => user.email})
+          external_key = (user.store.code == "nwb" ? "nwb-accountinfo" : "pwb-accountInfo")
+          result = trigger.deliver(user.email, external_key, {:First_Name => "Customer", :emailaddr => user.email})
+        rescue ET::Error => error
+          puts "Error sending ExactTarget triggered email"
+          puts error.to_yaml
+        end
       end
     end
 
@@ -615,23 +620,33 @@ class SiteExtension < Spree::Extension
         avs = Spree::Config[:hold_order_with_avs].split(",").each(&:strip!)
 
         if order.payments.any? {|payment| payment.txns.any? { |txn| !avs.include?(txn.avs_response) } }
-          trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+          begin
+            trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
-          external_key = (order.store.code == "nwb" ? "nwb-ordersecurity" : "pwb-custordersecurity")
-          result = trigger.deliver(order.checkout.email, external_key, { :First_Name => order.bill_address.firstname,
-                                                                         :Last_name => order.bill_address.lastname})
+            external_key = (order.store.code == "nwb" ? "nwb-ordersecurity" : "pwb-custordersecurity")
+            result = trigger.deliver(order.checkout.email, external_key, { :First_Name => order.bill_address.firstname,
+                                                                           :Last_name => order.bill_address.lastname})
+          rescue ET::Error => error
+            puts "Error sending ExactTarget triggered email"
+            puts error.to_yaml
+          end
         end
       end
 
       def after_ship(order, transition)
-        trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+        begin
+          trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
-        external_key = (order.store.code == "nwb" ? "nwb-ordershipped" : "pwb-custordershipped ")
-        view = ActionView::Base.new(Spree::ExtensionLoader.view_paths)
-        result = trigger.deliver(order.checkout.email, external_key, { :First_Name => order.bill_address.firstname,
-                                                                       :Last_name => order.bill_address.lastname,
-                                                                       :SENDTIME__CONTENT1 => view.render("order_mailer/order_shipped_plain", :order => order),
-                                                                       :SENDTIME__CONTENT2 => view.render("order_mailer/order_shipped_html", :order => order)})
+          external_key = (order.store.code == "nwb" ? "nwb-ordershipped" : "pwb-custordershipped ")
+          view = ActionView::Base.new(Spree::ExtensionLoader.view_paths)
+          result = trigger.deliver(order.checkout.email, external_key, { :First_Name => order.bill_address.firstname,
+                                                                         :Last_name => order.bill_address.lastname,
+                                                                         :SENDTIME__CONTENT1 => view.render("order_mailer/order_shipped_plain", :order => order),
+                                                                         :SENDTIME__CONTENT2 => view.render("order_mailer/order_shipped_html", :order => order)})
+       rescue ET::Error => error
+         puts "Error sending ExactTarget triggered email"
+         puts error.to_yaml
+       end
       end
 
     end
