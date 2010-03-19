@@ -3,7 +3,7 @@
   <div class="info" style="min-height:145px;">
     <h2><%= link_to truncate(product.name, :length => 26), product, :title => product.name %></h2>
     <p class="itemNum">Item # <%= product.sku %></p>
-    <p class="description"><%=is_home ? product.short_home : product.subtitle_main %></p>
+    <p class="description"><%=is_home ? product.short_home : product.short_category %></p>
     <div class="rating">
       <div class="pr_snippet_category">
         <script type="text/javascript">
@@ -26,7 +26,7 @@
       </fieldset>
     <% end %>
   </div>
-</li><% 
+</li><%
 if (products.index(product) % 2) == 1 && (products.index(product) < (products.size-1))
   %><li class="spacer">&nbsp;</li><%
 end %>
