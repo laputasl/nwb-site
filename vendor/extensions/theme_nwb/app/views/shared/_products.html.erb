@@ -12,7 +12,7 @@
     end
   end
   (products.size % 2).times do
-    %><li class="<%= products.index(product) < 2 ? "" : "border" %>">&nbsp;</li><%
+    %><li class="<%= products.size < 2 ? "" : "border" %>">&nbsp;</li><%
   end%>
 </ul>
 
