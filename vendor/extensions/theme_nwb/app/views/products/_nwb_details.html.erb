@@ -14,7 +14,7 @@
   </div>
   <div class="price">
     <!-- todo fix this -->
-    <%= render "nwb_pricing" %> 
+    <%= render "nwb_pricing" %>
   </div>
   <% unless @product.featured_testimonial.nil? %>
     <div class="testimonial">
@@ -43,7 +43,6 @@
     <li class="active"><a id="tabDescription" href="#description" title="Description">Description</a></li>
     <li><a id="tabReviews" href="#reviews" title="Reviews">Reviews</a></li>
     <li><a id="tabDirections" href="#directions" title="Dosage &amp; Directions">Dosage &amp; Directions</a></li>
-    <li><a id="tabStorage" href="#storage" title="Storage">Storage</a></li>
     <li><a id="tabIngredients" href="#ingredients" title="Ingredients">Ingredients</a></li>
   </ul>
   <div id="Description" class="content">
@@ -64,11 +63,6 @@
     <a name="directions" />
     <h3>Dosage &amp; Directions</h3>
     <%= @product.dosage %>
-    <p class="right"><a href="#" title="Back to Top &raquo;">Back to Top &raquo;</a></p>
-
-    <a name="storage" />
-    <h3>Storage</h3>
-    <%= @product.storage %>
     <p class="right"><a href="#" title="Back to Top &raquo;">Back to Top &raquo;</a></p>
 
     <a name="ingredients" />
