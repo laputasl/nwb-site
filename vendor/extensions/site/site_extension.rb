@@ -89,8 +89,14 @@ class SiteExtension < Spree::Extension
       transition :to => 'legacy', :if => false
     end
 
+    fsm.event :reship do
+      transition :to => 'paid', :if => :has_problem_shipment?
+    end
+
+
     fsm.after_transition :to => 'on_hold', :do => :make_shipments_pending
     fsm.after_transition :to => 'on_hold', :do => :record_on_hold_reason
+    fsm.after_transition :to => 'paid', :do => :check_for_reship
 
     Order.class_eval do
       include ActionView::Helpers::NumberHelper
@@ -98,7 +104,7 @@ class SiteExtension < Spree::Extension
 
       def allow_pay?
         return false if suspicious_order?
-        checkout_complete
+        checkout_completeYeah
       end
 
       private
@@ -152,6 +158,21 @@ class SiteExtension < Spree::Extension
 
         end
 
+      end
+
+      def has_problem_shipment?
+        shipments.reload.last.state == "unable_to_ship" && inventory_units.any? {|unit| unit.state == "backordered"}
+      end
+
+      def check_for_reship(transition)
+        if transition.event == :reship
+          problem_shipment = shipment
+          new_shipment = shipments.new(:shipping_method_id => problem_shipment.shipping_method_id, :address_id => problem_shipment.address_id, :shipping_charge => problem_shipment.shipping_charge)
+          new_shipment.inventory_units = problem_shipment.inventory_units.find_all { |unit| unit.state == "backordered" }
+
+          new_shipment.inventory_units.each {|unit| unit.state="sold"}
+          new_shipment.save!
+        end
       end
     end
 
@@ -672,7 +693,7 @@ class SiteExtension < Spree::Extension
 
       private
       def initialize_order_events
-        @order_events = %w{cancel hold approve resume}
+        @order_events = %w{cancel hold approve resume reship}
       end
 
       # def assign_to_store

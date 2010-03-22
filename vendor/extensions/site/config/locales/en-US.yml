@@ -8,6 +8,7 @@ en-US:
   legacy: Legacy
   page_title: Page Title
   can_be_free: Can be free
+  reship: Reship
   checkout_steps:
     # keys correspond to Checkout state names:
     delivery: Shipping and Payment
