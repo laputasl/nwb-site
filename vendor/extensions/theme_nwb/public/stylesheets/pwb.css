@@ -446,8 +446,14 @@ h1 {
   text-align: center;
   margin: 0 10px 0 0;
 }
-.product .prSnippetWriteReview { display: inline; }
-.product .prSnippetReadReviews { display: inline; }
+.product .prSnippetWriteReview {
+  display: inline;
+  margin-right: 5px;
+}
+.product .prSnippetReadReviews {
+  display: inline;
+  margin-right: 5px;
+}
 .product .prStarsSmall {
   display: block;
   float: none;

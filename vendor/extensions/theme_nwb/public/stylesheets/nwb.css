@@ -446,8 +446,14 @@ h1 {
   text-align: center;
   margin: 0 10px 0 0;
 }
-.product .prSnippetWriteReview { display: inline; }
-.product .prSnippetReadReviews { display: inline; }
+.product .prSnippetWriteReview {
+  display: inline;
+  margin-right: 5px;
+}
+.product .prSnippetReadReviews {
+  display: inline;
+  margin-right: 5px;
+}
 .product .prStarsSmall {
   display: block;
   float: none;
@@ -617,18 +623,9 @@ h1 {
   padding: 0;
 }
 .productList .action form { display: inline; }
-.productList .prSnippetTitle {
-  border: 1px solid red;
-  display: none;
-}
-.productList .prSnippetWriteReview {
-  border: 1px solid red;
-  display: none;
-}
-.productList .prSnippetReadReviews {
-  border: 1px solid red;
-  display: none;
-}
+.productList .prSnippetTitle { display: none; }
+.productList .prSnippetWriteReview { display: none; }
+.productList .prSnippetReadReviews { display: none; }
 .productList .prSnippetRatingUnclickable {
   padding: 0 !important;
   margin: 0 0 10px 0;
