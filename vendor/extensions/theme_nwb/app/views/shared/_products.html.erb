@@ -5,10 +5,10 @@
 
 <ul class="productList">
   <% products.each do |product|
-    if @current_domain == "pwb" 
-      %><%= render :partial => " /shared/pwb_product", :locals => {:product => product, :products => @products, :taxon => @taxon, :is_home => false} %><% 
-    else 
-      %><%= render :partial => "/shared/nwb_product", :locals => {:product => product, :products => @products, :taxon => @taxon, :is_home => false} %><% 
+    if @current_domain == "pwb"
+      %><%= render :partial => "/shared/pwb_product", :locals => {:product => product, :products => @products, :taxon => @taxon, :is_home => false} %><%
+    else
+      %><%= render :partial => "/shared/nwb_product", :locals => {:product => product, :products => @products, :taxon => @taxon, :is_home => false} %><%
     end
   end
   (products.size % 2).times do
