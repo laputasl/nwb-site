@@ -3,7 +3,7 @@
   <div class="info">
     <h2><%= link_to truncate(product.name, :length => 26), product, :title => product.name %></h2>
     <p class="itemNum">Item # <%= product.sku %></p>
-    <p class="description"><%=is_home ? product.short_home : product.short_category %></p>
+    <p class="description"><%= strip_tags(is_home ? product.short_home : product.short_category) %></p>
     <p class="more"><a href="#" title="Product Info &raquo;">Product Info &raquo;</a></p>
     <div class="rating">
       <div class="pr_snippet_category">
