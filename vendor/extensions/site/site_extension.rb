@@ -429,7 +429,7 @@ class SiteExtension < Spree::Extension
 
       private
 
-      def load_data
+      def load_data #ensures correct states list is created when updating checkout (site specific as nwb uses ship address as primary)
         @countries = Checkout.countries.sort
         if params[:checkout] && params[:checkout][:ship_address_attributes]
           default_country = Country.find params[:checkout][:ship_address_attributes][:country_id]

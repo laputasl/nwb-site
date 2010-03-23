@@ -25,7 +25,7 @@ a:active { color: #1c3c80; }
 #header {
   width: 745px;
   overflow: hidden;
-  padding: 5px 0 0 0;
+  padding: 2px 0 0 0;
 }
 #header h1 a {
   float: left;
@@ -34,6 +34,7 @@ a:active { color: #1c3c80; }
   width: 400px;
   height: 64px;
 }
+#header h1 { margin: 0px; }
 #header li {
   list-style: none;
   list-style-position: outside;
@@ -546,6 +547,7 @@ h1 {
   padding-top: 10px !important;
   margin-top: 20px;
 }
+.productList a { font-size: 0.9em; }
 .productList .rating {
   margin: 10px 0 0;
   min-height: 20px;

@@ -32,18 +32,21 @@ a:hover, a:active {color: #1c3c80;}
 #header {
   width: 745px;
   overflow: hidden;
-  padding: 5px 0 0 0;
+  padding: 2px 0 0 0;
 }
 #header h1 a {
 /*
   background: url(/nwb/images/nwb_logo.gif) top left no-repeat;
   text-indent: -999em;
-*/  
+*/
   float: left;
   display: inline;
   overflow: hidden;
   width: 400px;
   height: 64px;
+}
+#header h1 {
+  margin: 0px;
 }
 #header li {
   list-style: none;
@@ -455,7 +458,7 @@ h1 {
   margin: 0 0 10px 0;
 }
 .product .info ul {
-  margin: 1em 0; 
+  margin: 1em 0;
   padding-left: 40px;
   .product .info li {
   /*  background: url(/nwb/images/icon_bullet.gif) 0 3px no-repeat;
@@ -628,7 +631,7 @@ h1 {
   padding:0 5px;
   zoom: 1;
   *display: inline;
-  _height: 100px;  
+  _height: 100px;
   overflow: hidden;
 }
 .productList .border {
@@ -636,7 +639,9 @@ h1 {
   padding-top: 10px !important;
   margin-top: 20px;
 }
-
+.productList a {
+  font-size: 0.9em;
+}
 .productList .rating {
   margin: 10px 0 0 ;
   min-height: 20px;
@@ -686,7 +691,7 @@ h1 {
   float:none;
   clear:both;
 
-  
+
 }
 
 .productList .action .price {
@@ -699,10 +704,10 @@ h1 {
   padding:0 20px 0 0;
   zoom: 1;
   *display: inline;
-  _height: 5px;  
+  _height: 5px;
   overflow: hidden;
   font-weight: bold;
-  font-size: 10px;  
+  font-size: 10px;
 }
 
 .productList .action .price p{
@@ -782,7 +787,7 @@ h1 {
 }
 .product .price form .vprices .radio{
   width: 150px;
-  
+
 }
 .product .price form .vprices .pricesave{
   margin: 0 8px 0 20px;

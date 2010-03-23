@@ -5,32 +5,7 @@
 </head>
 <body>
   <div id="container">
-    <div id="header">
-      <h1><a href="/"><img src="/pwb/images/pwb_logo.jpg" alt="PetWellbeing.com - 1.877.633.2401" /></a></h1>
-      <div class="util">
-      <ul id="miscNav">
-        <% if current_user.nil? %>
-          <li class="first"><%= link_to "Login", login_path %></li>
-        <% else %>
-          <li class="first"><%= link_to "Log Out", logout_path %></li>
-        <% end %>
-        <li><a href="http://videos.petwellbeing.com/" title="Videos">Videos</a></li>
-        <li><a href="http://pethealth.petwellbeing.com/wiki/Main_Page" title="Wiki">Wiki</a></li>
-        <li><a href="/blog" title="Blog">Blog</a></li>
-        <li><a href="/pwb/contactus" title="Contact">Contact</a></li>
-        <li><a href="/pwb/aboutus" title="About">About</a></li>
-      </ul>
-      <%= render "shared/pwb_search" %>
-      </div>
-      <ul id="nav">
-        <li><a id="navHome" href="/" title="Home">Home</a></li>
-        <li><a id="navShipping" href="/pwb/shipping" title="Free Same Day Shipping">Free Same Day Shipping</a></li>
-        <li><a id="navSecure" href="/pwb/secure" title="Secure Shopping">Secure Shopping</a></li>
-        <li><a id="navGuarantee" href="/pwb/guarantee" title="30-Day Money Back Guarantee">30-Day Money Back Guarantee</a></li>
-        <li><%= link_to "My Shopping Cart", cart_path, {:id => "navCart"} %></li>
-        <li><%= link_to "My Account", current_user ? user_path(current_user) : login_path(), {:id => "navAccount"} %></li>
-      </ul>
-    </div>
+    <%= render "/shared/pwb_navigation" %>
     <hr />
     <div id="main">
       <% if flash[:notice] %>
@@ -51,9 +26,25 @@
           <% end %>
           <li><a id="btnPeople" href="/people" title="People">People</a></li>
         </ul>
+
+        <script type="text/javascript">
+            function launchChatWindow(chatURL) {
+              if (typeof pageTracker == 'object') {
+                chatURL = pageTracker._getLinkerUrl(chatURL);
+              }
+              window.open(chatURL, 'Chat2383427521958331727', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=470,height=400');
+            }
+          </script>
+        <div>
+          <a href="https://livechat.boldchat.com/aid/2298068183499916261/bc.chat?cwdid=6494358942194240032&amp;wdid=1885118237688256958" target="_blank" onclick="launchChatWindow('https://livechat.boldchat.com/aid/2298068183499916261/bc.chat?cwdid=6494358942194240032&amp;wdid=1885118237688256958&amp;url=' + escape(document.location.href));return false;">
+            <img alt="Live chat by BoldChat" src="https://cbi.boldchat.com/aid/2298068183499916261/bc.cbi?cbdid=2053870257879820757&amp;wdid=1885118237688256958" border="0">
+          </a>
+        </div>
+
         <div class="bbb">
           <a target="_blank" href="https://www.bbb.org/online/consumer/cks.aspx?id=110020517059"><img title="Click to verify BBB accreditation and to see a BBB report." border="0" src="/pwb/images/bbb.gif" alt="Click to verify BBB accreditation and to see a BBB report."></a>
         </div>
+
         <%= render 'shared/cart_preview' %>
 
         <dl id="subNav">
@@ -107,6 +98,7 @@
     <%= render :partial => "shared/pwb_footer" %>
   </div>
   <%= render 'shared/google_analytics' %>
+  <%= render 'shared/pwb_fetch_back' %>
 </body>
 </html>
 

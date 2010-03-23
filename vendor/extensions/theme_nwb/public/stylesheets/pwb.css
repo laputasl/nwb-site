@@ -25,7 +25,7 @@ a:active { color: #1c3c80; }
 #header {
   width: 745px;
   overflow: hidden;
-  padding: 5px 0 0 0;
+  padding: 2px 0 0 0;
 }
 #header h1 {
   width: 350px;
@@ -40,7 +40,7 @@ a:active { color: #1c3c80; }
 }
 #header h1 a { display: inline; }
 #header .util {
-  width: 392px;
+  width: 390px;
   min-height: 50px;
   display: -moz-inline-stack;
   display: inline-block;
@@ -530,7 +530,7 @@ h1 {
   overflow: hidden;
 }
 .productList li {
-  width: 270px;
+  width: 268px;
   min-height: 100px;
   display: -moz-inline-stack;
   display: inline-block;
@@ -557,6 +557,7 @@ h1 {
   margin: 10px 0 0;
   min-height: 20px;
 }
+.productList a { font-size: 0.9em; }
 .productList li .photo {
   width: 70px;
   min-height: 10px;
