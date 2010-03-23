@@ -429,6 +429,23 @@ class SiteExtension < Spree::Extension
 
       private
 
+      def load_data
+        @countries = Checkout.countries.sort
+        if params[:checkout] && params[:checkout][:ship_address_attributes]
+          default_country = Country.find params[:checkout][:ship_address_attributes][:country_id]
+        elsif object.bill_address && object.bill_address.country
+          default_country = object.bill_address.country
+        elsif current_user && current_user.bill_address
+          default_country = current_user.bill_address.country
+        else
+          default_country = Country.find Spree::Config[:default_country_id]
+        end
+        @states = default_country.states.sort
+
+        # prevent editing of a complete checkout
+        redirect_to order_url(parent_object) if parent_object.checkout_complete
+      end
+
       def object_params
         # For delivery (normally payment) step, filter checkout parameters to produce the expected nested attributes for a single payment and its source, discarding attributes for payment methods other than the one selected
         if object.delivery?
