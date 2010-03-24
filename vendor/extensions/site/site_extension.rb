@@ -371,7 +371,6 @@ class SiteExtension < Spree::Extension
             :page     => curr_page
           })
         @products_count = @products_scope.count
-
         return(@products.uniq)
       end
     end

@@ -1,8 +1,8 @@
 <% form_for :order, :url => orders_url do |f| %>
   <div class="pricebox">
     <% NwbThemeHelper.volume_levels(@product).each do |vl| %>
-      <% 
-        free_shipping = 50.0
+      <%
+        free_shipping = Spree::Config[:pwb_free_shipping_at].to_f
         amnt = vl.price * vl.first
         full_amnt = @product.base_price * vl.first
         savings = full_amnt - amnt
@@ -18,11 +18,11 @@
       </div>
       <div class="pricesave">
         <%= vl.display%>
-        <strong><%= number_to_currency(amnt)%></strong>
-        <strike><%= number_to_currency(full_amnt)%></strike><br>
-        Save <%= number_to_currency(savings)%>  
+        <strike><%= number_to_currency(full_amnt)%></strike>
+        <strong><%= number_to_currency(amnt)%></strong><br>
+        Save <%= number_to_currency(savings)%>
         <% if is_shipping_free%>
-        <span class="freeshiping">and get &nbsp;<strong>free shipping</strong></span>  
+          <br/><span class="freeshiping">and get &nbsp;<strong>free shipping</strong></span>
         <%end%>
       </div>
       <div class="clear">&nbsp;</div>

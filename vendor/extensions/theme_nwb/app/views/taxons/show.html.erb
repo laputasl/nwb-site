@@ -1,11 +1,5 @@
 <% content_for :breadcrumbs do %>
-  <% if @site.code == "pwb" %>
-    <% if @taxon.id == 3001 || @taxon.ancestors.any? {|t| t.id == 3001 } %>
-      <%= image_tag "/#{@current_domain}/images/banner-dog-supplies.jpg", :alt => "PetWellbeing.com : Dog Supplies" %>
-    <% elsif @taxon.id == 3002 || @taxon.ancestors.any? {|t| t.id == 3002 } %>
-      <%= image_tag "/#{@current_domain}/images/banner-cat-supplies.jpg", :alt => "PetWellbeing.com : Cat Supplies" %>
-    <% end %>
-  <% end %>
+  <%= render "shared/pwb_banner" %>
   <%= breadcrumbs(@taxon) %>
 <% end %>
 
