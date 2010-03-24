@@ -804,6 +804,14 @@ class SiteExtension < Spree::Extension
 
     #support short SEO taxon urls
     TaxonsController.class_eval do
+      before_filter :redirect_root_taxons, :only => :show
+
+      private
+
+      def redirect_root_taxons
+        redirect_to ActionController::Base.relative_url_root, :status => :moved_permanently if @taxon.root?
+      end
+
       def object
         if params.key? "id"
           @object ||= end_of_association_chain.find_by_permalink(params[:id].join("/") + "/")
