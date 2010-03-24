@@ -11,7 +11,7 @@
     <p><%= @product.subtitle_main %></p>
     <p><%= @product.sales_copy %></p>
 
-    <%= render_snippet("#{@site.code}-ships-from-canada") if @product.taxons.exists?(:id => 9994) && country_id == 35%>
+    <%= render_snippet("#{@current_domain}-ships-from-canada") if @product.taxons.exists?(:id => 9994) && country_id == 35%>
   </div>
   <div class="price">
     <%= render "pwb_pricing" %>
@@ -32,7 +32,7 @@
     </div>
     <div class="share">
       <p><strong>Share This</strong></p>
-      <a href="http://www.addthis.com/bookmark.php" onclick="addthis_url   = location.href; addthis_title = document.title; return addthis_click(this);"><img src="/<%= @site.code %>/images/icon_plus.gif" alt="Bookmark and Share" /></a>
+      <a href="http://www.addthis.com/bookmark.php" onclick="addthis_url   = location.href; addthis_title = document.title; return addthis_click(this);"><img src="/<%= @current_domain %>/images/icon_plus.gif" alt="Bookmark and Share" /></a>
       <a href="http://www.addthis.com/bookmark.php" onclick="addthis_url   = location.href; addthis_title = document.title; return addthis_click(this);">Bookmark &amp; Share</a>
       <script type="text/javascript" src="http://s7.addthis.com/js/widget.php?v=10"></script>
     </div>

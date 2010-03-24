@@ -29,7 +29,7 @@
       <% end %>
     </tbody>
   </table>
-  <p><a href="/pwb/shipping" title="Free Same Day Shipping at $50.00">Free Same Day Shipping at <%= number_to_currency Spree::Config.get("#{@site.code}_free_shipping_at") %></a></p>
+  <p><a href="/pwb/shipping" title="Free Same Day Shipping at $50.00">Free Same Day Shipping at <%= number_to_currency Spree::Config.get("#{@current_domain}_free_shipping_at") %></a></p>
   <% unless order.nil? || @controller.controller_name == "orders" %>
     <h3><a href="#" title="Shopping Calculator">Shipping Calculator</a></h3>
     <div id="shipping_calculator">
@@ -39,17 +39,17 @@
       </p>
       <div id="usa_options" <%= 'style="display:block"' if country_id == 214 %>>
         <%= text_field_tag :calculator_zipcode, "enter zip" %>
-        <%= image_submit_tag "/#{@site.code}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
+        <%= image_submit_tag "/#{@current_domain}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
       </div>
       <div id="international_options"<%= 'style="display:block"' if country_id != 214 %>>
         <%= select_tag :calculator_country, options_for_select(Checkout.countries.sort.map{|c| [c.name, c.id]}, country_id) %>
-        <%= image_submit_tag "/#{@site.code}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
+        <%= image_submit_tag "/#{@current_domain}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
       </div>
       <p id="calculator_methods">
         Select Shipping Method
         <select id="calculator_available_methods"></select>
       </p>
-      <%= image_tag "/#{@site.code}/images/verifying.gif", {:id => "calculator_progress"} %>
+      <%= image_tag "/#{@current_domain}/images/verifying.gif", {:id => "calculator_progress"} %>
     </div>
   <% end %>
 </div>

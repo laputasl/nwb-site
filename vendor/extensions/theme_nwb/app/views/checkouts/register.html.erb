@@ -19,7 +19,7 @@
           <%= render 'shared/user_form', :f => f %>
         </div>
         <div class="button_wrapper">
-          <%= image_submit_tag "/#{@site.code}/images/button_next.gif" %>
+          <%= image_submit_tag "/#{@current_domain}/images/button_next.gif" %>
         </div>
       <% end %>
     </div>
@@ -34,6 +34,6 @@
     <p style="padding-top:15px;">
       <span style="color:red;">*</span> mandatory field
     </p>
-    <%= link_to "Privacy Policy", "/#{@site.code}/privacy_policy" %>
+    <%= link_to "Privacy Policy", "/#{@current_domain}/privacy_policy" %>
   </div>
 </div>
