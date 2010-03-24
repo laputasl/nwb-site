@@ -348,8 +348,7 @@ h1 {
   padding: 0 0 0 14px;
 }
 #body .content h3 {
-  background: #f8f5ef;
-  padding: 5px;
+  background: none;
   margin: 5px 0 15px 0;
   font-size: 14px;
 }
@@ -476,8 +475,6 @@ h1 {
   font-size: 1em;
   font-weight: bold;
   line-height: 15px;
-  background: none;
-  padding: 0px;
 }
 .productDetails h4 {
   color: #5d755d;
