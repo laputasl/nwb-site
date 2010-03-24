@@ -11,6 +11,6 @@ class HomePageController < Spree::BaseController
       @best_selling_products = Product.active.find_all_by_store_id(@site.id, :limit => 10)
     end
 
-    render :partial => "#{@current_domain}_show", :layout => true
+    render :partial => "#{@site.code}_show", :layout => true
   end
 end
