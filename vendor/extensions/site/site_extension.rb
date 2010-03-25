@@ -104,7 +104,7 @@ class SiteExtension < Spree::Extension
 
       def allow_pay?
         return false if suspicious_order?
-        checkout_completeYeah
+        checkout_complete
       end
 
       private
@@ -320,6 +320,24 @@ class SiteExtension < Spree::Extension
       #need to reverse this (ie. bill_address is a copy of ship_address)
       def clone_billing_address
         self.bill_address = ship_address.clone
+        true
+      end
+
+      def clone_billing_address
+
+        if self.ship_address.nil?
+          self.ship_address = bill_address.clone
+        else
+          if bill_address.nil?
+            self.bill_address = ship_address.clone
+          else
+            if self.ship_address.updated_at < bill_address.updated_at
+              self.ship_address.attributes = bill_address.attributes.except("id", "updated_at", "created_at")
+            else
+              self.bill_address.attributes = ship_address.attributes.except("id", "updated_at", "created_at")
+            end
+          end
+        end
         true
       end
 
