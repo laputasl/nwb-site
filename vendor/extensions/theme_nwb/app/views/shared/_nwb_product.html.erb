@@ -4,27 +4,27 @@
     <h2><%= link_to product.name, product, :title => product.name %></h2>
     <p class="itemNum">Item # <%= product.sku %></p>
     <p class="description"><%= strip_tags(is_home ? product.short_home : product.short_category) %></p>
-    <p class="more"><a href="#" title="Product Info &raquo;">Product Info &raquo;</a></p>
     <div class="rating">
       <div class="pr_snippet_category">
         <script type="text/javascript">
-        var pr_snippet_min_reviews=1;
+        var pr_snippet_min_reviews=0;
         POWERREVIEWS.display.snippet(document, { pr_page_id : "<%= product.legacy_id %>" });
         </script>
       </div>
     </div>
+    <p class="price"><%= product_price(product) %> USD</p>
+    <p class="more"><%= link_to "More Product Info &raquo;", product, {:title => "More Product Info" } %></p>
   </div>
-
-    <div class="price">
-      <% form_for :order, :url => orders_url do |f| %>
-        <fieldset>
-           <div class="quantity">
-            <label>Quantity</label>
-            <%= text_field_tag("variants[#{product.master.id}]", 1)  %>
-          </div>
-          <%= submit_tag("Buy Now", :class => "btnAddCart") %>
-        </fieldset>
-      <% end %>
-    </div>
+  <div class="price">
+    <% form_for :order, :url => orders_url do |f| %>
+      <fieldset>
+         <div class="quantity">
+          <label>Quantity</label>
+          <%= text_field_tag("variants[#{product.master.id}]", 1)  %>
+        </div>
+        <%= submit_tag("Buy Now", :class => "btnAddCart") %>
+      </fieldset>
+    <% end %>
+  </div>
 
 </li>

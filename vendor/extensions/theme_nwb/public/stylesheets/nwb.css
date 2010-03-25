@@ -547,7 +547,6 @@ h5 {
 .products h1 a:hover { color: #da5789; }
 .products ul {
   margin: 10px 0px;
-  padding: 0px 5px;
   width: 563px;
   overflow: hidden;
 }
@@ -575,16 +574,28 @@ h5 {
   min-height: 20px;
 }
 .productList li .photo {
-  float: left;
-  display: inline;
   width: 70px;
-  text-align: right;
-  padding: 0 4px 4px 0;
+  min-height: 10px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+  _height: 10px;
+  overflow: hidden;
+  margin: 0px;
 }
 .productList li .info {
-  display: inline;
+  width: 168px;
+  min-height: 10px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+  _height: 10px;
   overflow: hidden;
-  margin: 0;
+  margin: 5px 0 5px 5px;
 }
 .productList li .info h2 {
   font-size: 14px;
@@ -603,42 +614,26 @@ h5 {
   margin: 10px 0 0;
   min-height: 20px;
 }
-.productList .info p.more {
-  text-align: right;
-  clear: none;
+.productList .info p.price {
+  width: 93px;
   margin: 0;
+  padding: 0;
+  float: left;
+  display: inline;
+}
+.productList .info p.more {
+  float: right;
+  display: inline;
+  clear: none;
+  width: 90px;
+  margin: 0;
+  text-align: right;
 }
 .productList li p.more {
   clear: both;
   font-size: 10px;
   margin: 0 0 10px 0;
 }
-.productList .action {
-  display: block;
-  float: none;
-  clear: both;
-}
-.productList .action .price {
-  width: 90px;
-  min-height: 5px;
-  display: -moz-inline-stack;
-  display: inline-block;
-  vertical-align: top;
-  margin: 0;
-  padding: 0 20px 0 0;
-  zoom: 1;
-  *display: inline;
-  _height: 5px;
-  overflow: hidden;
-  font-weight: bold;
-  font-size: 10px;
-}
-.productList .action .price p {
-  display: block;
-  margin: 0;
-  padding: 0;
-}
-.productList .action form { display: inline; }
 .productList .prSnippetTitle { display: none; }
 .productList .prSnippetWriteReview { display: none; }
 .productList .prSnippetReadReviews { display: none; }

@@ -7,13 +7,13 @@
     <div class="rating">
       <div class="pr_snippet_category">
         <script type="text/javascript">
-        var pr_snippet_min_reviews=1;
+        var pr_snippet_min_reviews=0;
         POWERREVIEWS.display.snippet(document, { pr_page_id : "<%= product.legacy_id %>" });
         </script>
       </div>
     </div>
     <p class="price"><%= product_price(product) %> USD</p>
-    <p class="more"><a href="#" title="Product Info &raquo;">Product Info &raquo;</a></p>
+    <p class="more"><%= link_to "More Product Info &raquo;", product, {:title => "More Product Info" } %></p>
   </div>
   <div class="price">
     <% form_for :order, :url => orders_url do |f| %>

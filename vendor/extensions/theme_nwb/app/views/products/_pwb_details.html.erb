@@ -1,5 +1,5 @@
 <div class="product">
-  <h2><%= link_to @product.name, @product, :title => @product.name %></h2>
+    <h2><%= link_to @product.name, @product, :title => @product.name %></h2>
   <div class="photo">
     <%= product_image(@product, {:style => "max-width:140px;margin-top:20px;"}) %>
     <p class="itemNum">
@@ -25,7 +25,7 @@
     <div class="rating">
       <div class="pr_snippet_product">
         <script type="text/javascript">
-        var pr_snippet_min_reviews=1;
+        var pr_snippet_min_reviews=0;
         POWERREVIEWS.display.snippet(document, { pr_page_id : "<%= @product.legacy_id %>" });
         </script>
       </div>
