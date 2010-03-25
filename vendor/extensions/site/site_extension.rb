@@ -387,13 +387,13 @@ class SiteExtension < Spree::Extension
         @products_scope = @product_group.apply_on(base_scope)
 
         curr_page = Spree::Config.searcher.manage_pagination ? params[:page] : 1
-        @products = @products_scope.all.paginate({
+        @products = @products_scope.uniq.paginate({
             :include  => [:images, :master],
             :per_page => per_page,
             :page     => curr_page
           })
         @products_count = @products_scope.count
-        return(@products.uniq)
+        return(@products)
       end
     end
 

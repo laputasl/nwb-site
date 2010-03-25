@@ -4,12 +4,14 @@
 <% end %>
 
 <% if @current_domain != @site.code && !@taxon.cross_sell.nil? %>
-  <div class="content">
-    <%= @taxon.cross_sell %>
-  </div>
+  <% unless @taxon.cross_sell.blank? %>
+    <div class="content">
+      <%= @taxon.cross_sell %>
+    </div>
+  <% end %>
 <% end %>
 
-<% unless @taxon.description.nil? %>
+<% unless @taxon.description.blank? %>
   <div class="content description">
     <%= @taxon.description %>
   </div>
@@ -18,7 +20,7 @@
   <h1><%= taxon_header(@taxon) %></h1>
   <%= render :partial => "shared/products", :locals => {:products => @products, :taxon => @taxon } %>
 </div>
-<% unless @taxon.footer.nil? %>
+<% unless @taxon.footer.blank? %>
   <div class="content footer">
     <%= @taxon.footer %>
   </div>

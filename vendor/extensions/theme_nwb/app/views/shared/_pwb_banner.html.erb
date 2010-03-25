@@ -1,7 +1,7 @@
 <% if @site.code == "pwb" %>
   <% if @taxon.id == 3001 || @taxon.ancestors.any? {|t| t.id == 3001 } %>
-    <%= image_tag "/#{@current_domain}/images/banner-dog-supplies.jpg", :alt => "PetWellbeing.com : Dog Supplies" %>
+    <%= image_tag "/pwb/images/banner-dog-supplies.jpg", :alt => "PetWellbeing.com : Dog Supplies" %>
   <% elsif @taxon.id == 3002 || @taxon.ancestors.any? {|t| t.id == 3002 } %>
-    <%= image_tag "/#{@current_domain}/images/banner-cat-supplies.jpg", :alt => "PetWellbeing.com : Cat Supplies" %>
+    <%= image_tag "/pwb/images/banner-cat-supplies.jpg", :alt => "PetWellbeing.com : Cat Supplies" %>
   <% end %>
 <% end %>
