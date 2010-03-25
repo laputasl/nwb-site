@@ -1,6 +1,6 @@
 <li class="<%= products.index(product) < 2 ? "" : "border" %>">
   <%= link_to small_image(product, {:style => "max-width:70px;"}), product, {:class => "photo"} %>
-  <div class="info" style="min-height:145px;">
+  <div class="info">
     <h2><%= link_to product.name, product, :title => product.name %></h2>
     <p class="itemNum">Item # <%= product.sku %></p>
     <p class="description"><%= strip_tags(is_home ? product.short_home : product.short_category) %></p>
