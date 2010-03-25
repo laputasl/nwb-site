@@ -199,7 +199,7 @@ class SiteExtension < Spree::Extension
 
       Shipment.state_machines[:state] = StateMachine::Machine.new(Shipment, :initial => 'pending') do
         event :ready do
-          transition :from => 'pending', :to => 'ready_to_ship'
+          transition :from => 'pending', :to => 'ready_to_ship', :if => :is_ready?
         end
         event :pend do
           transition :from => 'ready_to_ship', :to => 'pending'
@@ -225,6 +225,10 @@ class SiteExtension < Spree::Extension
       private
       def check_order_state
         self.ready! if (order.paid? && !inventory_units.any? {|unit| unit.backordered? })
+      end
+
+      def is_ready?
+        order.paid? && !inventory_units.any? {|unit| unit.backordered? }
       end
     end
 
