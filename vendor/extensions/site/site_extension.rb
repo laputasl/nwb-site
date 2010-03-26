@@ -89,8 +89,14 @@ class SiteExtension < Spree::Extension
       transition :to => 'legacy', :if => false
     end
 
+    fsm.event :reship do
+      transition :to => 'paid', :if => :has_problem_shipment?
+    end
+
+
     fsm.after_transition :to => 'on_hold', :do => :make_shipments_pending
     fsm.after_transition :to => 'on_hold', :do => :record_on_hold_reason
+    fsm.after_transition :to => 'paid', :do => :check_for_reship
 
     Order.class_eval do
       include ActionView::Helpers::NumberHelper
@@ -153,6 +159,21 @@ class SiteExtension < Spree::Extension
         end
 
       end
+
+      def has_problem_shipment?
+        shipments.reload.last.state == "unable_to_ship" && inventory_units.any? {|unit| unit.state == "backordered"}
+      end
+
+      def check_for_reship(transition)
+        if transition.event == :reship
+          problem_shipment = shipment
+          new_shipment = shipments.new(:shipping_method_id => problem_shipment.shipping_method_id, :address_id => problem_shipment.address_id, :shipping_charge => problem_shipment.shipping_charge)
+          new_shipment.inventory_units = problem_shipment.inventory_units.find_all { |unit| unit.state == "backordered" }
+
+          new_shipment.inventory_units.each {|unit| unit.state="sold"}
+          new_shipment.save!
+        end
+      end
     end
 
     InventoryUnit.class_eval do
@@ -178,7 +199,7 @@ class SiteExtension < Spree::Extension
 
       Shipment.state_machines[:state] = StateMachine::Machine.new(Shipment, :initial => 'pending') do
         event :ready do
-          transition :from => 'pending', :to => 'ready_to_ship'
+          transition :from => 'pending', :to => 'ready_to_ship', :if => :is_ready?
         end
         event :pend do
           transition :from => 'ready_to_ship', :to => 'pending'
@@ -205,12 +226,17 @@ class SiteExtension < Spree::Extension
       def check_order_state
         self.ready! if (order.paid? && !inventory_units.any? {|unit| unit.backordered? })
       end
+
+      def is_ready?
+        order.paid? && !inventory_units.any? {|unit| unit.backordered? }
+      end
     end
 
     OrdersController.class_eval do
       before_filter :set_analytics
       create.before << :assign_to_store
       update.before :check_for_removed_items
+      update.after :recalculate_totals
 
       update do
         flash nil
@@ -228,11 +254,20 @@ class SiteExtension < Spree::Extension
         addr.save(false)
         @order.checkout.update_attribute(:ship_address_id, addr.id)
 
-        rates =  ShippingMethod.all_available(@order).collect do |ship_method|
-          { :id => ship_method.id,
-            :name => ship_method.name,
-            :rate => ship_method.calculate_cost(@order.checkout.shipment) }
+        begin
+
+          rates = ShippingMethod.all_available(@order).collect do |ship_method|
+            { :id => ship_method.id,
+              :name => ship_method.name,
+              :rate => ship_method.calculate_cost(@order.checkout.shipment),
+              :position => ship_method.position }
+          end
+        rescue Spree::ShippingError => ship_error
+          flash[:error] = ship_error.to_s
+          rates = []
         end
+
+        rates = rates.sort_by{ |r| r[:position] }
 
         if rates.size > 0 && @order.checkout.shipping_method_id.nil?
           @order.checkout.update_attribute(:shipping_method_id, rates[0][:id])
@@ -263,12 +298,15 @@ class SiteExtension < Spree::Extension
 
         return unless params.key? "remove"
 
-        params[:remove].each do |variant_id, value|
-          @order.line_items.detect {|li| li.variant_id == variant_id.to_i }.destroy
+        params[:remove].each do |line_item, value|
+          LineItem.destroy line_item.to_i
         end
+
+      end
+
+      def recalculate_totals
         @order.update_totals!
         @order.reload
-
       end
 
     end
@@ -286,6 +324,24 @@ class SiteExtension < Spree::Extension
       #need to reverse this (ie. bill_address is a copy of ship_address)
       def clone_billing_address
         self.bill_address = ship_address.clone
+        true
+      end
+
+      def clone_billing_address
+
+        if self.ship_address.nil?
+          self.ship_address = bill_address.clone
+        else
+          if bill_address.nil?
+            self.bill_address = ship_address.clone
+          else
+            if self.ship_address.updated_at < bill_address.updated_at
+              self.ship_address.attributes = bill_address.attributes.except("id", "updated_at", "created_at")
+            else
+              self.bill_address.attributes = ship_address.attributes.except("id", "updated_at", "created_at")
+            end
+          end
+        end
         true
       end
 
@@ -308,8 +364,11 @@ class SiteExtension < Spree::Extension
         # Prepare a search within the parameters
         Spree::Config.searcher.prepare(params)
 
-        if params[:product_group_name]
-          @product_group = ProductGroup.find_by_permalink(params[:product_group_name])
+        if !params[:order_by_price].blank?
+          @product_group = ProductGroup.new.from_route([params[:order_by_price]+"_by_master_price"])
+        elsif params[:product_group_name]
+          @cached_product_group = ProductGroup.find_by_permalink(params[:product_group_name])
+          @product_group = ProductGroup.new
         elsif params[:product_group_query]
           @product_group = ProductGroup.new.from_route(params[:product_group_query])
         else
@@ -323,19 +382,17 @@ class SiteExtension < Spree::Extension
         @product_group.add_scope('keywords', @keywords) unless @keywords.blank?
         @product_group = @product_group.from_search(params[:search]) if params[:search]
 
-        params[:search] = @product_group.scopes_to_hash if @keywords.blank?
-
-        base_scope = Spree::Config[:show_zero_stock_products] ? Product.active : Product.active.on_hand
+        base_scope = @cached_product_group ? @cached_product_group.products.active : Product.active
+        base_scope = base_scope.on_hand unless Spree::Config[:show_zero_stock_products]
         @products_scope = @product_group.apply_on(base_scope)
 
-        curr_page = Spree::Config.searcher.manage_pagination ? 1 : params[:page]
-        @products = @products_scope.paginate({
+        curr_page = Spree::Config.searcher.manage_pagination ? params[:page] : 1
+        @products = @products_scope.uniq.paginate({
             :include  => [:images, :master],
             :per_page => per_page,
             :page     => curr_page
           })
         @products_count = @products_scope.count
-
         return(@products)
       end
     end
@@ -393,6 +450,23 @@ class SiteExtension < Spree::Extension
 
       private
 
+      def load_data #ensures correct states list is created when updating checkout (site specific as nwb uses ship address as primary)
+        @countries = Checkout.countries.sort
+        if params[:checkout] && params[:checkout][:ship_address_attributes]
+          default_country = Country.find params[:checkout][:ship_address_attributes][:country_id]
+        elsif object.bill_address && object.bill_address.country
+          default_country = object.bill_address.country
+        elsif current_user && current_user.bill_address
+          default_country = current_user.bill_address.country
+        else
+          default_country = Country.find Spree::Config[:default_country_id]
+        end
+        @states = default_country.states.sort
+
+        # prevent editing of a complete checkout
+        redirect_to order_url(parent_object) if parent_object.checkout_complete
+      end
+
       def object_params
         # For delivery (normally payment) step, filter checkout parameters to produce the expected nested attributes for a single payment and its source, discarding attributes for payment methods other than the one selected
         if object.delivery?
@@ -433,7 +507,7 @@ class SiteExtension < Spree::Extension
 
       #sorting by (and selecting) cheapest shipping method
       def load_available_methods
-        @available_methods = rate_hash.sort_by{ |sm| sm[:rate] }
+        @available_methods = rate_hash
         @checkout.shipping_method_id ||= @available_methods.first[:id] unless @available_methods.empty?
       end
 
@@ -473,6 +547,23 @@ class SiteExtension < Spree::Extension
           false
         end
       end
+
+      #returns rates sorted by :position
+      def rate_hash
+        begin
+          rates = @checkout.shipping_methods.collect do |ship_method|
+            { :id => ship_method.id,
+              :name => ship_method.name,
+              :rate => ship_method.calculate_cost(@order.checkout.shipment),
+              :position => ship_method.position }
+          end
+
+          rates.sort_by{ |r| r[:position] }
+        rescue Spree::ShippingError => ship_error
+          flash[:error] = ship_error.to_s
+          []
+        end
+      end
     end
 
     Spree::ExactTarget.module_eval do
@@ -493,9 +584,9 @@ class SiteExtension < Spree::Extension
         if list.nil?
           subscriber_id = -1
         else
-          subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-
           begin
+            subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+
             if user.is_a? String
               subscriber_id = subscriber.add(user, list.list_id)
             else
@@ -570,10 +661,15 @@ class SiteExtension < Spree::Extension
         create_subscriber(user)
 
         #send account info email
-        trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+        begin
+          trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
-        external_key = (user.store.code == "nwb" ? "nwb-accountinfo" : "pwb-accountInfo")
-        result = trigger.deliver(user.email, external_key, {:First_Name => "Customer", :emailaddr => user.email})
+          external_key = (user.store.code == "nwb" ? "nwb-accountinfo" : "pwb-accountInfo")
+          result = trigger.deliver(user.email, external_key, {:First_Name => "Customer", :emailaddr => user.email})
+        rescue ET::Error => error
+          puts "Error sending ExactTarget triggered email"
+          puts error.to_yaml
+        end
       end
     end
 
@@ -583,23 +679,33 @@ class SiteExtension < Spree::Extension
         avs = Spree::Config[:hold_order_with_avs].split(",").each(&:strip!)
 
         if order.payments.any? {|payment| payment.txns.any? { |txn| !avs.include?(txn.avs_response) } }
-          trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+          begin
+            trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
-          external_key = (order.store.code == "nwb" ? "nwb-ordersecurity" : "pwb-custordersecurity")
-          result = trigger.deliver(order.checkout.email, external_key, { :First_Name => order.bill_address.firstname,
-                                                                         :Last_name => order.bill_address.lastname})
+            external_key = (order.store.code == "nwb" ? "nwb-ordersecurity" : "pwb-custordersecurity")
+            result = trigger.deliver(order.checkout.email, external_key, { :First_Name => order.bill_address.firstname,
+                                                                           :Last_name => order.bill_address.lastname})
+          rescue ET::Error => error
+            puts "Error sending ExactTarget triggered email"
+            puts error.to_yaml
+          end
         end
       end
 
       def after_ship(order, transition)
-        trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
+        begin
+          trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
-        external_key = (order.store.code == "nwb" ? "nwb-ordershipped" : "pwb-custordershipped ")
-        view = ActionView::Base.new(Spree::ExtensionLoader.view_paths)
-        result = trigger.deliver(order.checkout.email, external_key, { :First_Name => order.bill_address.firstname,
-                                                                       :Last_name => order.bill_address.lastname,
-                                                                       :SENDTIME__CONTENT1 => view.render("order_mailer/order_shipped_plain", :order => order),
-                                                                       :SENDTIME__CONTENT2 => view.render("order_mailer/order_shipped_html", :order => order)})
+          external_key = (order.store.code == "nwb" ? "nwb-ordershipped" : "pwb-custordershipped ")
+          view = ActionView::Base.new(Spree::ExtensionLoader.view_paths)
+          result = trigger.deliver(order.checkout.email, external_key, { :First_Name => order.bill_address.firstname,
+                                                                         :Last_name => order.bill_address.lastname,
+                                                                         :SENDTIME__CONTENT1 => view.render("order_mailer/order_shipped_plain", :order => order),
+                                                                         :SENDTIME__CONTENT2 => view.render("order_mailer/order_shipped_html", :order => order)})
+       rescue ET::Error => error
+         puts "Error sending ExactTarget triggered email"
+         puts error.to_yaml
+       end
       end
 
     end
@@ -625,7 +731,7 @@ class SiteExtension < Spree::Extension
 
       private
       def initialize_order_events
-        @order_events = %w{cancel hold approve resume}
+        @order_events = %w{cancel hold approve resume reship}
       end
 
       # def assign_to_store
@@ -637,8 +743,14 @@ class SiteExtension < Spree::Extension
       #adds additional handling fee
       alias_method :core_calculate_cost, :calculate_cost
 
+      #add handling_fee or free for can_be_free calculators.
       def calculate_cost(shipment)
-        core_calculate_cost(shipment) + handling_fee.to_f
+        if can_be_free && shipment.order.line_items.total > Spree::Config.get("#{shipment.order.store.code}_free_shipping_at").to_f
+          0.0 #aka FREE!
+        else
+          core_calculate_cost(shipment) + handling_fee.to_f
+        end
+
       end
 
       #excludes PO (APO / FPO) boxes
@@ -652,8 +764,6 @@ class SiteExtension < Spree::Extension
         end
       end
     end
-
-    Calculator::FlatOverValue.register
 
     #Need to redirect to delivery step on failure (not the default payment)
     Spree::PaypalExpress.module_eval do
@@ -680,7 +790,7 @@ class SiteExtension < Spree::Extension
 
       private
       def load_orders
-        @problem_orders = Order.find(:all, :include => 'shipments', :conditions => ["orders.state != 'shipped' AND shipments.state = 'unable_to_ship'"])
+        @problem_orders = Shipment.find(:all, :group => "order_id", :having => "state = 'unable_to_ship' AND created_at = max(created_at)").map(&:order).uniq
 
         @vancouver_orders = Order.find(:all, :include => 'shipments', :conditions => ["orders.state != 'shipped' AND shipments.state = 'needs_fulfilment'"])
       end
@@ -716,6 +826,14 @@ class SiteExtension < Spree::Extension
 
     #support short SEO taxon urls
     TaxonsController.class_eval do
+      before_filter :redirect_root_taxons, :only => :show
+
+      private
+
+      def redirect_root_taxons
+        redirect_to ActionController::Base.relative_url_root, :status => :moved_permanently if @taxon.root?
+      end
+
       def object
         if params.key? "id"
           @object ||= end_of_association_chain.find_by_permalink(params[:id].join("/") + "/")
@@ -724,6 +842,12 @@ class SiteExtension < Spree::Extension
           permalink += "/" unless permalink[-1..-1] == "/"
           @object ||= end_of_association_chain.find(:first, :include => :taxonomy, :conditions => ["taxons.permalink = ? AND taxonomies.store_id = ?", permalink  , @site.id])
         end
+      end
+
+      def accurate_title
+        return nil if @taxon.nil?
+
+        @taxon.title.blank? ?  @taxon.name : @taxon.title
       end
     end
 
@@ -754,6 +878,14 @@ class SiteExtension < Spree::Extension
         return if params.key? :keywords
         redirect_to '/', :status => 301 if ['/products', '/products/'].include? request.path
       end
+
+      private
+      def accurate_title
+        return nil if @product.nil?
+
+        @product.page_title.blank? ?  @product.name : @product.page_title
+
+      end
     end
 
     #ensure we have new user object for custom login.
@@ -773,6 +905,7 @@ class SiteExtension < Spree::Extension
         (country_from_ip(request.remote_ip) || Country.find(214) ).id
       end
     end
+
 
  end
 

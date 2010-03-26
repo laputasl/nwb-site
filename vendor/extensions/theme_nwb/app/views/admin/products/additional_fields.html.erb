@@ -3,34 +3,37 @@
 <%= render :partial => 'admin/shared/product_tabs', :locals => {:current => "Additional fields"} %>
 
 <% form_for(@product, :url => object_url, :html => { :method => :put, :multipart => true }) do |f| %>
-  <div class="additional_fields">
-    <h3>SUBTITLE</h3>
 
-    <% f.field_container :subtitle_main do %>
-      <%= f.label :subtitle_main, "Default" %><br />
-      <%= f.text_field :subtitle_main, {:class => 'fullwidth'} %>
-      <%= f.error_message_on :subtitle_main %>
-    <% end %>
-  </div>
+  <% f.field_container :anchor_name do %>
+    <%= f.label :anchor_name, "Anchor Name"%><br />
+    <%= f.text_field :anchor_name, :class => 'fullwidth'  %>
+    <%= f.error_message_on :anchor_name %>
+  <% end %>
+
+  <% f.field_container :subtitle_main do %>
+    <%= f.label :subtitle_main, "Subtitle" %><br />
+    <%= f.text_field :subtitle_main, {:class => 'fullwidth'} %>
+    <%= f.error_message_on :subtitle_main %>
+  <% end %>
 
   <div class="additional_fields">
     <h3>Sales Copy</h3>
-    <% f.field_container :anchor_name do %>
-      <%= f.label :anchor_name, "Anchor Name"%><br />
-      <%= f.text_field :anchor_name, :class => 'fullwidth'  %>
-      <%= f.error_message_on :anchor_name %>
-    <% end %>
-
     <% f.field_container :sales_copy do %>
-      <%= f.label :sales_copy, "Default"%><br />
+      <%= f.label :sales_copy, "Product Page (Default)"%><br />
       <%= f.text_area :sales_copy, {:style=> "height:100px;", :class => 'fullwidth'} %>
       <%= f.error_message_on :sales_copy %>
     <% end %>
 
     <% f.field_container :short_home do %>
-      <%= f.label :short_home, "Short Product Description"%><br />
+      <%= f.label :short_home, "Home Page"%><br />
       <%= f.text_area :short_home, {:style=> "height:100px;", :class => 'fullwidth'} %>
       <%= f.error_message_on :short_home %>
+    <% end %>
+
+    <% f.field_container :short_category do %>
+      <%= f.label :short_category, "Category Page"%><br />
+      <%= f.text_area :short_category, {:style=> "height:100px;", :class => 'fullwidth'} %>
+      <%= f.error_message_on :short_category %>
     <% end %>
   </div>
 
@@ -60,19 +63,6 @@
       <%= f.text_area :warning, {:style=> "height:100px;", :class => 'fullwidth'} %>
       <%= f.error_message_on :warning %>
     <% end %>
-
-    <% f.field_container :storage do %>
-      <%= f.label :storage, "Storage"%><br />
-      <%= f.text_area :storage, {:style=> "height:100px;", :class => 'fullwidth'} %>
-      <%= f.error_message_on :storage %>
-    <% end %>
-
-    <% f.field_container :package_description do %>
-      <%= f.label :package_description, "Package Description"%><br />
-      <%= f.text_area :package_description, {:style=> "height:100px;", :class => 'fullwidth'} %>
-      <%= f.error_message_on :package_description %>
-    <% end %>
-
   </div>
 
   <div class="additional_fields">

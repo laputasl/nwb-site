@@ -1,7 +1,7 @@
 <%- locals = {:item_form => item_form, :variant => variant, :line_item => line_item} -%>
 <tr class="<%= cycle('', 'alt') %>">
   <td style="text-align:center;">
-    <%= check_box_tag "remove[#{variant.id}]", true %>
+    <%= check_box_tag "remove[#{line_item.id}]", true %>
   </td>
   <td>
     <%= item_form.text_field :quantity, :size => 3 %>

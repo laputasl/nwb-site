@@ -1,4 +1,6 @@
 <% content_for :breadcrumbs do %>
+  <%= render "shared/pwb_banner" %>
   <%= breadcrumbs(@taxon, @product) %>
 <% end %>
-<%= render "#{@site.code}_details" %>
+
+<%= render "#{@current_domain}_details" %>

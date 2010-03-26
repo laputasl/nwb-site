@@ -1,6 +1,6 @@
 <% if @site.code == "pwb" %>
   <% content_for :breadcrumbs do %>
-    <%= image_tag "/#{@site.code}/images/banner_shoppingcart2.jpg", :alt => "PetWellbeing.com" %>
+    <%= image_tag "/#{@current_domain}/images/banner_shoppingcart2.jpg", :alt => "PetWellbeing.com" %>
   <% end %>
 <% end %>
 
@@ -25,13 +25,13 @@
               <p style="padding:5px 0px;">Please note that we do not ship on weekends and your order time does not include weekends.</p>
               <div id="usa_options" style="float:left;<%= 'display:block' if country_id == 214 %>">
                 <%= text_field_tag :calculator_zipcode, "enter zip", {:style => "width:50px;"} %>
-                <%= image_submit_tag "/#{@site.code}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
+                <%= image_submit_tag "/#{@current_domain}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
               </div>
               <div id="international_options" style="float:left;<%= 'display:block' if country_id != 214 %>">
                 <%= select_tag :calculator_country, options_for_select(Checkout.countries.sort.map{|c| [c.name, c.id]}, country_id) %>
-                <%= image_submit_tag "/#{@site.code}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
+                <%= image_submit_tag "/#{@current_domain}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
               </div>
-              <%= image_tag "/#{@site.code}/images/verifying.gif", {:id => "calculator_progress", :style => "float:left;margin:4px;"} %>
+              <%= image_tag "/#{@current_domain}/images/verifying.gif", {:id => "calculator_progress", :style => "float:left;margin:4px;"} %>
               <p id="calculator_methods" style="float:left;">&nbsp;Select Shipping:&nbsp;
                 <select id="calculator_available_methods" style="width:200px;"></select>
               </p>
@@ -48,10 +48,10 @@
         </tr>
         <tr>
           <td colspan="6">
-            <%= link_to image_tag("/#{@site.code}/images/button_return_to_store.gif"), products_path %>
+            <%= link_to image_tag("/#{@current_domain}/images/button_return_to_store.gif"), products_path %>
           </td>
           <td colspan="2">
-            <%= link_to image_tag("/#{@site.code}/images/button_proceed_checkout.gif", :alt => t("checkout")), edit_order_checkout_url(@order), :class => 'button checkout primary' %>
+            <%= link_to image_tag("/#{@current_domain}/images/button_proceed_checkout.gif", :alt => t("checkout")), edit_order_checkout_url(@order), :class => 'button checkout primary' %>
           </td>
         </tr>
       </tfoot>
@@ -59,7 +59,7 @@
   </table>
 
   <div id="cart-footer">
-    <%= render_snippet("#{@site.code}-cart-footer") %>
+    <%= render_snippet("#{@current_domain}-cart-footer") %>
   </div>
 </div>
 

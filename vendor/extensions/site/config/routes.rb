@@ -10,5 +10,5 @@ map.namespace :admin do |admin|
    admin.resource  :suspicious_order_settings
 end
 
+map.category_taxon '/c/*path', :controller => 'taxons', :action => 'show'
 map.brand_taxon '/b/*path', :controller => 'taxons', :action => 'show'
-map.brand_taxon '/c/*path', :controller => 'taxons', :action => 'show'

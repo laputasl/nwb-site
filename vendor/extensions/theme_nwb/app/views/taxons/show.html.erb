@@ -1,31 +1,27 @@
 <% content_for :breadcrumbs do %>
-  <% if @site.code == "pwb" %>
-    <% if @taxon.id == 3001 || @taxon.ancestors.any? {|t| t.id == 3001 } %>
-      <%= image_tag "/#{@site.code}/images/banner-dog-supplies.jpg", :alt => "PetWellbeing.com : Dog Supplies" %>
-    <% elsif @taxon.id == 3002 || @taxon.ancestors.any? {|t| t.id == 3002 } %>
-      <%= image_tag "/#{@site.code}/images/banner-cat-supplies.jpg", :alt => "PetWellbeing.com : Cat Supplies" %>
-    <% end %>
-  <% end %>
+  <%= render "shared/pwb_banner" %>
   <%= breadcrumbs(@taxon) %>
 <% end %>
 
 <% if @current_domain != @site.code && !@taxon.cross_sell.nil? %>
-  <div class="content">
-    <%= @taxon.cross_sell %>
-  </div>
+  <% unless @taxon.cross_sell.blank? %>
+    <div class="content">
+      <%= @taxon.cross_sell %>
+    </div>
+  <% end %>
 <% end %>
 
-<% unless @taxon.description.nil? %>
-  <div class="content">
+<% unless @taxon.description.blank? %>
+  <div class="content description">
     <%= @taxon.description %>
   </div>
 <% end %>
 <div class="products">
   <h1><%= taxon_header(@taxon) %></h1>
-  <%= render "shared/products", :products => @products %>
+  <%= render :partial => "shared/products", :locals => {:products => @products, :taxon => @taxon } %>
 </div>
-<% unless @taxon.footer %>
-  <div class="content">
+<% unless @taxon.footer.blank? %>
+  <div class="content footer">
     <%= @taxon.footer %>
   </div>
 <% end %>

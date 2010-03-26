@@ -6,6 +6,9 @@ en-US:
   flat_rate_over_value: Flat Rate when order Over Value
   order_must_be_over: Order must be over
   legacy: Legacy
+  page_title: Page Title
+  can_be_free: Can be free
+  reship: Reship
   checkout_steps:
     # keys correspond to Checkout state names:
     delivery: Shipping and Payment

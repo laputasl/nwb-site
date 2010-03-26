@@ -1,34 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<%= render :partial => 'shared/nwb_head'%>
+<%= render :partial => 'shared/head'%>
 </head>
 <body>
   <div id="container">
-    <div id="header">
-      <h1><a href="/"><img src="/nwb/images/nwb_logo.gif" alt="NaturalWellbeing.com - 1.800.536.9353" /></a></h1>
-      <ul id="miscNav">
-        <% if current_user.nil? %>
-          <li class="first"><%= link_to "Login", login_path %></li>
-        <% else %>
-          <li class="first"><%= link_to "Log Out", logout_path %></li>
-        <% end %>
-        <li><a href="/blog" title="Blog">Blog</a></li>
-        <li><a href="/nwb/contactus" title="Contact">Contact</a></li>
-        <li><a href="/nwb/aboutus" title="About">About</a></li>
-      </ul>
-      <%= render "shared/nwb_search" %>
-
-      <ul id="nav">
-        <li><a id="navHome" href="/" title="Home">Home</a></li>
-        <li><a id="navShipping" href="/nwb/shipping" title="Free Same Day Shipping">Free Same Day Shipping</a></li>
-        <li><a id="navSecure" href="/nwb/secure" title="Secure Shopping">Secure Shopping</a></li>
-        <li><a id="navGuarantee" href="/nwb/guarantee" title="90-Day Money Back Guarantee">90-Day Money Back Guarantee</a></li>
-        <li><%= link_to "My Shopping Cart", cart_path, {:id => "navCart"} %></li>
-        <li><%= link_to "My Account", current_user ? user_path(current_user) : login_path(), {:id => "navAccount"} %></li>
-      </ul>
-    </div>
-    <hr />
+    <%= render "/shared/nwb_navigation" %>
     <div id="main">
       <% if flash[:notice] %>
         <div class="flash notice"><%= flash[:notice] %></div>
@@ -39,15 +16,33 @@
 
       <div id="sidebar">
         <ul id="peopleBtns">
-          <% @categories.root.children.each do |taxon| %>
+          <% global_categories.root.children.each do |taxon| %>
               <% if taxon.name.include? "Men's" %>
-                <li><a id="btnMen" href="<%= seo_url(taxon) %>" title="<%=taxon.name%>"><%=taxon.name%></a></li>
+                <li><a id="btnMen" href="/<%= taxon.permalink %>" title="<%=taxon.name%>"><%=taxon.name%></a></li>
               <% elsif taxon.name.include? "Women's" %>
-                 <li><a id="btnWomen" href="<%= seo_url(taxon) %>" title="<%=taxon.name%>"><%=taxon.name%></a></li>
+                 <li><a id="btnWomen" href="/<%= taxon.permalink %>" title="<%=taxon.name%>"><%=taxon.name%></a></li>
               <% end %>
           <% end %>
           <li><a id="btnPets" href="/pets" title="Pets">Pets</a></li>
         </ul>
+
+        <script type="text/javascript">
+          function launchChatWindow(chatURL) {
+            if (typeof pageTracker == 'object') {
+              chatURL = pageTracker._getLinkerUrl(chatURL);
+            }
+            window.open(chatURL, 'Chat2383427521958331727', 'toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=470,height=400');
+          }
+        </script>
+        <div>
+          <a onclick="launchChatWindow('https://livechat.boldchat.com/aid/2298068183499916261/bc.chat?cwdid=2087633114552724379&amp;wdid=2454181574448868657&amp;url=' + escape(document.location.href)); return false;" target="_blank" href="https://livechat.boldchat.com/aid/2298068183499916261/bc.chat?cwdid=2087633114552724379&amp;wdid=2454181574448868657">
+            <img border="0" src="https://cbi.boldchat.com/aid/2298068183499916261/bc.cbi?cbdid=2236800376728759828&amp;wdid=2454181574448868657" alt="Live chat by BoldChat">
+          </a>
+        </div>
+
+        <div id="bbb2">
+          <a target="_blank" href="https://www.bbb.org/online/consumer/cks.aspx?id=110020517059"><img title="Click to verify BBB accreditation and to see a BBB report." border=0 src="/nwb/images/bbb.gif" alt="Click to verify BBB accreditation and to see a BBB report." /></a>
+        </div>
 
         <%= render 'shared/cart_preview' %>
 
@@ -84,10 +79,18 @@
             <% end %>
           <% end %>
         </dl>
-        <a id="btnNWBlog" href="/blog" title="Natural Wellbeing Blog">Natural Wellbeing Blog</a>
+          <!-- START SCANALERT CODE -->
+          <a target="_blank" href="https://www.scanalert.com/RatingVerify?ref=www.naturalwellbeing.com">
+          <img width="94" height="54" border="0" src="//images.scanalert.com/meter/survey/www.naturalwellbeing.com/13.gif" alt="HACKER SAFE certified sites prevent over 99.9% of hacker crime." /></a>
+          <!-- END SCANALERT CODE -->
+
         <img src="/nwb/images/img_comodo.png" alt="Comodo" />
-        <img src="/nwb/images/img_paypal.png" alt="PayPal" />
-      </div>
+        <!-- Begin Official PayPal Seal -->
+        <a href="https://www.paypal.com/us/verified/pal=wdf%40naturalwellbeing%2ecom" target="_blank">
+        <img src="/nwb/images/img_paypal.png" border="0" alt="Official PayPal Seal" width="100" height="100" />
+      </a>
+        <!-- End Official PayPal Seal -->
+        </div>
       <hr />
       <div id="body">
         <%= yield :breadcrumbs %>
@@ -98,6 +101,7 @@
     <%= render :partial => "shared/nwb_footer" %>
   </div>
   <%= render 'shared/google_analytics' %>
+  <%= render 'shared/nwb_fetch_back' %>
 </body>
 </html>
 

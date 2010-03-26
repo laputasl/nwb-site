@@ -1,33 +1,25 @@
+<%
+  paginated_products = Spree::Config.searcher.products if params.key?(:keywords)
+  paginated_products ||= products
+%>
+
 <ul class="productList">
-  <% products.each do |product| %>
-    <li class="<%= ((products.size - products.index(product)) < (3 - (products.size % 2))) ? "" : "border" %>">
-      <%= link_to small_image(product, {:style => "max-width:70px;"}), product, {:class => "photo"} %>
-      <div class="info" style="min-height:145px;">
-        <h2><%= link_to truncate(product.name, :length => 26), product, :title => product.name %></h2>
-        <p class="itemNum">Item # <%= product.sku %></p>
-        <p class="description"><%= product.subtitle_main %></p>
-        <div class="rating">
-          <div class="pr_snippet_category">
-            <script type="text/javascript">
-            var pr_snippet_min_reviews=1;
-            POWERREVIEWS.display.snippet(document, { pr_page_id : "<%= product.legacy_id %>" });
-            </script>
-          </div>
-        </div>
-        <p class="price"><%= product_price(product) %> USD</p>
-        <p class="more"><a href="#" title="Product Info &raquo;">Product Info &raquo;</a></p>
-      </div>
-      <div class="price">
-        <% form_for :order, :url => orders_url do |f| %>
-          <fieldset>
-             <div class="quantity">
-              <label>Quantity</label>
-              <%= text_field_tag("variants[#{product.master.id}]", 1)  %>
-            </div>
-            <%= submit_tag("Buy Now", :class => "btnAddCart") %>
-          </fieldset>
-        <% end %>
-      </div>
-    </li>
-  <% end %>
+  <% products.each do |product|
+    if @current_domain == "pwb"
+      %><%= render :partial => "/shared/pwb_product", :locals => {:product => product, :products => @products, :taxon => @taxon, :is_home => false} %><%
+    else
+      %><%= render :partial => "/shared/nwb_product", :locals => {:product => product, :products => @products, :taxon => @taxon, :is_home => false} %><%
+    end
+  end
+  (products.size % 2).times do
+    %><li class="<%= products.size < 2 ? "" : "border" %>">&nbsp;</li><%
+  end%>
 </ul>
+
+<% if paginated_products.respond_to?(:total_pages)
+      params.delete(:search)
+      params.delete(:taxon)
+%><%= will_paginate(paginated_products,
+                    :previous_label => "&#171; #{t('previous')}",
+                    :next_label => "#{t('next')} &#187;") %>
+<% end -%>

@@ -1,31 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<%= render :partial => 'shared/pwb_head'%>
+<%= render :partial => 'shared/head'%>
 </head>
 <body>
   <div id="container">
-    <div id="header">
-      <h1><a href="/" title="PetWellbeing.com">PetWellbeing.com - 1.877.633.2401</a></h1>
-      <ul id="miscNav">
-        <li class="first"><%= link_to "Login", login_path %></li>
-        <li><a href="http://videos.petwellbeing.com/" title="Videos">Videos</a></li>
-        <li><a href="http://pethealth.petwellbeing.com/wiki/Main_Page" title="Wiki">Wiki</a></li>
-        <li><a href="/blog" title="Blog">Blog</a></li>
-        <li><a href="/pwb/contactus" title="Contact">Contact</a></li>
-        <li><a href="/pwb/aboutus" title="About">About</a></li>
-      </ul>
-      <%= render "shared/pwb_search" %>
-
-      <ul id="nav">
-        <li><a id="navHome" href="/" title="Home">Home</a></li>
-        <li><a id="navShipping" href="/pwb/shipping" title="Free Same Day Shipping">Free Same Day Shipping</a></li>
-        <li><a id="navSecure" href="/pwb/secure" title="Secure Shopping">Secure Shopping</a></li>
-        <li><a id="navGuarantee" href="/pwb/guarantee" title="30-Day Money Back Guarantee">30-Day Money Back Guarantee</a></li>
-        <li><%= link_to "My Shopping Cart", cart_path, {:id => "navCart"} %></li>
-        <li><%= link_to "My Account", current_user ? user_path(current_user) : login_path(), {:id => "navAccount"} %></li>
-      </ul>
-    </div>
+    <%= render "/shared/pwb_navigation" %>
     <hr />
     <div id="checkout-main">
       <div class="content">
@@ -35,15 +15,16 @@
         <% end %>
         <% if flash[:error] %>
         <div class="flash errors"><%= flash[:error] %></div>
-        <% end %>        
+        <% end %>
         <%= yield %>
 
       </div>
     </div>
     <hr />
-    <%= render :partial => "shared/pwb_footer" %> 
+    <%= render :partial => "shared/pwb_footer" %>
   </div>
   <%= render 'shared/google_analytics' %>
+  <%= render 'shared/pwb_fetch_back' %>
 </body>
 </html>
 

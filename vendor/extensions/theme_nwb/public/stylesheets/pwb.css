@@ -25,9 +25,32 @@ a:active { color: #1c3c80; }
 #header {
   width: 745px;
   overflow: hidden;
-  padding: 5px 0 0 0;
+  padding: 2px 0 0 0;
+}
+#header h1 {
+  width: 350px;
+  min-height: 50px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0px;
+  zoom: 1;
+  *display: inline;
+  _height: 50px;
 }
 #header h1 a { display: inline; }
+#header .util {
+  width: 390px;
+  min-height: 50px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0px;
+  zoom: 1;
+  *display: inline;
+  _height: 50px;
+  text-align: right;
+}
 #header li {
   list-style: none;
   list-style-position: outside;
@@ -331,7 +354,7 @@ h1 {
   background: #f8f5ef;
   padding: 5px;
   margin: 5px 0 15px 0;
-  font-size: 14px;
+  font-size: 1.1em;
 }
 #body .content p.right { text-align: right; }
 .product {
@@ -353,8 +376,8 @@ h1 {
 .product h2 a {
   color: #708369;
   text-decoration: none;
-  font-weight: normal;
-  font-size: 18px;
+  font-weight: bold;
+  font-size: 1.3em;
 }
 .product .info p { margin: 0 0 10px 0; }
 .product .info ul { margin: 0 0 10px 25px; }
@@ -370,6 +393,7 @@ h1 {
   padding: 1px 69px 0px 74px;
   background-image: url(/pwb/images/quotes.gif);
   background-repeat: no-repeat;
+  font-size: 1.1em;
 }
 .product .price {
   clear: both;
@@ -423,8 +447,14 @@ h1 {
   text-align: center;
   margin: 0 10px 0 0;
 }
-.product .prSnippetWriteReview { display: inline; }
-.product .prSnippetReadReviews { display: inline; }
+.product .prSnippetWriteReview {
+  display: inline;
+  margin-right: 5px;
+}
+.product .prSnippetReadReviews {
+  display: inline;
+  margin-right: 5px;
+}
 .product .prStarsSmall {
   display: block;
   float: none;
@@ -441,6 +471,20 @@ h1 {
   border-top: 0;
 }
 .productDetails { margin: 25px 0 0 13px; }
+.productDetails h4 {
+  color: #5d755d;
+  font-size: 1.4em;
+  font-weight: bolder;
+  margin: 0;
+  padding: 3px 0;
+}
+h5 {
+  color: #5d755d;
+  font-size: 1.4em;
+  font-weight: bolder;
+  margin: 0;
+  padding: 3px 0;
+}
 .productMenu {
   background: url(/pwb/images/bg_tab_menu.png) bottom left repeat-x;
   overflow: hidden;
@@ -497,38 +541,63 @@ h1 {
 .products h1 a { color: #324a21; }
 .products h1 a:hover { color: #496337; }
 .products ul {
-  background: url(/pwb/images/bg_dotted.png) 265px 0 repeat-y;
-  margin: 10px;
-  width: 545px;
+  background: url(/pwb/images/bg_dotted.png) 281px 0 repeat-y;
+  margin: 10px 0px;
+  width: 563px;
   overflow: hidden;
 }
-.productList .border {
-  border-bottom: 5px solid #f4f3f0;
-  padding-bottom: 10px !important;
-  margin-bottom: 20px;
+.productList li {
+  width: 268px;
+  min-height: 100px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+  _height: 100px;
+  overflow: hidden;
+  margin: 0px 1px 0 10px;
+}
+.productList .spacer {
+  display: block;
+  width: 543px;
+  height: 5px;
+  min-height: 5px;
+  background-color: #f4f3f0;
+  padding: 0px;
+  border-width: 20px 10px;
+  border-color: #ffffff;
+  border-style: solid;
+  margin: 0;
 }
 .productList .rating {
   margin: 10px 0 0;
   min-height: 20px;
 }
-.productList li {
-  width: 262px;
-  float: left;
-  display: inline;
-  padding: 0 10px 0 0;
-  min-height: 195px;
-}
+.productList a { font-size: 0.9em; }
 .productList li .photo {
-  float: left;
-  display: inline;
-  width: 60px;
+  width: 70px;
+  min-height: 10px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+  _height: 10px;
+  overflow: hidden;
+  margin: 0px;
 }
 .productList li .info {
-  float: right;
-  display: inline;
-  width: 188px;
+  width: 184px;
+  min-height: 10px;
+  display: -moz-inline-stack;
+  display: inline-block;
+  vertical-align: top;
+  zoom: 1;
+  *display: inline;
+  _height: 10px;
   overflow: hidden;
-  margin: 5px 0 5px 0;
+  margin: 5px 0 5px 5px;
 }
 .productList li .info h2 {
   font-size: 14px;
@@ -537,11 +606,6 @@ h1 {
 .productList li .info p.itemNum {
   font-size: 11px;
   margin: 0;
-}
-.productList li .info p.description {
-  min-height: 50px;
-  max-height: 50px;
-  overflow: hidden;
 }
 .productList li .info p {
   font-size: 12px;
@@ -553,7 +617,7 @@ h1 {
   min-height: 20px;
 }
 .productList .info p.price {
-  width: 95px;
+  width: 93px;
   margin: 0;
   padding: 0;
   float: left;
@@ -565,6 +629,7 @@ h1 {
   clear: none;
   width: 90px;
   margin: 0;
+  text-align: right;
 }
 .productList li p.more {
   clear: both;
@@ -665,7 +730,10 @@ h1 {
   _height: 75px;
 }
 .product .price form .vprices .radio { width: 150px; }
-.product .price form .vprices .pricesave { margin: 0 8px 0 20px; }
+.product .price form .vprices .pricesave {
+  margin: 0 8px 0 20px;
+  font-size: 0.9em;
+}
 .product .price form .vprices .radio .add_to_cart {
   display: block;
   border: none;
