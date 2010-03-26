@@ -192,6 +192,7 @@ class SiteExtension < Spree::Extension
 
     Shipment.class_eval do
       after_create :check_order_state
+      before_save :generate_shipment_number
 
       def editable_by?(user)
         %w(pending ready_to_ship unable_to_ship needs_fulfilment).include?(state) or user.has_role?(:admin)
@@ -222,6 +223,18 @@ class SiteExtension < Spree::Extension
         after_transition :to => 'shipped', :do => :transition_order
       end
 
+      #use custom store specific shipment number
+      def generate_shipment_number
+        return nil if order.store.nil?
+        return self.number unless self.number.blank?
+        record = true
+        while record
+          random = "#{order.store.code == "nwb" ? "1" : "2"}_#{Array.new(11){rand(9)}.join}"
+          record = Shipment.find(:first, :conditions => ["number = ?", random])
+        end
+        self.number = random
+      end
+
       private
       def check_order_state
         self.ready! if (order.paid? && !inventory_units.any? {|unit| unit.backordered? })
@@ -230,6 +243,7 @@ class SiteExtension < Spree::Extension
       def is_ready?
         order.paid? && !inventory_units.any? {|unit| unit.backordered? }
       end
+
     end
 
     OrdersController.class_eval do
@@ -278,7 +292,8 @@ class SiteExtension < Spree::Extension
 
       private
       def assign_to_store
-        @order.store = @site
+        @order.shipment.order.store = @order.store = @site
+        @order.shipment.generate_shipment_number
       end
 
       def set_analytics
@@ -727,16 +742,17 @@ class SiteExtension < Spree::Extension
     end
 
     Admin::OrdersController.class_eval do
-      #after_filter :assign_to_store, :only => [:new, :create, :update]
+      after_filter :ensure_shipment_has_number, :only => [:create, :update]
 
       private
       def initialize_order_events
         @order_events = %w{cancel hold approve resume reship}
       end
 
-      # def assign_to_store
-      #   @order.update_attribute(:store_id, Store.find_by_code("nwb").id) if @order.store.nil?
-      # end
+      def ensure_shipment_has_number
+        @order.shipment.generate_shipment_number
+        @order.shipment.save!
+      end
     end
 
     ShippingMethod.class_eval do
