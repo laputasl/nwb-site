@@ -6,7 +6,11 @@ class SiteExtension < Spree::Extension
   description "Describe your extension here"
   url "http://yourwebsite.com/site"
 
-  def self.require_gems(config)
+  def self.require_gems(config)   
+    
+    # store switcher needs to load first
+    config.metals = ["StoreSwitcher", "LegacyRedirect"]
+    
     #config.gem 'right_aws'
   end
 
