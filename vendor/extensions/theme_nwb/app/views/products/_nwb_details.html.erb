@@ -16,7 +16,7 @@
     <!-- todo fix this -->
     <%= render "nwb_pricing" %>
   </div>
-  <% unless @product.featured_testimonial.nil? %>
+  <% unless @product.featured_testimonial.blank? %>
     <div class="testimonial">
       <%= @product.featured_testimonial %>
     </div>

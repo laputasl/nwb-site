@@ -29,7 +29,7 @@
       <% end %>
     </tbody>
   </table>
-  <p><a href="/pwb/shipping" title="Free Same Day Shipping at $50.00">Free Same Day Shipping at <%= number_to_currency Spree::Config.get("#{@current_domain}_free_shipping_at") %></a></p>
+  <p><a href="/pwb/shipping" title="Free Same Day Shipping at <%= number_to_currency Spree::Config.get("#{@current_domain}_free_shipping_at") %>">Free Same Day Shipping at <%= number_to_currency Spree::Config.get("#{@current_domain}_free_shipping_at") %></a></p>
   <% unless order.nil? || @controller.controller_name == "orders" %>
     <h3><a href="#" title="Shopping Calculator">Shipping Calculator</a></h3>
     <div id="shipping_calculator">

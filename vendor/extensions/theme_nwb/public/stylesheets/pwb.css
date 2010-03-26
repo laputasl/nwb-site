@@ -577,25 +577,22 @@ h5 {
 .productList a { font-size: 0.9em; }
 .productList li .photo {
   width: 70px;
-  min-height: 10px;
   display: -moz-inline-stack;
-  display: inline-block;
+  float: left;
   vertical-align: top;
   zoom: 1;
   *display: inline;
   _height: 10px;
   overflow: hidden;
-  margin: 0px;
+  margin: 0px 5px;
 }
 .productList li .info {
-  width: 184px;
-  min-height: 10px;
-  display: -moz-inline-stack;
-  display: inline-block;
+  min-height: 165px;
+  float: left;
   vertical-align: top;
   zoom: 1;
   *display: inline;
-  _height: 10px;
+  _height: 165px;
   overflow: hidden;
   margin: 5px 0 5px 5px;
 }
@@ -609,11 +606,12 @@ h5 {
 }
 .productList li .info p {
   font-size: 12px;
-  margin: 7px 0 0 0;
+  margin: 7px 0;
   line-height: 15px;
 }
 .productList .info .rating {
-  margin: 10px 0 0;
+  clear: both;
+  padding: 10px 0 0;
   min-height: 20px;
 }
 .productList .info p.price {
