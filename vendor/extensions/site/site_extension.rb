@@ -6,11 +6,11 @@ class SiteExtension < Spree::Extension
   description "Describe your extension here"
   url "http://yourwebsite.com/site"
 
-  def self.require_gems(config)   
-    
+  def self.require_gems(config)
+
     # store switcher needs to load first
     config.metals = ["StoreSwitcher", "LegacyRedirect"]
-    
+
     #config.gem 'right_aws'
   end
 
@@ -394,8 +394,8 @@ class SiteExtension < Spree::Extension
           @product_group = ProductGroup.new
         end
 
-        #SITE SPECIFIC: only retrieve products for the current store.
-        @product_group.add_scope('by_store', @site.id)
+        #SITE SPECIFIC: only retrieve products for the current store - but not if we're searching
+        @product_group.add_scope('by_store', @site.id) if @keywords.blank?
 
         @product_group.add_scope('in_taxon', @taxon) unless @taxon.blank?
         @product_group.add_scope('keywords', @keywords) unless @keywords.blank?
