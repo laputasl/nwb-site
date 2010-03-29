@@ -609,7 +609,7 @@ h5 {
 }
 .productList .info .rating {
   clear: both;
-  padding: 10px 0 0;
+  padding: 0 0 4px;
   min-height: 20px;
 }
 .productList .info p.price {
