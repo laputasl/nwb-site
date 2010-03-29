@@ -13,10 +13,7 @@
   <ul class="productList">
     <% @best_selling_dogs.each do |product| %>
       <%= render "shared/pwb_product", :product => product, :products => @best_selling_dogs, :is_home => true %>
-    <% end
-      (@best_selling_dogs.size % 2).times do
-        %><li class="<%= products.index(product) < 2 ? "" : "border" %>">&nbsp;</li><%
-      end%>
+    <% end %>
 
   </ul>
   <h1>Top Selling Cat Supplies</h1>

@@ -585,8 +585,6 @@ h5 {
   margin: 0px 5px;
 }
 .productList li .info {
-  min-height: 165px;
-  float: left;
   vertical-align: top;
   zoom: 1;
   *display: inline;

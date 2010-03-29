@@ -17,8 +17,8 @@ class HomePageController < Spree::BaseController
     else
       #TODO: Figure out what criteria we will use to display products on homepages.
       if @site.code == "pwb"
-        @best_selling_cats = Taxon.find_by_name("Cat Supplies").products.active.find(:all, :limit => 2)
-        @best_selling_dogs = Taxon.find_by_name("Dog Supplies").products.active.find(:all, :limit => 2)
+        @best_selling_cats = Product.find(Taxon.find([9998,3002]).map(&:product_ids).inject {|x, y| x &  y })
+        @best_selling_dogs = Product.find(Taxon.find([9998,3001]).map(&:product_ids).inject {|x, y| x &  y })
       else
         @best_selling_products = Product.active.find_all_by_store_id(@site.id, :limit => 10)
       end
