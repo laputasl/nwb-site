@@ -36,5 +36,6 @@ vendor/extensions/theme_nwb/app/stylesheets/*.css
 # from capistrano
 mkmf.log
 
+vendor/extensions/importer/data/*
 
 
