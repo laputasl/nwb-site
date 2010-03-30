@@ -228,12 +228,13 @@ class SiteExtension < Spree::Extension
       end
 
       #use custom store specific shipment number
-      def generate_shipment_number
-        return nil if order.store.nil?
-        return self.number unless self.number.blank?
+      def generate_shipment_number(force=false)
+        return self.number unless self.number.blank? || force
+        store = order.store.nil? ? Store.last : order.store
+
         record = true
-        while record
-          random = "#{order.store.code == "nwb" ? "1" : "2"}_#{Array.new(11){rand(9)}.join}"
+         while record
+          random = "#{store.code == "nwb" ? "1" : "2"}_#{Array.new(11){rand(9)}.join}"
           record = Shipment.find(:first, :conditions => ["number = ?", random])
         end
         self.number = random
@@ -247,7 +248,6 @@ class SiteExtension < Spree::Extension
       def is_ready?
         order.paid? && !inventory_units.any? {|unit| unit.backordered? }
       end
-
     end
 
     OrdersController.class_eval do
@@ -297,7 +297,7 @@ class SiteExtension < Spree::Extension
       private
       def assign_to_store
         @order.shipment.order.store = @order.store = @site
-        @order.shipment.generate_shipment_number
+        @order.shipment.generate_shipment_number(true)
       end
 
       def set_analytics
@@ -754,7 +754,7 @@ class SiteExtension < Spree::Extension
       end
 
       def ensure_shipment_has_number
-        @order.shipment.generate_shipment_number
+        @order.shipment.generate_shipment_number(true)
         @order.shipment.save!
       end
     end
@@ -926,7 +926,14 @@ class SiteExtension < Spree::Extension
       end
     end
 
+    #force shipments to be found via their numbers (not ids)
+    Admin::ShipmentsController.class_eval do
+      private
 
+      def object
+        @object ||= Shipment.find_by_number(params[:id]) if params[:id]
+      end
+    end
  end
 
 end
