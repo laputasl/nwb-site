@@ -13,7 +13,7 @@ xmlns='http://exacttarget.com/wsdl/partnerAPI'>
       <% @attributes.each do |key, value| %>
         <Attributes>
           <Name><%= key %></Name>
-          <Value><![CDATA[<%= CGI::unescapeHTML value %>]]></Value>
+          <Value><![CDATA[<%= CGI::unescapeHTML(value) unless value.nil? %>]]></Value>
         </Attributes>
       <% end %>
     </Subscribers>

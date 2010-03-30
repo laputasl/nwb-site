@@ -51,6 +51,7 @@ module ET
       response = send do|io|
         io << render_template('triggered_send')
       end
+
       Error.check_response_error(response)
       doc = Hpricot.XML(response.read_body)
       doc.at("triggered_send_description").inner_html.to_i

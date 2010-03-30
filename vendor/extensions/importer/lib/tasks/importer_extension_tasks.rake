@@ -7,6 +7,10 @@ namespace :spree do
         require 'rubygems'
         require 'fastercsv'
 
+        User.class_eval do
+           attr_accessible :ship_address_id, :salt, :bill_address_id, :crypted_password, :id
+        end
+
         LineItem.class_eval do
           attr_accessible :price
         end
@@ -98,70 +102,103 @@ namespace :spree do
             countries[row[0]] = row
           end
 
-          FasterCSV.foreach("#{RAILS_ROOT}/vendor/extensions/importer/data/#{code}-customers.csv" ) do |row|
+          passwords = {} #blank hash to hold email /  passwords
 
-            user = User.find_by_email_and_legacy_id_and_store_id row[1], row[0], store.id
-            next unless user.nil?
+          file = File.open("#{RAILS_ROOT}/vendor/extensions/importer/data/pwb_users_whos_passwords_are_now_get_to_nwb", "w")
 
-            bill_state = State.find_by_abbr(states[row[11]][1]) unless row[11].blank?
-            bill_country = Country.find_by_name(countries[row[14]][2]) unless row[14].blank?
-            if bill_country.nil?
-              puts "-----------No bill country---------#{row[14]}----------------------------"
+            FasterCSV.foreach("#{RAILS_ROOT}/vendor/extensions/importer/data/#{code}-customers.csv" ) do |row|
+
+              user = User.find_by_email row[1]
+
+              unless user.nil?
+                if code == "nwb"
+                  puts "-----------This should never happen-------------------------------------"
+                else
+                  user.pwb_legacy_id = row[0]
+                  user.save!
+
+                  if passwords[row[1]] == row[2]
+                    file.write [user.id, row[1], row[4], row[6], user.nwb_legacy_id, user.pwb_legacy_id].join(",")
+                    puts "-----------Duplicate user with different passwords!---------------------------"
+                  else
+                    puts "-----------Duplicate user, same password-------------------------------------"
+                  end
+                end
+
+                next
+              end
+
+
+              bill_state = State.find_by_abbr(states[row[11]][1]) unless row[11].blank? || states[row[11]].blank?
+              bill_country = Country.find_by_name(countries[row[14]][2]) unless row[14].blank? || countries[row[14]].blank?
+              if bill_country.nil?
+                puts "-----------No bill country---------#{row[14]}----------------------------"
+              end
+
+              if bill_state.nil? && !bill_country.nil? && !row[11].blank?
+                bill_state = State.create(:name => states[row[11]][2], :abbr => states[row[11]][1], :country_id => bill_country.id) unless states[row[11]][1] == "--"
+                puts "-----------new bill state--#{bill_state.inspect}-----------------------------------"
+              end
+
+              bill_address = Address.new("firstname"   => row[4],
+                                        "lastname"    => row[6],
+                                        "address1"    => row[8],
+                                        "address2"    => row[9],
+                                        "city"        => row[10],
+                                        "state_id"    => bill_state.nil? ? nil : bill_state.id,
+                                        "zipcode"     => row[12],
+                                        "country_id"  => bill_country.nil? ? nil : bill_country.id,
+                                        "phone"       => row[14])
+              bill_address.save(false)
+
+
+              ship_state = State.find_by_abbr(states[row[22]][1]) unless row[22].blank? || states[row[22]].blank?
+              ship_country = Country.find_by_name(countries[row[24]][2]) unless row[24].blank? || countries[row[24]].blank?
+              if ship_country.nil?
+                puts "-----------No ship country---------#{row[24]}----------------------------"
+              end
+
+              if ship_country.nil? && !ship_country.nil? && !row[22].blank?
+                ship_country = State.create(:name => states[row[22]][2], :abbr => states[row[22]][1], :country_id => ship_country.id) unless states[row[22]][1] == "--"
+                puts "-----------new ship state--#{ship_country.inspect}-----------------------------------"
+              end
+
+              ship_address = Address.new("firstname"   => row[16],
+                                        "lastname"    => row[18],
+                                        "address1"    => row[19],
+                                        "address2"    => row[20],
+                                        "city"        => row[21],
+                                        "state_id"    => ship_state.nil? ? nil : ship_state.id,
+                                        "zipcode"     => row[23],
+                                        "country_id"  => ship_country.nil? ? nil : ship_country.id,
+                                        "phone"       => row[14])
+              ship_address.save(false)
+
+
+
+              user = User.new(:store_id => store.id, :email => row[1], :bill_address_id => bill_address.id, :ship_address_id => ship_address.id)
+              user.password = row[2]
+              user.password_confirmation = row[2]
+              passwords[row[1]] = row[2]
+
+              if code == "nwb"
+                user.nwb_legacy_id = row[0]
+              else
+                user.pwb_legacy_id = row[0]
+              end
+              user.save(false)
+
+
             end
 
-            if bill_state.nil? && !bill_country.nil? && !row[11].blank?
-              bill_state = State.create(:name => states[row[11]][2], :abbr => states[row[11]][1], :country_id => bill_country.id) unless states[row[11]][1] == "--"
-              puts "-----------new bill state--#{bill_state.inspect}-----------------------------------"
-            end
-
-            bill_address = Address.new("firstname"   => row[4],
-                                      "lastname"    => row[6],
-                                      "address1"    => row[8],
-                                      "address2"    => row[9],
-                                      "city"        => row[10],
-                                      "state_id"    => bill_state.nil? ? nil : bill_state.id,
-                                      "zipcode"     => row[12],
-                                      "country_id"  => bill_country.nil? ? nil : bill_country.id,
-                                      "phone"       => row[14])
-            bill_address.save(false)
+          file.close
 
 
-            ship_state = State.find_by_abbr(states[row[22]][1]) unless row[22].blank?
-            ship_country = Country.find_by_name(countries[row[24]][2]) unless row[24].blank?
-            if ship_country.nil?
-              puts "-----------No ship country---------#{row[24]}----------------------------"
-            end
-
-            if ship_country.nil? && !ship_country.nil? && !row[22].blank?
-              ship_country = State.create(:name => states[row[22]][2], :abbr => states[row[22]][1], :country_id => ship_country.id) unless states[row[22]][1] == "--"
-              puts "-----------new ship state--#{ship_country.inspect}-----------------------------------"
-            end
-
-            ship_address = Address.new("firstname"   => row[16],
-                                      "lastname"    => row[18],
-                                      "address1"    => row[19],
-                                      "address2"    => row[20],
-                                      "city"        => row[21],
-                                      "state_id"    => ship_state.nil? ? nil : ship_state.id,
-                                      "zipcode"     => row[23],
-                                      "country_id"  => ship_country.nil? ? nil : ship_country.id,
-                                      "phone"       => row[14])
-            ship_address.save(false)
-
-
-
-            user = User.new(:store_id => store.id, :email => row[1], :bill_address_id => bill_address.id, :ship_address_id => ship_address.id)
-            user.password = row[2]
-            user.password_confirmation = row[2]
-            user.legacy_id = row[0]
-            user.save(false)
-
-
-          end
         end
 
+        import_users("nwb") #passwords
         import_users("pwb")
-        import_users("nwb")
+
 
         def import_orders(code)
           store = Store.find_by_code code
