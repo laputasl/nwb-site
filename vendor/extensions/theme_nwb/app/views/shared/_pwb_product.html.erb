@@ -12,7 +12,7 @@
         </script>
       </div>
     </div>
-    <p class="price"><%= product_price(product) %> USD</p>
+    <p class="price"><%= number_to_currency(product.master.volume_price(1).to_s) %> USD</p>
     <p class="more"><%= link_to "More Product Info &raquo;", product, {:title => "More Product Info" } %></p>
   </div>
   <div class="price">
