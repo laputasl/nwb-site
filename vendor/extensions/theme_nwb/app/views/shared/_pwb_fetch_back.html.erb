@@ -1,3 +1,7 @@
 <% unless Spree::Config[:pwb_fetch_back_code].nil? %>
-  <iframe src='https://pixel.fetchback.com/serve/fb/pdc?cat=&name=<%= flash[:commerce_tracking].nil? ? "landing" : "success" %>&sid=<%= Spree::Config[:pwb_fetch_back_code] %>' scrolling='no' width='1' height='1' marginheight='0' marginwidth='0' frameborder='0'></iframe>
+  <% if flash[:commerce_tracking].nil? %>
+    <iframe src='http<%= "s" if request.ssl? %>://pixel.fetchback.com/serve/fb/pdc?cat=&name=landing&sid=<%= Spree::Config[:pwb_fetch_back_code] %>' scrolling='no' width='1' height='1' marginheight='0' marginwidth='0' frameborder='0'></iframe>
+  <% else %>
+    <iframe src='http<%= "s" if request.ssl? %>://pixel.fetchback.com/serve/fb/pdc?cat=&name=success&client_revenue=<%= @order.total %>&order_id=<%= @order.number %>&sid=<%= Spree::Config[:pwb_fetch_back_code] %>' scrolling='no' width='1' height='1' marginheight='0' marginwidth='0' frameborder='0'></iframe>
+  <% end %>
 <% end %>

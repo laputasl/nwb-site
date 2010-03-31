@@ -39,3 +39,7 @@ Spree::Config.set(:always_put_site_name_in_title => false)
 
 #we don't want to track stock in Spree
 Spree::Config.set(:track_inventory_levels => false)
+
+
+Spree::Config.set(:pwb_fetch_back_code => 2285)
+Spree::Config.set(:nwb_fetch_back_code => 2521)
