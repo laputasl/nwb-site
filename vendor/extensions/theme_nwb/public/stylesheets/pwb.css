@@ -423,18 +423,9 @@ h1 {
   border-bottom: 1px solid #d8d5c3;
 }
 .rateShare .rating { min-height: 64px; }
-.product .rating {
-  width: 280px;
-  border-right: 1px solid #d8d5c3;
-  float: left;
-  display: inline;
-  padding: 0 10px 5px 0;
-}
-.product .prSnippetTitle {
-  margin: 10px 0 5px 0;
-  font-size: 12px;
-  font-weight: bold;
-}
+.product .rating { padding: 0 10px 15px 0; }
+.product .prSnippetTitle { display: none; }
+.product .prSnippetNumberOfRatingsText { display: none; }
 .product .share p {
   margin: 10px 0 5px 0;
   font-size: 12px;
@@ -460,11 +451,7 @@ h1 {
   float: none;
 }
 .product .rating * { padding: 0; }
-.product .share {
-  width: 260px;
-  float: right;
-  display: inline;
-}
+.product .subtitle { font-size: 1.2em; }
 #body .productDetails .content {
   margin: 0 0 20px 0;
   border-color: #c2bfaf;
@@ -648,6 +635,7 @@ h5 {
   padding: 0 !important;
   margin: 0 0 10px 0;
 }
+.productList .prSnippetEngine div { padding: 0px; }
 .price {
   clear: both;
   padding: 10px 0;

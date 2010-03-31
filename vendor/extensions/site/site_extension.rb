@@ -342,11 +342,6 @@ class SiteExtension < Spree::Extension
 
       #need to reverse this (ie. bill_address is a copy of ship_address)
       def clone_billing_address
-        self.bill_address = ship_address.clone
-        true
-      end
-
-      def clone_billing_address
 
         if self.ship_address.nil?
           self.ship_address = bill_address.clone
@@ -383,7 +378,9 @@ class SiteExtension < Spree::Extension
         # Prepare a search within the parameters
         Spree::Config.searcher.prepare(params)
 
-        if !params[:order_by_price].blank?
+        if !params[:sort_by].blank?
+          @product_group = ProductGroup.new.from_route([params[:sort_by]])
+        elsif !params[:order_by_price].blank?
           @product_group = ProductGroup.new.from_route([params[:order_by_price]+"_by_master_price"])
         elsif params[:product_group_name]
           @cached_product_group = ProductGroup.find_by_permalink(params[:product_group_name])
@@ -592,7 +589,7 @@ class SiteExtension < Spree::Extension
 
       def create_subscriber(user)
         if user.is_a? String
-          checkout = Checkout.find_by_email user
+          checkout = Checkout.find_by_email(user, :order => "updated_at desc")
 
           list = autosubscribe_list(checkout.order.store) if checkout
         else
@@ -892,19 +889,18 @@ class SiteExtension < Spree::Extension
 
     #redirect /products url (except when searching)
     ProductsController.class_eval do
-      before_filter :redirect_products_path_to_home, :only => :index
-
-      def redirect_products_path_to_home
-        return if params.key? :keywords
-        redirect_to '/', :status => 301 if ['/products', '/products/'].include? request.path
-      end
+      # before_filter :redirect_products_path_to_home, :only => :index
+      #
+      # def redirect_products_path_to_home
+      #   return if params.key? :keywords
+      #   redirect_to '/', :status => 301 if ['/products', '/products/'].include? request.path
+      # end
 
       private
       def accurate_title
         return nil if @product.nil?
 
         @product.page_title.blank? ?  @product.name : @product.page_title
-
       end
     end
 
@@ -932,6 +928,23 @@ class SiteExtension < Spree::Extension
 
       def object
         @object ||= Shipment.find_by_number(params[:id]) if params[:id]
+      end
+    end
+
+    #force shipments to be found via their numbers (not ids)
+    Admin::ShipmentsController.class_eval do
+      private
+
+      def object
+        @object ||= Shipment.find_by_number(params[:id]) if params[:id]
+      end
+    end
+
+    Api::ShipmentsController.class_eval do
+      private
+
+      def object
+        @object ||= end_of_association_chain.find_by_number(params[:id]) if params[:id]
       end
     end
  end

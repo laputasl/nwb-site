@@ -6,6 +6,8 @@ namespace :spree do
       task :import => :environment do
         require 'rubygems'
         require 'fastercsv'
+        require 'activesupport'
+        include ActionView::Helpers::NumberHelper
 
         User.class_eval do
            attr_accessible :ship_address_id, :salt, :bill_address_id, :crypted_password, :id
@@ -27,6 +29,16 @@ namespace :spree do
           end
 
           def create_tax_charge
+          end
+        end
+
+        Shipment.class_eval do
+          def create_shipping_charge
+          end
+        end
+
+        TaxCharge.class_eval do
+          def calculate_tax_charge
           end
         end
 
@@ -90,96 +102,44 @@ namespace :spree do
         # import_product_meta("nwb")
 
 
-        def import_users(code)
+        def import_users(code, filename)
           store = Store.find_by_code code
-          states = {}
-          FasterCSV.foreach("#{RAILS_ROOT}/vendor/extensions/importer/data/#{code}-provinces.csv" ) do |row|
-            states[row[0]] = row
-          end
-
-          countries = {}
-          FasterCSV.foreach("#{RAILS_ROOT}/vendor/extensions/importer/data/#{code}-countries.csv" ) do |row|
-            countries[row[0]] = row
-          end
 
           passwords = {} #blank hash to hold email /  passwords
 
           file = File.open("#{RAILS_ROOT}/vendor/extensions/importer/data/pwb_users_whos_passwords_are_now_get_to_nwb", "w")
 
-            FasterCSV.foreach("#{RAILS_ROOT}/vendor/extensions/importer/data/#{code}-customers.csv" ) do |row|
-
-              user = User.find_by_email row[1]
+            FasterCSV.foreach("#{RAILS_ROOT}/vendor/extensions/importer/data/#{filename}-customers.csv" ) do |row|
+              if row[4].to_s.size < 4
+                puts "-----------Email address too short: #{row[1]}-------------------------------------"
+                next
+              end
+              user = User.find_by_email row[4]
 
               unless user.nil?
                 if code == "nwb"
                   puts "-----------This should never happen-------------------------------------"
                 else
                   user.pwb_legacy_id = row[0]
-                  user.save!
+                  user.save(false)
 
-                  if passwords[row[1]] == row[2]
-                    file.write [user.id, row[1], row[4], row[6], user.nwb_legacy_id, user.pwb_legacy_id].join(",")
+                  if passwords[row[4]] == row[5]
+                    file.write [user.id, row[4], row[2], row[3], user.nwb_legacy_id, user.pwb_legacy_id].join(",")
                     puts "-----------Duplicate user with different passwords!---------------------------"
-                  else
-                    puts "-----------Duplicate user, same password-------------------------------------"
+
                   end
                 end
 
                 next
               end
 
-
-              bill_state = State.find_by_abbr(states[row[11]][1]) unless row[11].blank? || states[row[11]].blank?
-              bill_country = Country.find_by_name(countries[row[14]][2]) unless row[14].blank? || countries[row[14]].blank?
-              if bill_country.nil?
-                puts "-----------No bill country---------#{row[14]}----------------------------"
-              end
-
-              if bill_state.nil? && !bill_country.nil? && !row[11].blank?
-                bill_state = State.create(:name => states[row[11]][2], :abbr => states[row[11]][1], :country_id => bill_country.id) unless states[row[11]][1] == "--"
-                puts "-----------new bill state--#{bill_state.inspect}-----------------------------------"
-              end
-
-              bill_address = Address.new("firstname"   => row[4],
-                                        "lastname"    => row[6],
-                                        "address1"    => row[8],
-                                        "address2"    => row[9],
-                                        "city"        => row[10],
-                                        "state_id"    => bill_state.nil? ? nil : bill_state.id,
-                                        "zipcode"     => row[12],
-                                        "country_id"  => bill_country.nil? ? nil : bill_country.id,
-                                        "phone"       => row[14])
-              bill_address.save(false)
-
-
-              ship_state = State.find_by_abbr(states[row[22]][1]) unless row[22].blank? || states[row[22]].blank?
-              ship_country = Country.find_by_name(countries[row[24]][2]) unless row[24].blank? || countries[row[24]].blank?
-              if ship_country.nil?
-                puts "-----------No ship country---------#{row[24]}----------------------------"
-              end
-
-              if ship_country.nil? && !ship_country.nil? && !row[22].blank?
-                ship_country = State.create(:name => states[row[22]][2], :abbr => states[row[22]][1], :country_id => ship_country.id) unless states[row[22]][1] == "--"
-                puts "-----------new ship state--#{ship_country.inspect}-----------------------------------"
-              end
-
-              ship_address = Address.new("firstname"   => row[16],
-                                        "lastname"    => row[18],
-                                        "address1"    => row[19],
-                                        "address2"    => row[20],
-                                        "city"        => row[21],
-                                        "state_id"    => ship_state.nil? ? nil : ship_state.id,
-                                        "zipcode"     => row[23],
-                                        "country_id"  => ship_country.nil? ? nil : ship_country.id,
-                                        "phone"       => row[14])
-              ship_address.save(false)
-
-
-
-              user = User.new(:store_id => store.id, :email => row[1], :bill_address_id => bill_address.id, :ship_address_id => ship_address.id)
-              user.password = row[2]
-              user.password_confirmation = row[2]
-              passwords[row[1]] = row[2]
+              user = User.new(:store_id => store.id, :email => row[4])
+              user.firstname = row[1]
+              user.lastname = row[2]
+              user.company = row[3]
+              user.password = row[5]
+              user.password_confirmation = row[5]
+              passwords[row[4]] = row[5]
 
               if code == "nwb"
                 user.nwb_legacy_id = row[0]
@@ -196,13 +156,15 @@ namespace :spree do
 
         end
 
-        import_users("nwb") #passwords
-        import_users("pwb")
+        # import_users("nwb", "nwb-1") #passwords
+        # import_users("nwb", "nwb-2")
+        # import_users("pwb", "pwb")
 
 
         def import_orders(code)
           store = Store.find_by_code code
           admin = User.find_by_email "spree@naturalwellbeing.com"
+          legacy_payments = PaymentMethod.find(3)
 
           line_items = {}
           FasterCSV.foreach("#{RAILS_ROOT}/vendor/extensions/importer/data/#{code}-order-details.csv", :headers => true ) do |row|
@@ -223,11 +185,14 @@ namespace :spree do
             next unless order.nil?
 
             begin
-              puts "Processing #{order_number}"
+              if code == "nwb"
+                user = User.find_by_nwb_legacy_id(row[1].to_i)
+              else
+                user = User.find_by_pwb_legacy_id(row[1].to_i)
+              end
 
-              user = User.find_by_store_id_and_legacy_id(store.id, row[1])
               if user.nil?
-                puts "Order: #{order_number} NOT IMPORTED - Failed to find user with legacy_id: #{row[1]}"
+                puts "Order: #{order_number} NOT IMPORTED - Failed to find user with #{code}_legacy_id: #{row[1]}"
                 next
               end
 
@@ -237,6 +202,7 @@ namespace :spree do
               end
 
               order = Order.new("user_id"         => user.id,
+                              "number"          => order_number,
                               "state"           => "new",
                               "completed_at"    => row[24],
                               "created_at"      => row[24],
@@ -281,7 +247,6 @@ namespace :spree do
                 puts "-----------No bill country---------#{row[9]}----------------------------"
               end
 
-
               bill_address = Address.new("firstname"   => row[3],
                                         "lastname"    => row[4],
                                         "address1"    => row[5],
@@ -303,7 +268,6 @@ namespace :spree do
                 puts "-----------No shio country---------#{row[19]}----------------------------"
               end
 
-
               ship_address = Address.new("firstname"   => row[13],
                                         "lastname"    => row[14],
                                         "address1"    => row[15],
@@ -314,14 +278,13 @@ namespace :spree do
                                         "country_id"  => ship_country.nil? ? nil : ship_country.id,
                                         "phone"       => row[11])
               ship_address.save(false)
-              order.bill_address = ship_address
+              order.ship_address = ship_address
 
               if code == "pwd"
                 shipment_number = "2_" + Array.new(6){rand(10)}.join
               else
                 shipment_number = "1_" + Array.new(6){rand(10)}.join
               end
-
 
               shipment = Shipment.new("number"  => shipment_number,
                                       "order"   => order,
@@ -336,7 +299,7 @@ namespace :spree do
               order.adjustments << ShippingCharge.create("amount"             => row[32].to_f,
                                                     "adjustment_source_id"    => order.id,
                                                     "adjustment_source_type"  => "Order",
-                                                    "description"             => "Shipping Charge: (#{row[32]})")
+                                                    "description"             => "Shipping Charge: (#{row[31]})")
 
               order.adjustments << TaxCharge.create("amount"                 => row[35].to_f,
                                                     "adjustment_source_id"    => order.id,
@@ -350,8 +313,8 @@ namespace :spree do
                                                     "description"             => "Coupon")
               end
 
-              if row[37].to_f > 0
-                order.adjustments << Charge.create("amount"                 => row[37].to_f,
+              if row[36].to_f > 0
+                order.adjustments << Charge.create("amount"                 => row[36].to_f,
                                                     "adjustment_source_id"    => order.id,
                                                     "adjustment_source_type"  => "Order",
                                                     "description"             => "Surcharge")
@@ -379,19 +342,19 @@ namespace :spree do
 
               order.reload.update_totals!
 
-              payment = Payment.new("payable"   => order,
-                                    "source"     => payment_source,
-                                    "amount"     => order.total)
+              payment = Payment.new("payable"             => order,
+                                    "payment_method_id"   => legacy_payments.id,
+                                    "source"              => payment_source,
+                                    "amount"              => order.total)
               payment.save(false)
 
               #force order state
-              order.update_attribute(:state, "legacy")
               order.reload
-              order.shipment.state = "pending"
-              order.shipment.ready!
+              order.update_attribute(:state, "paid")
+              order.shipment.state = "acknowledged"
               order.shipment.ship!
 
-              if row[37] < 0
+              if row[37].to_f < 0
                 rma = ReturnAuthorization.new("order" => order, "amount" => row[37])
                 rma.save(false)
                 order.reload
@@ -402,27 +365,35 @@ namespace :spree do
 
                 rma.receive!
                 payment = Payment.new("payable"   => order,
-                              "source"     => creditcard,
-                              "amount"     => rma.amount * -1)
+                                      "payment_method_id"   => legacy_payments.id,
+                                      "source"              => payment_source,
+                                      "amount"     => rma.amount * -1)
                 payment.save(false)
               end
 
-              orders.comments.create(:title => "Import Comment", :comment => row[28])
+              order.comments.create(:title => "Import Comment", :comment => row[28])
 
+              order.update_attribute(:state, "legacy")
               order.reload
-              puts "Spree Total: #{number_to_currency(order.total)} NWB Total: #{number_to_currency(row[37])}"
+              puts "Spree Total: #{number_to_currency(order.total)} NWB Total: #{number_to_currency(row[37])}" unless number_to_currency(order.total) == number_to_currency(row[37])
 
             rescue Exception => e
               puts "ERROR Processing #{order_number}"
               puts e.to_yaml
+              puts e.backtrace.to_yaml
 
-              order.destroy
+              order.destroy unless order.nil?
+              bill_address.destroy unless bill_address.nil?
+              ship_address.destroy unless ship_address.nil?
+              payment.destroy unless payment.nil?
+              payment_source.destroy unless payment_source.nil?
             end
 
           end
         end
 
-       # import_orders("pwb")
+        # import_orders("nwb")
+        import_orders("pwb")
 
       end
 

@@ -45,8 +45,6 @@
           <a target="_blank" href="https://www.bbb.org/online/consumer/cks.aspx?id=110020517059"><img title="Click to verify BBB accreditation and to see a BBB report." border="0" src="/pwb/images/bbb.gif" alt="Click to verify BBB accreditation and to see a BBB report."></a>
         </div>
 
-        <%= render 'shared/cart_preview' %>
-
         <dl id="subNav">
           <% @categories.root.children.each do |taxon| %>
             <dt><a href="<%= seo_url(taxon) %>" title="<%= taxon.name %>"><strong><%= taxon.name %></strong></a></dt>
@@ -69,7 +67,15 @@
               </ul>
             </dd>
           <% end %>
+          <% if @current_controller == "products" && @current_action == "index" && !params[:keywords] %>
+            <dt class="selected"><strong>All Products</strong></dt>
+          <% else %>
+             <dt><%= link_to "<strong>All Products</strong>", products_url %></dt>
+          <% end %>
         </dl>
+
+         <%= render 'shared/cart_preview' %>
+
         <div id="scan">
           <a href="https://www.scanalert.com/RatingVerify?ref=www.petwellbeing.com" rel="external nofollow" target="_blank"><img width="94" height="54" border="0" src="//images.scanalert.com/meter/survey/www.petwellbeing.com/13.gif" alt="HACKER SAFE certified sites prevent over 99.9% of hacker crime."></a>
         </div>

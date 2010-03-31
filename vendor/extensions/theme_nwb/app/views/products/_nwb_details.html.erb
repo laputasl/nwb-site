@@ -8,8 +8,16 @@
     </p>
   </div>
   <div class="info">
+    <div class="rating">
+      <div class="pr_snippet_product">
+        <script type="text/javascript">
+        var pr_snippet_min_reviews=0;
+        POWERREVIEWS.display.snippet(document, { pr_page_id : "<%= @product.legacy_id %>" });
+        </script>
+      </div>
+    </div>
     <p class="subtitle"><%= @product.subtitle_main %></p>
-    <p class="sales_copy"><%= @product.sales_copy %></p>
+    <div class="sales_copy"><%= @product.sales_copy %></div>
     <%= render_snippet("#nwb-ships-from-canada") if @product.taxons.exists?(:id => 9994) && country_id == 35%>
   </div>
   <div class="price">
@@ -21,22 +29,7 @@
       <%= @product.featured_testimonial %>
     </div>
   <% end %>
-  <div class="rateShare">
-    <div class="rating">
-      <div class="pr_snippet_product">
-        <script type="text/javascript">
-        var pr_snippet_min_reviews=0;
-        POWERREVIEWS.display.snippet(document, { pr_page_id : "<%= @product.legacy_id %>" });
-        </script>
-      </div>
-    </div>
-    <div class="share">
-      <p><strong>Share This</strong></p>
-      <a href="http://www.addthis.com/bookmark.php" onclick="addthis_url   = location.href; addthis_title = document.title; return addthis_click(this);"><img src="/<%= @current_domain %>/images/icon_plus.gif" alt="Bookmark and Share" /></a>
-      <a href="http://www.addthis.com/bookmark.php" onclick="addthis_url   = location.href; addthis_title = document.title; return addthis_click(this);">Bookmark &amp; Share</a>
-      <script type="text/javascript" src="http://s7.addthis.com/js/widget.php?v=10"></script>
-    </div>
-  </div>
+
 </div>
 <div class="productDetails">
   <ul class="productMenu">

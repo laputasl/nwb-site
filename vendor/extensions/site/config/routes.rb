@@ -1,6 +1,9 @@
 map.resource :home_page
 map.root :controller => :home_page, :action => :show
 
+#needed for pagination
+map.products "/products", :controller => :products, :action => :index
+
 map.resources :orders, :member => {:calculate_shipping => :get} do |order|
   order.resource :checkout, :member => {:set_shipping_method => :any}
 end

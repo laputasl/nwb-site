@@ -9,7 +9,7 @@
 <% end %>
 
 <% content_for :breadcrumbs do %>
-  <ul id="breadcrumbs" class="foo"><li>Your Location: <%= @site.code == "pwb" ? "PetWellbeing.com" : "NaturalWellbeing.com" %> Search</li></ul>
+  <ul id="breadcrumbs" class="foo"><li>Your Location: <%= @site.code == "pwb" ? "PetWellbeing.com" : "NaturalWellbeing.com" %> <%= params[:keywords].blank? ? "All Products" : "Search" %></li></ul>
 <% end %>
 
 
@@ -24,11 +24,37 @@
   <% end %>
 
 <% else %>
+  <% paginated_products = @products %>
 
-  <% hook :homepage_products do %>
-    <%= render "shared/products", :locals => {:products => @products, :taxon => @taxon } %>
-  <% end %>
+  <div class="products">
+    <% ('A'...'Z').each do |letter| %>
+      <% letter_products = @products.partition { |product| product.name[0..0].downcase == letter.downcase }.first %>
 
+      <% unless letter_products.empty? %>
+        <h1><%= letter %></h1>
+        <ul class="productList">
+          <% letter_products.each do |product|
+            if @current_domain == "pwb"
+              %><%= render :partial => "/shared/pwb_product", :locals => {:product => product, :products => letter_products, :taxon => @taxon, :is_home => false} %><%
+            else
+              %><%= render :partial => "/shared/nwb_product", :locals => {:product => product, :products => letter_products, :taxon => @taxon, :is_home => false} %><%
+            end
+          end
+          (letter_products.size % 2).times do
+            %><li class="<%= letter_products.size < 2 ? "" : "border" %>">&nbsp;</li><%
+          end%>
+        </ul>
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if paginated_products.respond_to?(:total_pages)
+        params.delete(:search)
+        params.delete(:taxon)
+  %><%= will_paginate(paginated_products,
+                      :previous_label => "&#171; #{t('previous')}",
+                      :next_label => "#{t('next')} &#187;") %>
+  <% end -%>
 
 <% end %>
 

@@ -15,17 +15,6 @@
       <% end %>
 
       <div id="sidebar">
-        <ul id="peopleBtns">
-          <% global_categories.root.children.each do |taxon| %>
-              <% if taxon.name.include? "Men's" %>
-                <li><a id="btnMen" href="/<%= taxon.permalink %>" title="<%=taxon.name%>"><%=taxon.name%></a></li>
-              <% elsif taxon.name.include? "Women's" %>
-                 <li><a id="btnWomen" href="/<%= taxon.permalink %>" title="<%=taxon.name%>"><%=taxon.name%></a></li>
-              <% end %>
-          <% end %>
-          <li><a id="btnPets" href="/pets" title="Pets">Pets</a></li>
-        </ul>
-
         <script type="text/javascript">
           function launchChatWindow(chatURL) {
             if (typeof pageTracker == 'object') {
@@ -44,8 +33,6 @@
           <a target="_blank" href="https://www.bbb.org/online/consumer/cks.aspx?id=110020517059"><img title="Click to verify BBB accreditation and to see a BBB report." border=0 src="/nwb/images/bbb.gif" alt="Click to verify BBB accreditation and to see a BBB report." /></a>
         </div>
 
-        <%= render 'shared/cart_preview' %>
-
         <dl id="subNav">
           <% @categories.root.children.each do |taxon| %>
             <% if (taxon == @taxon || taxon.children.include?(@taxon) ) %>
@@ -57,7 +44,7 @@
                       <% if (child == @taxon || child.children.include?(@taxon) ) %>
                         <p><%= child.name %></p>
                         <ul>
-                          <% child.products.each do |product| %>
+                          <% child.products.active.each do |product| %>
                             <li>
                               <% if product == @product %>
                                 <%= link_to product.anchor_name, product, {:title => product.anchor_name, :style => "font-weight:bold;"} %>
@@ -78,17 +65,29 @@
               <dt><a href="<%= seo_url(taxon) %>" title="<%= taxon.name %>"<strong><%= taxon.name %></strong></a></dt>
             <% end %>
           <% end %>
+          <% if @current_controller == "products" && @current_action == "index" && !params[:keywords] %>
+            <dt class="selected"><strong>All Products</strong></dt>
+          <% else %>
+             <dt><%= link_to "<strong>All Products</strong>", products_url %></dt>
+          <% end %>
         </dl>
-          <!-- START SCANALERT CODE -->
-          <a target="_blank" href="https://www.scanalert.com/RatingVerify?ref=www.naturalwellbeing.com">
-          <img width="94" height="54" border="0" src="//images.scanalert.com/meter/survey/www.naturalwellbeing.com/13.gif" alt="HACKER SAFE certified sites prevent over 99.9% of hacker crime." /></a>
-          <!-- END SCANALERT CODE -->
+
+        <%= render 'shared/cart_preview' %>
+
+        <ul id="peopleBtns">
+          <li><a id="btnPets" href="/pets" title="Pets">Pets</a></li>
+        </ul>
+
+        <!-- START SCANALERT CODE -->
+        <a target="_blank" href="https://www.scanalert.com/RatingVerify?ref=www.naturalwellbeing.com">
+        <img width="94" height="54" border="0" src="//images.scanalert.com/meter/survey/www.naturalwellbeing.com/13.gif" alt="HACKER SAFE certified sites prevent over 99.9% of hacker crime." /></a>
+        <!-- END SCANALERT CODE -->
 
         <img src="/nwb/images/img_comodo.png" alt="Comodo" />
         <!-- Begin Official PayPal Seal -->
         <a href="https://www.paypal.com/us/verified/pal=wdf%40naturalwellbeing%2ecom" target="_blank">
-        <img src="/nwb/images/img_paypal.png" border="0" alt="Official PayPal Seal" width="100" height="100" />
-      </a>
+          <img src="/nwb/images/img_paypal.png" border="0" alt="Official PayPal Seal" width="100" height="100" />
+        </a>
         <!-- End Official PayPal Seal -->
         </div>
       <hr />
