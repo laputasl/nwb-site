@@ -56,7 +56,8 @@ class SiteExtension < Spree::Extension
       named_scope :by_store, lambda { |*args| { :conditions => ["products.store_id = ?", args.first] } }
 
       xapit do |index|
-        index.text :name, :description, :subtitle_main, :sales_copy, :short_home, :ingredients
+        index.text :name, :weight => 10
+        index.text :description, :subtitle_main, :sales_copy, :short_home, :ingredients
         index.field :is_active, :taxon_ids
         index.facet :gender_property, "Gender"
         index.facet :brand_property, "Brand"
@@ -927,16 +928,8 @@ class SiteExtension < Spree::Extension
       private
 
       def object
-        @object ||= Shipment.find_by_number(params[:id]) if params[:id]
-      end
-    end
-
-    #force shipments to be found via their numbers (not ids)
-    Admin::ShipmentsController.class_eval do
-      private
-
-      def object
-        @object ||= Shipment.find_by_number(params[:id]) if params[:id]
+        return @object unless params.has_key? :id
+        @object ||= end_of_association_chain.find_by_param!(params[:id])
       end
     end
 
