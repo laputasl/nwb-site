@@ -20,7 +20,7 @@ class HomePageController < Spree::BaseController
         @best_selling_cats = Product.find(Taxon.find([9998,3002]).map(&:product_ids).inject {|x, y| x &  y })
         @best_selling_dogs = Product.find(Taxon.find([9998,3001]).map(&:product_ids).inject {|x, y| x &  y })
       else
-        @best_selling_products = Product.active.find_all_by_store_id(@site.id, :limit => 10)
+        @best_selling_products = Product.active.in_taxon(9998).find_all_by_store_id(@site.id)
       end
 
       render :partial => "#{@site.code}_show", :layout => true
