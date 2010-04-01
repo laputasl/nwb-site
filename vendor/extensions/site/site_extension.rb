@@ -38,6 +38,7 @@ class SiteExtension < Spree::Extension
       before_filter :can_show_product, :only => :show
 
       private
+      #prevents pwb products from appearing on nwb (and vice versa)
       def can_show_product
        if (@product.store.nil? || (@product.store.code != @site.code)) || (RAILS_ENV == "production" && params[:id].is_integer?)
          render :file => "public/404.html", :status => 404
@@ -45,6 +46,27 @@ class SiteExtension < Spree::Extension
 
        #load taxon if not set (where referrer fails)
        @taxon ||= (@product.taxons & @categories.taxons).first
+      end
+
+      #custom regex above to match SEO short urls (plus need to prepend / below for taxon find)
+      def load_data
+        #load_object
+        @variants = Variant.active.find_all_by_product_id(@product.id,
+                    :include => [:option_values, :images])
+        @product_properties = ProductProperty.find_all_by_product_id(@product.id,
+                              :include => [:property])
+        @selected_variant = @variants.detect { |v| v.available? }
+
+        referer = request.env['HTTP_REFERER']
+        if referer  && referer.match(NWB_HTTP_REFERER_REGEX)
+          @taxon = Taxon.find_by_permalink($1 + "/")
+        end
+      end
+
+      def accurate_title
+        return nil if @product.nil?
+
+        @product.page_title.blank? ?  @product.name : @product.page_title
       end
 
     end
@@ -889,31 +911,6 @@ class SiteExtension < Spree::Extension
           return [301, { 'Location'=> env["PATH_INFO"][0...-1] }, []] #ensures no trailing / for taxon urls
         end
         [404, {"Content-Type" => "text/html"}, "Not Found"]
-      end
-    end
-
-    #custom regex above to match SEO short urls (plus need to prepend / below for taxon find)
-    ProductsController.class_eval do
-      private
-      def load_data
-        #load_object
-        @variants = Variant.active.find_all_by_product_id(@product.id,
-                    :include => [:option_values, :images])
-        @product_properties = ProductProperty.find_all_by_product_id(@product.id,
-                              :include => [:property])
-        @selected_variant = @variants.detect { |v| v.available? }
-
-        referer = request.env['HTTP_REFERER']
-        logger.error { "-----------#{referer}-------------------------------------" }
-        if referer  && referer.match(NWB_HTTP_REFERER_REGEX)
-          @taxon = Taxon.find_by_permalink($1 + "/")
-        end
-      end
-
-      def accurate_title
-        return nil if @product.nil?
-
-        @product.page_title.blank? ?  @product.name : @product.page_title
       end
     end
 
