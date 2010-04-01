@@ -395,6 +395,9 @@ class SiteExtension < Spree::Extension
         #SITE SPECIFIC: only retrieve products for the current store - but not if we're searching
         @product_group.add_scope('by_store', @site.id) if @keywords.blank?
 
+        #Add workaround to disable paging for all products pahe
+        per_page = 9999 if @current_controller == "products" && @current_action == "index" && @keywords.blank?
+
         @product_group.add_scope('taxons_id_eq', @taxon) unless @taxon.blank?
         @product_group.add_scope('keywords', @keywords) unless @keywords.blank?
         @product_group = @product_group.from_search(params[:search]) if params[:search]
