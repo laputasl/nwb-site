@@ -6,8 +6,9 @@ class SiteExtension < Spree::Extension
   description "Describe your extension here"
   url "http://yourwebsite.com/site"
 
-  def self.require_gems(config)
+  NWB_HTTP_REFERER_REGEX = /^https?:\/\/[^\/]+\/(c\/[a-z0-9\-\/]*)$/
 
+  def self.require_gems(config)
     # store switcher needs to load first
     config.metals = ["StoreSwitcher", "LegacyRedirect"]
 
@@ -891,16 +892,24 @@ class SiteExtension < Spree::Extension
       end
     end
 
-    #redirect /products url (except when searching)
+    #custom regex above to match SEO short urls (plus need to prepend / below for taxon find)
     ProductsController.class_eval do
-      # before_filter :redirect_products_path_to_home, :only => :index
-      #
-      # def redirect_products_path_to_home
-      #   return if params.key? :keywords
-      #   redirect_to '/', :status => 301 if ['/products', '/products/'].include? request.path
-      # end
-
       private
+      def load_data
+        #load_object
+        @variants = Variant.active.find_all_by_product_id(@product.id,
+                    :include => [:option_values, :images])
+        @product_properties = ProductProperty.find_all_by_product_id(@product.id,
+                              :include => [:property])
+        @selected_variant = @variants.detect { |v| v.available? }
+
+        referer = request.env['HTTP_REFERER']
+        logger.error { "-----------#{referer}-------------------------------------" }
+        if referer  && referer.match(NWB_HTTP_REFERER_REGEX)
+          @taxon = Taxon.find_by_permalink($1 + "/")
+        end
+      end
+
       def accurate_title
         return nil if @product.nil?
 

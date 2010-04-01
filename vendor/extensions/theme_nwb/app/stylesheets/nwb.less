@@ -303,19 +303,32 @@ a:hover, a:active {color: #1c3c80;}
 }
 #subNav .selected{
   padding: 6px 0 6px 13px;
-
+  background: url("/nwb/images/icon_arrow.gif") no-repeat scroll 4px center #FFFEF6;
+}
+#subNav .child_selected{
+  background-color: #FFFEF6;
+  font-weight: bold;
 }
 #subNav li {display:inline;}
 #subNav li a,
 #subNav li p {
   background: #FEFEFC;
   border-bottom: 1px dashed #d8d5c3;
-  padding: 5px 5px 5px 17px;
+  padding: 5px 5px 5px 25px;
   display: block;
   line-height: 16px;
 }
 #subNav li a:hover {background: #FFFEF4;}
 #subNav li a:visited{ color: #0342C9; }
+
+#subNav .selected_product{
+  background: url("/nwb/images/icon_arrow.gif") no-repeat scroll 24px center;
+}
+#subNav .selected_product strong{
+  display: table-cell;
+  padding: 5px 5px 5px 35px;
+  border-bottom: 1px dashed #d8d5c3;
+}
 /*---------------------*/
 /* Sub Nav Tier -------*/
 /*---------------------*/
@@ -324,12 +337,12 @@ a:hover, a:active {color: #1c3c80;}
   background: #fff;
 }
 #subNav ul ul a,
-#subNav ul ul p {padding-left: 25px;}
+#subNav ul ul p {padding-left: 35px;}
 #subNav ul p,
 #subNav dt p {
-  background-image: url(/pwb/images/icon_arrow.gif);
+  background-image: url(/nwb/images/icon_arrow.gif);
   background-repeat: no-repeat;
-  background-position: 4px center;
+  background-position: 14px center;
   font-weight: bold;
 }
 #subNav ul ul p {

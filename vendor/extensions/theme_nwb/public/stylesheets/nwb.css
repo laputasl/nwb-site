@@ -254,40 +254,53 @@ a:active { color: #1c3c80; }
 }
 #subNav dt a:hover { background: #fffef4; }
 #subNav ul { border-top: 1px dashed #d8d5c3; }
-#subNav .selected { padding: 6px 0 6px 13px; }
+#subNav .selected {
+  padding: 6px 0 6px 13px;
+  background: url("/nwb/images/icon_arrow.gif") no-repeat scroll 4px center #fffef6;
+}
+#subNav .child_selected {
+  background-color: #fffef6;
+  font-weight: bold;
+}
 #subNav li { display: inline; }
 #subNav li a {
   background: #fefefc;
   border-bottom: 1px dashed #d8d5c3;
-  padding: 5px 5px 5px 17px;
+  padding: 5px 5px 5px 25px;
   display: block;
   line-height: 16px;
 }
 #subNav li p {
   background: #fefefc;
   border-bottom: 1px dashed #d8d5c3;
-  padding: 5px 5px 5px 17px;
+  padding: 5px 5px 5px 25px;
   display: block;
   line-height: 16px;
 }
 #subNav li a:hover { background: #fffef4; }
 #subNav li a:visited { color: #0342c9; }
+#subNav .selected_product { background: url("/nwb/images/icon_arrow.gif") no-repeat scroll 24px center; }
+#subNav .selected_product strong {
+  display: table-cell;
+  padding: 5px 5px 5px 35px;
+  border-bottom: 1px dashed #d8d5c3;
+}
 #subNav ul ul {
   border: 0;
   background: #ffffff;
 }
-#subNav ul ul a { padding-left: 25px; }
-#subNav ul ul p { padding-left: 25px; }
+#subNav ul ul a { padding-left: 35px; }
+#subNav ul ul p { padding-left: 35px; }
 #subNav ul p {
-  background-image: url(/pwb/images/icon_arrow.gif);
+  background-image: url(/nwb/images/icon_arrow.gif);
   background-repeat: no-repeat;
-  background-position: 4px center;
+  background-position: 14px center;
   font-weight: bold;
 }
 #subNav dt p {
-  background-image: url(/pwb/images/icon_arrow.gif);
+  background-image: url(/nwb/images/icon_arrow.gif);
   background-repeat: no-repeat;
-  background-position: 4px center;
+  background-position: 14px center;
   font-weight: bold;
 }
 #subNav ul ul p {
