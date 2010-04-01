@@ -44,8 +44,6 @@ class SiteExtension < Spree::Extension
          render :file => "public/404.html", :status => 404
        end
 
-       #load taxon if not set (where referrer fails)
-       @taxon ||= (@product.taxons & @categories.taxons).first
       end
 
       #custom regex above to match SEO short urls (plus need to prepend / below for taxon find)
@@ -61,8 +59,12 @@ class SiteExtension < Spree::Extension
         if referer && referer.match(NWB_HTTP_REFERER_REGEX)
           @taxon = Taxon.find_by_permalink($1 + "/")
         elsif !session[:last_taxon_permalink].blank?
-          @taxon = Taxon.find_by_permalink(session[:last_taxon_permalink])
+          @taxon = @product.taxons.find_by_permalink(session[:last_taxon_permalink])
         end
+
+        #fall back if nothing sets taxon
+        @taxon ||= (@product.taxons & @categories.taxons).first
+
       end
 
       def accurate_title

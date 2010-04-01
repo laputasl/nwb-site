@@ -36,8 +36,12 @@
         <dl id="subNav">
           <% @categories.root.children.each do |taxon| %>
             <% if (taxon == @taxon || taxon.children.include?(@taxon) ) %>
-              <% if taxon == @taxon && @product.nil? %>
-                <dt class="selected"><strong><%= taxon.name %></strong></dt>
+              <% if taxon == @taxon %>
+                <% if @product.nil? %>
+                  <dt class="selected"><strong><%= taxon.name %></strong></dt>
+                <% else %>
+                  <dt class="selected"><a href="<%= seo_url(taxon) %>" title="<%= taxon.name %>"<strong><%= taxon.name %></strong></a></dt>
+                <% end %>
               <% else %>
                 <dt class="child_selected"><a href="<%= seo_url(taxon) %>" title="<%= taxon.name %>"<strong><%= taxon.name %></strong></a></dt>
               <% end %>
@@ -45,7 +49,7 @@
                 <ul>
                   <% taxon.children.each do |child| %>
                     <li>
-                      <% if (child == @taxon || child.children.include?(@taxon) ) || (!@product.nil? && @product.taxons.include?(child)) %>
+                      <% if (child == @taxon || child.children.include?(@taxon) ) %>
                         <% if @product.nil? %>
                            <p><%= child.name %></p>
                         <% else %>
