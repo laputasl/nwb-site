@@ -58,8 +58,10 @@ class SiteExtension < Spree::Extension
         @selected_variant = @variants.detect { |v| v.available? }
 
         referer = request.env['HTTP_REFERER']
-        if referer  && referer.match(NWB_HTTP_REFERER_REGEX)
+        if referer && referer.match(NWB_HTTP_REFERER_REGEX)
           @taxon = Taxon.find_by_permalink($1 + "/")
+        elsif !session[:last_taxon_permalink].blank?
+          @taxon = Taxon.find_by_permalink(session[:last_taxon_permalink])
         end
       end
 
@@ -875,6 +877,7 @@ class SiteExtension < Spree::Extension
       private
 
       def redirect_root_taxons
+        session[:last_taxon_permalink] = @taxon.permalink #used for products controller to maintain trail
         redirect_to ActionController::Base.relative_url_root, :status => :moved_permanently if @taxon.root?
       end
 
