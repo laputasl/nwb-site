@@ -139,6 +139,7 @@ namespace :spree do
               user.company = row[3]
               user.password = row[5]
               user.password_confirmation = row[5]
+              user.login = row[4]
               passwords[row[4]] = row[5]
 
               if code == "nwb"
@@ -156,9 +157,9 @@ namespace :spree do
 
         end
 
-        # import_users("nwb", "nwb-1") #passwords
-        # import_users("nwb", "nwb-2")
-        # import_users("pwb", "pwb")
+        import_users("nwb", "nwb-1") #passwords
+        import_users("nwb", "nwb-2")
+        import_users("pwb", "pwb")
 
 
         def import_orders(code)
@@ -392,7 +393,7 @@ namespace :spree do
           end
         end
 
-        # import_orders("nwb")
+        import_orders("nwb")
         import_orders("pwb")
 
       end
