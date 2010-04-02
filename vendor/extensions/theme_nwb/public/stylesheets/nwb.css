@@ -243,20 +243,17 @@ a:active { color: #1c3c80; }
   background-color: #fbf9ed;
   border-top: 1px dashed #d8d5c3;
 }
-#subNav dt a:visited { color: #0342c9; }
 #subNav dt a {
-  padding: 6px 0 6px 13px;
   display: block;
+  text-decoration: none;
 }
-#subNav dt p {
-  padding: 6px 0 6px 13px;
-  display: block;
-}
+#subNav dt a:visited { color: #0342c9; }
 #subNav dt a:hover { background: #fffef4; }
 #subNav ul { border-top: 1px dashed #d8d5c3; }
-#subNav .selected {
+#subNav .selected { background: url("/nwb/images/icon_arrow.gif") no-repeat scroll 4px center #fffef6; }
+#subNav .selected strong {
+  display: block;
   padding: 6px 0 6px 13px;
-  background: url("/nwb/images/icon_arrow.gif") no-repeat scroll 4px center #fffef6;
 }
 #subNav .child_selected {
   background-color: #fffef6;
@@ -285,6 +282,10 @@ a:active { color: #1c3c80; }
   padding: 5px 5px 5px 35px;
   border-bottom: 1px dashed #d8d5c3;
 }
+#subNav strong {
+  display: table-cell;
+  padding: 6px 0 6px 13px;
+}
 #subNav ul ul {
   border: 0;
   background: #ffffff;
@@ -295,12 +296,14 @@ a:active { color: #1c3c80; }
   background-image: url(/nwb/images/icon_arrow.gif);
   background-repeat: no-repeat;
   background-position: 14px center;
+  background-color: #fffef6;
   font-weight: bold;
 }
 #subNav dt p {
   background-image: url(/nwb/images/icon_arrow.gif);
   background-repeat: no-repeat;
   background-position: 14px center;
+  background-color: #fffef6;
   font-weight: bold;
 }
 #subNav ul ul p {

@@ -291,19 +291,21 @@ a:hover, a:active {color: #1c3c80;}
   background-color: #FBF9ED;
   border-top:1px dashed #D8D5C3;
 }
-#subNav dt a:visited{ color: #0342C9; }
-#subNav dt a,
-#subNav dt p {
-  padding: 6px 0 6px 13px;
+#subNav dt a{
   display: block;
+  text-decoration: none;
 }
+#subNav dt a:visited{ color: #0342C9; }
 #subNav dt a:hover {background: #FFFEF4;}
 #subNav ul {
   border-top: 1px dashed #d8d5c3;
 }
 #subNav .selected{
-  padding: 6px 0 6px 13px;
   background: url("/nwb/images/icon_arrow.gif") no-repeat scroll 4px center #FFFEF6;
+}
+#subNav .selected  strong{
+  display: block;
+  padding: 6px 0 6px 13px;
 }
 #subNav .child_selected{
   background-color: #FFFEF6;
@@ -324,10 +326,14 @@ a:hover, a:active {color: #1c3c80;}
 #subNav .selected_product{
   background: url("/nwb/images/icon_arrow.gif") no-repeat scroll 24px center;
 }
-#subNav .selected_product strong{
+#subNav .selected_product strong {
   display: table-cell;
   padding: 5px 5px 5px 35px;
   border-bottom: 1px dashed #d8d5c3;
+}
+#subNav strong {
+  display: table-cell;
+  padding: 6px 0 6px 13px;
 }
 /*---------------------*/
 /* Sub Nav Tier -------*/
@@ -343,6 +349,7 @@ a:hover, a:active {color: #1c3c80;}
   background-image: url(/nwb/images/icon_arrow.gif);
   background-repeat: no-repeat;
   background-position: 14px center;
+  background-color:#FFFEF6;
   font-weight: bold;
 }
 #subNav ul ul p {
