@@ -57,7 +57,9 @@ class SiteExtension < Spree::Extension
 
         referer = request.env['HTTP_REFERER']
         if referer && referer.match(NWB_HTTP_REFERER_REGEX)
-          @taxon = Taxon.find_by_permalink($1 + "/")
+          url = $1
+          url += "/" unless url[-1..-1] == "/"
+          @taxon = Taxon.find_by_permalink(url)
         elsif !session[:last_taxon_permalink].blank?
           @taxon = @product.taxons.find_by_permalink(session[:last_taxon_permalink])
         end
@@ -906,6 +908,7 @@ class SiteExtension < Spree::Extension
         request = Rack::Request.new(env)
         params = request.params
         taxon_id = params['taxon']
+
         if !taxon_id.blank? && !taxon_id.is_a?(Hash) && @taxon = Taxon.find(taxon_id)
           params.delete('taxon')
           query = build_query(params)
