@@ -17,6 +17,11 @@ namespace :spree do
           attr_accessible :price
         end
 
+        Payment.class_eval do
+          def create_payment_profile
+          end
+        end
+
         Creditcard.class_eval do
           def create_payment_profile
           end
@@ -157,9 +162,9 @@ namespace :spree do
 
         end
 
-        import_users("nwb", "nwb-1") #passwords
-        import_users("nwb", "nwb-2")
-        import_users("pwb", "pwb")
+        # import_users("nwb", "nwb-1") #passwords
+        # import_users("nwb", "nwb-2")
+        # import_users("pwb", "pwb")
 
 
         def import_orders(code)
@@ -241,7 +246,7 @@ namespace :spree do
 
               bill_state = State.find_by_abbr(row[8])
               bill_country = Country.find_by_name(row[9].titleize)
-              if bill_country.nil?
+              if bill_state.nil?
                 puts "-----------No bill state---------#{row[8]}----------------------------"
               end
               if bill_country.nil?
@@ -254,6 +259,7 @@ namespace :spree do
                                         "address2"    => row[6],
                                         "city"        => row[7],
                                         "state_id"    => bill_state.nil? ? nil : bill_state.id,
+                                        "state_name"  => bill_state.nil? ? row[8] : nil,
                                         "zipcode"     => row[10],
                                         "country_id"  => bill_country.nil? ? nil : bill_country.id,
                                         "phone"       => row[11])
@@ -265,8 +271,8 @@ namespace :spree do
               if ship_state.nil?
                 puts "-----------No ship state---------#{row[18]}----------------------------"
               end
-              if bill_country.nil?
-                puts "-----------No shio country---------#{row[19]}----------------------------"
+              if ship_country.nil?
+                puts "-----------No ship country---------#{row[19]}----------------------------"
               end
 
               ship_address = Address.new("firstname"   => row[13],
@@ -275,6 +281,7 @@ namespace :spree do
                                         "address2"    => row[16],
                                         "city"        => row[17],
                                         "state_id"    => ship_state.nil? ? nil : ship_state.id,
+                                        "state_name"  => ship_state.nil? ? row[8] : nil,
                                         "zipcode"     => row[20],
                                         "country_id"  => ship_country.nil? ? nil : ship_country.id,
                                         "phone"       => row[11])

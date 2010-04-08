@@ -46,32 +46,7 @@
         </div>
 
         <dl id="subNav">
-          <% @categories.root.children.each do |taxon| %>
-            <dt><a href="<%= seo_url(taxon) %>" title="<%= taxon.name %>"><strong><%= taxon.name %></strong></a></dt>
-            <dd>
-              <ul>
-                <% taxon.children.each do |child| %>
-                  <li>
-                    <% if (child == @taxon || child.children.include?(@taxon) ) %>
-                      <p><%= child.name %></p>
-                      <ul>
-                        <% child.products.each do |product| %>
-                          <li><%= link_to product.anchor_name, product, {:title => product.anchor_name} %></li>
-                        <% end %>
-                      </ul>
-                    <% else %>
-                      <a href="<%= seo_url(child) %>" title="<%= child.name %>"><%= child.name %></a>
-                    <% end %>
-                  </li>
-                <% end %>
-              </ul>
-            </dd>
-          <% end %>
-          <% if @current_controller == "products" && @current_action == "index" && !params[:keywords] %>
-            <dt class="selected"><strong>All Products</strong></dt>
-          <% else %>
-             <dt><%= link_to "<strong>All Products</strong>", products_url %></dt>
-          <% end %>
+          <%= render "shared/left_navigation" %>
         </dl>
 
          <%= render 'shared/cart_preview' %>

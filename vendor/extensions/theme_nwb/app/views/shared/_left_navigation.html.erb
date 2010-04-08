@@ -1,0 +1,51 @@
+<% if @current_domain == "nwb" && @site.code != @current_domain %>
+  <dt><%= link_to "<strong>People Products</strong>", "/" %></dt>
+<% end %>
+
+<% @categories.root.children.each do |taxon| %>
+  <% if (taxon == @taxon || taxon.children.include?(@taxon)) || (@site.code == "pwb" && @current_controller == "home_page") %>
+    <% if taxon == @taxon %>
+      <% if @product.nil? %>
+        <dt class="selected"><strong><%= taxon.name %></strong></dt>
+      <% else %>
+        <dt class="selected"><a href="<%= seo_url(taxon) %>" title="<%= taxon.name %>"<strong><%= taxon.name %></strong></a></dt>
+      <% end %>
+    <% else %>
+      <dt class="child_selected"><a href="<%= seo_url(taxon) %>" title="<%= taxon.name %>"<strong><%= taxon.name %></strong></a></dt>
+    <% end %>
+    <dd>
+      <ul>
+        <% taxon.children.each do |child| %>
+          <li>
+            <% if (child == @taxon || child.children.include?(@taxon)) %>
+              <% if @product.nil? %>
+                 <p><%= child.name %></p>
+              <% else %>
+                <a <%= "class='child_selected'" if @product.taxons.include?(child) %>href="<%= seo_url(child) %>" title="<%= child.name %>"><%= child.name %></a>
+              <% end %>
+              <ul>
+                <% child.products.active.each do |product| %>
+                  <% if product == @product %>
+                    <li class="selected_product"><strong><%= product.anchor_name %></strong></li>
+                  <% else %>
+                    <li><%= link_to product.anchor_name, product, {:title => product.anchor_name} %></li>
+                  <% end %>
+                <% end %>
+              </ul>
+            <% else %>
+              <a href="<%= seo_url(child) %>" title="<%= child.name %>"><%= child.name %></a>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </dd>
+  <% else %>
+    <dt><a href="<%= seo_url(taxon) %>" title="<%= taxon.name %>"<strong><%= taxon.name %></strong></a></dt>
+  <% end %>
+<% end %>
+<%- all_products = "All #{(@site.code == "pwb" ? "Pet " : "People ") if @current_domain != @site.code}Products" -%>
+<% if @current_controller == "products" && @current_action == "index" && !params[:keywords] %>
+  <dt class="selected"><strong><%= all_products %></strong></dt>
+<% else %>
+   <dt><%= link_to "<strong>#{all_products}</strong>", products_url %></dt>
+<% end %>
