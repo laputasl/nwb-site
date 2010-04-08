@@ -285,11 +285,18 @@ class SiteExtension < Spree::Extension
       create.before << :assign_to_store
       update.before :check_for_removed_items
       update.after :recalculate_totals
+      new_action.after :save_order
 
       update do
         flash nil
         success.wants.html { redirect_to (@from_checkout ? edit_order_checkout_url(object, :step => "delivery")  : edit_order_url(object)) }
         failure.wants.html { render :template => "orders/edit" }
+      end
+
+      def new
+        @order = Order.new
+        @order.save
+        redirect_to edit_order_url(@order)
       end
 
       def calculate_shipping
@@ -357,7 +364,6 @@ class SiteExtension < Spree::Extension
         @order.update_totals!
         @order.reload
       end
-
     end
 
     Checkout.class_eval do
