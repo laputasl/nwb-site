@@ -475,7 +475,7 @@ class RandomOrders
     end
 
     pos = rand(total_weight)
-    index  = cloned.index do |itm|  
+    index  = cloned.find_index do |itm|  
       itm[:weight] >= pos  
     end
 
@@ -498,7 +498,7 @@ class RandomOrders
     end
 
     pos = rand(total_weight)
-    weights.index do |itm|  
+    weights.find_index do |itm|  
       itm >= pos  
     end
   end
