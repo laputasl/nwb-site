@@ -285,7 +285,6 @@ class SiteExtension < Spree::Extension
       create.before << :assign_to_store
       update.before :check_for_removed_items
       update.after :recalculate_totals
-      new_action.after :save_order
 
       update do
         flash nil
@@ -294,8 +293,10 @@ class SiteExtension < Spree::Extension
       end
 
       def new
-        @order = Order.new
+        @order = find_order
         @order.save
+        session[:order_id]    = @order.id
+        session[:order_token] = @order.token
         redirect_to edit_order_url(@order)
       end
 
