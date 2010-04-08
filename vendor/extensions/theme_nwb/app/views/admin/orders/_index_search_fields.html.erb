@@ -2,3 +2,7 @@
   <label><%= t("store") %></label><br />
   <%= f.select :store_id_equals, Store.all.collect {|s| [s.name, s.id ] }, {:include_blank => true} %></p>
 </p>
+<p>
+  <label><%= t("shipment_number") %></label><br />
+  <%= f.text_field :shipments_number_equals, :size=>25 %>
+</p>
