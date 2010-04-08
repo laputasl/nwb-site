@@ -6,15 +6,22 @@ module Enumerable
   
   def method_missing(name, *args, &block)
     if name == :find_index
-      return my_find_index(*args)
+      return my_find_index(*args, &block)
     else
       super(name, *args, &block)
     end
   end
   
-  def my_find_index(value)
+  def my_find_index(*value, &block)
+    puts value
     self.each_with_index do |item, index|
-      if item == value
+      if block_given?
+        test = block.call(item) 
+      else
+        test = (item == value)
+      end
+      puts "#{index}: #{test}"
+      if test
         return index
       end
     end
@@ -475,7 +482,7 @@ class RandomOrders
     end
 
     pos = rand(total_weight)
-    index  = cloned.find_index do |itm|  
+    index  = cloned.my_find_index do |itm|  
       itm[:weight] >= pos  
     end
 
@@ -498,7 +505,7 @@ class RandomOrders
     end
 
     pos = rand(total_weight)
-    weights.find_index do |itm|  
+    weights.my_find_index do |itm|  
       itm >= pos  
     end
   end
