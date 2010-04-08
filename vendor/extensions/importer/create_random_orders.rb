@@ -1,5 +1,28 @@
 require 'pp'
 
+# find_index method for Ruby 1.8.6 and earlier.
+# Falls back to the built-in method in 1.8.7 and newer.
+module Enumerable
+  
+  def method_missing(name, *args, &block)
+    if name == :find_index
+      return my_find_index(*args)
+    else
+      super(name, *args, &block)
+    end
+  end
+  
+  def my_find_index(value)
+    self.each_with_index do |item, index|
+      if item == value
+        return index
+      end
+    end
+    nil
+  end
+  
+end
+
 User.class_eval do
    attr_accessible :ship_address_id, :salt, :bill_address_id, :crypted_password, :id
 end
