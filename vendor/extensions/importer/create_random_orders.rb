@@ -5,7 +5,7 @@ require 'pp'
 module Enumerable
   
   def method_missing(name, *args, &block)
-    puts "--- #{name} --- #{args} ---"
+    # puts "--- #{name} --- #{args} ---"
     if name == :find_index
       return my_find_index(*args, &block)
     else
@@ -410,7 +410,6 @@ class RandomOrders
     countries = [:ca, :us, :gb]
     country = countries[((rand(3)+rand(3)+rand(3))/3).floor]
     order.bill_address = address(country)
-    pp order.bill_address
     order.bill_address.save(false)
     ship_address = address(country)
     order.ship_address = ship_address
