@@ -26,9 +26,12 @@ module Enumerable
     end
     nil
   end
-  
-end
 
+end
+Payment.class_eval do
+  def create_payment_profile
+  end
+end
 User.class_eval do
    attr_accessible :ship_address_id, :salt, :bill_address_id, :crypted_password, :id
 end
