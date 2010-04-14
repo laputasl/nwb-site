@@ -799,6 +799,7 @@ class SiteExtension < Spree::Extension
     ShippingMethod.class_eval do
       #adds additional handling fee
       alias_method :core_calculate_cost, :calculate_cost
+      alias_method :core_available_to_order?, :available_to_order?
 
       #add handling_fee or free for can_be_free calculators.
       def calculate_cost(shipment)
@@ -811,13 +812,13 @@ class SiteExtension < Spree::Extension
       end
 
       #excludes PO (APO / FPO) boxes
-      def available_to_address?(address)
+      def available_to_order?(order)
         po_regex = /\b((A|a|F|f)?[P|p](OST|ost)?\.?\s?[O|o|0](ffice|FFICE)?\.?\s)?([B|b][O|o|0][X|x])\s(\d+)/
 
-        if self.name.upcase.include?("UPS") && (address.address1 =~ po_regex || address.address2 =~ po_regex)
+        if self.name.upcase.include?("UPS") && (order.ship_address.address1 =~ po_regex || order.ship_address.address2 =~ po_regex)
           return false
         else
-          available? && zone.include?(address)
+          core_available_to_order?(order)
         end
       end
     end

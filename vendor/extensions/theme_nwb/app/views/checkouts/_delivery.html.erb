@@ -67,8 +67,33 @@
     </ul>
 
     <div class="submit-warning">After clicking submit, the process may take up to two minutes.<br/>
-      If you have problems checking out, please let us know
+      If you have problems checking out, <%= link_to "please let us know", "/#{@current_domain}/contact_us" %>
     </div>
+  </div>
+
+</div>
+
+<div id="payments-footer">
+  <div class="left">
+    <strong>Payment Methods:</strong><img align="absmiddle" alt="AMEX, VISA, MASTERCARD, DISCOVER, PAYPAL" src="/<%= @site.code %>/images/logo_payment_methods.gif">
+  </div>
+  <div class="right">
+    or you may order via our <a href="/MailFaxOrder.pdf" title="Fax/Mail Order Form">Fax/Mail Order Form</a><br>(requires <a target="_blank" href="http://www.adobe.com/products/acrobat/readstep2.html">Adobe Acrobat</a>)
+  </div>
+  <div class="clear">&nbsp;</div>
+  <div class="badges">
+    <a target="_blank" href="https://www.bbb.org/online/consumer/cks.aspx?id=110020517059"><img title="Click to verify BBB accreditation and to see a BBB report." border=0 src="/nwb/images/bbb.gif" alt="Click to verify BBB accreditation and to see a BBB report." /></a>
+
+    <!-- Begin Official PayPal Seal -->
+    <a href="https://www.paypal.com/us/verified/pal=wdf%40naturalwellbeing%2ecom" target="_blank">
+      <img src="/nwb/images/pp_verification_seal_small.gif" border="0" alt="Official PayPal Seal"/>
+    </a>
+    <!-- End Official PayPal Seal -->
+
+    <!-- START SCANALERT CODE -->
+    <a target="_blank" href="https://www.scanalert.com/RatingVerify?ref=www.naturalwellbeing.com">
+    <img width="94" height="54" border="0" src="//images.scanalert.com/meter/survey/www.naturalwellbeing.com/13.gif" alt="HACKER SAFE certified sites prevent over 99.9% of hacker crime." /></a>
+    <!-- END SCANALERT CODE -->
   </div>
 </div>
 

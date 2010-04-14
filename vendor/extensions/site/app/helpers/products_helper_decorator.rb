@@ -13,14 +13,17 @@ ProductsHelper.module_eval do
   end
 
   def estimate_shipping_day()
-    if Time.now.hour < 14
-      if Time.now.wday < 6 && Time.now.wday > 0
+    now = Time.new()
+    Time.zone = "PST"
+
+    if Time.zone.at(now).hour < 14
+      if Time.zone.at(now).wday < 6 && Time.zone.at(now).wday > 0
         "Today"
       else
         "Monday"
       end
     else
-      if Time.now.wday < 5 && Time.now.wday > 0
+      if Time.zone.at(now).wday < 5 && Time.zone.at(now).wday > 0
         "Tomorrow"
       else
         "Monday"

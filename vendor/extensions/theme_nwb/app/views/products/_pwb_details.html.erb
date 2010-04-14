@@ -1,5 +1,5 @@
 <div class="product">
-   <h2><%= link_to @product.name, @product, :title => @product.name %></h2>
+   <h2><%= @product.name %></h2>
   <div class="photo">
     <%= product_image(@product, {:style => "max-width:140px;margin-top:20px;"}) %>
     <p class="itemNum">

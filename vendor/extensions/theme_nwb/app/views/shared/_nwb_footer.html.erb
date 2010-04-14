@@ -1,13 +1,15 @@
 <div id="footer">
-  <ul>
-    <li class="first"><a href="/nwb/shipping" title="Shipping">Shipping</a></li>
-    <li><a href="/nwb/secure" title="Security">Security</a></li>
-    <li><a href="/nwb/guarantee" title="Guarantee">Guarantee</a></li>
-    <li><a href="/nwb/privacy_policy" title="Privacy Policy">Privacy Policy</a></li>
-    <li><a href="/nwb/contactus" title="Contact Us">Contact Us</a></li>
-    <li><a href="/nwb/advertising" title="Advertising">Advertising</a></li>
-    <li><a href="/nwb/terms" title="Terms &amp; Conditions">Terms &amp; Conditions</a></li>
-  </ul>
+  <% unless @current_controller == "checkouts" %>
+    <ul>
+      <li class="first"><a href="/nwb/shipping" title="Shipping">Shipping</a></li>
+      <li><a href="/nwb/secure" title="Security">Security</a></li>
+      <li><a href="/nwb/guarantee" title="Guarantee">Guarantee</a></li>
+      <li><a href="/nwb/privacy_policy" title="Privacy Policy">Privacy Policy</a></li>
+      <li><a href="/nwb/contactus" title="Contact Us">Contact Us</a></li>
+      <li><a href="/nwb/advertising" title="Advertising">Advertising</a></li>
+      <li><a href="/nwb/terms" title="Terms &amp; Conditions">Terms &amp; Conditions</a></li>
+    </ul>
+  <% end %>
   <p>
     <strong>1-877-633-2401</strong><br />
     <a href="mailto:customerservice@petwellbeing.com" title="Contact Customer Service">customerservice@petwellbeing.com</a>

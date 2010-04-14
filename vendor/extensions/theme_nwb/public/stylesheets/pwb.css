@@ -381,12 +381,12 @@ h1 {
   display: inline;
   width: 420px;
 }
-.product h2 { margin: 0 0 10px 0; }
-.product h2 a {
+.product h2 {
+  margin: 0 0 10px 0;
   color: #708369;
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.3em;
+  font-size: 1.5em;
 }
 .product .info p { margin: 0 0 10px 0; }
 .product .info ul { margin: 0 0 10px 25px; }
@@ -752,6 +752,7 @@ h5 {
   text-indent: -1000px;
   font-size: 0px;
   cursor: pointer;
+  width: 170px;
 }
 .product .price form .vprices .radio .add_to_cart_1 { background-position: -10px -10px; }
 .product .price form .vprices .radio .add_to_cart_1:hover { background-position: -10px -58px; }
@@ -820,6 +821,31 @@ h5 {
   padding: 5px 0 0 0;
   margin: 5px 0 0 0;
 }
+#checkout-main #payments-footer {
+  padding-top: 20px;
+  clear: both;
+}
+#checkout-main #payments-footer .left {
+  height: 30px;
+  line-height: 35px;
+  float: left;
+}
+#checkout-main #payments-footer .left strong {
+  font-size: 1.3em;
+  vertical-align: middle;
+}
+#checkout-main #payments-footer .right {
+  width: 250px;
+  margin-top: -2px;
+  float: right;
+  text-align: right;
+}
+#checkout-main #payments-footer .badges {
+  padding-top: 20px;
+  text-align: center;
+}
+#checkout-main #payments-footer .badges a { padding: 0px 5px; }
+#checkout-main #payments-footer .badges img { vertical-align: middle; }
 form p.field {
   margin-bottom: 0.5em;
   clear: both;
