@@ -245,7 +245,7 @@ a:active { color: #1c3c80; }
   padding: 6px 0 6px 13px;
 }
 #subNav dt a { display: block; }
-#subNav dt a:visited { color: #0342c9; }
+#subNav dt a:visited { color: #791f7c; }
 #subNav dt a:hover { background: #fffef4; }
 #subNav ul { border-top: 1px dashed #d8d5c3; }
 #subNav .selected { background: url("/nwb/images/icon_arrow.gif") no-repeat scroll 4px center #fffef6; }
@@ -269,7 +269,7 @@ a:active { color: #1c3c80; }
   line-height: 16px;
 }
 #subNav li a:hover { background: #fffef4; }
-#subNav li a:visited { color: #0342c9; }
+#subNav li a:visited { color: #791f7c; }
 #subNav .selected_product { background: url("/nwb/images/icon_arrow.gif") no-repeat scroll 24px center; }
 #subNav .selected_product strong {
   display: table-cell;

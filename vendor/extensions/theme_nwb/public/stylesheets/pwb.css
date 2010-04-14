@@ -174,7 +174,7 @@ a:active { color: #1c3c80; }
 }
 #sidebar #btnDogs { background: url(/pwb/images/btn_dogs.png) top left no-repeat; }
 #sidebar #btnCats { background: url(/pwb/images/btn_cats.png) top left no-repeat; }
-#sidebar #btnPeople { background: url(/pwb/images/btn-people.gif) top left no-repeat; }
+#sidebar #btnPeople { background: url(/pwb/images/owners.gif) top left no-repeat; }
 #sidebar img {
   display: block;
   margin: 10px auto;

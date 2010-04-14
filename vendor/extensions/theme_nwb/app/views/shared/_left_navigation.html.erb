@@ -43,6 +43,10 @@
     <dt><a href="<%= seo_url(taxon) %>" title="<%= taxon.name %>"<strong><%= taxon.name %></strong></a></dt>
   <% end %>
 <% end %>
+<% if @site.code == "nwb" %>
+  <dt><%= link_to "<strong>Pet Products</strong>", "/pets" %></dt>
+<% end %>
+
 <%- all_products = "All #{(@site.code == "pwb" ? "Pet " : "People ") if @current_domain != @site.code}Products" -%>
 <% if @current_controller == "products" && @current_action == "index" && !params[:keywords] %>
   <dt class="selected"><strong><%= all_products %></strong></dt>
