@@ -17,12 +17,14 @@
         <%= submit_tag vl.first, :class => clss, :name => "variants[#{@product.master.id}]" %>
       </div>
       <div class="pricesave">
-        <%= vl.display%>
-        <strike><%= number_to_currency(full_amnt)%></strike>
-        <strong><%= number_to_currency(amnt)%></strong><br>
-        Save <%= number_to_currency(savings)%>
+        <p>
+          <%= vl.display%>
+          <strike><%= number_to_currency(full_amnt)%></strike>
+          <strong><%= number_to_currency(amnt)%></strong><br>
+          Save <%= number_to_currency(savings)%>
+        </p>
         <% if is_shipping_free%>
-          <br/><span class="freeshiping">and get &nbsp;<strong>free shipping</strong></span>
+          <p><span class="freeshiping">and get &nbsp;<strong>free shipping</strong></span></p>
         <%end%>
       </div>
       <div class="clear">&nbsp;</div>

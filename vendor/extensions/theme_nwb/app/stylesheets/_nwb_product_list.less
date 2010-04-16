@@ -1,0 +1,114 @@
+/*---------------------*/
+/* Product List -------*/
+/*---------------------*/
+.products {
+  border: 1px solid #D7D5C6;
+  border-top: 0;
+  margin: 0 0 20px 13px;
+  h1 {
+    background: #FBF9ED;
+    font-size: 15px;
+    color: #DA5789;
+    padding: 3px 10px 5px 10px;
+    border-top: 1px solid #D7D5C6;
+    border-bottom: 1px solid #D7D5C6;
+    a {
+      color: #DA5789;
+      :hover {
+        color: #DA5789;
+      }
+    }
+  }
+  ul {
+    margin: 10px 0px;
+    width: 563px;
+    overflow: hidden;
+  }
+}
+.productList {
+  li {
+    width: 250px;
+    min-height: 150px;
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    padding:0 5px;
+    zoom: 1;
+    *display: inline;
+    _height: 100px;
+    overflow: hidden;
+    .photo {
+      width: 70px;
+      display: -moz-inline-stack;
+      float: left;
+      vertical-align: top;
+      zoom: 1;
+      *display: inline;
+      _height: 10px;
+      overflow: hidden;
+      margin: 0px 5px
+    }
+    .info {
+      vertical-align: top;
+      zoom: 1;
+      *display: inline;
+      overflow: hidden;
+      margin: 5px 0 5px 5px;
+      h2 {
+        font-size: 14px;
+        margin: 0 0 7px 0;
+      }
+      p {
+        font-size: 12px;
+        margin: 7px 0;
+        line-height: 15px;
+      }
+      p.itemNum {
+        font-size: 11px;
+        margin: 0;
+      }
+      p.price {
+        margin: 0;
+        padding: 0;
+        float: left;
+        display: inline;
+      }
+      p.more {
+        clear: both;
+        font-size: 10px;
+        margin: 0 0 10px 0;
+        float: right;
+        display: inline;
+        clear: none;
+        width: 90px;
+        margin: 0;
+        text-align: right;
+      }
+    }
+  }
+  .border {
+    border-top: 1px dashed #F4F3F0;
+    padding-top: 10px !important;
+    margin-top: 20px;
+  }
+  a {
+    font-size: 0.9em;
+  }
+}
+.allProducts {
+  .productList{
+    margin-left: 10px;
+    list-style-position:inside;
+    width:auto;
+    li{
+      float:left;
+      font-size:1.1em;
+      min-height:0;
+      width:48%;
+      display:list-item;
+      overflow:visible;
+      margin:5px 0;
+    }
+  }
+}

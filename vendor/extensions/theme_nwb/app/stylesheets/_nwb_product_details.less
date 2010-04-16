@@ -1,0 +1,74 @@
+/*---------------------*/
+/* Product Tabs -------*/
+/*---------------------*/
+.productMenu {
+  background: url(/nwb/images/bg_tab_menu.png) bottom left repeat-x;
+  overflow: hidden;
+  width: 565px;
+  li {
+    list-style: none;
+    list-style-position: outside;
+    float: left;
+    display: inline;
+    a {
+      float: left;
+      display: inline;
+      text-align: center;
+      font-size: 14px;
+      padding: 5px 0 0 0;
+      text-decoration: none;
+      color: #000;
+      height: 23px;
+      :hover {
+        background-position: center left !important;
+      }
+    }
+  }
+  li.active {
+    a, a:hover {
+      background-position: bottom left !important;
+    }
+  }
+  #tabDescription {
+    background: url(/nwb/images/tab_description.png) top left no-repeat;
+    width: 91px;
+  }
+  #tabReviews {
+    background: url(/nwb/images/tab_reviews.png) top left no-repeat;
+    width: 101px;
+  }
+  #tabDirections {
+    background: url(/nwb/images/tab_directions.png) top left no-repeat;
+    width: 155px;
+  }
+  #tabIngredients {
+    background: url(/nwb/images/tab_ingredients.png) top left no-repeat;
+    width: 96px;
+  }
+}
+/*---------------------*/
+/* Product Details ----*/
+/*---------------------*/
+
+#body .productDetails .content {
+  margin: 0 0 20px 0;
+  border-color: #c2bfaf;
+  border-top: 0;
+}
+.productDetails {
+  margin: 25px 0 0 13px;
+  h3 {
+    color:#40729B;
+    font-size:1em;
+    font-weight:bold;
+    line-height:15px;
+  }
+  h4, 
+  h5{
+    color:#5D755D;
+    font-size:1.4em;
+    font-weight:bolder;
+    margin:0;
+    padding:3px 0;
+  }
+}

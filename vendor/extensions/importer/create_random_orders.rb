@@ -431,7 +431,7 @@ class RandomOrders
     shipment.save(false)
     shipment.reload
     
-    order.adjustments << ShippingCharge.create("amount"             => (10+rand(100000)/100).to_f,
+    order.adjustments << ShippingCharge.create("amount"             => (10+rand(100x00)/100).to_f,
                                           "adjustment_source_id"    => order.id,
                                           "adjustment_source_type"  => "Order",
                                           "description"             => "Shipping Charge")
@@ -488,7 +488,7 @@ class RandomOrders
       itm[:weight] >= pos  
     end
 
-    item = list.delete_at(index)
+    item = list.delete_at(index || 0)
     result = [item]
     if len > 1
       res, list = pick_random(list, len-1)

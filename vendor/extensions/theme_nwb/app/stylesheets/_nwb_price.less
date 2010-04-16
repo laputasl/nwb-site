@@ -1,0 +1,207 @@
+/*---------------------*/
+/* Price --------------*/
+/*---------------------*/
+@bg_pos1:      -10px-0*178px;
+@bg_pos1_free: -10px-6*178px;
+@bg_pos2:      -10px-1*178px;
+@bg_pos2_free: -10px-7*178px;
+@bg_pos3:      -10px-2*178px;
+@bg_pos3_free: -10px-8*178px;
+@bg_pos4:      -10px-3*178px;
+@bg_pos4_free: -10px-9*178px;
+@bg_pos5:      -10px-4*178px;
+@bg_pos5_free: -10px-10*178px;
+@bg_pos6:      -10px-5*178px;
+@bg_pos6_free: -10px-11*178px;
+@bg_pos:       -10px;
+@bg_pos_hover: -58px;
+
+.price {
+  clear: both;
+  padding: 10px 0;
+  p {
+    float: left;
+    display: inline;
+    width: 120px;
+    font-size: 11px;
+  }
+  form {
+    .btnBuyNow, 
+    .btnAddCart {
+      background: url(/nwb/images/btn_buy_now.gif) top left no-repeat;
+      float: left;
+      display: inline;
+      text-indent: -999em;
+      overflow: hidden;
+      width: 72px;
+      height: 20px;
+      border: 0;
+      cursor: pointer;
+      text-transform: uppercase;
+      margin: 2px 0 0 0;
+    }
+  }
+  .quantity {
+    float: left;
+    display: inline;
+    width: 100px;
+    input {
+      width: 30px;
+      margin: 0 0 0 5px;
+      text-align: center;
+    }
+  }
+}
+
+
+.productList .price form .btnAddCart {
+  background: url(/nwb/images/btn_add_cart.gif) top left no-repeat;
+  width: 84px;
+  float: none;
+  display: block;
+  margin: 0 0 0 180px;
+  margin: 0;
+  float: left;
+  display: inline;
+}
+.product .price form .vprices {
+  padding:10px 5px 10px 1px;
+  width:auto;
+  margin: 5px 0;
+  float:left;
+  .pricesave {
+    margin: 0 8px 0 20px;
+    font-size:0.9em;
+    p {
+      padding:0;
+      margin:0;
+      white-space: nowrap;
+      float:none;
+    }
+    
+  }
+  .radio {
+    width: 150px;
+    .add_to_cart {
+      display: block;
+      border: none;
+      background-color: transparent;
+      background-repeat: no-repeat;
+      background-image: url(/nwb/images/sprite-add-to-cart.png);
+      height: 38px;
+      width: 150px;
+      text-indent: -1000px;
+      font-size: 0px;
+      cursor: pointer;
+    }
+    .add_to_cart_1 {
+      background-position: @bg_pos1 @bg_pos;
+    }
+    .add_to_cart_1:hover {
+      background-position: @bg_pos1 @bg_pos_hover;
+    }
+    .add_to_cart_1:active {
+      background-position: @bg_pos1 @bg_pos_hover;
+    }
+    .add_to_cart_1_free {
+      background-position: @bg_pos1_free @bg_pos;
+    }
+    .add_to_cart_1_free:hover {
+      background-position: @bg_pos1_free @bg_pos_hover;
+    }
+    .add_to_cart_1_free:active {
+      background-position: @bg_pos1_free @bg_pos_hover;
+    }
+    .add_to_cart_2 {
+      background-position: @bg_pos2 @bg_pos;
+    }
+    .add_to_cart_2:hover {
+      background-position: @bg_pos2 @bg_pos_hover;
+    }
+    .add_to_cart_2:active {
+      background-position: @bg_pos2 @bg_pos_hover;
+    }
+    .add_to_cart_2_free {
+      background-position: @bg_pos2_free @bg_pos;
+    }
+    .add_to_cart_2_free:hover {
+      background-position: @bg_pos2_free @bg_pos_hover;
+    }
+    .add_to_cart_2_free:active {
+      background-position: @bg_pos2_free @bg_pos_hover;
+    }
+    .add_to_cart_3 {
+      background-position: @bg_pos3 @bg_pos;
+    }
+    .add_to_cart_3:hover {
+      background-position: @bg_pos3 @bg_pos_hover;
+    }
+    .add_to_cart_3:active {
+      background-position: @bg_pos3 @bg_pos_hover;
+    }
+    .add_to_cart_3_free {
+      background-position: @bg_pos3_free @bg_pos;
+    }
+    .add_to_cart_3_free:hover {
+      background-position: @bg_pos3_free @bg_pos_hover;
+    }
+    .add_to_cart_3_free:active {
+      background-position: @bg_pos3_free @bg_pos_hover;
+    }
+    .add_to_cart_4 {
+      background-position: @bg_pos4 @bg_pos;
+    }
+    .add_to_cart_4:hover {
+      background-position: @bg_pos4 @bg_pos_hover;
+    }
+    .add_to_cart_4:active {
+      background-position: @bg_pos4 @bg_pos_hover;
+    }
+    .add_to_cart_4_free {
+      background-position: @bg_pos4_free @bg_pos;
+    }
+    .add_to_cart_4_free:hover {
+      background-position: @bg_pos4_free @bg_pos_hover;
+    }
+    .add_to_cart_4_free:active {
+      background-position: @bg_pos4_free @bg_pos_hover;
+    }
+    .add_to_cart_5 {
+      background-position: @bg_pos5 @bg_pos;
+    }
+    .add_to_cart_5:hover {
+      background-position: @bg_pos5 @bg_pos_hover;
+    }
+    .add_to_cart_5:active {
+      background-position: @bg_pos5 @bg_pos_hover;
+    }
+    .add_to_cart_5_free {
+      background-position: @bg_pos5_free @bg_pos;
+    }
+    .add_to_cart_5_free:hover {
+      background-position: @bg_pos5_free @bg_pos_hover;
+    }
+    .add_to_cart_5_free:active {
+      background-position: @bg_pos5_free @bg_pos_hover;
+    }
+    .add_to_cart_6 {
+      background-position: @bg_pos6 @bg_pos;
+    }
+    .add_to_cart_6:hover {
+      background-position: @bg_pos6 @bg_pos_hover;
+    }
+    .add_to_cart_6:active {
+      background-position: @bg_pos6 @bg_pos_hover;
+    }
+    .add_to_cart_6_free {
+      background-position: @bg_pos6_free @bg_pos;
+    }
+    .add_to_cart_6_free:hover {
+      background-position: @bg_pos6_free @bg_pos_hover;
+    }
+    .add_to_cart_6_free:active {
+      background-position: @bg_pos6_free @bg_pos_hover;
+    }
+  }
+}
+

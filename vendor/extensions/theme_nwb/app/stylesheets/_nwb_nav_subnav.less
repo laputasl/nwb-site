@@ -1,0 +1,82 @@
+
+/*---------------------*/
+/* Sub Nav ------------*/
+/*---------------------*/
+#subNav {
+  padding: 0 1px;
+  font-family: Verdana, Arial, sans-serif;
+  dt {
+    background-color: #FBF9ED;
+    border-top:1px dashed #D8D5C3;
+    padding: 6px 0 6px 13px;
+    a{
+      display: block;
+      :visited{
+        color: #791F7C;
+      }
+      :hover {
+        background: #FFFEF4;
+      }
+    }
+    p {
+      background-image: url(/nwb/images/icon_arrow.gif);
+      background-repeat: no-repeat;
+      background-position: 14px center;
+      background-color:#FFFEF6;
+      font-weight: bold;
+    }
+  }
+  .selected{
+    background: url("/nwb/images/icon_arrow.gif") no-repeat scroll 4px center #FFFEF6;
+  }
+  .child_selected{
+    background-color: #FFFEF6;
+    font-weight: bold;
+  }
+  .selected_product{
+    background: url("/nwb/images/icon_arrow.gif") no-repeat scroll 24px center;
+    strong {
+      display: table-cell;
+      padding: 5px 5px 5px 35px;
+      border-bottom: 1px dashed #d8d5c3;
+    }
+  }
+  ul {
+    border-top: 1px dashed #d8d5c3;
+    li {
+      display:inline;
+    }
+    li a, #subNav li p {
+      background: #FEFEFC;
+      border-bottom: 1px dashed #d8d5c3;
+      padding: 5px 5px 5px 25px;
+      display: block;
+      line-height: 16px;
+    }
+    li a:hover {
+      background: #FFFEF4;
+    }
+    li a:visited{
+      color: #791F7C;
+    }
+    p {
+      background-image: url(/nwb/images/icon_arrow.gif);
+      background-repeat: no-repeat;
+      background-position: 14px center;
+      background-color:#FFFEF6;
+      font-weight: bold;
+    }
+    ul {
+      border: 0;
+      background: #fff;
+      a{
+        padding-left: 35px;
+      }
+      p {
+        padding-left: 35px;
+        font-weight: normal;
+        background-position: 10px center;
+      }
+    }
+  }
+}
