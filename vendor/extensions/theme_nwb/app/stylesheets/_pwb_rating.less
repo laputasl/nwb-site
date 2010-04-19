@@ -1,0 +1,71 @@
+/*---------------------*/
+/* Rating & Share -----*/
+/*---------------------*/
+.rateShare {
+  width: 565px;
+  overflow: hidden;
+  border-top: 1px solid #d8d5c3;
+  border-bottom: 1px solid #d8d5c3;
+  .rating{
+    min-height:64px;
+  }
+}
+.rating {
+  .prSnippetEngine{
+    padding-bottom:15px;
+    .prSnippetRatingUnclickable{
+      display:inline;
+    }
+    .prStars,
+    .prSnippetNumberOfRatingsText,
+    .prSnippetWriteReview,
+    .prSnippetReadReviews{
+      display: -moz-inline-stack;
+      display: inline-block;
+      vertical-align: top;
+      zoom: 1;
+      *display: inline;
+      padding:0 5px 0 0;
+    }
+  }
+  .prSnippetRatingDecimal,
+  .prSnippetTitle{
+    display: none;
+  }
+}
+.product {
+  .rating {
+    .prSnippetNumberOfRatingsText{
+      display: none;
+    }
+  }
+}
+.productList {
+  .info {
+    .rating {
+      clear: both;
+      .prSnippetRatingUnclickable{
+        padding:0;
+      }
+    }
+  }
+  .rating {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    .prSnippetEngine {
+      padding:0;
+      
+      .prSnippetRatingUnclickable{
+        display:block;
+      }
+      .prSnippetWriteReview,
+      .prSnippetReadReviews {
+        display: none;
+      }
+    }
+  }
+}
+/*
+.rating { margin: 10px 0 0 ; min-height: 20px; }
+.rating { clear: both; padding:0 0 4px; min-height: 20px; }
+*/

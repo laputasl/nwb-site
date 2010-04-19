@@ -20,7 +20,9 @@
         <p>
           <%= vl.display%>
           <strike><%= number_to_currency(full_amnt)%></strike>
-          <strong><%= number_to_currency(amnt)%></strong><br>
+          <strong><%= number_to_currency(amnt)%></strong>
+        </p>
+        <p>
           Save <%= number_to_currency(savings)%>
         </p>
         <% if is_shipping_free%>

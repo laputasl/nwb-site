@@ -1,0 +1,76 @@
+/*---------------------*/
+/* Sub Nav ------------*/
+/*---------------------*/
+#subNav {
+  padding: 0 1px;
+  font-family: Verdana, Arial, sans-serif;
+  dt {
+    background-color: #d3d9be;
+    border-top:1px dashed #e9efe4;
+    padding: 6px 0 6px 13px;
+    a {
+      display: block;
+    }
+    p {
+      padding: 6px 0 6px 13px;
+      display: block;
+      background-image: url(/pwb/images/icon_arrow.gif);
+      background-repeat: no-repeat;
+      background-position: 4px center;
+      font-weight: bold;
+    }
+  }
+  .selected{
+    background: url("/pwb/images/icon_arrow.gif") no-repeat scroll 4px center #D3D9BE;
+  }
+  .child_selected{
+    font-weight: bold;
+  }
+  .selected_product{
+    background: url("/pwb/images/icon_arrow.gif") no-repeat scroll 24px center;
+  }
+  .selected_product strong {
+    display: table-cell;
+    padding: 5px 5px 5px 35px;
+    border-bottom: 1px dashed #d8d5c3;
+  }
+  ul {
+    border-top: 1px dashed #d8d5c3;
+    li {
+      display:inline;
+      p {
+        border-bottom: 1px dashed #d8d5c3;
+        padding: 5px 5px 5px 13px;
+        display: block;
+        line-height: 16px;
+      }
+      a {
+        border-bottom: 1px dashed #d8d5c3;
+        padding: 5px 5px 5px 13px;
+        display: block;
+        line-height: 16px;
+        :hover {
+          background: #e9efe4;
+        }
+      }
+    }
+    ul {
+      border: 0;
+      background: #fff;
+      a {
+        padding-left: 25px;
+      }
+      p {
+        padding-left: 25px;
+        font-weight: normal;
+        background-position: 10px center;
+      }
+    }
+    p {
+      background-image: url(/pwb/images/icon_arrow.gif);
+      background-repeat: no-repeat;
+      background-position: 4px center;
+      font-weight: bold;
+    }
+  }
+}

@@ -716,6 +716,7 @@ h5 {
   margin: 0;
   white-space: nowrap;
   float: none;
+  display: block;
 }
 .product .price form .vprices .radio { width: 150px; }
 .product .price form .vprices .radio .add_to_cart {
