@@ -222,6 +222,7 @@ a:active { color: #1c3c80; }
 #shipping_calculator #usa_options { display: none; }
 #shipping_calculator #calculator_zipcode { width: 50%; }
 #shipping_calculator #international_options { display: none; }
+#shipping_calculator #calculator_methods { display: none; }
 #shipping_calculator #calculator_available_methods { width: 90%; }
 #shipping_calculator #calculator_country { width: 65%; }
 #shipping_calculator #calculator_progress { display: none; }

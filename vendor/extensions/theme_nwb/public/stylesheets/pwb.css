@@ -237,6 +237,7 @@ a:active { color: #1c3c80; }
 #shipping_calculator #usa_options { display: none; }
 #shipping_calculator #calculator_zipcode { width: 50%; }
 #shipping_calculator #international_options { display: none; }
+#shipping_calculator #calculator_methods { display: none; }
 #shipping_calculator #calculator_available_methods { width: 90%; }
 #shipping_calculator #calculator_country { width: 65%; }
 #shipping_calculator #calculator_progress { display: none; }
@@ -501,7 +502,10 @@ h1 {
   border-color: #c2bfaf;
   border-top: 0;
 }
-.productDetails { margin: 25px 0 0 13px; }
+.productDetails {
+  margin: 25px 0 0 13px;
+  clear: both;
+}
 .productDetails h4 {
   color: #5d755d;
   font-size: 1.4em;
