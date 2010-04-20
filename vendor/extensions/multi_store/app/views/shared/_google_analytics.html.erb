@@ -28,7 +28,7 @@
          *  ship-to country
          */
         VKIPageTracker._addTrans(
-          "<%= "#{"QA-" if request.server_name =~ /^(dev.|localhost)/ }#{@order.number}" %>",
+          "<%= "#{"QA-" if request.server_name =~ /^(dev.|staging.|localhost)/ }#{@order.number}" %>",
           "",
           "<%= @order.total %>",
           "<%= @order.tax_charges.sum(:amount).to_s %>",
@@ -39,7 +39,7 @@
         );
         <% @order.line_items.each do |line_item| -%>
         VKIPageTracker._addItem(
-          "<%= "#{"QA-" if request.server_name =~ /^(dev.|localhost)/ }#{@order.number}" %>",
+          "<%= "#{"QA-" if request.server_name =~ /^(dev.|staging.|localhost)/ }#{@order.number}" %>",
           "<%= line_item.variant.sku %>",
           "<%= line_item.variant.product.name %>",
           "-",
