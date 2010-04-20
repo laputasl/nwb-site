@@ -16,7 +16,7 @@
         </tr>
         <tr>
           <td class="right">Shipping:</td>
-          <td id="cart_preview_shipping">-</td>
+          <td id="cart_preview_shipping"><%= session[:shipping_method_rate].blank? ? "-" : number_to_currency(session[:shipping_method_rate]) %></td>
         </tr>
         <tr>
           <td class="right">Total:</td>
@@ -34,20 +34,21 @@
     <h3><%= link_to "Shipping Calculator", cart_path %></h3>
     <div id="shipping_calculator">
       <p>
-        <%= radio_button_tag :calculator_zone, :usa, country_id == 214 %> USA
-        <%= radio_button_tag :calculator_zone, :international, country_id != 214 %> International
+        <%= radio_button_tag :calculator_zone, :usa, !session[:zipcode].blank?  %> USA
+        <%= radio_button_tag :calculator_zone, :international, !session[:country_id].blank? %> International
       </p>
-      <div id="usa_options" <%= 'style="display:block"' if country_id == 214 %>>
-        <%= text_field_tag :calculator_zipcode, "enter zip" %>
+      <div id="usa_options" <%= 'style="display:block"' if !session[:zipcode].blank? %>>
+        <%= text_field_tag :calculator_zipcode, (session[:zipcode] || "enter zip") %>
         <%= image_submit_tag "/#{@current_domain}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
       </div>
-      <div id="international_options"<%= 'style="display:block"' if country_id != 214 %>>
-        <%= select_tag :calculator_country, options_for_select(Checkout.countries.sort.map{|c| [c.name, c.id]}, country_id) %>
+      <div id="international_options"<%= 'style="display:block"' if !session[:country_id].blank? %>>
+        <%= select_tag :calculator_country, options_for_select(Checkout.countries.sort.map{|c| [c.name, c.id]}.reject{|c| c[1] == 214}, session[:country_id] ) %>
         <%= image_submit_tag "/#{@current_domain}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
       </div>
-      <p id="calculator_methods">
+      <p id="calculator_methods" style="display:<%= @shipping_calculator_rates.empty? ? "none" : "block" %>;">
         Select Shipping Method
-        <select id="calculator_available_methods"></select>
+        <%= select_tag :calculator_available_methods, options_for_select(@shipping_calculator_rates.map{ |r| ["#{r[:name]} - #{number_to_currency(r[:rate])}", r[:id]]}, session[:shipping_method_id] ) %>
+
       </p>
       <%= image_tag "/#{@current_domain}/images/verifying.gif", {:id => "calculator_progress"} %>
     </div>
@@ -58,7 +59,7 @@
   jQuery(document).ready(function(){
     var country_id = <%= country_id %>;
     var order_total = <%= order.nil? ? 0 : order.line_items.total %>;
-    var shipping_methods = [];
+    var shipping_methods = [<%= @shipping_calculator_rates.map(&:to_json).join(",") %>];
 
     function format_currency(num) {
       num = isNaN(num) || num === '' || num === null ? 0.00 : num;
@@ -96,7 +97,12 @@
               }
             }
 
-            $("#calculator_available_methods").append(new Option(rate.name + disp, rate.id));
+            var opt = $(document.createElement('option'))
+                      .attr('value', rate.id)
+                      .html(rate.name + disp);
+            $("#calculator_available_methods").append(opt);
+
+
             if(rate.rate==0){
               $("#calculator_available_methods option:contains('" + rate.name + "')").attr("selected", true);
             }
