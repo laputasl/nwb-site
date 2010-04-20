@@ -268,14 +268,7 @@ a:active { color: #1c3c80; }
 #subNav ul { border-top: 1px dashed #d8d5c3; }
 #subNav ul li { display: inline; }
 #subNav ul li a {
-  background: #fefefc;
-  border-bottom: 1px dashed #d8d5c3;
-  padding: 5px 5px 5px 25px;
-  display: block;
-  line-height: 16px;
-}
-#subNav ul #subNav li p {
-  background: #fefefc;
+  background-color: #fefefc;
   border-bottom: 1px dashed #d8d5c3;
   padding: 5px 5px 5px 25px;
   display: block;
@@ -283,6 +276,13 @@ a:active { color: #1c3c80; }
 }
 #subNav ul li a:hover { background: #fffef4; }
 #subNav ul li a:visited { color: #791f7c; }
+#subNav ul li p {
+  background-color: #fefefc;
+  border-bottom: 1px dashed #d8d5c3;
+  padding: 5px 5px 5px 25px;
+  display: block;
+  line-height: 16px;
+}
 #subNav ul p {
   background-image: url(/nwb/images/icon_arrow.gif);
   background-repeat: no-repeat;
@@ -797,6 +797,11 @@ h5 {
   overflow: hidden;
   padding: 5px 0 0 0;
   margin: 5px 0 0 0;
+}
+#checkout_title {
+  clear: both;
+  color: #485543;
+  padding-top: 10px;
 }
 form p.field {
   margin-bottom: 0.5em;
