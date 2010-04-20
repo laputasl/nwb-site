@@ -301,33 +301,15 @@ class SiteExtension < Spree::Extension
       end
 
       def calculate_shipping
-        load_object
         if params.key? :zipcode
-          addr = Address.new(:zipcode => params[:zipcode], :country_id => 214, :state_name => "")
+          session[:zipcode] = params[:zipcode].to_i
+          session[:country_id] = nil
         else
-          addr = Address.new(:zipcode => "", :country_id => params[:country_id], :state_name => "")
-        end
-        addr.save(false)
-        @order.checkout.update_attribute(:ship_address_id, addr.id)
-
-        begin
-
-          rates = ShippingMethod.all_available(@order).collect do |ship_method|
-            { :id => ship_method.id,
-              :name => ship_method.name,
-              :rate => ship_method.calculate_cost(@order.checkout.shipment),
-              :position => ship_method.position }
-          end
-        rescue Spree::ShippingError => ship_error
-          flash[:error] = ship_error.to_s
-          rates = []
+          session[:country_id] = params[:country_id].to_i
+          session[:zipcode] = nil
         end
 
-        rates = rates.sort_by{ |r| r[:position] }
-
-        if rates.size > 0 && @order.checkout.shipping_method_id.nil?
-          @order.checkout.update_attribute(:shipping_method_id, rates[0][:id])
-        end
+        rates = get_shipping_rates
 
         render :json => rates.to_json
       end
@@ -598,6 +580,10 @@ class SiteExtension < Spree::Extension
 
         if @checkout.update_attribute(:shipping_method_id, params[:shipping_method])
           @checkout.order.update_totals!
+
+          session[:shipping_method_id] = params[:shipping_method].to_i
+          session[:shipping_method_rate] = @checkout.order.shipping_charges.first.amount
+
           true
         else
           false
