@@ -542,10 +542,13 @@ class SiteExtension < Spree::Extension
             #set default shippping method if none selected yet
             if @checkout.shipping_method.nil? && @checkout.ship_address.valid?
               available_shipping_methods = @checkout.shipping_methods
-              @checkout.update_attribute(:shipping_method_id, available_shipping_methods[0].id) unless available_shipping_methods.empty?
 
-              session[:shipping_method_id] = available_shipping_methods[0].id
-              session[:shipping_method_rate] = available_shipping_methods[0].rate
+              unless available_shipping_methods.empty?
+                @checkout.update_attribute(:shipping_method_id, available_shipping_methods[0].id)
+
+                session[:shipping_method_id] = available_shipping_methods[0].id
+                session[:shipping_method_rate] = available_shipping_methods[0].rate
+              end
             end
 
             @checkout.order.update_totals!
