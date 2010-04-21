@@ -521,6 +521,40 @@ class SiteExtension < Spree::Extension
         render :json => update_shipping_method
       end
 
+      def update
+        load_object
+
+        # call the edit hooks for the current step in case we experience validation failure and need to edit again
+        edit_hooks
+        @checkout.enable_validation_group(@checkout.state.to_sym)
+        @prev_state = @checkout.state
+
+        before :update
+
+        begin
+          if @checkout.update_attributes object_params
+            update_hooks
+            @checkout.order.update_totals!
+            after :update
+            next_step
+            if @checkout.completed_at
+              return complete_checkout
+            end
+          else
+            after :update_fails
+            set_flash :update_fails
+          end
+        rescue Spree::GatewayError => ge
+          logger.debug("#{ge}:\n#{ge.backtrace.join("\n")}")
+          flash.now[:error] = t("unable_to_authorize_credit_card") + ": #{ge.message}"
+        rescue Spree::ShippingError => se #handle bad addresses / errors from ActiveShipping
+          logger.debug("#{se}:\n#{se.backtrace.join("\n")}")
+          flash.now[:error] = se.message
+        end
+
+        render 'edit'
+      end
+
       private
 
       def load_data #ensures correct states list is created when updating checkout (site specific as nwb uses ship address as primary)
