@@ -1,4 +1,4 @@
-<%- order = Order.find_or_create_by_id(session[:order_id]) unless session[:order_id].blank? -%>
+<% order = Order.find_or_create_by_id(session[:order_id]) unless session[:order_id].blank? %>
 <div id="cartPreview">
   <h3><%= link_to "Shopping Cart", cart_path %></h3>
   <table summary="My Shopping Cart" cellspacing="0">
@@ -31,6 +31,7 @@
   </table>
   <p><a href="/pwb/shipping" title="Free Same Day Shipping at <%= number_to_currency Spree::Config.get("#{@current_domain}_free_shipping_at") %>">Free Same Day Shipping at <%= number_to_currency Spree::Config.get("#{@current_domain}_free_shipping_at") %></a></p>
   <% unless order.nil? || @controller.controller_name == "orders" %>
+    <% @shipping_calculator_rates = order.available_shipping_rates(session[:zipcode], session[:country_id]) %>
     <h3><%= link_to "Shipping Calculator", cart_path %></h3>
     <div id="shipping_calculator">
       <p>
@@ -47,6 +48,7 @@
       </div>
       <p id="calculator_methods" style="display:<%= @shipping_calculator_rates.empty? ? "none" : "block" %>;">
         Select Shipping Method
+
         <%= select_tag :calculator_available_methods, options_for_select(@shipping_calculator_rates.map{ |r| ["#{r[:name]} - #{number_to_currency(r[:rate])}", r[:id]]}, session[:shipping_method_id] ) %>
 
       </p>
@@ -59,7 +61,11 @@
   jQuery(document).ready(function(){
     var country_id = <%= country_id %>;
     var order_total = <%= order.nil? ? 0 : order.line_items.total %>;
-    var shipping_methods = [<%= @shipping_calculator_rates.map(&:to_json).join(",") %>];
+    <% if @shipping_calculator_rates.nil? %>
+      var shipping_methods = [];
+    <% else %>
+      var shipping_methods = [<%= @shipping_calculator_rates.map(&:to_json).join(",") %>];
+    <% end %>
 
     function format_currency(num) {
       num = isNaN(num) || num === '' || num === null ? 0.00 : num;
@@ -175,3 +181,4 @@
 
   });
 </script>
+
