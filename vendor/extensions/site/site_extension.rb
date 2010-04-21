@@ -516,6 +516,8 @@ class SiteExtension < Spree::Extension
       before_filter :get_exact_target_lists, :only => [:edit]
       before_filter :enforce_registration, :except => [:register, :set_shipping_method]
 
+      ssl_required :update, :edit, :register, :set_shipping_method
+
       # sets shipping medthod for checkout when using paypal payment option
       def set_shipping_method
         render :json => update_shipping_method
