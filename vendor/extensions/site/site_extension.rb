@@ -323,6 +323,8 @@ class SiteExtension < Spree::Extension
       update.before :check_for_removed_items
       update.after :recalculate_totals
 
+      ssl_allowed :update
+
       update do
         flash nil
         success.wants.html { redirect_to (@from_checkout ? edit_order_checkout_url(object, :step => "delivery")  : edit_order_url(object)) }
@@ -541,6 +543,9 @@ class SiteExtension < Spree::Extension
             if @checkout.shipping_method.nil? && @checkout.ship_address.valid?
               available_shipping_methods = @checkout.shipping_methods
               @checkout.update_attribute(:shipping_method_id, available_shipping_methods[0].id) unless available_shipping_methods.empty?
+
+              session[:shipping_method_id] = available_shipping_methods[0].id
+              session[:shipping_method_rate] = available_shipping_methods[0].rate
             end
 
             @checkout.order.update_totals!
