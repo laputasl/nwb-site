@@ -539,17 +539,7 @@ class SiteExtension < Spree::Extension
           if @checkout.update_attributes object_params
             update_hooks
 
-            #set default shippping method if none selected yet
-            if @checkout.shipping_method.nil? && @checkout.ship_address.valid?
-              available_shipping_methods = @checkout.shipping_methods
-
-              unless available_shipping_methods.empty?
-                @checkout.update_attribute(:shipping_method_id, available_shipping_methods[0].id)
-
-                session[:shipping_method_id] = available_shipping_methods[0].id
-                session[:shipping_method_rate] = available_shipping_methods[0].rate
-              end
-            end
+            force_shipping_method
 
             @checkout.order.update_totals!
             after :update
@@ -697,11 +687,13 @@ class SiteExtension < Spree::Extension
 
       #allows registered users to skip address step.
       def handle_express_users
-        return if params[:step] == "address"
+        return if params[:step] == "address" || current_user.nil?
 
         unless @checkout.ship_address.valid?
           @checkout.ship_address.attributes = current_user.ship_address.attributes.except("id", "updated_at", "created_at") if current_user.ship_address
         end
+
+        force_shipping_method
 
         #can't skip addressing if the checkout is not valid.
         if @checkout.valid?
@@ -712,6 +704,20 @@ class SiteExtension < Spree::Extension
           load_available_methods
         else
           @checkout.errors.clear
+        end
+      end
+
+      def force_shipping_method
+        #set default shippping method if none selected yet
+        if @checkout.shipping_method.nil? && @checkout.ship_address.valid?
+          available_shipping_methods = @checkout.shipping_methods
+
+          unless available_shipping_methods.empty?
+            @checkout.update_attribute(:shipping_method_id, available_shipping_methods[0].id)
+
+            session[:shipping_method_id] = available_shipping_methods[0].id
+            session[:shipping_method_rate] = @checkout.order.ship_total
+          end
         end
       end
     end
