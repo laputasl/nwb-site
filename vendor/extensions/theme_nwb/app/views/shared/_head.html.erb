@@ -8,16 +8,18 @@
 <% end -%>
 <%= meta_data_tags %>
 
-<% if @site.code == "pwb" %>
-  <script type="text/javascript">
-  var pr_style_sheet="http://cdn.powerreviews.com/aux/10926/4478/css/express.css";
-  </script>
-  <script type="text/javascript" src="http://cdn.powerreviews.com/repos/10926/pr/pwr/engine/js/full.js"></script>
-<% else %>
-  <script type="text/javascript">
-  var pr_style_sheet="http://cdn.powerreviews.com/aux/10964/1570/css/express.css";
-  </script>
-  <script type="text/javascript" src="http://cdn.powerreviews.com/repos/10964/pr/pwr/engine/js/full.js"></script>
+<% unless request.ssl? %>
+  <% if @site.code == "pwb" %>
+    <script type="text/javascript">
+    var pr_style_sheet="http://cdn.powerreviews.com/aux/10926/4478/css/express.css";
+    </script>
+    <script type="text/javascript" src="http://cdn.powerreviews.com/repos/10926/pr/pwr/engine/js/full.js"></script>
+  <% else %>
+    <script type="text/javascript">
+    var pr_style_sheet="http://cdn.powerreviews.com/aux/10964/1570/css/express.css";
+    </script>
+    <script type="text/javascript" src="http://cdn.powerreviews.com/repos/10964/pr/pwr/engine/js/full.js"></script>
+  <% end %>
 <% end %>
 
 <%= yield :head %>
