@@ -406,11 +406,7 @@ class SiteExtension < Spree::Extension
           if bill_address.nil?
             self.bill_address = ship_address.clone
           else
-            if self.ship_address.updated_at < bill_address.updated_at
-              self.ship_address.attributes = bill_address.attributes.except("id", "updated_at", "created_at")
-            else
-              self.bill_address.attributes = ship_address.attributes.except("id", "updated_at", "created_at")
-            end
+            self.bill_address.attributes = ship_address.attributes.except("id", "updated_at", "created_at")
           end
         end
         true
@@ -569,17 +565,24 @@ class SiteExtension < Spree::Extension
       #Resets state ABBR values for QualifiedAddress changed states.
       def correct_state_values
         return unless params.has_key? :checkout
-        if params[:checkout].has_key?(:bill_address_attributes) && params[:checkout][:bill_address_attributes].has_key?(:state_id)
-          if params[:checkout][:bill_address_attributes][:state_id].size == 2
-            params[:checkout][:bill_address_attributes][:state_id] = State.find_by_abbr_and_country_id(params[:checkout][:bill_address_attributes][:state_id], params[:checkout][:bill_address_attributes][:country_id]).id
-          end
-        end
 
         if params[:checkout].has_key?(:ship_address_attributes) && params[:checkout][:ship_address_attributes].has_key?(:state_id)
           if params[:checkout][:ship_address_attributes][:state_id].size == 2
             params[:checkout][:ship_address_attributes][:state_id] = State.find_by_abbr_and_country_id(params[:checkout][:ship_address_attributes][:state_id], params[:checkout][:ship_address_attributes][:country_id]).id
           end
         end
+
+        #use_billing actually means use_shipping
+        if params[:checkout][:use_billing] == "1"
+          params[:checkout].delete :bill_address_attributes #don't need this as we clone (and might be missing values)
+        else
+          if params[:checkout].has_key?(:bill_address_attributes) && params[:checkout][:bill_address_attributes].has_key?(:state_id)
+            if params[:checkout][:bill_address_attributes][:state_id].size == 2
+              params[:checkout][:bill_address_attributes][:state_id] = State.find_by_abbr_and_country_id(params[:checkout][:bill_address_attributes][:state_id], params[:checkout][:bill_address_attributes][:country_id]).id
+            end
+          end
+        end
+
       end
 
       def next_step
@@ -646,11 +649,7 @@ class SiteExtension < Spree::Extension
         return if params[:step] == "address"
 
         unless @checkout.ship_address.valid?
-          @checkout.ship_address = current_user.ship_address if current_user.ship_address
-        end
-
-        unless @checkout.bill_address.valid?
-          @checkout.bill_address = current_user.bill_address if current_user.bill_address
+          @checkout.ship_address.attributes = current_user.ship_address.attributes.except("id", "updated_at", "created_at") if current_user.ship_address
         end
 
         #can't skip addressing if the checkout is not valid.
