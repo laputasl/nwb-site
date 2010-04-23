@@ -141,6 +141,43 @@ class SiteExtension < Spree::Extension
         checkout_complete
       end
 
+      def available_shipping_rates(zipcode, country_id)
+        return [] if zipcode.nil? && country_id.nil?
+
+        if !zipcode.blank?
+          addr = Address.new(:zipcode => zipcode, :country_id => 214, :state_name => "")
+        elsif !country_id.blank?
+          addr = Address.new(:zipcode => "", :country_id => country_id, :state_name => "")
+        end
+
+        return if addr.nil?
+        addr.save(false)
+        checkout.update_attribute(:ship_address_id, addr.id)
+
+        begin
+          rates = ShippingMethod.all_available(self).collect do |ship_method|
+            { :id => ship_method.id,
+              :name => ship_method.name,
+              :rate => ship_method.calculate_cost(self.checkout.shipment),
+              :position => ship_method.position }
+          end
+        rescue Spree::ShippingError => ship_error
+          flash[:error] = ship_error.to_s
+          rates = []
+        end
+
+        if rates.size > 0 && (checkout.shipping_method_id.nil? || !rates.map{|r| r[:id]}.include?(checkout.shipping_method_id))
+          # session[:shipping_method_id] = rates[0][:id]
+          # session[:shipping_method_rate] = rates[0][:rate]
+
+          checkout.enable_validation_group(:register)
+          checkout.update_attribute(:shipping_method_id, rates[0][:id])
+          self.update_totals!
+        end
+
+        rates
+      end
+
       private
       def restore_state
         # pop the resume / approve event so we can see what the event before that was
@@ -286,6 +323,8 @@ class SiteExtension < Spree::Extension
       update.before :check_for_removed_items
       update.after :recalculate_totals
 
+      ssl_allowed :update
+
       update do
         flash nil
         success.wants.html { redirect_to (@from_checkout ? edit_order_checkout_url(object, :step => "delivery")  : edit_order_url(object)) }
@@ -301,6 +340,8 @@ class SiteExtension < Spree::Extension
       end
 
       def calculate_shipping
+        load_object
+
         if params.key? :zipcode
           session[:zipcode] = params[:zipcode].to_i
           session[:country_id] = nil
@@ -309,7 +350,7 @@ class SiteExtension < Spree::Extension
           session[:zipcode] = nil
         end
 
-        rates = get_shipping_rates
+        rates = @order.available_shipping_rates(session[:zipcode], session[:country_id])
 
         render :json => rates.to_json
       end
@@ -361,18 +402,13 @@ class SiteExtension < Spree::Extension
 
       #need to reverse this (ie. bill_address is a copy of ship_address)
       def clone_billing_address
-
         if self.ship_address.nil?
           self.ship_address = bill_address.clone
         else
           if bill_address.nil?
             self.bill_address = ship_address.clone
           else
-            if self.ship_address.updated_at < bill_address.updated_at
-              self.ship_address.attributes = bill_address.attributes.except("id", "updated_at", "created_at")
-            else
-              self.bill_address.attributes = ship_address.attributes.except("id", "updated_at", "created_at")
-            end
+            self.bill_address.attributes = ship_address.attributes.except("id", "updated_at", "created_at")
           end
         end
         true
@@ -473,6 +509,7 @@ class SiteExtension < Spree::Extension
       layout 'checkouts'
 
       delivery.edit_hook << :load_available_payment_methods
+      address.edit_hook << :handle_express_users
 
       update.before :clear_payments_if_in_payment_state, :correct_state_values
 
@@ -481,9 +518,48 @@ class SiteExtension < Spree::Extension
       before_filter :get_exact_target_lists, :only => [:edit]
       before_filter :enforce_registration, :except => [:register, :set_shipping_method]
 
+      ssl_allowed :set_shipping_method
+
       # sets shipping medthod for checkout when using paypal payment option
       def set_shipping_method
         render :json => update_shipping_method
+      end
+
+      def update
+        load_object
+
+        # call the edit hooks for the current step in case we experience validation failure and need to edit again
+        edit_hooks
+        @checkout.enable_validation_group(@checkout.state.to_sym)
+        @prev_state = @checkout.state
+
+        before :update
+
+        begin
+          if @checkout.update_attributes object_params
+            update_hooks
+
+            force_shipping_method
+
+            @checkout.order.update_totals!
+            after :update
+            next_step
+            if @checkout.completed_at
+              return complete_checkout
+            end
+          else
+            after :update_fails
+            set_flash :update_fails
+          end
+        rescue Spree::GatewayError => ge
+          logger.debug("#{ge}:\n#{ge.backtrace.join("\n")}")
+          flash.now[:error] = t("unable_to_authorize_credit_card") + ": #{ge.message}"
+        rescue Spree::ShippingError => se #handle bad addresses / errors from ActiveShipping
+          logger.debug("#{se}:\n#{se.backtrace.join("\n")}")
+          flash.now[:error] = se.message
+        end
+
+        render 'edit'
       end
 
       private
@@ -530,23 +606,24 @@ class SiteExtension < Spree::Extension
       #Resets state ABBR values for QualifiedAddress changed states.
       def correct_state_values
         return unless params.has_key? :checkout
-        if params[:checkout].has_key?(:bill_address_attributes) && params[:checkout][:bill_address_attributes].has_key?(:state_id)
-          if params[:checkout][:bill_address_attributes][:state_id].size == 2
-            params[:checkout][:bill_address_attributes][:state_id] = State.find_by_abbr_and_country_id(params[:checkout][:bill_address_attributes][:state_id], params[:checkout][:bill_address_attributes][:country_id]).id
-          end
-        end
 
         if params[:checkout].has_key?(:ship_address_attributes) && params[:checkout][:ship_address_attributes].has_key?(:state_id)
           if params[:checkout][:ship_address_attributes][:state_id].size == 2
             params[:checkout][:ship_address_attributes][:state_id] = State.find_by_abbr_and_country_id(params[:checkout][:ship_address_attributes][:state_id], params[:checkout][:ship_address_attributes][:country_id]).id
           end
         end
-      end
 
-      #sorting by (and selecting) cheapest shipping method
-      def load_available_methods
-        @available_methods = rate_hash
-        @checkout.shipping_method_id ||= @available_methods.first[:id] unless @available_methods.empty?
+        #use_billing actually means use_shipping
+        if params[:checkout][:use_billing] == "1"
+          params[:checkout].delete :bill_address_attributes #don't need this as we clone (and might be missing values)
+        else
+          if params[:checkout].has_key?(:bill_address_attributes) && params[:checkout][:bill_address_attributes].has_key?(:state_id)
+            if params[:checkout][:bill_address_attributes][:state_id].size == 2
+              params[:checkout][:bill_address_attributes][:state_id] = State.find_by_abbr_and_country_id(params[:checkout][:bill_address_attributes][:state_id], params[:checkout][:bill_address_attributes][:country_id]).id
+            end
+          end
+        end
+
       end
 
       def next_step
@@ -592,6 +669,7 @@ class SiteExtension < Spree::Extension
 
       #returns rates sorted by :position
       def rate_hash
+
         begin
           rates = @checkout.shipping_methods.collect do |ship_method|
             { :id => ship_method.id,
@@ -604,6 +682,42 @@ class SiteExtension < Spree::Extension
         rescue Spree::ShippingError => ship_error
           flash[:error] = ship_error.to_s
           []
+        end
+      end
+
+      #allows registered users to skip address step.
+      def handle_express_users
+        return if params[:step] == "address" || current_user.nil?
+
+        unless @checkout.ship_address.valid?
+          @checkout.ship_address.attributes = current_user.ship_address.attributes.except("id", "updated_at", "created_at") if current_user.ship_address
+        end
+
+        force_shipping_method
+
+        #can't skip addressing if the checkout is not valid.
+        if @checkout.valid?
+          @checkout.enable_validation_group(:address)
+
+          @checkout.next
+          load_available_payment_methods
+          load_available_methods
+        else
+          @checkout.errors.clear
+        end
+      end
+
+      def force_shipping_method
+        #set default shippping method if none selected yet
+        if @checkout.shipping_method.nil? && @checkout.ship_address.valid?
+          available_shipping_methods = @checkout.shipping_methods
+
+          unless available_shipping_methods.empty?
+            @checkout.update_attribute(:shipping_method_id, available_shipping_methods[0].id)
+
+            session[:shipping_method_id] = available_shipping_methods[0].id
+            session[:shipping_method_rate] = @checkout.order.ship_total
+          end
         end
       end
     end

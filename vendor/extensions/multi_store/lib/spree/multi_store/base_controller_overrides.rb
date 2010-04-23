@@ -2,7 +2,12 @@ module Spree::MultiStore::BaseControllerOverrides
   def self.included(controller)
     controller.prepend_before_filter :set_layout, :load_global_taxons
     controller.helper :products, :taxons
+
+    unless ActionController::Base.consider_all_requests_local
+      controller.rescue_from Exception, :with => :render_error
+    end
   end
+
 
   private
 
@@ -27,45 +32,16 @@ module Spree::MultiStore::BaseControllerOverrides
 
   def load_global_taxons
     @categories = Taxonomy.find(:first, :conditions => {:store_id => @site.id, :name => "Category"})
-
-    rates = get_shipping_rates
   end
 
-  def get_shipping_rates
-    @shipping_calculator_rates = []
-    return @shipping_calculator_rates if session[:order_id].blank?
-    order = find_order
-
-    if !session[:zipcode].blank?
-      addr = Address.new(:zipcode => session[:zipcode], :country_id => 214, :state_name => "")
-    elsif !session[:country_id].blank?
-      addr = Address.new(:zipcode => "", :country_id => session[:country_id], :state_name => "")
+  def render_error(exception)
+    log_error(exception)
+    if request.path == "/"
+      #error on the homepage can't redirect to it.
+      render :file => "#{RAILS_ROOT}/public/500.html", :status => 500
+    else
+      flash[:error] = "We're sorry, but something went wrong."
+      redirect_to "/"
     end
-
-    return if addr.nil?
-
-    addr.save(false)
-    order.checkout.update_attribute(:ship_address_id, addr.id)
-
-    begin
-
-      rates = ShippingMethod.all_available(order).collect do |ship_method|
-        { :id => ship_method.id,
-          :name => ship_method.name,
-          :rate => ship_method.calculate_cost(order.checkout.shipment),
-          :position => ship_method.position }
-      end
-    rescue Spree::ShippingError => ship_error
-      flash[:error] = ship_error.to_s
-      rates = []
-    end
-
-    if rates.size > 0 && (order.checkout.shipping_method_id.nil? || !rates.map{|r| r[:id]}.include?(order.checkout.shipping_method_id))
-      session[:shipping_method_id] = rates[0][:id]
-      session[:shipping_method_rate] = rates[0][:rate]
-      order.checkout.update_attribute(:shipping_method_id, rates[0][:id])
-    end
-
-    @shipping_calculator_rates = rates
   end
 end

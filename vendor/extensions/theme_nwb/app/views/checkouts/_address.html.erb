@@ -26,6 +26,14 @@ div.inner input[type=text], div.inner select { width: 80%; }
         <%= ship_form.label :city, t(:city) %>
         <%= ship_form.text_field :city, :class => 'required' -%><span class="req">*</span>
       </p>
+      <p id="szip" class="field">
+        <%= ship_form.label :zipcode, t(:zip) %>
+        <%= ship_form.text_field :zipcode, :class => 'required' -%><span class="req">*</span>
+      </p>
+      <p id="scountry" class="field">
+        <%= ship_form.label :country_id, t(:country) %>
+        <span id="scountry"><%= ship_form.collection_select :country_id, @countries, :id, :name, {}, {:class => 'required'} %></span>
+      </p>
       <% if Spree::Config[:address_requires_state] %>
         <p class="field">
           <span id="sstate">
@@ -54,14 +62,6 @@ div.inner input[type=text], div.inner select { width: 80%; }
           <span class="req">*</span>
         </p>
       <% end %>
-      <p id="szip" class="field">
-        <%= ship_form.label :zipcode, t(:zip) %>
-        <%= ship_form.text_field :zipcode, :class => 'required' -%><span class="req">*</span>
-      </p>
-      <p id="scountry" class="field">
-        <%= ship_form.label :country_id, t(:country) %>
-        <span id="scountry"><%= ship_form.collection_select :country_id, @countries, :id, :name, {}, {:class => 'required'} %></span>
-      </p>
       <p id="sphone" class="field">
         <%= ship_form.label :phone, t(:phone) %>
         <%= ship_form.text_field :phone, :class => 'required' -%><span class="req">*</span>
@@ -110,6 +110,14 @@ div.inner input[type=text], div.inner select { width: 80%; }
         <%= bill_form.label :city %>
         <%= bill_form.text_field :city, :class => 'required' -%><span class="req">*</span>
       </p>
+      <p id="bzip" class="field">
+        <%= bill_form.label :zipcode, t(:zip) %>
+        <%= bill_form.text_field :zipcode, :class => 'required' -%><span class="req">*</span>
+      </p>
+      <p id="bcountry" class="field">
+        <%= bill_form.label :country_id, t(:country) %>
+        <span id="bcountry"><%= bill_form.collection_select :country_id, @countries, :id, :name, {}, {:class => 'required'} %></span>
+      </p>
       <% if Spree::Config[:address_requires_state] %>
         <p class="field">
           <span id="bstate">
@@ -138,14 +146,6 @@ div.inner input[type=text], div.inner select { width: 80%; }
           <span class="req">*</span>
         </p>
       <% end %>
-      <p id="bzip" class="field">
-        <%= bill_form.label :zipcode, t(:zip) %>
-        <%= bill_form.text_field :zipcode, :class => 'required' -%><span class="req">*</span>
-      </p>
-      <p id="bcountry" class="field">
-        <%= bill_form.label :country_id, t(:country) %>
-        <span id="bcountry"><%= bill_form.collection_select :country_id, @countries, :id, :name, {}, {:class => 'required'} %></span>
-      </p>
       <p id="bphone" class="field">
         <%= bill_form.label :phone %>
         <%= bill_form.text_field :phone, :class => 'required' -%><span class="req">*</span>

@@ -12,6 +12,7 @@ config/database.yml
 config/ey-cloud.yml
 db/*.sqlite3*
 db/schema.rb
+db/xapiandb
 doc/**/*
 log/*
 tmp/*
@@ -28,6 +29,7 @@ public/nwb
 public/ckeditor
 config/s3.yml
 public/MailFaxOrder.pdf
+public/__utm.gif
 db/xapiandb/
 
 # compiled less
@@ -37,5 +39,6 @@ vendor/extensions/theme_nwb/app/stylesheets/*.css
 mkmf.log
 
 vendor/extensions/importer/data/*
+
 
 

@@ -8,11 +8,11 @@
 
     <h2 id="checkout_title">
       <% if @current_action == "register" %>
-        Step 1 - Sign In or Register
+        Step 1 of 3 - Sign In or Register
       <% elsif @checkout.state == "address" %>
-        Step 2 - Shipping & Payment Information
+        Step 2 of 3 - Shipping & Payment Information
       <% elsif @checkout.state == "delivery" %>
-        Step 3 - Complete Order
+        Step 3 of 3 - Complete Order
       <% end %>
     </h2>
   <% else %>

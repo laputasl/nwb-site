@@ -43,5 +43,8 @@
   <br/>
   <%= link_to t('back_to_store'), products_path, :style => "clear:both;" %>
 </div>
-
-<%= render_snippet("#{@current_domain}-conversion-javascript") %>
+<% if params.has_key? :checkout_complete %>
+  <% session[:shipping_method_id] = nil %>
+  <% session[:shipping_method_rate] = nil %>
+  <%= render_snippet("#{@current_domain}-conversion-javascript") %>
+<% end %>
