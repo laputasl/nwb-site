@@ -46,23 +46,47 @@
 'Admin::BaseController':
   permission1:
     roles : [admin]
+'Admin::OverviewController':
+  permission1:
+    roles : [admin, csr]
+'Admin::OrdersController':
+  permission1:
+    roles : [admin, csr]
+'Admin::CheckoutsController':
+  permission1:
+    roles : [admin, csr]
+'Admin::AdjustmentsController':
+  permission1:
+    roles : [admin, csr]
+'Admin::PaymentsController':
+  permission1:
+    roles : [admin, csr]
+'Admin::ShipmentsController':
+  permission1:
+    roles : [admin, csr]
+'Admin::ReturnAuthorizationsController':
+  permission1:
+    roles : [admin, csr]
+'Admin::UsersController':
+  permission1:
+    roles : [admin, csr]
 # Users can only see their own accounts
 'UsersController':
   permission1:
     roles : [admin]
     options :
-      except : [new, create]   
+      except : [new, create]
       unless : "current_user and current_user.id == object.id"
 'OrdersController':
   permission1:
     # Users can only see their own orders
     roles : [admin]
     options :
-      except : [new, create, cvv]   
+      except : [new, create, cvv]
       unless : can_access?  #orders_controller may grant access based on presence of token, etc.
 'CheckoutsController':
   permission1:
     # Users can only see their own orders
     roles : [admin]
     options :
-      unless : can_access?  #checkouts_controller may grant access based on presence of token, etc.      
+      unless : can_access?  #checkouts_controller may grant access based on presence of token, etc.
