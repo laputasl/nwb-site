@@ -154,27 +154,28 @@ class SiteExtension < Spree::Extension
         addr.save(false)
         checkout.update_attribute(:ship_address_id, addr.id)
 
-        begin
-          rates = ShippingMethod.all_available(self).collect do |ship_method|
-            { :id => ship_method.id,
-              :name => ship_method.name,
-              :rate => ship_method.calculate_cost(self.checkout.shipment),
-              :position => ship_method.position }
-          end
-        rescue Spree::ShippingError => ship_error
-          flash[:error] = ship_error.to_s
-          rates = []
-        end
+        rates = shipping_rate_hash
 
-        if rates.size > 0 && (checkout.shipping_method_id.nil? || !rates.map{|r| r[:id]}.include?(checkout.shipping_method_id))
-          # session[:shipping_method_id] = rates[0][:id]
-          # session[:shipping_method_rate] = rates[0][:rate]
-
+        if rates.size > 0 && checkout.shipping_method_id.nil?
           checkout.enable_validation_group(:register)
           checkout.update_attribute(:shipping_method_id, rates[0][:id])
           self.update_totals!
         end
 
+        rates
+      end
+
+      def shipping_rate_hash
+
+        rates = ShippingMethod.all_available(self).collect do |ship_method|
+          { :id => ship_method.id,
+            :name => ship_method.name,
+            :rate => ship_method.calculate_cost(self.checkout.shipment),
+            :position => ship_method.position,
+            :can_be_free => ship_method.can_be_free }
+        end
+
+        rates.reject! { |rate| rate[:rate].to_f <= 0.0 && !rate[:can_be_free] }
         rates
       end
 
@@ -350,7 +351,12 @@ class SiteExtension < Spree::Extension
           session[:zipcode] = nil
         end
 
-        rates = @order.available_shipping_rates(session[:zipcode], session[:country_id])
+        begin
+          rates = @order.available_shipping_rates(session[:zipcode], session[:country_id])
+        rescue Spree::ShippingError => ship_error
+          flash[:error] = ship_error.to_s
+          rates = []
+        end
 
         render :json => rates.to_json
       end
@@ -557,6 +563,7 @@ class SiteExtension < Spree::Extension
         rescue Spree::ShippingError => se #handle bad addresses / errors from ActiveShipping
           logger.debug("#{se}:\n#{se.backtrace.join("\n")}")
           flash.now[:error] = se.message
+          @checkout.state = "address"
         end
 
         render 'edit'
@@ -653,8 +660,6 @@ class SiteExtension < Spree::Extension
         load_object
         object.enable_validation_group(:register)
 
-        @checkout.order.shipping_charges.each(&:destroy) #remove all old shipping charges
-
         if @checkout.update_attribute(:shipping_method_id, params[:shipping_method])
           @checkout.order.update_totals!
 
@@ -669,20 +674,7 @@ class SiteExtension < Spree::Extension
 
       #returns rates sorted by :position
       def rate_hash
-
-        begin
-          rates = @checkout.shipping_methods.collect do |ship_method|
-            { :id => ship_method.id,
-              :name => ship_method.name,
-              :rate => ship_method.calculate_cost(@order.checkout.shipment),
-              :position => ship_method.position }
-          end
-
-          rates.sort_by{ |r| r[:position] }
-        rescue Spree::ShippingError => ship_error
-          flash[:error] = ship_error.to_s
-          []
-        end
+        @checkout.order.shipping_rate_hash
       end
 
       #allows registered users to skip address step.
@@ -691,6 +683,11 @@ class SiteExtension < Spree::Extension
 
         unless @checkout.ship_address.valid?
           @checkout.ship_address.attributes = current_user.ship_address.attributes.except("id", "updated_at", "created_at") if current_user.ship_address
+        end
+
+        if @checkout.ship_address.changed?
+          @checkout.ship_address.save
+          @checkout.order.reload
         end
 
         force_shipping_method
@@ -708,12 +705,15 @@ class SiteExtension < Spree::Extension
       end
 
       def force_shipping_method
-        #set default shippping method if none selected yet
-        if @checkout.shipping_method.nil? && @checkout.ship_address.valid?
-          available_shipping_methods = @checkout.shipping_methods
+        #set default shippping method if none selected yet (or it's no longer valid)
+        available_shipping_methods = @checkout.shipping_methods
+
+        if (@checkout.shipping_method.nil? || !available_shipping_methods.map(&:id).include?(@checkout.shipping_method.id)) && @checkout.ship_address.valid?
 
           unless available_shipping_methods.empty?
             @checkout.update_attribute(:shipping_method_id, available_shipping_methods[0].id)
+            @checkout.order.shipping_charges.each(&:destroy) #remove all old shipping charges
+            @checkout.reload
 
             session[:shipping_method_id] = available_shipping_methods[0].id
             session[:shipping_method_rate] = @checkout.order.ship_total
