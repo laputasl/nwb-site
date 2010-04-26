@@ -30,7 +30,7 @@ class ThemeNwbExtension < Spree::Extension
           options = options.first || {}
           if product.images.empty?
             options.reverse_merge! :alt => product.name
-            image_tag "/#{@current_domain}/images/noimage/#{style}.png", options
+            image_tag "/#{@current_domain}/images/noimage/#{style}.jpg", options
           else
             image = product.images.first
             options.reverse_merge! :alt => image.alt.blank? ? product.name : image.alt
