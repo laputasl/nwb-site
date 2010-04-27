@@ -9,7 +9,14 @@
   <td>
     <%= item_form.hidden_field :variant_id %>
     <%= item_form.hidden_field :order_id %>
-    <%= mini_image variant %>
+
+    <% if variant.images.length == 0 %>
+      <% if variant.product.images.any? %>
+        <%= mini_image variant.product %>
+      <% end %>
+    <% else %>
+      <%= mini_image variant %>
+    <% end %>
   </td>
   <td>
     <%= link_to variant.product.name,  product_path(variant.product) %>
