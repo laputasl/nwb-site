@@ -559,7 +559,8 @@ class SiteExtension < Spree::Extension
           end
         rescue Spree::GatewayError => ge
           logger.debug("#{ge}:\n#{ge.backtrace.join("\n")}")
-          flash.now[:error] = t("unable_to_authorize_credit_card") + ": #{ge.message}"
+          flash.now[:error] =   %(<h4>Your credit card was not charged.</h4>
+                                  <p>It looks like there was an issue with the credit card information entered. Please try again... and make sure the information appears just like it does on your credit card.</p>)
         rescue Spree::ShippingError => se #handle bad addresses / errors from ActiveShipping
           logger.debug("#{se}:\n#{se.backtrace.join("\n")}")
           flash.now[:error] = se.message
