@@ -9,13 +9,7 @@
   <td>
     <%= item_form.hidden_field :variant_id %>
     <%= item_form.hidden_field :order_id %>
-    <% if variant.images.length == 0 %>
-      <% if variant.product.images.any? %>
-        <%= image_tag variant.product.images.first.attachment.url(:mini) %>
-      <% end %>
-    <% else %>
-      <%=  image_tag variant.images.first.attachment.url(:mini)   %>
-    <% end %>
+    <%= mini_image variant %>
   </td>
   <td>
     <%= link_to variant.product.name,  product_path(variant.product) %>

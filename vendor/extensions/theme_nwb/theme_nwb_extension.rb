@@ -34,7 +34,13 @@ class ThemeNwbExtension < Spree::Extension
           else
             image = product.images.first
             options.reverse_merge! :alt => image.alt.blank? ? product.name : image.alt
-            image_tag image.attachment.url(style), options
+
+            if request.ssl?
+              image_tag image.attachment.url(style).gsub("http://", "https://"), options
+            else
+              image_tag image.attachment.url(style), options
+            end
+
           end
         end
       end
