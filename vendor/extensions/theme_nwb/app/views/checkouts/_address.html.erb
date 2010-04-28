@@ -213,7 +213,7 @@ div.inner input[type=text], div.inner select { width: 80%; }
       }
     })
 
-    QadApi({timeout: 10,
+    QadApi({timeout: 5,
             key: <%= Spree::Config[:qualified_address_key] %>,
             busySubmit: false,
             autoClean: false,
@@ -225,7 +225,7 @@ div.inner input[type=text], div.inner select { width: 80%; }
               if($("select#checkout_ship_address_attributes_country_id").val()==214){
                 set_actual_value('ship', 'state');
               }
-              setTimeout($('#checkout_form_address').submit(), 250);
+              setTimeout("$('#checkout_form_address').submit()", 250);
               return false;
             } }, {},
       [{

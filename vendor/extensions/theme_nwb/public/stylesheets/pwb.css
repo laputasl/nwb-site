@@ -1244,6 +1244,13 @@ div#checkout .progress-steps {
   float: left;
 }
 .address_box .submit-warning { font-size: 9px; }
+.address_box label.error {
+  color: red;
+  display: block;
+  margin-top: -5px;
+  padding-left: 130px;
+  width: auto;
+}
 .checkout-totals {
   width: 100%;
   margin-bottom: 20px;
