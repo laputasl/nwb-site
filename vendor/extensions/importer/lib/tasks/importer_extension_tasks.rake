@@ -289,9 +289,9 @@ namespace :spree do
               order.ship_address = ship_address
 
               if code == "pwd"
-                shipment_number = "2_" + Array.new(6){rand(10)}.join
+                shipment_number = "2_" + row[0]
               else
-                shipment_number = "1_" + Array.new(6){rand(10)}.join
+                shipment_number = "1_" + row[0]
               end
 
               shipment = Shipment.new("number"  => shipment_number,
@@ -400,8 +400,87 @@ namespace :spree do
           end
         end
 
-        import_orders("nwb")
-        import_orders("pwb")
+        # import_orders("nwb")
+        # import_orders("pwb")
+
+
+        def import_users_and_addresses(code)
+          store = Store.find_by_code code
+
+
+
+          FasterCSV.foreach("#{RAILS_ROOT}/vendor/extensions/importer/data/#{code}-customers.csv" ) do |row|
+            if row[1].to_s.size < 4
+              puts "-----------Email address too short: #{row[1]}-------------------------------------"
+              next
+            end
+            user = User.find_by_email row[1]
+
+            if user.nil?
+              puts "NEW: #{row[1]}"
+              user = User.new(:store_id => store.id, :email => row[1])
+              user.firstname = row[4]
+              user.lastname = row[6]
+              user.company = row[7]
+              user.password = row[2]
+              user.password_confirmation = row[2]
+              user.login = row[1]
+
+              if code == "nwb"
+                user.nwb_legacy_id = row[0]
+              else
+                user.pwb_legacy_id = row[0]
+              end
+              user.save(false)
+            else
+              puts "Existing: #{row[1]}"
+            end
+
+            #Shipping Address
+            ship_state = State.find_by_abbr(row[11])
+            ship_country = Country.find_by_name(row[14])
+
+            ship_address = Address.new("firstname"          => row[4],
+                                              "lastname"    => row[6],
+                                              "address1"    => row[8],
+                                              "address2"    => row[9],
+                                              "city"        => row[10],
+                                              "state_id"    => ship_state.nil? ? nil : ship_state.id ,
+                                              "state_name"  => ship_state.nil? ? row[11] : nil,
+                                              "zipcode"     => row[12],
+                                              "country_id"  => ship_country.nil? ? nil : ship_country.id,
+                                              "phone"       => row[13])
+            ship_address.save(false)
+
+            user.ship_address = ship_address
+
+
+            #Billing Address
+            bill_state = State.find_by_abbr(row[22])
+            bill_country = Country.find_by_name(row[24])
+
+            bill_address = Address.new("firstname"          => row[16],
+                                              "lastname"    => row[18],
+                                              "address1"    => row[19],
+                                              "address2"    => row[20],
+                                              "city"        => row[21],
+                                              "state_id"    => bill_state.nil? ? nil : bill_state.id,
+                                              "state_name"  => bill_state.nil? ? row[22] : nil,
+                                              "zipcode"     => row[23],
+                                              "country_id"  => bill_country.nil? ? nil : bill_country.id,
+                                              "phone"       => row[13])
+            bill_address.save(false)
+
+            user.bill_address = bill_address
+
+            user.save(false)
+          end
+
+        end
+
+
+        import_users_and_addresses("nwb")
+        import_users_and_addresses("pwb")
 
       end
 
