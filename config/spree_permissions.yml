@@ -52,6 +52,9 @@
 'Admin::OrdersController':
   permission1:
     roles : [admin, csr]
+'Admin::LineItemsController':
+  permission1:
+    roles : [admin, csr]
 'Admin::CheckoutsController':
   permission1:
     roles : [admin, csr]
@@ -67,6 +70,13 @@
 'Admin::ReturnAuthorizationsController':
   permission1:
     roles : [admin, csr]
+'Admin::ProductsController':
+  permission1:
+    roles : [admin, csr]
+  permission2:
+    roles : [admin]
+    options :
+      except : [index]
 'Admin::UsersController':
   permission1:
     roles : [admin, csr]
