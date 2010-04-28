@@ -242,6 +242,11 @@ a:active { color: #1c3c80; }
 #shipping_calculator #calculator_country { width: 65%; }
 #shipping_calculator #calculator_progress { display: none; }
 #shipping_calculator #free_shipping_at { margin-top: 10px; }
+.cart_sub_total {
+  font-weight: bold;
+  text-align: right;
+  font-size: 100%;
+}
 .cart_total {
   font-weight: bold;
   text-align: right;

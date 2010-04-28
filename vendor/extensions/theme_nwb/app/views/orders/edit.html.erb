@@ -43,6 +43,19 @@
           </td>
           <td id="cart_preview_shipping" class="cart_total"><%= @order.checkout.shipping_method ? (@order.ship_total == 0 ? "Free" : number_to_currency(@order.ship_total)) : "-" %></td>
         </tr>
+        <% @order.charges.each do |charge| %>
+          <%- next if charge.is_a?(ShippingCharge) || charge.amount == 0 -%>
+          <tr>
+            <td colspan="7" class="cart_sub_total"><%= charge.description %></td>
+            <td class="cart_sub_total"><%= number_to_currency charge.amount -%></td>
+          </tr>
+        <% end %>
+        <% @order.credits.each do |credit| %>
+          <tr>
+            <td colspan="7" class="cart_sub_total"><%= credit.description %></td>
+            <td class="cart_sub_total"><%= number_to_currency credit.amount -%></td>
+          </tr>
+        <% end %>
         <tr>
           <td colspan="7" class="cart_total">Total (USD):</td>
           <td class="cart_total"><strong id="cart_preview_total"><%= number_to_currency @order.total %></strong></td>

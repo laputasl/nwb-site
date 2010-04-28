@@ -555,7 +555,7 @@ class SiteExtension < Spree::Extension
             @checkout.order.update_totals!
             after :update
 
-            next_step unless params[:checkout][:coupon_code]
+            next_step unless params[:checkout][:coupon_code] && @checkout.delivery?
 
             if @checkout.completed_at
               return complete_checkout
