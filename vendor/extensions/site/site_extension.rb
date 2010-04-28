@@ -823,7 +823,8 @@ class SiteExtension < Spree::Extension
         begin
           trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
-          external_key = (user.store.code == "nwb" ? "nwb-accountinfo" : "pwb-accountInfo")
+          external_key = Spree::Config["#{user.store.code.upcase}_ET_new_account"]
+
           result = trigger.deliver(user.email, external_key, {:First_Name => "Customer", :emailaddr => user.email})
         rescue ET::Error => error
           puts "Error sending ExactTarget triggered email"
@@ -841,7 +842,7 @@ class SiteExtension < Spree::Extension
           begin
             trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
-            external_key = (order.store.code == "nwb" ? "nwb-ordersecurity" : "pwb-custordersecurity")
+            external_key = Spree::Config["#{order.store.code.upcase}_ET_order_security"]
             result = trigger.deliver(order.checkout.email, external_key, { :First_Name => order.bill_address.firstname,
                                                                            :Last_name => order.bill_address.lastname})
           rescue ET::Error => error
@@ -855,7 +856,7 @@ class SiteExtension < Spree::Extension
         begin
           trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
-          external_key = (order.store.code == "nwb" ? "nwb-ordershipped" : "pwb-custordershipped ")
+          external_key = Spree::Config["#{order.store.code.upcase}_ET_order_shipped"]
           view = ActionView::Base.new(Spree::ExtensionLoader.view_paths)
           result = trigger.deliver(order.checkout.email, external_key, { :First_Name => order.bill_address.firstname,
                                                                          :Last_name => order.bill_address.lastname,
@@ -881,7 +882,7 @@ class SiteExtension < Spree::Extension
         from          Spree::Config[:mails_from]
         recipients    user.email
         sent_on       Time.now
-        body          :edit_password_reset_url => edit_password_reset_url(user.perishable_token), :user => user
+        body          :user => user
       end
     end
 

@@ -5,7 +5,8 @@ class SiteShipmentObserver < ActiveRecord::Observer
     begin
       trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
-      external_key = (shipment.order.store.code == "nwb" ? "nwb-orderexport" : "pwb-custorderexport")
+      external_key = Spree::Config["#{shipment.order.store.code.upcase}_ET_order_exported"]
+
       view = ActionView::Base.new(Spree::ExtensionLoader.view_paths)
       result = trigger.deliver(shipment.order.checkout.email, external_key, { :First_Name => shipment.order.bill_address.firstname,
                                                                               :Last_name => shipment.order.bill_address.lastname,

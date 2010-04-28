@@ -18,7 +18,7 @@
     </div>
     <p class="subtitle"><%= @product.subtitle_main %></p>
     <div class="sales_copy"><%= @product.sales_copy %></div>
-    <%= render_snippet("#nwb-ships-from-canada") if @product.taxons.exists?(:id => 9994) && country_id == 35%>
+    <%= render_snippet("nwb-ships-from-canada") if @product.taxons.exists?(:id => 9994) && country_id == 35%>
   </div>
   <div class="price">
     <!-- todo fix this -->
