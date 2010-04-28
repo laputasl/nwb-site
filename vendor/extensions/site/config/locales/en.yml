@@ -9,6 +9,7 @@ en:
   page_title: Page Title
   can_be_free: Can be free
   reship: Reship
+  new_order_completed: New order completed
   checkout_steps:
     # keys correspond to Checkout state names:
     delivery: Shipping and Payment
