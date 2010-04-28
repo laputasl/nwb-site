@@ -87,6 +87,7 @@ class SiteExtension < Spree::Extension
       xapit do |index|
         index.text :name, :weight => 10
         index.text :description, :subtitle_main, :sales_copy, :short_home, :ingredients
+        index.text :sku
         index.field :is_active, :taxon_ids
         index.facet :gender_property, "Gender"
         index.facet :brand_property, "Brand"
