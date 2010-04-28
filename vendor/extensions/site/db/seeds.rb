@@ -14,8 +14,8 @@ Spree::Config.set(:NWB_ET_order_received => "nwb-orderconfirm-new")
 Spree::Config.set(:PWB_ET_order_received => "pwb-custorderconfirm-new")
 Spree::Config.set(:NWB_ET_new_account => "nwb-accountinfo-new")
 Spree::Config.set(:PWB_ET_new_account => "pwb-accountInfo-new")
-Spree::Config.set(:NWB_ET_password_reset => "nwb-accountinfo-new")
-Spree::Config.set(:PWB_ET_password_reset => "pwb-accountInfo-new")
+Spree::Config.set(:NWB_ET_password_reset => "nwb-forgotpswrd-new")
+Spree::Config.set(:PWB_ET_password_reset => "pwb-forgotpswrd-new")
 
 #Spree::Config.set("searcher.spelling_suggestion"  => true)
 
