@@ -16,7 +16,7 @@ class GeoLocateExtension < Spree::Extension
     ApplicationHelper.module_eval do
 
       def country_from_ip(ip)
-        Country.find_by_iso(country_code_from_ip ip)
+        Country.find_by_iso(country_code_from_ip(ip))
       end
 
       def country_code_from_ip(ip)
@@ -31,7 +31,7 @@ class GeoLocateExtension < Spree::Extension
               IpMapping.create(:ip_address => ip, :iso => res)
               return res
             else
-              IpMapping.create(:ip_address => ip) if res.include? "IP_NOT_FOUND"
+              IpMapping.create(:ip_address => ip, :iso => "US") if res.include? "IP_NOT_FOUND"
               return nil
             end
           else
