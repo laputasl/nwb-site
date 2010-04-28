@@ -155,12 +155,13 @@ class SiteExtension < Spree::Extension
         checkout.update_attribute(:ship_address_id, addr.id)
 
         rates = shipping_rate_hash
+        checkout.enable_validation_group(:register)
 
         if rates.size > 0 && checkout.shipping_method_id.nil?
-          checkout.enable_validation_group(:register)
           checkout.update_attribute(:shipping_method_id, rates[0][:id])
-          self.update_totals!
         end
+
+        self.update_totals! #update totals are method maybe the same, but the rate could have changed.
 
         rates
       end
@@ -353,6 +354,9 @@ class SiteExtension < Spree::Extension
 
         begin
           rates = @order.available_shipping_rates(session[:zipcode], session[:country_id])
+
+          session[:shipping_method_id] = @order.checkout.shipping_method_id
+          session[:shipping_method_rate] = @order.shipping_charges.first.amount
         rescue Spree::ShippingError => ship_error
           flash[:error] = ship_error.to_s
           rates = []
