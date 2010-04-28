@@ -549,7 +549,9 @@ class SiteExtension < Spree::Extension
 
             @checkout.order.update_totals!
             after :update
-            next_step
+
+            next_step unless params[:checkout][:coupon_code]
+
             if @checkout.completed_at
               return complete_checkout
             end
@@ -591,7 +593,7 @@ class SiteExtension < Spree::Extension
 
       def object_params
         # For delivery (normally payment) step, filter checkout parameters to produce the expected nested attributes for a single payment and its source, discarding attributes for payment methods other than the one selected
-        if object.delivery?
+        if object.delivery? && params[:checkout].key?(:payments_attributes)
           if source_params = params.delete(:payment_source)[params[:checkout][:payments_attributes].first[:payment_method_id].underscore]
             params[:checkout][:payments_attributes].first[:source_attributes] = source_params
           end
