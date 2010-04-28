@@ -213,6 +213,7 @@ namespace :spree do
                               "completed_at"    => row[24],
                               "created_at"      => row[24],
                               "updated_at"      => row[21])
+              order.store = store
               order.save(false)
               order.checkout.state = "complete"
 
@@ -298,6 +299,7 @@ namespace :spree do
                                       "order"   => order,
                                       "address" => ship_address,
                                       "state"   => "pending")
+
               order.inventory_units.each do |unit|
                 shipment.inventory_units << unit
               end
@@ -358,9 +360,31 @@ namespace :spree do
 
               #force order state
               order.reload
-              order.update_attribute(:state, "paid")
-              order.shipment.state = "acknowledged"
-              order.shipment.ship!
+
+              if row[23].upcase == "NOT DONE"
+                shipment_state = "ready_to_ship"
+              elsif row[23].upcase == "NOT DONE"
+                shipment_state = "ready_to_ship"
+              elsif row[23].upcase == "SHIPPED"
+                shipment_state = "shipped"
+              elsif row[23].upcase == "ORDER_PROCESSED"
+                shipment_state = "acknowledged"
+              elsif row[23].upcase == "MARKEDFOREXPORT"
+                shipment_state = "ready_to_ship"
+              elsif row[23].upcase == "DONE"
+                shipment_state = "transmitted"
+              elsif row[23].upcase == "EXPORTED_UNKNOWN"
+                shipment_state = "transmitted"
+              end
+              puts "#{row[23].upcase} = #{shipment_state}"
+
+              shipment.update_attribute(:state, shipment_state)
+
+              if shipment_state == "shipped"
+                order.update_attribute(:state, "shipped")
+              else
+                order.update_attribute(:state, "paid")
+              end
 
               if row[37].to_f < 0
                 rma = ReturnAuthorization.new("order" => order, "amount" => row[37])
@@ -381,9 +405,8 @@ namespace :spree do
 
               order.comments.create(:title => "Import Comment", :comment => row[28])
 
-              order.update_attribute(:state, "legacy")
               order.reload
-              puts "Spree Total: #{number_to_currency(order.total)} NWB Total: #{number_to_currency(row[37])}" unless number_to_currency(order.total) == number_to_currency(row[37])
+              puts "#{order.number} - Spree Total: #{number_to_currency(order.total)} NWB Total: #{number_to_currency(row[37])}" unless order.total.to_f == row[37].to_f
 
             rescue Exception => e
               puts "ERROR Processing #{order_number}"
@@ -400,8 +423,8 @@ namespace :spree do
           end
         end
 
-        # import_orders("nwb")
-        # import_orders("pwb")
+        import_orders("nwb")
+        import_orders("pwb")
 
 
         def import_users_and_addresses(code)
@@ -478,9 +501,8 @@ namespace :spree do
 
         end
 
-
-        import_users_and_addresses("nwb")
-        import_users_and_addresses("pwb")
+        #import_users_and_addresses("nwb")
+        #import_users_and_addresses("pwb")
 
       end
 

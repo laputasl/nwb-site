@@ -720,8 +720,9 @@ class SiteExtension < Spree::Extension
 
           unless available_shipping_methods.empty?
             @checkout.update_attribute(:shipping_method_id, available_shipping_methods[0].id)
-            @checkout.order.shipping_charges.each(&:destroy) #remove all old shipping charges
             @checkout.reload
+            @order = @checkout.order
+            @order.update_totals!
 
             session[:shipping_method_id] = available_shipping_methods[0].id
             session[:shipping_method_rate] = @checkout.order.ship_total
