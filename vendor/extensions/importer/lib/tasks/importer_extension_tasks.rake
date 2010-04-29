@@ -188,7 +188,40 @@ namespace :spree do
 
             order_number = code == "pwb" ? "LP#{row[0]}" : "LN#{row[0]}"
             order = Order.find_by_number(order_number)
-            next unless order.nil?
+
+
+            unless order.nil?
+              if order.state != "legacy"
+                if row[23].upcase == "NOT DONE"
+                  shipment_state = "ready_to_ship"
+                elsif row[23].upcase == "NOT DONE"
+                  shipment_state = "ready_to_ship"
+                elsif row[23].upcase == "SHIPPED"
+                  shipment_state = "shipped"
+                elsif row[23].upcase == "ORDER_PROCESSED"
+                  shipment_state = "acknowledged"
+                elsif row[23].upcase == "MARKEDFOREXPORT"
+                  shipment_state = "ready_to_ship"
+                elsif row[23].upcase == "DONE"
+                  shipment_state = "transmitted"
+                elsif row[23].upcase == "EXPORTED_UNKNOWN"
+                  shipment_state = "transmitted"
+                end
+
+                shipment = order.shipment
+                shipment.update_attribute(:state, shipment_state) unless shipment.nil?
+
+                if shipment_state == "shipped"
+                  shipment.update_attribute(:tracking, row[34]) unless shipment.nil?
+                  order.update_attribute(:state, "shipped")
+                else
+                  order.update_attribute(:state, "paid")
+                end
+
+              end
+
+              next # don't process anymore
+            end
 
             begin
               if code == "nwb"
@@ -376,7 +409,7 @@ namespace :spree do
               elsif row[23].upcase == "EXPORTED_UNKNOWN"
                 shipment_state = "transmitted"
               end
-              puts "#{row[23].upcase} = #{shipment_state}"
+
 
               shipment.update_attribute(:state, shipment_state)
 
@@ -459,50 +492,54 @@ namespace :spree do
               puts "Existing: #{row[1]}"
             end
 
-            #Shipping Address
-            ship_state = State.find_by_abbr(row[11])
-            ship_country = Country.find_by_name(row[14])
+            if user.ship_address.nil?
+              #Shipping Address
+              ship_state = State.find_by_abbr(row[11])
+              ship_country = Country.find_by_name(row[14])
 
-            ship_address = Address.new("firstname"          => row[4],
-                                              "lastname"    => row[6],
-                                              "address1"    => row[8],
-                                              "address2"    => row[9],
-                                              "city"        => row[10],
-                                              "state_id"    => ship_state.nil? ? nil : ship_state.id ,
-                                              "state_name"  => ship_state.nil? ? row[11] : nil,
-                                              "zipcode"     => row[12],
-                                              "country_id"  => ship_country.nil? ? nil : ship_country.id,
-                                              "phone"       => row[13])
-            ship_address.save(false)
+              ship_address = Address.new("firstname"          => row[4],
+                                                "lastname"    => row[6],
+                                                "address1"    => row[8],
+                                                "address2"    => row[9],
+                                                "city"        => row[10],
+                                                "state_id"    => ship_state.nil? ? nil : ship_state.id ,
+                                                "state_name"  => ship_state.nil? ? row[11] : nil,
+                                                "zipcode"     => row[12],
+                                                "country_id"  => ship_country.nil? ? nil : ship_country.id,
+                                                "phone"       => row[13])
+              ship_address.save(false)
 
-            user.ship_address = ship_address
+              user.ship_address = ship_address
+            end
 
 
-            #Billing Address
-            bill_state = State.find_by_abbr(row[22])
-            bill_country = Country.find_by_name(row[24])
+            if user.bill_address.nil?
+              #Billing Address
+              bill_state = State.find_by_abbr(row[22])
+              bill_country = Country.find_by_name(row[24])
 
-            bill_address = Address.new("firstname"          => row[16],
-                                              "lastname"    => row[18],
-                                              "address1"    => row[19],
-                                              "address2"    => row[20],
-                                              "city"        => row[21],
-                                              "state_id"    => bill_state.nil? ? nil : bill_state.id,
-                                              "state_name"  => bill_state.nil? ? row[22] : nil,
-                                              "zipcode"     => row[23],
-                                              "country_id"  => bill_country.nil? ? nil : bill_country.id,
-                                              "phone"       => row[13])
-            bill_address.save(false)
+              bill_address = Address.new("firstname"          => row[16],
+                                                "lastname"    => row[18],
+                                                "address1"    => row[19],
+                                                "address2"    => row[20],
+                                                "city"        => row[21],
+                                                "state_id"    => bill_state.nil? ? nil : bill_state.id,
+                                                "state_name"  => bill_state.nil? ? row[22] : nil,
+                                                "zipcode"     => row[23],
+                                                "country_id"  => bill_country.nil? ? nil : bill_country.id,
+                                                "phone"       => row[13])
+              bill_address.save(false)
 
-            user.bill_address = bill_address
+              user.bill_address = bill_address
+            end
 
             user.save(false)
           end
 
         end
 
-        #import_users_and_addresses("nwb")
-        #import_users_and_addresses("pwb")
+        import_users_and_addresses("nwb")
+        import_users_and_addresses("pwb")
 
       end
 
