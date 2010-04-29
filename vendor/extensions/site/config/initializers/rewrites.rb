@@ -8,6 +8,10 @@ Refraction.configure do |req|
   domain_parts = req.env['SERVER_NAME'].split(".")
   domain_name = domain_parts.size == 3 ? domain_parts[1] : domain_parts[0]
 
+  if domain_parts.size == 2
+    req.permanent! create_301_url("#{req.scheme}://www.#{req.http_host}#{req.path}", req)
+  end
+
   if domain_name == "naturalwellbeing"
     if req.path =~ /.cfm\z/
       case req.path
