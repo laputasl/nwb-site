@@ -40,6 +40,7 @@ Spree::Initializer.run do |config|
   config.gem 'state_machine', :lib => 'state_machine', :version => '0.8.0'
   config.gem "faker", :version => '0.3.1'
   config.gem 'paperclip', :version => '>=2.3.1.1'
+  config.gem 'refraction', :version => '0.2.0'
 
   # Only load the plugins named here, in the order given. By default, all plugins
   # in vendor/plugins are loaded in alphabetical order.
@@ -52,7 +53,7 @@ Spree::Initializer.run do |config|
   # yourself, this is an optional Spree file. For example:
   # SPREE_EXTENSIONS_LOAD_ORDER = [:theme_default, :all, :site]
   # For more details see http://railsdog.lighthouseapp.com/projects/31096/tickets/595
-  
+
   # Add additional load paths for your own custom dirs
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
 
