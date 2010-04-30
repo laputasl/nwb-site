@@ -880,15 +880,34 @@ class SiteExtension < Spree::Extension
       belongs_to :store
 
       attr_accessible :store_id
+
+      def deliver_password_reset_instructions!(current_domain)
+        reset_perishable_token!
+        UserMailer.deliver_password_reset_instructions(self, current_domain)
+      end
     end
 
     UserMailer.class_eval do
-      def password_reset_instructions(user)
-        subject       Spree::Config[:site_name] + ' ' + I18n.t("password_reset_instructions")
-        from          Spree::Config[:mails_from]
-        recipients    user.email
-        sent_on       Time.now
-        body          :user => user
+      def password_reset_instructions(user, current_domain)
+        subject         Spree::Config[:site_name] + ' ' + I18n.t("password_reset_instructions")
+        from            Spree::Config[:mails_from]
+        recipients      user.email
+        sent_on         Time.now
+        body            :user => user, :current_domain => current_domain
+      end
+    end
+
+    PasswordResetsController.class_eval do
+      def create
+        @user = User.find_by_email(params[:email])
+        if @user
+          @user.deliver_password_reset_instructions! @current_domain
+          flash[:notice] = t("password_reset_instructions_are_mailed")
+          redirect_to root_url
+        else
+          flash[:error] = t("no_user_found")
+          render :action => :new
+        end
       end
     end
 
