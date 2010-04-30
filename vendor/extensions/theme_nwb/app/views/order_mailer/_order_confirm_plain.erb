@@ -1,7 +1,15 @@
 Here are the details of your order received on <%= order.completed_at.strftime("%B %d %Y at %I:%M %p") %>.
 
 Your order number is <%= order.number %> Please keep it for reference if you speak to a customer service  representative.
+<% if order.store.code == "nwb" %>
+Click on the link below to login to your account and to check your order status.
 
+https://www.naturalwellbeing.com/orders/<%= order.number %>
+<% else %>
+Click on the link below to login to your account and to check your order status.
+
+https://www.petwellbeing.com/orders/<%= order.number %>
+<% end %>
 Your <%= order.store.name %> order includes the following item(s):
 
 <%= render "order_details_plain", :order => order %>
