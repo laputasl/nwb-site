@@ -147,7 +147,7 @@ class SiteExtension < Spree::Extension
 
         if !zipcode.blank?
           addr = Address.new(:zipcode => zipcode, :country_id => 214, :state_name => "")
-        elsif !country_id.blank?
+        elsif !country_id.blank? && country_id != 0
           addr = Address.new(:zipcode => "", :country_id => country_id, :state_name => "")
         end
 
