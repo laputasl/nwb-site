@@ -40,10 +40,22 @@ class SiteExtension < Spree::Extension
       private
       #prevents pwb products from appearing on nwb (and vice versa)
       def can_show_product
-       if (@product.store.nil? || (@product.store.code != @site.code)) || (RAILS_ENV == "production" && params[:id].is_integer?)
-         render :file => "public/404.html", :status => 404
-       end
+        if RAILS_ENV == "production" && params[:id].is_integer?
+          render :file => "public/404.html", :status => 404
+        elsif (@product.store.nil? || (@product.store.code != @site.code))
 
+          if ActionController::Base.relative_url_root.blank?
+            if @product.store.code == "pwb"
+              redirect_to "/pets/products/#{@product.permalink}"
+            else
+              redirect_to "/people/products/#{@product.permalink}"
+            end
+
+          else
+            redirect_to "/products/#{@product.permalink}" #not the same as product_url as we want to drop the relative_url_root
+          end
+
+        end
       end
 
       #custom regex above to match SEO short urls (plus need to prepend / below for taxon find)

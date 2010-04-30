@@ -1,8 +1,7 @@
 <li class="<%= products.index(product) < 2 ? "" : "border" %>">
-  <%- url = product.store.code == @current_domain ? product_url(product) : "/pets#{product_url(product, :only_path => true)}" -%>
-  <%= link_to small_image(product, {:style => "max-width:70px;"}), url, {:class => "photo"} %>
+  <%= link_to small_image(product, {:style => "max-width:70px;"}), product, {:class => "photo"} %>
   <div class="info">
-    <h2><%= link_to product.name, url, :title => product.name %></h2>
+    <h2><%= link_to product.name, product, :title => product.name %></h2>
     <p class="itemNum">Item # <%= product.sku %></p>
     <p class="description"><%= strip_tags(is_home ? product.short_home : product.short_category) %></p>
     <div class="rating">
