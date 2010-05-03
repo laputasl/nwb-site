@@ -14,7 +14,6 @@
   <table id="cart-detail">
     <%= render "form", :checkout => false %>
     <% unless @order.line_items.empty? %>
-        <% @shipping_calculator_rates = @order.available_shipping_rates(session[:zipcode], session[:country_id]) %>
         <tr class="border">
           <td colspan="7" id="shipping_td">
             <strong>Shipping Options</strong>
@@ -33,8 +32,8 @@
                 <%= image_submit_tag "/#{@current_domain}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
               </div>
               <%= image_tag "/#{@current_domain}/images/verifying.gif", {:id => "calculator_progress", :style => "float:left;margin:4px;"} %>
-              <p id="calculator_methods" style="float:left;display:<%= @shipping_calculator_rates.empty? ? "none" : "block" %>;">&nbsp;Select Shipping:&nbsp;
-                <%= select_tag :calculator_available_methods, options_for_select(@shipping_calculator_rates.map{ |r| ["#{r[:name]} - #{number_to_currency(r[:rate])}", r[:id]]}, session[:shipping_method_id] ), :style => "width:200px;" %>
+              <p id="calculator_methods" style="float:left;display:none;" %>&nbsp;Select Shipping:&nbsp;
+                <%= select_tag :calculator_available_methods, [], :style => "width:200px;" %>
               </p>
 
               <p style="clear:both;padding-top:6px;">Estimated to ship: <strong><%= estimate_shipping_day %></strong></p>

@@ -31,7 +31,6 @@
   </table>
   <p><a href="/pwb/shipping" title="Free Same Day Shipping at <%= number_to_currency Spree::Config.get("#{@current_domain}_free_shipping_at") %>">Free Same Day Shipping at <%= number_to_currency Spree::Config.get("#{@current_domain}_free_shipping_at") %></a></p>
   <% unless order.nil? || @controller.controller_name == "orders" %>
-    <% @shipping_calculator_rates = order.available_shipping_rates(session[:zipcode], session[:country_id]) %>
     <h3><%= link_to "Shipping Calculator", cart_path %></h3>
     <div id="shipping_calculator">
       <p>
@@ -46,11 +45,9 @@
         <%= select_tag :calculator_country, options_for_select(Checkout.countries.sort.map{|c| [c.name, c.id]}.reject{|c| c[1] == 214}, session[:country_id] ) %>
         <%= image_submit_tag "/#{@current_domain}/images/button_enter.gif", {:style => "vertical-align:top;"} %><br />
       </div>
-      <p id="calculator_methods" style="display:<%= @shipping_calculator_rates.empty? ? "none" : "block" %>;">
+      <p id="calculator_methods" style="display:none;" %>
         Select Shipping Method
-
-        <%= select_tag :calculator_available_methods, options_for_select(@shipping_calculator_rates.map{ |r| ["#{r[:name]} - #{number_to_currency(r[:rate])}", r[:id]]}, session[:shipping_method_id] ) %>
-
+        <%= select_tag :calculator_available_methods, [] %>
       </p>
       <%= image_tag "/#{@current_domain}/images/verifying.gif", {:id => "calculator_progress"} %>
     </div>
