@@ -572,6 +572,8 @@ class SiteExtension < Spree::Extension
             if @checkout.completed_at
               return complete_checkout
             end
+            #force reload of order so coupon difference will appear
+            @order.reload
           else
             after :update_fails
             set_flash :update_fails
