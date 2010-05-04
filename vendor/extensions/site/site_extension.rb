@@ -481,11 +481,13 @@ class SiteExtension < Spree::Extension
 
         base_scope = @cached_product_group ? @cached_product_group.products.active : Product.active
         base_scope = base_scope.on_hand unless Spree::Config[:show_zero_stock_products]
+        base_scope = base_scope.scoped(:include => [:images, {:master => :volume_prices}])
+
         @products_scope = @product_group.apply_on(base_scope)
 
         curr_page = Spree::Config.searcher.manage_pagination ? params[:page] : 1
+
         @products = @products_scope.uniq.paginate({
-            :include  => [:images, :master],
             :per_page => per_page,
             :page     => curr_page
           })
