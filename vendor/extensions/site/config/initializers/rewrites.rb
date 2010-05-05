@@ -144,7 +144,24 @@ Refraction.configure do |req|
          when "/static/textadvertising.cfm" ; req.permanent! create_301_url("/", req)
          when "/static/link_directory.cfm" ; req.permanent! create_301_url("/", req)
          when "/static/form_add_link.cfm" ; req.permanent! create_301_url("/", req)
-
+         when "/reviews/hair-essentials-works.cfm" ; req.permanent! create_301_url("/sl/reviews/hair-essentials-works.html", req)
+         when "/reviews/trilex-works.cfm" ; req.permanent! create_301_url("/sl/reviews/trilex-works.html", req)
+         when "/blog/2009/10/naturalwellbeing-coupons-discounts-and.cfm" ; req.permanent! create_301_url("/blog/2009/10/naturalwellbeing-coupons-discounts-and-promotions.cfm", req)
+         when "/maca-p237.cfm" ; req.permanent! create_301_url("/products/maca", req)
+         when "/psyllium-husks-p245.cfm" ; req.permanent! create_301_url("/products/psyllium-husks", req)
+         when "/nettles-p243.cfm" ; req.permanent! create_301_url("/products/nettles", req)
+         when "/milk-thistle-p238.cfm" ; req.permanent! create_301_url("/products/milk-thistle", req)
+         when "/omega-3-6-9-p250.cfm" ; req.permanent! create_301_url("/products/omega-3-6-9", req)
+         when "/cordless-epilator-p225.cfm" ; req.permanent! create_301_url("/", req)
+         when "/coq10-red-yeast-extract-p254.cfm" ; req.permanent! create_301_url("/products/coq10-red-yeast-extract", req)
+         when "/hair-removal-epilators-p226.cfm" ; req.permanent! create_301_url("/", req)
+         when "/calcium-magnesium-with-zinc-and-vitamin-d-p255.cfm" ; req.permanent! create_301_url("/products/calcium-magnesium-with-zinc-and-vitamin-d", req)
+         when "/electrolysis-hair-removal-system-p173.cfm" ; req.permanent! create_301_url("/", req)
+         when "/oil-of-oregano-p244.cfm" ; req.permanent! create_301_url("/products/oil-of-oregano", req)
+         when "/echinacea-goldenseal-p236.cfm" ; req.permanent! create_301_url("/products/echinacea-goldenseal", req)
+         when "/antioxidant-complex-p251.cfm" ; req.permanent! create_301_url("/products/antioxidant-complex", req)
+         when "/clio-sexy-shine-lips-p219.cfm" ; req.permanent! create_301_url("/", req)
+         when "/double-strength-probiotic-complex-with-acidophilus-p253.cfm" ; req.permanent! create_301_url("/products/double-strength-probiotic-complex-with-acidophilus", req)
       end
 
     end
@@ -202,7 +219,17 @@ Refraction.configure do |req|
          when "/Zukes-c2b6.cfm" ; req.permanent! create_301_url("/b/zukes/", req)
          when "/static/form_add_link.cfm" ; req.permanent! create_301_url("/", req)
          when "/static/link_directory.cfm" ; req.permanent! create_301_url("/", req)
-         when "/static/textadvertising.cfm" ; req.permanent! create_301_url("/", req)
+         when "/static/textadvertising.cfm" ; req.permanent! create_301_url("/", req)           
+         when "/articles/2009/01/petwellbeing-discounts-coupons-and.cfm" ; req.permanent! create_301_url("/blog/2009/01/petwellbeing-coupons-discounts-and-promotions.cfm", req)
+         when "/canine_respiratory_aid_p20.cfm" ; req.permanent! create_301_url("/products/dog-cough-medicine", req)
+         when "/canine_mellit_p11.cfm" ; req.permanent! create_301_url("/products/dog-diabetes", req)
+         when "/feline_plantaeris_p45.cfm" ; req.permanent! create_301_url("/products/cat-diarrhea", req)
+         when "/maris-for-canines-p115.cfm" ; req.permanent! create_301_url("/products/maris-for-canines", req)
+         when "/canine_inulin_pk_p8.cfm" ; req.permanent! create_301_url("/products/inulin-pk-dog-worms", req)
+         when "/canine_plantaeris_p18.cfm" ; req.permanent! create_301_url("/products/dog-diarrhea", req)
+         when "/hemp-dog-collars-medium-p42.cfm" ; req.permanent! create_301_url("/", req)
+         when "/cat_supplies_c2.cfm" ; req.permanent! create_301_url("/c/cat-products", req)
+         when "/hemp-dog-collars-medium-p42.cfm" ; req.permanent! create_301_url("/", req)         
       end
 
     end
