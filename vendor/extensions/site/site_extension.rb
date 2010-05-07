@@ -342,7 +342,7 @@ class SiteExtension < Spree::Extension
 
       update do
         flash nil
-        success.wants.html { redirect_to (@from_checkout ? edit_order_checkout_url(object, :step => "delivery")  : edit_order_url(object)) }
+        success.wants.html { redirect_to(@from_checkout ? edit_order_checkout_url(object, :step => "delivery")  : edit_order_url(object)) }
         failure.wants.html { render :template => "orders/edit" }
       end
 
