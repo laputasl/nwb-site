@@ -148,6 +148,7 @@ class SiteExtension < Spree::Extension
     Order.class_eval do
       include ActionView::Helpers::NumberHelper
       belongs_to :store
+      has_many :reminder_messages, :as => :remindable
 
       def allow_pay?
         return false if suspicious_order?
@@ -1109,6 +1110,10 @@ class SiteExtension < Spree::Extension
       def object
         @object ||= end_of_association_chain.find_by_number(params[:id]) if params[:id]
       end
+    end
+
+    LineItem.class_eval do
+      has_many :reminder_messages, :as => :remindable
     end
  end
 

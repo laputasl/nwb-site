@@ -25,16 +25,17 @@
 require 'net/https'
 require 'uri'
 require 'erb'
+include ERB::Util
 
 module ET
   class Client
     attr_reader :username, :password, :headers
     include ET::Renderable
-    
+
     #  Initializes a new ET::Client object
-    #  
+    #
     #   Usaage:
-    #    
+    #
     #     client = ET::Client.new('tester','tester11', {:service_url => 'http://127.0.0.1:99999/test/', :use_ssl => false})
     #     client.status
     #     => "Running"
@@ -53,13 +54,13 @@ module ET
         'Content-Type' => 'application/x-www-form-urlencoded'
       }
     end
-    
+
     # Boolean value of whether the service is running or not currently
     def live?
       @current_status ||= status
       @current_status == 'Running'
     end
-    
+
     # Returns the string value from the ExactTarget API ping method. ("Running" when the system is operational)
     def status
       response = send do|io|
@@ -69,7 +70,7 @@ module ET
       doc = Hpricot.XML( response.read_body )
       @current_status = doc.at("Ping").inner_html
     end
-    
+
     # usage:
     #   send do|io|
     #     io << 'more xml'
@@ -78,7 +79,21 @@ module ET
       @system = ""
       yield @system
 
-      result = 'qf=xml&xml=' + render_template( 'auth' )
+      data = ""
+      xml = Builder::XmlMarkup.new(:target => data, :indent => 2)
+      xml.instruct!
+
+      xml.exacttarget do |x|
+        x.authorization do
+          x.username @username
+          x.password @password
+        end
+        x << @system
+      end
+
+      data_encoded = url_encode(data)
+
+      result = 'qf=xml&xml=' + data_encoded
 
       @url.post( @uri.path, result, @headers.merge('Content-length' => result.length.to_s) )
     end
