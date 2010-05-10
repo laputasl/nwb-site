@@ -38,9 +38,14 @@ class ExactTargetExtension < Spree::Extension
       def self.method_missing(method_symbol, *parameters) #:nodoc:
         if match = matches_dynamic_method?(method_symbol)
           if match[1] == 'deliver'
-            mailer = new(match[2], *parameters)
-            variables = YAML::load(mailer.body)
-            external_key = variables.delete "external_key"
+            begin
+              mailer = new(match[2], *parameters)
+              variables = YAML::load(mailer.body)
+              external_key = variables.delete "external_key"
+            rescue => exception
+              logger.error "Error parsing ExactTarget variables for triggered email"
+              logger.error exception.to_yaml
+            end
 
             unless external_key.nil?
               begin
