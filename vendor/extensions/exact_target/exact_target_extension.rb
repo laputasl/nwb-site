@@ -49,8 +49,9 @@ class ExactTargetExtension < Spree::Extension
 
             unless external_key.nil?
               begin
-                trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-                result = trigger.deliver(mailer.mail.to, external_key, variables)
+                mailer.mail.to.each do |email|
+                  Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), email, external_key, variables)
+                end
               rescue ET::Error => error
                 logger.error "Error sending ExactTarget triggered email"
                 logger.error error.to_yaml

@@ -2,7 +2,6 @@
 def product_review(reminder, report, count)
   report << "\nProduct Review Request(s):"
   view = ActionView::Base.new(Spree::ExtensionLoader.view_paths)
-  trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
   orders = Order.find(:all, :include => {:line_items => [{:variant => :product }, :reminder_messages], :user => {}, :store => {} },
                       :joins => "left outer join reminder_messages on orders.id = reminder_messages.remindable_id and reminder_messages.remindable_type = 'Order'and reminder_messages.reminder_id = #{reminder.id}" ,
@@ -36,9 +35,11 @@ def product_review(reminder, report, count)
       end
 
       external_key = Spree::Config["#{order.store.code.upcase}_ET_product_review"]
-      result = trigger.deliver(email, external_key, { :First_Name => order.bill_address.firstname,
-                                                      :SENDTIME__CONTENT1 => view.render("order_mailer/product_review_plain", :products => products, :store => order.store),
-                                                      :SENDTIME__CONTENT2 => view.render("order_mailer/product_review_html", :products => products, :store => order.store)})
+      variables    = {:First_Name => order.bill_address.firstname,
+                      :SENDTIME__CONTENT1 => view.render("order_mailer/product_review_plain", :products => products, :store => order.store),
+                      :SENDTIME__CONTENT2 => view.render("order_mailer/product_review_html", :products => products, :store => order.store)}
+
+      Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), email, external_key, variables)
 
       ReminderMessage.create(:remindable => order, :reminder => reminder, :user => user)
     rescue ET::Error => error
@@ -54,7 +55,6 @@ end
 def reorder_alert(reminder, report, count)
   report << "\nProduct Reorder Alert(s):"
   view = ActionView::Base.new(Spree::ExtensionLoader.view_paths)
-  trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
 
   orders = Order.find(:all, :include => {:line_items => [{:variant => :product }, :reminder_messages], :user => {}, :store => {} },
                       :joins => "inner join line_items on line_items.order_id = orders.id left outer join reminder_messages on line_items.id = reminder_messages.remindable_id and reminder_messages.remindable_type = 'LineItem' and reminder_messages.reminder_id = #{reminder.id}" ,
@@ -100,9 +100,12 @@ def reorder_alert(reminder, report, count)
         end
 
         external_key = Spree::Config["#{order.store.code.upcase}_ET_reorder_alert"]
-        result = trigger.deliver(email, external_key, { :First_Name => order.bill_address.firstname,
-                                                        :SENDTIME__CONTENT1 => view.render("order_mailer/reorder_alert_plain", :products => products, :store => order.store),
-                                                        :SENDTIME__CONTENT2 => view.render("order_mailer/reorder_alert_html", :products => products, :store => order.store)})
+        variables    = {:First_Name => order.bill_address.firstname,
+                        :SENDTIME__CONTENT1 => view.render("order_mailer/reorder_alert_plain", :products => products, :store => order.store),
+                        :SENDTIME__CONTENT2 => view.render("order_mailer/reorder_alert_html", :products => products, :store => order.store)}
+
+        Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), email, external_key, variables)
+
       rescue ET::Error => error
         report << "\n#{order.number} FAILED"
         report << error.to_yaml
@@ -129,7 +132,7 @@ Reminder.all.each do |reminder|
 end
 
 #send reports to operations
-trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-result = trigger.deliver("brian@railsdog.com", "nwb-operational", { :SENDTIME__CONTENT1 => "Reminder Emails Report", :SENDTIME__CONTENT2 => report})
-result = trigger.deliver("operations@naturalwellbeing.com", "nwb-operational", { :SENDTIME__CONTENT1 => "Reminder Emails Report", :SENDTIME__CONTENT2 => report})
+Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), "brian@railsdog.com", "nwb-operational", { :SENDTIME__CONTENT1 => "Reminder Emails Report", :SENDTIME__CONTENT2 => report})
+Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), "operations@naturalwellbeing.com", "nwb-operational", { :SENDTIME__CONTENT1 => "Reminder Emails Report", :SENDTIME__CONTENT2 => report})
+
 
