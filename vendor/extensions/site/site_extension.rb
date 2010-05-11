@@ -762,59 +762,37 @@ class SiteExtension < Spree::Extension
           list = autosubscribe_list(user.store)
         end
 
-
-        if list.nil?
-          subscriber_id = -1
-        else
-          begin
-            subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-
-            if user.is_a? String
-              subscriber_id = subscriber.add(user, list.list_id)
-            else
-              subscriber_id = subscriber.add(user.email, list.list_id, {:Customer_ID => user.id, :Customer_ID_NWB => user.id, :Customer_ID_PWB => user.id})
-            end
-            user.exact_target_lists << list
-            user.save!
-          rescue
-            subscriber_id = -1
-          end
-        end
-
-        unless user.is_a? String
-          user.exact_target_subscriber_id = subscriber_id
-          user.save!
-        end
+        subscribe_to_list(user, list)
       end
 
       #override as we subscribe during checkout (not login/register)
       def update_exact_target_lists
         return unless params.key? :exact_target_list
 
-        @user = @checkout.order.user
+        @user = @checkout.order.user if @user.nil? && !@checkout.nil?
 
         params[:exact_target_list].each do |id, subscribe|
 
           list = ExactTargetList.find(id)
 
-          if @user.nil? #guest checkout
+          if @user.nil? && !@checkout.nil? #guest checkout
             if subscribe == "true"
               #subscribe
-              subscribe_to_list(@checkout.email, list.list_id)
+              subscribe_to_list(@checkout.email, list)
             else
               #unsubscribe
-              unsubscribe_from_list(@checkout.email, list.list_id)
+              unsubscribe_from_list(@checkout.email, list)
             end
           else #normal checkout
             if subscribe == "true"
               #subscribe
               unless @user.exact_target_lists.include? list
-                @user.exact_target_lists << list if subscribe_to_list(@user, list.list_id)
+                subscribe_to_list(@user, list)
               end
             else
               #unsubscribe
               if @user.exact_target_lists.include? list
-                @user.exact_target_lists.delete(list) if unsubscribe_from_list(@user, list.list_id)
+                unsubscribe_from_list(@user, list)
               end
             end
           end
@@ -844,11 +822,10 @@ class SiteExtension < Spree::Extension
 
         #send account info email
         begin
-          trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-
           external_key = Spree::Config["#{user.store.code.upcase}_ET_new_account"]
+          variables = {:First_Name => "Customer", :emailaddr => user.email}
+          Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), user.email, external_key, variables)
 
-          result = trigger.deliver(user.email, external_key, {:First_Name => "Customer", :emailaddr => user.email})
         rescue ET::Error => error
           puts "Error sending ExactTarget triggered email"
           puts error.to_yaml
@@ -863,11 +840,10 @@ class SiteExtension < Spree::Extension
 
         if order.payments.any? {|payment| payment.txns.any? { |txn| !avs.include?(txn.avs_response) } }
           begin
-            trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-
             external_key = Spree::Config["#{order.store.code.upcase}_ET_order_security"]
-            result = trigger.deliver(order.checkout.email, external_key, { :First_Name => order.bill_address.firstname,
-                                                                           :Last_name => order.bill_address.lastname})
+            variables =  {:First_Name => order.bill_address.firstname, :Last_name => order.bill_address.lastname}
+            Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), order.checkout.email, external_key, variables)
+
           rescue ET::Error => error
             puts "Error sending ExactTarget triggered email"
             puts error.to_yaml
@@ -877,14 +853,14 @@ class SiteExtension < Spree::Extension
 
       def after_ship(order, transition)
         begin
-          trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-
           external_key = Spree::Config["#{order.store.code.upcase}_ET_order_shipped"]
           view = ActionView::Base.new(Spree::ExtensionLoader.view_paths)
-          result = trigger.deliver(order.checkout.email, external_key, { :First_Name => order.bill_address.firstname,
-                                                                         :Last_name => order.bill_address.lastname,
-                                                                         :SENDTIME__CONTENT1 => view.render("order_mailer/order_shipped_plain", :order => order),
-                                                                         :SENDTIME__CONTENT2 => view.render("order_mailer/order_shipped_html", :order => order)})
+          variables = {:First_Name => order.bill_address.firstname,
+                       :Last_name => order.bill_address.lastname,
+                       :SENDTIME__CONTENT1 => view.render("order_mailer/order_shipped_plain", :order => order),
+                       :SENDTIME__CONTENT2 => view.render("order_mailer/order_shipped_html", :order => order)}
+
+          Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), order.checkout.email, external_key, variables)
        rescue ET::Error => error
          puts "Error sending ExactTarget triggered email"
          puts error.to_yaml

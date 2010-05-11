@@ -6,68 +6,15 @@ module Spree
 
     def create_subscriber(user)
       list = autosubscribe_list
-
-      if list.nil?
-        subscriber_id = -1
-      else
-        begin
-          subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-
-          if user.is_a? String
-            subscriber_id = subscriber.add(user, list.list_id)
-          else
-            subscriber_id = subscriber.add(user.email, list.list_id, {:Customer_ID => user.id, :Customer_ID_NWB => user.id, :Customer_ID_PWB => user.id})
-          end
-
-          user.exact_target_lists << list
-          user.save!
-        rescue
-          subscriber_id = -1
-        end
-      end
-
-      user.exact_target_subscriber_id = subscriber_id
-      user.save!
+      subscribe_to_list(user, list)
     end
 
-    def subscribe_to_list(user, listid)
-      begin
-        subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-
-        if user.is_a? User
-          subscription_id = subscriber.add(user.email, listid).inspect
-        else
-          subscription_id = subscriber.add(user, listid).inspect
-        end
-
-        return true
-      rescue ET::Error => error
-        if error.code == 14 #already subscribed
-          return true
-        else
-          return false
-        end
-      end
+    def subscribe_to_list(user, list)
+      Delayed::Job.enqueue DelayedSubscriberAdd.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), user, list)
     end
 
-    def unsubscribe_from_list(user, listid)
-      begin
-        subscriber = ET::Subscriber.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-
-        if user.is_a? User
-          result = subscriber.delete(nil, user.email, listid).inspect
-        else
-          result = subscriber.delete(nil, user, listid).inspect
-        end
-
-        return true
-      rescue ET::Error => error
-        if error.code == 1 #not subscribed
-          return true
-        else
-          return false
-        end
-      end
+    def unsubscribe_from_list(user, list)
+      Delayed::Job.enqueue DelayedSubscriberDelete.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), user, list)
     end
 
     private
@@ -85,12 +32,12 @@ module Spree
         if subscribe == "true"
           #subscribe
           unless @user.exact_target_lists.include? list
-            @user.exact_target_lists << list if subscribe_to_list(@user, list.list_id)
+            subscribe_to_list(@user, list)
           end
         else
           #unsubscribe
           if @user.exact_target_lists.include? list
-            @user.exact_target_lists.delete(list) if unsubscribe_from_list(@user, list.list_id)
+            unsubscribe_from_list(@user, list)
           end
         end
       end

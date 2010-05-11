@@ -38,14 +38,20 @@ class ExactTargetExtension < Spree::Extension
       def self.method_missing(method_symbol, *parameters) #:nodoc:
         if match = matches_dynamic_method?(method_symbol)
           if match[1] == 'deliver'
-            mailer = new(match[2], *parameters)
-            variables = YAML::load(mailer.body)
-            external_key = variables.delete "external_key"
+            begin
+              mailer = new(match[2], *parameters)
+              variables = YAML::load(mailer.body)
+              external_key = variables.delete "external_key"
+            rescue => exception
+              logger.error "Error parsing ExactTarget variables for triggered email"
+              logger.error exception.to_yaml
+            end
 
             unless external_key.nil?
               begin
-                trigger = ET::TriggeredSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password))
-                result = trigger.deliver(mailer.mail.to, external_key, variables)
+                mailer.mail.to.each do |email|
+                  Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), email, external_key, variables)
+                end
               rescue ET::Error => error
                 logger.error "Error sending ExactTarget triggered email"
                 logger.error error.to_yaml
