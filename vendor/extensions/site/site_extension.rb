@@ -1066,7 +1066,7 @@ class SiteExtension < Spree::Extension
     #set default country_id (around geo_locate ext)
     ApplicationHelper.module_eval do
       def country_id
-        (country_from_ip(request.remote_ip) || Country.find(214) ).id
+        Rails.cache.fetch("country_for_#{request.remote_ip}") { country_from_ip(request.remote_ip).id rescue 214 }
       end
     end
 

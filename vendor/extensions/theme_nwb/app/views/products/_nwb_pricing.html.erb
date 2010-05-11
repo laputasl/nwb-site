@@ -4,7 +4,7 @@
       <%
         free_shipping = Spree::Config[:nwb_free_shipping_at].to_f
         amnt = vl.price * vl.first
-        full_amnt = @product.master_price * vl.first
+        full_amnt = @product.price * vl.first
         savings = full_amnt - amnt
         is_shipping_free = amnt >= free_shipping
         clss = "add_to_cart add_to_cart_#{vl.first.to_s}"
