@@ -16,6 +16,14 @@ Spree::Config.set(:NWB_ET_new_account => "nwb-accountinfo-new")
 Spree::Config.set(:PWB_ET_new_account => "pwb-accountInfo-new")
 Spree::Config.set(:NWB_ET_password_reset => "nwb-forgotpswrd-new")
 Spree::Config.set(:PWB_ET_password_reset => "pwb-forgotpswrd-new")
+Spree::Config.set(:NWB_ET_product_review => "nwb-powerreviewsemail-new")
+Spree::Config.set(:PWB_ET_product_review => "pwb-powerreviewsemail-new")
+Spree::Config.set(:NWB_ET_reorder_alert => "nwb-reorderalert-new")
+Spree::Config.set(:PWB_ET_reorder_alert => "pwb-reorderalert-new")
+
+#for reminder email script
+Spree::Config.set(:reminders_max_send_count => 100)
+Spree::Config.set(:reminders_max_send_count => "pwb-reorderalert-new")
 
 #Spree::Config.set("searcher.spelling_suggestion"  => true)
 

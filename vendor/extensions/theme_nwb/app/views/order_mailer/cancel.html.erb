@@ -1,5 +1,5 @@
 external_key: <%= @order.store.code == "pwb"  ? "pwb-custordercancel" : "nwb-ordercancel" %>
 First_Name: <%= @order.ship_address.firstname %>
 Last_Name: <%= @order.ship_address.lastname %>
-SENDTIME__CONTENT1: '<%= render "order_cancel_plain", :order => @order %>'
-SENDTIME__CONTENT2: '<%= render "order_cancel_html", :order => @order %>'
+SENDTIME__CONTENT1: '<%= render("order_cancel_plain", :order => @order).gsub("'", "''") %>'
+SENDTIME__CONTENT2: '<%= render("order_cancel_html", :order => @order).gsub("'", "''") %>'

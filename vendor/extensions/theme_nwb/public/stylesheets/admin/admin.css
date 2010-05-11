@@ -50,7 +50,7 @@ body {
     padding: 1em;
     background: #fff;
     color: #111;
-    min-height: 650px; }
+    min-height: 650px; } /* NWB custom */
     #content a {
       color: #3C7DFB; }
       #content a:active,
@@ -75,6 +75,9 @@ body {
           #sidebar h3 a {
             color: #111;
             text-decoration: none; }
+        #sidebar h5 {
+          margin: 0 10px;
+           float: left;}
         #sidebar span.sku {
           display: block;
           font-weight: normal; }
@@ -332,7 +335,7 @@ body {
     border: solid 1px #999;
     -moz-border-radius: .5em;
     -webkit-border-radius: .5em;
-    min-width: 200px; }
+    min-width: 46%; }
     .adr .fn {
       font-weight: bold; }
     .adr h4 {
@@ -439,7 +442,7 @@ div#calculator-settings-warning {
   padding:10px 0 15px;
   position:fixed;
   text-align:center;
-  width:30%;
+  width:320px;
   font-weight:bold;
   -moz-border-radius-bottomleft:15px;
   -moz-border-radius-bottomright:15px;
@@ -480,15 +483,77 @@ div.product-preview-products {
 
 }
 
-#preference-settings input[type=text] {
+#preference-settings input[type=text], #preference-settings input[type=password] {
   width: 250px;
 }
+
+#preference-settings input.input_integer[type=text] {
+  width: 100px;
+}
+
 #preference-settings label{
   clear:both;
   display:block;
   float:left;
   width:170px;
 }
-.additional_fields p{
-  margin-left:30px;
+.index .price{
+  width: 50px;
+  text-align:center;
+}
+.index .qty{
+  width: 50px;
+  text-align:center;
+}
+.index .total{
+  width: 50px;
+  text-align:right;
+}
+.index .orders-actions{
+  width:40px;
+  padding-left:10px;
+}
+
+
+
+
+
+
+
+/* Product Groups */
+
+table#product_scopes tr {
+  background-color: #eee;
+
+}
+table#product_scopes tr td {
+  border-top: 4px solid #fff;
+  border-bottom: 1px solid #bbb;
+  padding: 5px 10px;
+}
+table#product_scopes tr td.actions {
+  vertical-align: middle;
+  text-align: right;
+}
+table#product_scopes tr td table {
+  margin: 0;
+  width: auto;
+}
+table#product_scopes tr td table tr td {
+  padding: 0;
+  border:  none;
+  padding-right: 5px;
+}
+
+#product_group_forms_container {
+  position: relative;
+}
+#new_product_group_form {
+  position: absolute;
+  right: 25px;
+  bottom: 0;
+}
+#new_product_group_form p {
+  text-align: right;
+  margin: 0;
 }

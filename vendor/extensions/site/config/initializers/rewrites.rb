@@ -162,6 +162,19 @@ Refraction.configure do |req|
          when "/antioxidant-complex-p251.cfm" ; req.permanent! create_301_url("/products/antioxidant-complex", req)
          when "/clio-sexy-shine-lips-p219.cfm" ; req.permanent! create_301_url("/", req)
          when "/double-strength-probiotic-complex-with-acidophilus-p253.cfm" ; req.permanent! create_301_url("/products/double-strength-probiotic-complex-with-acidophilus", req)
+         when "/Antioxidant-Complex-p251.cfm" ; req.permanent! create_301_url("/products/antioxidant-complex", req)
+         when "/Astragalus-Immunity-Booster-p252.cfm" ; req.permanent! create_301_url("/products/astragalus-immunity-booster", req)
+         when "/CoQ10-Red-Yeast-Extract-p254.cfm" ; req.permanent! create_301_url("/products/coq10-red-yeast-extract", req)
+         when "/DHA-Essentials-Fatty-Acids-p248.cfm" ; req.permanent! create_301_url("/products/dha-essentials-fatty-acids", req)
+         when "/Double-Strength-Probiotic-Complex-with-Acidophilus-p253.cfm" ; req.permanent! create_301_url("/products/double-strength-probiotic-complex-with-acidophilus", req)
+         when "/Maca-p237.cfm" ; req.permanent! create_301_url("/products/maca", req)
+         when "/Milk-Thistle-p238.cfm" ; req.permanent! create_301_url("/products/milk-thistle", req)
+         when "/Nettles-p243.cfm" ; req.permanent! create_301_url("/products/nettles", req)
+         when "/Oil-of-Oregano-p244.cfm" ; req.permanent! create_301_url("/products/oil-of-oregano", req)
+         when "/Omega-3-6-9-p250.cfm" ; req.permanent! create_301_url("/products/omega-3-6-9", req)
+         when "/Organic-Spirulina-p247.cfm" ; req.permanent! create_301_url("/products/organic-spirulina", req)
+         when "/Psyllium-Husks-p245.cfm" ; req.permanent! create_301_url("/products/psyllium-husks", req)
+         when "/Viatri-Heart-and-Cholesterol-Support-p249.cfm" ; req.permanent! create_301_url("/products/viatri-heart-and-cholesterol-support", req)
       end
 
     end
@@ -219,7 +232,7 @@ Refraction.configure do |req|
          when "/Zukes-c2b6.cfm" ; req.permanent! create_301_url("/b/zukes/", req)
          when "/static/form_add_link.cfm" ; req.permanent! create_301_url("/", req)
          when "/static/link_directory.cfm" ; req.permanent! create_301_url("/", req)
-         when "/static/textadvertising.cfm" ; req.permanent! create_301_url("/", req)           
+         when "/static/textadvertising.cfm" ; req.permanent! create_301_url("/", req)
          when "/articles/2009/01/petwellbeing-discounts-coupons-and.cfm" ; req.permanent! create_301_url("/blog/2009/01/petwellbeing-coupons-discounts-and-promotions.cfm", req)
          when "/canine_respiratory_aid_p20.cfm" ; req.permanent! create_301_url("/products/dog-cough-medicine", req)
          when "/canine_mellit_p11.cfm" ; req.permanent! create_301_url("/products/dog-diabetes", req)
@@ -229,7 +242,12 @@ Refraction.configure do |req|
          when "/canine_plantaeris_p18.cfm" ; req.permanent! create_301_url("/products/dog-diarrhea", req)
          when "/hemp-dog-collars-medium-p42.cfm" ; req.permanent! create_301_url("/", req)
          when "/cat_supplies_c2.cfm" ; req.permanent! create_301_url("/c/cat-products", req)
-         when "/hemp-dog-collars-medium-p42.cfm" ; req.permanent! create_301_url("/", req)         
+         when "/hemp-dog-collars-medium-p42.cfm" ; req.permanent! create_301_url("/", req)
+         when "/Feline_Plantaeris_P45.cfm" ; req.permanent! create_301_url("/products/cat-diarrhea", req)
+         when "/Canine_Respiratory_Aid_P20.cfm" ; req.permanent! create_301_url("/products/dog-cough-medicine", req)
+         when "/Canine_Mellit_P11.cfm" ; req.permanent! create_301_url("/products/dog-diabetes", req)
+         when "/Canine_Plantaeris_P18.cfm" ; req.permanent! create_301_url("/products/dog-diarrhea", req)
+         when "/Canine_Inulin_PK_P8.cfm" ; req.permanent! create_301_url("/products/inulin-pk-dog-worms", req)
       end
 
     end

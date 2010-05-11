@@ -1,0 +1,14 @@
+<p>A little while ago you ordered:</p>
+<p>
+  <% products.each do |product| %>
+    <%= " - #{product.name}" %><br />
+  <% end %>
+</p>
+<p>Our records show you’ll be running out of your supply soon.</p>
+<p>To order some more, click the link below, and checkout:</p>
+<p>
+  <% products.each do |product| %>
+    <%- url = "http://www.#{store.code == "nwb" ? "natural" : "pet"}wellbeing.com/products/#{product.permalink}?utm_medium=email&utm_campaign=ET-mailing&utm_source=ReorderAlert&utm_content=http://www.#{store.code == "nwb" ? "natural" : "pet"}wellbeing.com/products/#{product.permalink}"  -%>
+    <%= link_to product.name, url %><br />
+  <% end %>
+</p>

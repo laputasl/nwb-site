@@ -1,0 +1,10 @@
+A little while ago you ordered:
+<% products.each do |product| %><%= " - #{product.name}" %>
+<% end %>
+
+Our records show you’ll be running out of your supply soon.
+
+To order some more, click the link below, and checkout:
+<% products.each do |product| %>
+  <%= "http://www.#{store.code == "nwb" ? "natural" : "pet"}wellbeing.com/products/#{product.permalink}?utm_medium=email&utm_campaign=ET-mailing&utm_source=ReorderAlert&utm_content=http://www.#{store.code == "nwb" ? "natural" : "pet"}wellbeing.com/products/#{product.permalink}  " %>
+<% end %>

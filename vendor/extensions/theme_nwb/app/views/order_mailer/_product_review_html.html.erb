@@ -1,0 +1,24 @@
+<table cellspacing="0" cellpadding="10" border="0" width="100%" style="font-size: 1em;">
+  <tbody>
+    <tr>
+      <td></td>
+    </tr>
+    <% products.each_with_index do |product, i| %>
+      <%- url = "http://www.#{store.code == "nwb" ? "natural" : "pet"}wellbeing.com/products/#{product.permalink}?utm_campaign=ET-mailing&utm_medium=email&utm_source=PowerReviewsRequest&utm_content=store" -%>
+      <%- review_url = "http://www.#{store.code == "nwb" ? "natural" : "pet"}wellbeing.com/#{store.code}/writeareview?pr_page_id=#{product.legacy_id}&utm_campaign=ET-mailing&utm_medium=email&utm_source=PowerReviewsRequest&utm_content=store" -%>
+      <tr style="background-color:<%= cycle('#FEFFF2', '#F1F2E6') %>;">
+        <td>
+          <% unless product.images.empty? %>
+            <img border="0" src="<%= product.images.first.attachment.url(:mini) %>">
+          <% end %>
+        </td>
+        <td>
+          <a target="_blank" href="<%= url %>"><%= product.name %></a>
+        </td>
+        <td>
+          <a target="_blank" href="<%= review_url %>">Write a Review</a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
