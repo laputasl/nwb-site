@@ -1090,7 +1090,9 @@ class SiteExtension < Spree::Extension
 
     LineItem.class_eval do
       has_many :reminder_messages, :as => :remindable
-    end
+    end 
+    
+    ActionView::Base.send :include, MetaTagHelper   
  end
 
 end
