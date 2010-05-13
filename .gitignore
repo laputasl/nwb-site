@@ -1,4 +1,4 @@
-a\#*
+  a\#*
 **/*.db
 *~
 .#*
@@ -30,6 +30,7 @@ public/ckeditor
 config/s3.yml
 public/MailFaxOrder.pdf
 public/__utm.gif
+public/google84592614d8899e68.html
 db/xapiandb/
 
 # compiled less
