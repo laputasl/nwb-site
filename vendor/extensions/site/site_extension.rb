@@ -150,6 +150,10 @@ class SiteExtension < Spree::Extension
       belongs_to :store
       has_many :reminder_messages, :as => :remindable
 
+      def after_initialize #fallback to ensure order is always assigned to a store
+        self.store ||= Store.first
+      end
+
       def allow_pay?
         return false if suspicious_order?
         checkout_complete
