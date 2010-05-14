@@ -40,6 +40,8 @@ class ExactTargetExtension < Spree::Extension
           if match[1] == 'deliver'
             begin
               mailer = new(match[2], *parameters)
+              super if mailer.mail.to.nil?
+
               variables = YAML::load(mailer.body)
               external_key = variables.delete "external_key"
             rescue => exception

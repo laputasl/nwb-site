@@ -140,6 +140,9 @@ class SiteExtension < Spree::Extension
       transition :to => 'paid', :if => :has_problem_shipment?
     end
 
+    fsm.event :return_authorized do
+      transition :to => 'awaiting_return', :from => ['shipped', 'legacy']
+    end
 
     fsm.after_transition :to => 'on_hold', :do => :make_shipments_pending
     fsm.after_transition :to => 'on_hold', :do => :record_on_hold_reason
@@ -149,6 +152,10 @@ class SiteExtension < Spree::Extension
       include ActionView::Helpers::NumberHelper
       belongs_to :store
       has_many :reminder_messages, :as => :remindable
+
+      def after_initialize #fallback to ensure order is always assigned to a store
+        self.store ||= Store.first
+      end
 
       def allow_pay?
         return false if suspicious_order?
@@ -241,8 +248,8 @@ class SiteExtension < Spree::Extension
           self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because shipping country is not white listed.", :user => admin)
 
         elsif payments.any? {|payment| payment.txns.any? { |txn| !avs.include?(txn.avs_response) } }
-          self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because AVS code is not white listed.", :user => admin)
-
+          avs_responses = payments.map(&:txns).flatten.map(&:avs_response).join(",") rescue ""
+          self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because AVS code (#{avs_responses}) is not white listed.", :user => admin)
         end
 
       end
@@ -341,6 +348,10 @@ class SiteExtension < Spree::Extension
 
       ssl_allowed :update
 
+      def index
+        render :text => "File not found", :status => 404
+      end
+
       update do
         flash nil
         success.wants.html { redirect_to(@from_checkout ? edit_order_checkout_url(object, :step => "delivery")  : edit_order_url(object)) }
@@ -369,10 +380,17 @@ class SiteExtension < Spree::Extension
         begin
           rates = @order.available_shipping_rates(session[:zipcode], session[:country_id])
 
-          session[:shipping_method_id] = @order.checkout.shipping_method_id
-          session[:shipping_method_rate] = @order.shipping_charges.first.amount
+          if rates.empty?
+            session[:shipping_method_id] = nil
+            session[:shipping_method_rate] = nil
+          else
+            session[:shipping_method_id] = @order.checkout.shipping_method_id
+            session[:shipping_method_rate] = @order.shipping_charges.first.amount
+          end
         rescue Spree::ShippingError => ship_error
           flash[:error] = ship_error.to_s
+          session[:shipping_method_id] = nil
+          session[:shipping_method_rate] = nil
           rates = []
         end
 
@@ -1090,6 +1108,22 @@ class SiteExtension < Spree::Extension
 
     LineItem.class_eval do
       has_many :reminder_messages, :as => :remindable
+    end
+
+    ActionView::Base.send :include, MetaTagHelper
+
+
+    #simplified address comparsion to exclude first/lastname and phone, make it case insensitve
+    Address.class_eval do
+      def ==(other_address)
+        self_attrs = self.attributes
+        other_attrs = other_address.respond_to?(:attributes) ? other_address.attributes : {}
+
+        [self_attrs, other_attrs].each do |attrs|
+          attrs.except!("firstname", "lastname", "phone", "id", "created_at", "updated_at", "order_id")
+        end
+        self_attrs.all? { |key, value| other_attrs[key].to_s.downcase == value.to_s.downcase}
+      end
     end
  end
 

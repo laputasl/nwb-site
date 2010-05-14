@@ -40,7 +40,8 @@ Spree::Initializer.run do |config|
   config.gem 'state_machine', :lib => 'state_machine', :version => '0.8.0'
   config.gem "faker", :version => '0.3.1'
   config.gem 'paperclip', :version => '>=2.3.1.1'
-  config.gem 'refraction', :version => '0.2.0'
+  config.gem 'refraction', :version => '0.2.0'       
+  config.gem 'exceptional', :version => '2.0.9'
 
   # Only load the plugins named here, in the order given. By default, all plugins
   # in vendor/plugins are loaded in alphabetical order.
@@ -64,7 +65,7 @@ Spree::Initializer.run do |config|
   # Make Time.zone default to the specified zone, and make Active Record store time values
   # in the database in UTC, and return them converted to the specified local zone.
   # Run "rake -D time" for a list of tasks for finding time zone names.
-  config.time_zone = "Eastern Time (US & Canada)"
+  config.time_zone = "Pacific Time (US & Canada)"
 
   # Use SQL instead of Active Record's schema dumper when creating the test database.
   # This is necessary if your schema can't be completely dumped by the schema dumper,
