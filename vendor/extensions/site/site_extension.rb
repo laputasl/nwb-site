@@ -373,10 +373,17 @@ class SiteExtension < Spree::Extension
         begin
           rates = @order.available_shipping_rates(session[:zipcode], session[:country_id])
 
-          session[:shipping_method_id] = @order.checkout.shipping_method_id
-          session[:shipping_method_rate] = @order.shipping_charges.first.amount
+          if rates.empty?
+            session[:shipping_method_id] = nil
+            session[:shipping_method_rate] = nil
+          else
+            session[:shipping_method_id] = @order.checkout.shipping_method_id
+            session[:shipping_method_rate] = @order.shipping_charges.first.amount
+          end
         rescue Spree::ShippingError => ship_error
           flash[:error] = ship_error.to_s
+          session[:shipping_method_id] = nil
+          session[:shipping_method_rate] = nil
           rates = []
         end
 
