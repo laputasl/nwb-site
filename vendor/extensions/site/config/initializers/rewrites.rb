@@ -11,9 +11,7 @@ Refraction.configure do |req|
   if domain_parts.size == 2
     req.permanent! create_301_url("#{req.scheme}://www.#{req.http_host}#{req.path}", req)
   end
-  
-  # admins are sometimes typing /orders instead of /admin/orders which causes confusion (#710)
-  req.respond!(404, {'Content-Type' => 'text/html'}, "File not found") if req.path =~ /^\/orders\/{0,}$/
+
   # no favicon so lets not keep pouring through the view paths only to return and log a 404 (#711)
   req.respond!(404, {'Content-Type' => 'text/html'}, "File not found") if req.path =~ /^\/favicon.ico$/
 

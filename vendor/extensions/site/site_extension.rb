@@ -341,6 +341,10 @@ class SiteExtension < Spree::Extension
 
       ssl_allowed :update
 
+      def index
+        render :text => "File not found", :status => 404
+      end
+
       update do
         flash nil
         success.wants.html { redirect_to(@from_checkout ? edit_order_checkout_url(object, :step => "delivery")  : edit_order_url(object)) }
@@ -1090,9 +1094,9 @@ class SiteExtension < Spree::Extension
 
     LineItem.class_eval do
       has_many :reminder_messages, :as => :remindable
-    end 
-    
-    ActionView::Base.send :include, MetaTagHelper   
+    end
+
+    ActionView::Base.send :include, MetaTagHelper
  end
 
 end
