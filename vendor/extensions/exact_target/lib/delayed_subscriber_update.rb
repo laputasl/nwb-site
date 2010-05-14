@@ -1,7 +1,8 @@
-class DelayedSubscriberUpdate < Struct.new(:username, :password, :order)
+class DelayedSubscriberUpdate < Struct.new(:username, :password, :order_number)
   include Spree::ExactTarget
 
   def perform
+    order = Order.find_by_number(order_number)
     unless order.user.nil?
       order.user.reload #reload the user to be sure we have the most uptodate record
 
