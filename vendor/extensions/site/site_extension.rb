@@ -140,6 +140,9 @@ class SiteExtension < Spree::Extension
       transition :to => 'paid', :if => :has_problem_shipment?
     end
 
+    fsm.event :return_authorized do
+      transition :to => 'awaiting_return', :from => ['shipped', 'legacy']
+    end
 
     fsm.after_transition :to => 'on_hold', :do => :make_shipments_pending
     fsm.after_transition :to => 'on_hold', :do => :record_on_hold_reason
