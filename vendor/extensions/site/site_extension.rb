@@ -241,7 +241,7 @@ class SiteExtension < Spree::Extension
           self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because shipping country is not white listed.", :user => admin)
 
         elsif payments.any? {|payment| payment.txns.any? { |txn| !avs.include?(txn.avs_response) } }
-          self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because AVS code is not white listed.", :user => admin)
+          self.comments.create(:title => "Order On Hold", :comment => "Held as suspicious because AVS code (#{txn.avs_response}) is not white listed.", :user => admin)
 
         end
 
