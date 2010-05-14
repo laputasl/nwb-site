@@ -1104,6 +1104,20 @@ class SiteExtension < Spree::Extension
     end
 
     ActionView::Base.send :include, MetaTagHelper
+
+
+    #simplified address comparsion to exclude first/lastname and phone, make it case insensitve
+    Address.class_eval do
+      def ==(other_address)
+        self_attrs = self.attributes
+        other_attrs = other_address.respond_to?(:attributes) ? other_address.attributes : {}
+
+        [self_attrs, other_attrs].each do |attrs|
+          attrs.except!("firstname", "lastname", "phone", "id", "created_at", "updated_at", "order_id")
+        end
+        self_attrs.all? { |key, value| other_attrs[key].to_s.downcase == value.to_s.downcase}
+      end
+    end
  end
 
 end
