@@ -164,7 +164,7 @@ a:active { color: #1c3c80; }
   padding: 0 7px 5px 7px;
   margin: 0 0 10px 0;
 }
-#sidebar #petBtns li { disply: block; }
+#sidebar #petBtns li { display: block; }
 #sidebar #petBtns li a {
   display: block;
   text-indent: -999em;
