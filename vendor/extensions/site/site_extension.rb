@@ -302,8 +302,11 @@ class SiteExtension < Spree::Extension
         event :ship do
           transition :from => ['needs_fulfilment', 'acknowledged'], :to => 'shipped'
         end
+        event :process do
+          transition :from => 'ready_to_ship', :to => 'processed'
+        end
         event :transmit do
-          transition :from => 'ready_to_ship', :to => 'transmitted'
+          transition :from => 'processed', :to => 'transmitted'
         end
         event :acknowledge do
           transition :from => 'transmitted', :to => 'acknowledged'
