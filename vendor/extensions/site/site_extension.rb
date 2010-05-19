@@ -842,7 +842,12 @@ class SiteExtension < Spree::Extension
         begin
           external_key = Spree::Config["#{user.store.code.upcase}_ET_new_account"]
           variables = {:First_Name => "Customer", :emailaddr => user.email}
-          Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), user.email, external_key, variables)
+          Delayed::Job.enqueue DelayedSend.new( Spree::Config.get(:exact_target_user),
+                                                Spree::Config.get(:exact_target_password),
+                                                user.email,
+                                                external_key,
+                                                variables,
+                                                nil,nil,nil)
 
         rescue ET::Error => error
           puts "Error sending ExactTarget triggered email"
@@ -860,7 +865,12 @@ class SiteExtension < Spree::Extension
           begin
             external_key = Spree::Config["#{order.store.code.upcase}_ET_order_security"]
             variables =  {:First_Name => order.bill_address.firstname, :Last_name => order.bill_address.lastname}
-            Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), order.checkout.email, external_key, variables)
+            Delayed::Job.enqueue DelayedSend.new( Spree::Config.get(:exact_target_user),
+                                                  Spree::Config.get(:exact_target_password),
+                                                  order.checkout.email,
+                                                  external_key,
+                                                  variables,
+                                                  nil,nil,nil)
 
           rescue ET::Error => error
             puts "Error sending ExactTarget triggered email"
@@ -874,11 +884,16 @@ class SiteExtension < Spree::Extension
           external_key = Spree::Config["#{order.store.code.upcase}_ET_order_shipped"]
           view = ActionView::Base.new(Spree::ExtensionLoader.view_paths)
           variables = {:First_Name => order.bill_address.firstname,
-                       :Last_name => order.bill_address.lastname,
-                       :SENDTIME__CONTENT1 => view.render("order_mailer/order_shipped_plain", :order => order),
-                       :SENDTIME__CONTENT2 => view.render("order_mailer/order_shipped_html", :order => order)}
+                       :Last_name => order.bill_address.lastname}
 
-          Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), order.checkout.email, external_key, variables)
+          Delayed::Job.enqueue DelayedSend.new( Spree::Config.get(:exact_target_user),
+                                                Spree::Config.get(:exact_target_password),
+                                                order.checkout.email,
+                                                external_key,
+                                                variables,
+                                                order.number,
+                                                "order_mailer/order_shipped_plain",
+                                                "order_mailer/order_shipped_html")
        rescue ET::Error => error
          puts "Error sending ExactTarget triggered email"
          puts error.to_yaml

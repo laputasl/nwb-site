@@ -52,7 +52,7 @@ class ExactTargetExtension < Spree::Extension
             unless external_key.nil?
               begin
                 mailer.mail.to.each do |email|
-                  Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), email, external_key, variables)
+                  Delayed::Job.enqueue DelayedActionMailerSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), email, external_key, variables)
                 end
               rescue ET::Error => error
                 logger.error "Error sending ExactTarget triggered email"
@@ -66,7 +66,6 @@ class ExactTargetExtension < Spree::Extension
       end
 
     end
-
 
   end
 end

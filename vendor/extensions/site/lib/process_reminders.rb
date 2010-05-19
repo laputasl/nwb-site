@@ -39,7 +39,7 @@ def product_review(reminder, report, count)
                       :SENDTIME__CONTENT1 => view.render("order_mailer/product_review_plain", :products => products, :store => order.store),
                       :SENDTIME__CONTENT2 => view.render("order_mailer/product_review_html", :products => products, :store => order.store)}
 
-      Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), email, external_key, variables)
+      Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), email, external_key, variables, nil,nil,nil)
 
       ReminderMessage.create(:remindable => order, :reminder => reminder, :user => user)
     rescue ET::Error => error
@@ -104,7 +104,7 @@ def reorder_alert(reminder, report, count)
                         :SENDTIME__CONTENT1 => view.render("order_mailer/reorder_alert_plain", :products => products, :store => order.store),
                         :SENDTIME__CONTENT2 => view.render("order_mailer/reorder_alert_html", :products => products, :store => order.store)}
 
-        Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), email, external_key, variables)
+        Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), email, external_key, variables, nil,nil,nil)
 
       rescue ET::Error => error
         report << "\n#{order.number} FAILED"
@@ -132,7 +132,7 @@ Reminder.all.each do |reminder|
 end
 
 #send reports to operations
-Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), "brian@railsdog.com", "nwb-operational", { :SENDTIME__CONTENT1 => "Reminder Emails Report", :SENDTIME__CONTENT2 => report})
-Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), "operations@naturalwellbeing.com", "nwb-operational", { :SENDTIME__CONTENT1 => "Reminder Emails Report", :SENDTIME__CONTENT2 => report})
+Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), "brian@railsdog.com", "nwb-operational", { :SENDTIME__CONTENT1 => "Reminder Emails Report", :SENDTIME__CONTENT2 => report}, nil,nil,nil)
+Delayed::Job.enqueue DelayedSend.new(Spree::Config.get(:exact_target_user), Spree::Config.get(:exact_target_password), "operations@naturalwellbeing.com", "nwb-operational", { :SENDTIME__CONTENT1 => "Reminder Emails Report", :SENDTIME__CONTENT2 => report}, nil,nil,nil)
 
 
