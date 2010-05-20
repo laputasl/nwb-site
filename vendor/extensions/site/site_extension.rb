@@ -1160,6 +1160,21 @@ class SiteExtension < Spree::Extension
                                               "order_mailer/order_confirm_html")
       end
 
+      def self.deliver_cancel(order)
+        external_key = order.store.code == "pwb"  ? "pwb-custordercancel" : "nwb-ordercancel"
+        variables = { :First_Name => order.bill_address.firstname,
+                      :Last_name => order.bill_address.lastname}
+
+        Delayed::Job.enqueue DelayedSend.new( Spree::Config.get(:exact_target_user),
+                                              Spree::Config.get(:exact_target_password),
+                                              order.checkout.email,
+                                              external_key,
+                                              variables,
+                                              order.number,
+                                              "order_mailer/order_cancel_plain",
+                                              "order_mailer/order_cancel_html")
+      end
+
     end
 
  end

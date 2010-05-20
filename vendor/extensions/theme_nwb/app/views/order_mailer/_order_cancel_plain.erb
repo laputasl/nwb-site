@@ -4,4 +4,4 @@ Your order number is <%= order.number %> Please keep it for reference if you spe
 
 Your <%= order.store.name %> order included the following item(s):
 
-<%= render "order_details_plain", :order => order %>
+<%= render "order_mailer/order_details_plain", :order => order %>

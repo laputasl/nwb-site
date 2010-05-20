@@ -1,5 +1,0 @@
-external_key: <%= Spree::Config["#{@order.store.code.upcase}_ET_order_received"] %>
-First_Name: <%= @order.ship_address.firstname %>
-Last_Name: <%= @order.ship_address.lastname %>
-SENDTIME__CONTENT1: '<%= render("order_confirm_plain", :order => @order).gsub("'", "''") %>'
-SENDTIME__CONTENT2: '<%= render("order_confirm_html", :order => @order).gsub("'", "''") %>'
