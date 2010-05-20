@@ -1143,6 +1143,27 @@ class SiteExtension < Spree::Extension
         self_attrs.all? { |key, value| other_attrs[key].to_s.downcase == value.to_s.downcase}
       end
     end
+
+    #Prevent sales total from running without dates, default to month-to-date
+    Admin::ReportsController.class_eval do
+      def sales_total
+        params[:search] = {} unless params[:search]
+        params[:search][:created_at_after] = Time.zone.now.beginning_of_month if params[:search][:created_at_after].blank?
+
+        @search = Order.searchlogic(params[:search])
+        @search.checkout_complete = true
+        #set order by to default or form result
+        @search.order ||= "descend_by_created_at"
+
+        @orders = @search.find(:all)
+
+        @item_total = @search.sum(:item_total)
+        @charge_total = @search.sum(:adjustment_total)
+        @credit_total = @search.sum(:credit_total)
+        @sales_total = @search.sum(:total)
+      end
+    end
+
  end
 
 end
