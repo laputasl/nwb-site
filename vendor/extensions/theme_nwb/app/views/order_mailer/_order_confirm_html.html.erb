@@ -14,4 +14,4 @@
 <% end %>
 
 <p>Your <%= order.store.name %> order includes the following item(s):</p>
-<%= render "order_details_html", :order => order %>
+<%= render "order_mailer/order_details_html", :order => order %>

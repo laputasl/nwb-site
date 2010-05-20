@@ -12,4 +12,4 @@ https://www.petwellbeing.com/orders/<%= order.number %>
 <% end %>
 Your <%= order.store.name %> order includes the following item(s):
 
-<%= render "order_details_plain", :order => order %>
+<%= render "order_mailer/order_details_plain", :order => order %>

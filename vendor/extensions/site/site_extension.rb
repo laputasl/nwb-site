@@ -1144,6 +1144,24 @@ class SiteExtension < Spree::Extension
       end
     end
 
+    OrderMailer.class_eval do
+      def self.deliver_confirm(order)
+        external_key = Spree::Config["#{order.store.code.upcase}_ET_order_received"]
+        variables = { :First_Name => order.bill_address.firstname,
+                      :Last_name => order.bill_address.lastname}
+
+        Delayed::Job.enqueue DelayedSend.new( Spree::Config.get(:exact_target_user),
+                                              Spree::Config.get(:exact_target_password),
+                                              order.checkout.email,
+                                              external_key,
+                                              variables,
+                                              order.number,
+                                              "order_mailer/order_confirm_plain",
+                                              "order_mailer/order_confirm_html")
+      end
+
+    end
+
  end
 
 end
