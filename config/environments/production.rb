@@ -19,3 +19,8 @@ config.action_controller.perform_caching             = true
 
 # Uncomment the line below if you want to use the gateway in test mode while deployed in production
 #ActiveMerchant::Billing::Base.gateway_mode = :test
+
+unless (memcached_config = MemcachedConfig.new).disabled?
+  memcached_options = memcached_config.options
+  config.cache_store = :mem_cache_store, memcached_options.delete(:servers), memcached_options
+end
