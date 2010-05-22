@@ -1,5 +1,6 @@
 
 def product_review(reminder, report, count)
+  puts "- Starting product reviews"
   report << "\nProduct Review Request(s):"
   view = ActionView::Base.new(Spree::ExtensionLoader.view_paths)
 
@@ -53,6 +54,7 @@ def product_review(reminder, report, count)
 end
 
 def reorder_alert(reminder, report, count)
+  puts "- Starting reorder alerts"
   report << "\nProduct Reorder Alert(s):"
   view = ActionView::Base.new(Spree::ExtensionLoader.view_paths)
 
@@ -124,6 +126,7 @@ end
 now = Time.new()
 Time.zone = "PST"
 
+puts "Starting up..."
 report  = "The following after-sales emails have been sent at: #{Time.zone.at(now).strftime("%B %d, %Y at %I:%M PST")}\n"
 
 Reminder.all.each do |reminder|
