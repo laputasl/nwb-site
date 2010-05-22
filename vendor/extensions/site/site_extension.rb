@@ -1047,6 +1047,7 @@ class SiteExtension < Spree::Extension
       private
 
       def redirect_root_taxons
+        return if @taxon.nil?
         session[:last_taxon_permalink] = @taxon.permalink #used for products controller to maintain trail
         redirect_to ActionController::Base.relative_url_root, :status => :moved_permanently if @taxon.root?
       end
