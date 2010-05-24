@@ -20,6 +20,7 @@ class SiteExtension < Spree::Extension
     Image.attachment_definitions[:attachment][:s3_credentials] = "#{RAILS_ROOT}/config/s3.yml"
     Image.attachment_definitions[:attachment][:bucket] = "nwb"
     Image.attachment_definitions[:attachment][:path] = ":attachment/:id/:style.:extension"
+    Image.attachment_definitions[:attachment][:s3_headers] = {'Cache-Control' => 'max-age=31557600'}
     Image.attachment_definitions[:attachment].delete :url
 
     base = File.dirname(__FILE__)
