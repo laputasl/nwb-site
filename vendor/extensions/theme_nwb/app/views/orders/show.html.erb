@@ -46,5 +46,8 @@
 <% if params.has_key? :checkout_complete %>
   <% session[:shipping_method_id] = nil %>
   <% session[:shipping_method_rate] = nil %>
+  <script type="text/javascript">
+    var order = <%= @order.to_json(:include => {:line_items => {:include => {:variant => {:only => :sku} } } }) %>;
+  </script>
   <%= render_snippet("#{@current_domain}-conversion-javascript") %>
 <% end %>
