@@ -1052,12 +1052,17 @@ class SiteExtension < Spree::Extension
         redirect_to ActionController::Base.relative_url_root, :status => :moved_permanently if @taxon.root?
       end
 
-      def object
+      def object #overriden for custom seo/short taxon urls
+        return @object if @object
+        set_layout unless @site #forces @site to load
+
         if params.key? "id"
           @object ||= end_of_association_chain.find_by_permalink(params[:id].join("/") + "/")
         else
           permalink = request.path[1..-1]
           permalink += "/" unless permalink[-1..-1] == "/"
+          params[:id] = permalink #set params[:id] so reject_unknown_object works as expected.
+
           @object ||= end_of_association_chain.find(:first, :include => :taxonomy, :conditions => ["taxons.permalink = ? AND taxonomies.store_id = ?", permalink  , @site.id])
         end
       end
