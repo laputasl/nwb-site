@@ -64,3 +64,5 @@ Spree::Config.set(:track_inventory_levels => false)
 
 Spree::Config.set(:pwb_fetch_back_code => 2285)
 Spree::Config.set(:nwb_fetch_back_code => 2521)
+
+Spree::Config.set(:geo_ip_key => "dGGtRmYrWh5D")

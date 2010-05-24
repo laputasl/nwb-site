@@ -25,7 +25,7 @@ class GeoLocateExtension < Spree::Extension
         begin
           if mapping.nil?
 
-            res = Net::HTTP.get("geoip3.maxmind.com", "/a?l=dGGtRmYrWh5D&i=#{ip}")
+            lookup(ip)
 
             if res.length < 4
               IpMapping.create(:ip_address => ip, :iso => res)
@@ -38,8 +38,7 @@ class GeoLocateExtension < Spree::Extension
             if mapping.updated_at > 7.days.ago
               mapping.iso
             else
-
-              res = Net::HTTP.get("geoip3.maxmind.com", "/a?l=dGGtRmYrWh5D&i=#{ip}")
+              lookup(ip)
 
               if res.length < 4
                 mapping.update_attribute("iso", res)
@@ -50,11 +49,22 @@ class GeoLocateExtension < Spree::Extension
               end
             end
           end
-        rescue
+        rescue => e
           return nil
         end
       end
 
+      def lookup(ip)
+        url = URI.parse("geoip3.maxmind.com/a?l=#{Spree::Config[:geo_ip_key]}&i=#{ip}")
+        req = Net::HTTP::Get.new(url.path)
+        res = Net::HTTP.new(url.host, url.port).start do |http|
+          http.open_timeout = 3
+          http.read_timeout = 3
+          http.request(req)
+        end
+
+        res
+      end
     end
   end
 end
