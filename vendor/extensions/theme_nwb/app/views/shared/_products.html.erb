@@ -19,6 +19,7 @@
 <% if paginated_products.respond_to?(:total_pages)
       params.delete(:search)
       params.delete(:taxon)
+      params.delete(:id)
 %><%= will_paginate(paginated_products,
                     :previous_label => "&#171; #{t('previous')}",
                     :next_label => "#{t('next')} &#187;") %>
