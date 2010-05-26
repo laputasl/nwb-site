@@ -26,4 +26,10 @@ class HomePageController < Spree::BaseController
       render :partial => "#{@site.code}_show", :layout => true
     end
   end
+
+  private
+
+  def accurate_title
+    Spree::Config["#{@site.code}_homepage_title"]
+  end
 end

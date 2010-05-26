@@ -6,7 +6,11 @@
 <% unless I18n.locale.to_s[0..1] == 'en' -%>
   <%= javascript_include_tag ['localization/messages_', I18n.locale.to_s[0..1], '.js'].join %>
 <% end -%>
-<%= meta_data_tags %>
+<% if  @current_controller == "home_page" %>
+  <meta name="description" content="<%= Spree::Config["#{@site.code}_homepage_description"] %>">
+<% else %>
+  <%= meta_data_tags %>
+<% end %>
 <%= meta_skip %>
 
 <% unless request.ssl? %>
