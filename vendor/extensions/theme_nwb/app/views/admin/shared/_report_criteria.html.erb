@@ -1,0 +1,21 @@
+<% form_for @search do |s| %>
+    <label><%= t("date_range") %></label><br />
+    <div class="yui-g date-range-filter">
+      <div class="yui-u sub-field first">
+        <%= s.unobtrusive_date_text_picker :created_at_after %><br />
+        <label class="sub"><%= t("start") %></label>
+      </div>
+      <div class="yui-u sub-field">
+        <%= s.unobtrusive_date_text_picker :created_at_before %><br />
+        <label><%= t("stop") %></label>
+      </div>
+    </div>
+    <p>
+      <label><%= t("status") %></label><br />
+      <%= s.select :state_equals, Order.state_machines[:state].states.collect {|st| [t(st.name), st.value]}, {:include_blank => true}  %>
+    </p>
+    <p>  
+      <%= s.check_box :completed_at_not_null, {}, "1", "" %> <label for='search_completed_at'>Only completed</label>
+    </p>
+    <p><%= button t("search") %></p>
+<% end %>

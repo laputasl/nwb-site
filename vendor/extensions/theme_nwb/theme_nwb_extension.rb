@@ -18,6 +18,43 @@ class ThemeNwbExtension < Spree::Extension
       helper NwbThemeHelper
     end
 
+
+    Admin::ReportsController.class_eval do
+      def sales_total
+        @taxonomy = Taxonomy.first
+        params[:search] = {} unless params[:search]
+
+        if params[:search][:created_at_after].blank?
+          params[:search][:created_at_after] = Time.zone.now.beginning_of_month
+        else
+          params[:search][:created_at_after] = Time.zone.parse(params[:search][:created_at_after]).beginning_of_day rescue Time.zone.now.beginning_of_month
+        end
+
+        if params[:search][:created_at_before].blank?
+          params[:search][:created_at_before] = Time.zone.now
+        else
+          params[:search][:created_at_before] = Time.zone.parse(params[:search][:created_at_before]).end_of_day rescue ""
+        end
+
+        @search = Order.searchlogic(params[:search])
+        
+        if params[:category_id].present? && @taxon = Taxon.find(params[:category_id])
+          @search = @search.line_items_variant_product_in_taxon(@taxon)
+        end
+        if params[:image_number].present?
+          @search = @search.line_items_variant_sku_eq(params[:image_number])
+        end
+        #set order by to default or form result
+        @search.order ||= "descend_by_created_at"
+        @orders = @search.find(:all).uniq
+        
+        @item_total = @orders.inject(0){|acc, o| acc + o.item_total}
+        @charge_total = @orders.inject(0){|acc, o| acc + o.adjustment_total}
+        @credit_total = @orders.inject(0){|acc, o| acc + o.credit_total}
+        @sales_total = @orders.inject(0){|acc, o| acc + o.total}
+      end
+    end
+
     Spree::BaseHelper.module_eval do
 
       def global_categories
