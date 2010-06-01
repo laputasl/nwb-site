@@ -322,12 +322,12 @@ class SiteExtension < Spree::Extension
       end
 
       #use custom store specific shipment number
-      def generate_shipment_number(force=false)
-        return self.number unless self.number.blank? || force
+      def generate_shipment_number()
+        return self.number unless self.number.blank?
         store = order.store.nil? ? Store.last : order.store
 
         record = true
-         while record
+        while record
           random = "#{store.code == "nwb" ? "1" : "2"}_#{Array.new(11){rand(9)}.join}"
           record = Shipment.find(:first, :conditions => ["number = ?", random])
         end
@@ -404,7 +404,7 @@ class SiteExtension < Spree::Extension
       private
       def assign_to_store
         @order.shipment.order.store = @order.store = @site
-        @order.shipment.generate_shipment_number(true)
+        @order.shipment.generate_shipment_number
       end
 
       def set_analytics
@@ -950,7 +950,7 @@ class SiteExtension < Spree::Extension
       end
 
       def ensure_shipment_has_number
-        @order.shipment.generate_shipment_number(true)
+        @order.shipment.generate_shipment_number
         @order.shipment.save!
       end
     end
