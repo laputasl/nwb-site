@@ -426,8 +426,8 @@ class SiteExtension < Spree::Extension
 
         params[:remove].each do |line_item, value|
           LineItem.destroy line_item.to_i
-          params[:order][:line_items_attributes].reject! { |key, item| item["id"] == line_item}
         end
+
       end
 
       def recalculate_totals
