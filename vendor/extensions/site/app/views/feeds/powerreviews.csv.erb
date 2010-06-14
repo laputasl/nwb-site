@@ -1,0 +1,38 @@
+<% 
+require 'csv'
+buf = ""
+CSV.generate_row([
+  "product_url", 
+  "page_id", 
+  "brand",	
+  "name", 
+  "description", 
+  "image_url", 
+  "price",	
+  "category", 
+  "in_stock", 
+  "manufacturer_id", 
+  "upc"], 11, buf)
+
+products.each do |prod|
+  row = []
+  # 
+  # legacy_id = prod.legacy_id
+  # 
+  
+  row << url_for(:controller=>'products', :action=> :show, :id=>prod, :only_path => false)
+  row << (prod.legacy_id || "#{prod.store.code}_#{prod.id}")
+  row << product_brand_name(prod)
+  row << prod.name
+  row << prod.description.gsub(/\s+/, " ")
+  row << product_image_url(prod)
+  row << number_to_currency(prod.master.volume_price(1).to_s)
+  row << category_names(prod).join("<")
+  row << (prod.count_on_hand>0)?1:0
+  row << prod.sku
+  row << prod.sku
+  CSV.generate_row(row, 11, buf)
+end
+%><%= buf %>
+
+
