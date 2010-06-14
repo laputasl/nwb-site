@@ -96,6 +96,7 @@ class SiteExtension < Spree::Extension
       belongs_to :store
 
       named_scope :by_store, lambda { |*args| { :conditions => ["products.store_id = ?", args.first] } }
+
       xapit do |index|
         index.text :name, :weight => 10
         index.text :description, :subtitle_main, :sales_copy, :short_home, :ingredients
@@ -107,6 +108,7 @@ class SiteExtension < Spree::Extension
         index.facet :taxon_names, "Taxon"
         index.sortable :price
       end
+
       private
       def validate
         errors.add(:can_be_part, "cannot be true when the product contains parts.") if assembly? && can_be_part
