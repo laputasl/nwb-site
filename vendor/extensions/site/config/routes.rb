@@ -15,3 +15,4 @@ end
 
 map.category_taxon '/c/*path', :controller => 'taxons', :action => 'show'
 map.brand_taxon '/b/*path', :controller => 'taxons', :action => 'show'
+map.feed '/feed/:feed',  :controller => 'feeds', :action => 'show'

@@ -1,0 +1,45 @@
+<product_list>
+<%products.each do |prod|%>
+<product>
+   <name><%= html_escape(prod.name)%></name>
+   <url><%=url_for(:controller=>'products', :action=> :show, :id=>prod, :only_path => false)%></url>
+   <sku><%=prod.sku%></sku>
+   <short_desc><%= html_escape(prod.short_home)%></short_desc>
+   <long_desc><%= html_escape(prod.description)%></long_desc>
+   <image><%=product_image_url(prod)%></image>
+   <% cats = category_names(prod)
+   if cats.size > 0%>
+   <category><%= html_escape(cats[0])%></category><%
+   end
+   if cats.size > 1%>
+   <sub_category><%= html_escape(cats[1])%></sub_category><%
+   end%>
+   <price><%= number_to_currency(prod.price.to_s) %></price>
+   <saleprice><%= number_to_currency(prod.master.volume_price(1).to_s) %></saleprice>
+   <availability><%= prod.count_on_hand%></availability>
+   <mfn_num><%=prod.sku%></mfn_num>
+   <brand><%= html_escape(product_brand_name(prod))%></brand>
+   <store><%= prod.store.name%></store>
+   <% if !prod.parts.blank? %>
+   <assembly>
+     <% for item in prod.parts %>
+     <part><%= item.sku%></part>
+     <% end %>
+   </assembly>
+   <% end %>   
+   <%if prod.dosage?%>
+   <dosage><%= html_escape(prod.dosage) %></dosage>
+   <%end%>
+   <%if prod.featured_testimonial?%>
+   <featured_testimonial><%= html_escape(prod.featured_testimonial) %></featured_testimonial>
+   <%end%>
+   <%if prod.ingredients?%>
+   <ingredients><%= html_escape(prod.ingredients) %></ingredients>
+   <%end%>
+</product>
+  
+<%end%>
+
+
+
+</product_list>
