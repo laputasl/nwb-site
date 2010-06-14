@@ -16,12 +16,8 @@ CSV.generate_row([
 
 products.each do |prod|
   row = []
-  # 
-  # legacy_id = prod.legacy_id
-  # 
-  
   row << url_for(:controller=>'products', :action=> :show, :id=>prod, :only_path => false)
-  row << (prod.legacy_id || "#{prod.store.code}_#{prod.id}")
+  row << prod.powerreviews_page_id
   row << product_brand_name(prod)
   row << prod.name
   row << prod.description.gsub(/\s+/, " ")
@@ -34,5 +30,3 @@ products.each do |prod|
   CSV.generate_row(row, 11, buf)
 end
 %><%= buf %>
-
-
