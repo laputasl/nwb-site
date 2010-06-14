@@ -80,6 +80,21 @@ class ThemeNwbExtension < Spree::Extension
 
           end
         end
+        
+        define_method "#{style}_image_url" do |product|
+          if product.images.empty?
+            url_for( {:controller=> "/#{@current_domain}/images/noimage/#{style}.jpg", :path_only =>false} )
+          else
+            image = product.images.first
+            if request.ssl?
+              image.attachment.url(style).gsub("http://", "https://")
+            else
+              image.attachment.url(style)
+            end
+          end
+        end
+        
+        
       end
 
     end
