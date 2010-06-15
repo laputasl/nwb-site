@@ -1,5 +1,7 @@
 <%content_for :head do%>
 <!-- Add markup for search head here -->
+<base href="<%=root_url%>"/>
+<%= stylesheet_link_tag "/stylesheets/#{@current_domain}_search.css" %>
 <%end%>
 <%content_for :analytics do%>
 <!-- Add markup for search analytics here -->
