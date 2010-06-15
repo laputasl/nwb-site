@@ -6,6 +6,9 @@ if(typeof(_gat)!='object')document.write('<sc'+'ript src="http'+
 <script type="text/javascript">
 try {
 var gwoTracker=_gat._getTracker("<%= ga_pid %>");
+gwoTracker._setDomainName('.naturalwellbeing.com');
+gwoTracker._setAllowLinker(true);
+gwoTracker._setAllowHash(false);
 gwoTracker._trackPageview("/<%= id %>/goal");
 }catch(err){}</script>
 <!-- End of Google Website Optimizer Conversion Script -->
