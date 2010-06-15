@@ -2,7 +2,7 @@ class SiteHooks < Spree::ThemeSupport::HookListener
 
   insert_after :product_properties do
     %(<div class="pr_review_summary">
-      <script type="text/javascript">POWERREVIEWS.display.engine(document, { pr_page_id : "<%= @product.legacy_id %>" });</script>
+      <script type="text/javascript">POWERREVIEWS.display.engine(document, { pr_page_id : "<%= @product.powerreviews_page_id %>" });</script>
     </div>)
   end
 
