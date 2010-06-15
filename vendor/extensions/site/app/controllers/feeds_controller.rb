@@ -16,4 +16,22 @@ class FeedsController < Spree::BaseController
       format.csv { render :template => "feeds/#{feed_name}.csv", :layout => false, :locals =>{:products => products}}
     end
   end
+  def includes
+    @supress_cart = true
+    @title = "Search Results"
+    locals = {}
+    case params[:segment]
+    when "head"
+      render :template => "feeds/includes.html.erb", :layout => "/shared/_head.html", :locals =>locals
+    when "navigation"
+      render :template => "feeds/includes.html.erb", :layout => "/shared/_#{@current_domain}_navigation.html", :locals =>locals
+    when "sidebar"
+      render :template => "feeds/includes.html.erb", :layout => "/shared/_#{@current_domain}_sidebar.html", :locals =>locals
+    when "footer"
+      render :template => "feeds/includes.html.erb", :layout => "/shared/_#{@current_domain}_footer.html", :locals =>locals
+    when "analytics"
+      render :template => "feeds/includes.html.erb", :layout => "/shared/_#{@current_domain}_footer.html", :locals =>locals      
+    end
+  end
+  
 end
