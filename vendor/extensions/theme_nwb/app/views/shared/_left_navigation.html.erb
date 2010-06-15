@@ -3,7 +3,7 @@
 <% end %>
 
 <% @categories.root.children.each do |taxon| %>
-  <% if (taxon == @taxon || taxon.children.include?(@taxon)) || (@site.code == "pwb" && @current_controller == "home_page") %>
+  <% if (taxon == @taxon || taxon.children.include?(@taxon)) || (@site.code == "pwb" && %w(home_page feeds).include?(@current_controller)) %>
     <% if taxon == @taxon %>
       <% if @product.nil? %>
         <dt class="selected"><strong><%= taxon.name %></strong></dt>
