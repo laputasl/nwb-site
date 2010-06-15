@@ -108,7 +108,7 @@ class SiteExtension < Spree::Extension
         index.facet :taxon_names, "Taxon"
         index.sortable :price
       end
-      
+
       def powerreviews_page_id
         legacy_id || "#{store.code}_#{id}"
       end
