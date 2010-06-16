@@ -35,6 +35,10 @@ class SiteExtension < Spree::Extension
       end
     end
 
+    OrdersController.class_eval do
+      skip_before_filter :verify_authenticity_token, :only => [:create, :update]
+    end
+
     ProductsController.class_eval do
       before_filter :can_show_product, :only => :show
 
@@ -157,7 +161,7 @@ class SiteExtension < Spree::Extension
       include ActionView::Helpers::NumberHelper
       belongs_to :store
       has_many :reminder_messages, :as => :remindable
-
+      
       def after_initialize #fallback to ensure order is always assigned to a store
         self.store ||= Store.first
       end
