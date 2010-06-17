@@ -4,9 +4,12 @@ map.root :controller => :home_page, :action => :show
 #needed for pagination
 map.products "/products", :controller => :products, :action => :index
 
-map.resources :orders, :member => {:calculate_shipping => :get} do |order|
+map.resources :orders,  :member => {:calculate_shipping => :get}, :collection => {:add_variant_only => [:post, :get]} do |order|
   order.resource :checkout, :member => {:set_shipping_method => :any}
 end
+
+map.connect "/add_to_cart", :controller=> 'orders', :action=>"add_variant_only"
+
 
 map.namespace :admin do |admin|
    admin.resources :products, :member => {:additional_fields => :get}
