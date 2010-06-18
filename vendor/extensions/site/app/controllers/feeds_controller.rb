@@ -5,7 +5,7 @@ class FeedsController < Spree::BaseController
 
     store =  Store.find_by_code(@current_domain)
     products = store.products.active
-    all_products = Products.active
+    all_products = Product.active
     respond_to do |format|
       format.xml  { render :template => "feeds/#{feed_name}.xml",  :layout => false, :locals =>{:products => products, :all_products => all_products, :store => store}}
       format.csv  { render :template => "feeds/#{feed_name}.csv",  :layout => false, :locals =>{:products => products, :all_products => all_products, :store => store}}
