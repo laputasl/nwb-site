@@ -47,7 +47,7 @@
 CODE
 %></powerreviews>
 <add_to_cart><![CDATA[
-<% form_for :order, :url => "/add_to_cart" do |f| %>
+<% form_tag "/add_to_cart", :method => :post do |f| %>
   <fieldset>
      <div class="quantity">
       <label>Quantity</label>
