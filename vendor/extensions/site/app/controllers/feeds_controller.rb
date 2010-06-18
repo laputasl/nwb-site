@@ -12,8 +12,9 @@ class FeedsController < Spree::BaseController
     end
 
     respond_to do |format|
-      format.xml { render :template => "feeds/#{feed_name}.xml", :layout => false, :locals =>{:products => products}}
-      format.csv { render :template => "feeds/#{feed_name}.csv", :layout => false, :locals =>{:products => products}}
+      format.xml  { render :template => "feeds/#{feed_name}.xml",  :layout => false, :locals =>{:products => products}}
+      format.csv  { render :template => "feeds/#{feed_name}.csv",  :layout => false, :locals =>{:products => products}}
+      format.atom { render :template => "feeds/#{feed_name}.atom", :layout => false, :locals =>{:products => products}}
     end
   end
   def includes
@@ -30,7 +31,7 @@ class FeedsController < Spree::BaseController
     when "footer"
       render :template => "feeds/includes.html.erb", :layout => "/shared/_#{@current_domain}_footer.html", :locals =>locals
     when "analytics"
-      render :template => "feeds/includes.html.erb", :layout => "/shared/_#{@current_domain}_footer.html", :locals =>locals      
+      render :template => "feeds/includes.html.erb", :layout => "/shared/analytics.html", :locals =>locals      
     end
   end
   

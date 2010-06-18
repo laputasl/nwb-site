@@ -46,6 +46,17 @@
 </div>
 CODE
 %></powerreviews>
+<add_to_cart><![CDATA[
+<% form_for :order, :url => "/add_to_cart" do |f| %>
+  <fieldset>
+     <div class="quantity">
+      <label>Quantity</label>
+      <%= text_field_tag("variants[#{product.master.id}]", 1)  %>
+    </div>
+    <%= submit_tag("Buy Now", :class => "btnAddCart") %>
+  </fieldset>
+<% end %>
+]]></add_to_cart>
 </product>
   
 <%end%>
