@@ -1,6 +1,6 @@
 <div id="header">
   <h1><a href="/"><img src="/pwb/images/pwb_logo.jpg" alt="PetWellbeing.com - 1.877.633.2401" /></a></h1>
-  <div class="util">
+
   <ul id="miscNav">
     <% if current_user.nil? %>
       <li class="first"><%= link_to "Login", login_path %></li>
@@ -14,7 +14,7 @@
     <li><a href="/pwb/aboutus" title="About">About</a></li>
   </ul>
   <%= render "shared/pwb_search" %>
-  </div>
+
   <ul id="nav">
     <li><a id="navHome" href="/" title="Home">Home</a></li>
     <li><a id="navShipping" href="/pwb/shipping" title="Free Same Day Shipping">Free Same Day Shipping</a></li>
@@ -24,3 +24,4 @@
     <li><%= link_to "My Account", current_user ? user_path(current_user) : login_path(), {:id => "navAccount"} %></li>
   </ul>
 </div>
+

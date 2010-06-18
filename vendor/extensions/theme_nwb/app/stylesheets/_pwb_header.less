@@ -6,30 +6,18 @@
   overflow: hidden;
   padding: 2px 0 0 0;
   h1 {
-    width: 350px;
-    min-height: 50px;
-    display: -moz-inline-stack;
-    display: inline-block;
-    vertical-align: top;
-    margin: 0px;
-    zoom: 1;
-    *display: inline;
-    _height: 50px;
     a {
+      /*
+      background: url(/pwb/images/pwb_logo.gif) top left no-repeat;
+      text-indent: -999em;
+      */
+      float: left;
       display: inline;
+      overflow: hidden;
+      width: 400px;
+      height: 64px;
     }
-  }
-  .util {
-    width: 390px;
-    min-height: 50px;
-    display: -moz-inline-stack;
-    display: inline-block;
-    vertical-align: top;
     margin: 0px;
-    zoom: 1;
-    *display: inline;
-    _height: 50px;
-    text-align: right;
   }
   li {
     list-style: none;
@@ -39,7 +27,8 @@
   #miscNav {
     float: right;
     display: inline;
-    width: 400px;
+    width: 340px;
+
     li {
       float: right;
       display: inline;
@@ -47,12 +36,11 @@
       border-right: 1px solid #000;
       line-height: 14px;
     }
-    li.first {
-      border: 0;
-      padding-right: 0;
-    }
+    li.first {border: 0;padding-right: 0;}
   }
-  /*Search*/
+  /*---------------------*/
+  /* Search -------------*/
+  /*---------------------*/
   #searchForm {
     float: right;
     display: inline;
@@ -64,14 +52,13 @@
     p {
       clear: both;
     }
-    legend {
-      display:none;
-    }
+    legend {display:none;}
     input {
       float: left;
       display: inline;
       width: 118px;
       padding: 1px 2px;
+      border: 1px solid #7FADCE;
     }
     #btnSearch {
       background: url(/pwb/images/btn_search.png) top left no-repeat;

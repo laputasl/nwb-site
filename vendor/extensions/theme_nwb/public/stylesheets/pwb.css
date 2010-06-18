@@ -27,29 +27,13 @@ a:active { color: #1c3c80; }
   overflow: hidden;
   padding: 2px 0 0 0;
 }
-#header h1 {
-  width: 350px;
-  min-height: 50px;
-  display: -moz-inline-stack;
-  display: inline-block;
-  vertical-align: top;
-  margin: 0px;
-  zoom: 1;
-  *display: inline;
-  _height: 50px;
-}
-#header h1 a { display: inline; }
-#header .util {
-  width: 390px;
-  min-height: 50px;
-  display: -moz-inline-stack;
-  display: inline-block;
-  vertical-align: top;
-  margin: 0px;
-  zoom: 1;
-  *display: inline;
-  _height: 50px;
-  text-align: right;
+#header h1 { margin: 0px; }
+#header h1 a {
+  float: left;
+  display: inline;
+  overflow: hidden;
+  width: 400px;
+  height: 64px;
 }
 #header li {
   list-style: none;
@@ -59,7 +43,7 @@ a:active { color: #1c3c80; }
 #header #miscNav {
   float: right;
   display: inline;
-  width: 400px;
+  width: 340px;
 }
 #header #miscNav li {
   float: right;
@@ -88,6 +72,7 @@ a:active { color: #1c3c80; }
   display: inline;
   width: 118px;
   padding: 1px 2px;
+  border: 1px solid #7fadce;
 }
 #header #searchForm #btnSearch {
   background: url(/pwb/images/btn_search.png) top left no-repeat;
@@ -508,9 +493,12 @@ h1 {
   border-color: #c2bfaf;
   border-top: 0;
 }
-.productDetails {
-  margin: 25px 0 0 13px;
-  clear: both;
+.productDetails { margin: 25px 0 0 13px; }
+.productDetails h3 {
+  color: #40729b;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 15px;
 }
 .productDetails h4 {
   color: #5d755d;
@@ -555,7 +543,6 @@ h1 {
   vertical-align: top;
   zoom: 1;
   *display: inline;
-  _height: 100px;
   overflow: hidden;
   margin: 0px 9px 0 10px;
 }
@@ -567,7 +554,6 @@ h1 {
   vertical-align: top;
   zoom: 1;
   *display: inline;
-  _height: 10px;
   overflow: hidden;
   margin: 0px 5px;
 }
@@ -720,6 +706,7 @@ h1 {
   cursor: pointer;
   overflow: hidden;
   text-indent: -999em;
+  font-size: 0px;
 }
 .productList .price form .btnAddCart {
   background: url(/pwb/images/btn_add_cart.png) top left no-repeat;
@@ -732,6 +719,7 @@ h1 {
   cursor: pointer;
   overflow: hidden;
   text-indent: -999em;
+  font-size: 0px;
 }
 .productList .price .quantity {
   float: left;
@@ -1202,10 +1190,22 @@ div#checkout .progress-steps {
   padding-right: 10px;
   text-align: right;
 }
-#checkout_form_address #billing input { width: 300px; }
-#checkout_form_address #shipping input { width: 300px; }
-#checkout_form_address #billing select { width: 300px; }
-#checkout_form_address #shipping select { width: 300px; }
+#checkout_form_address #billing input {
+  width: 300px;
+  float: left;
+}
+#checkout_form_address #shipping input {
+  width: 300px;
+  float: left;
+}
+#checkout_form_address #billing select {
+  width: 300px;
+  float: left;
+}
+#checkout_form_address #shipping select {
+  width: 300px;
+  float: left;
+}
 #checkout_form_address #billing p.checkbox { padding-left: 210px; }
 #checkout_form_address #shipping p.checkbox { padding-left: 210px; }
 #checkout_form_address #billing p.checkbox label {
