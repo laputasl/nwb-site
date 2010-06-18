@@ -21,6 +21,5 @@ map.brand_taxon '/b/*path', :controller => 'taxons', :action => 'show'
 # map.feed '/feed/:feed.:format',  :controller => 'feeds', :action => 'show'
 # map.feed '/feed(/:store)/:feed.:format',  :controller => 'feeds', :action => 'show'
 
-map.connect '/inc/:segment', :controller => 'feeds', :action => 'includes',  :conditions => { :method => :get } 
-map.connect '/feed/:feed.:format', :controller => 'feeds', :action => 'show',  :conditions => { :method => :get } 
-map.connect '/feed/:store/:feed.:format', :controller => 'feeds', :action => 'show',  :conditions => { :method => :get } 
+map.connect '/inc/:segment', :controller => 'feeds', :action => 'includes', :conditions => { :method => :get } 
+map.connect '/feed/:feed.:format', :controller => 'feeds', :action => 'show', :conditions => { :method => :get } 
