@@ -1,0 +1,23 @@
+<%
+key = (@current_domain == "pwb")? :pwb_click_equations_key : :nwb_click_equations_key
+scheme = (request.ssl?) ? "https://" : "http://"
+%><%=javascript_include_tag "#{scheme}js.clickequations.net/CLEQ_#{Spree::Config[key]}.js"%><% 
+if flash[:commerce_tracking] 
+  units = 0  
+  javascript_tag :defer => 'defer' do -%>
+  CQtracker.set_CLEQ_transtype( '1' );
+  CQtracker.set_CLEQ_transid( '<%= "#{"QA-" if request.server_name =~ /^(dev.|staging.|localhost)/ }#{@order.number}" %>' );
+  CQtracker.set_CLEQ_currency( 'USD' );
+  CQtracker.set_CLEQ_total( '<%= @order.total %>' ) ;
+  CQtracker.set_CLEQ_tax( '<%= @order.tax_charges.sum(:amount).to_s %>' ) ;
+  CQtracker.set_CLEQ_shipping( '<%= @order.shipping_charges.sum(:amount).to_s %>' ) ;
+  <% @order.line_items.each do |line_item| -%>
+    <% units += line_item.quantity%>
+    CQtracker.set_CLEQ_items( '<%= line_item.variant.sku %>|<%= line_item.price %>|<%= line_item.quantity %>' );
+  <% end -%>
+  CQtracker.set_CLEQ_units( '<%= units%>' ) ;
+  CQtracker.log_CLEQ_conversion();
+  <% 
+  end
+end  -%>
+ 
