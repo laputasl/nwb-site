@@ -413,7 +413,6 @@ h5 {
 }
 .product .price {
   clear: both;
-  overflow: auto;
   padding: 0;
 }
 .product .price strong { color: #941c1c; }
