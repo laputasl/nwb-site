@@ -1,5 +1,5 @@
 <product_list>
-<%products.each do |prod|%>
+<%all_products.each do |prod|%>
 <product>
    <name><%= html_escape(prod.name)%></name>
    <url><%=url_for(:controller=>'products', :action=> :show, :id=>prod, :only_path => false)%></url>
@@ -7,7 +7,8 @@
    <short_desc><%= html_escape(prod.short_home)%></short_desc>
    <long_desc><%= html_escape(prod.description)%></long_desc>
    <image><%=product_image_url(prod)%></image>
-   <% cats = category_names(prod)
+   <% 
+   cats = category_names(prod, store)
    if cats.size > 0%>
    <category><%= html_escape(cats[0])%></category><%
    end
@@ -36,6 +37,27 @@
    <%if prod.ingredients?%>
    <ingredients><%= html_escape(prod.ingredients) %></ingredients>
    <%end%>
+   <powerreviews><%= 
+     html_escape <<-"CODE".chomp
+<div class="pr_snippet_category">
+  <script type="text/javascript">
+    var pr_snippet_min_reviews=1;
+    POWERREVIEWS.display.snippet(document, { pr_page_id : "#{prod.powerreviews_page_id}" });
+  </script>
+</div>
+CODE
+%></powerreviews>
+<add_to_cart><![CDATA[
+<% form_tag "/add_to_cart", :method => :post do |f| %>
+  <fieldset>
+     <div class="quantity">
+      <label>Quantity</label>
+      <%= text_field_tag("variants[#{prod.master.id}]", 1)  %>
+    </div>
+    <%= submit_tag("Buy Now", :class => "btnAddCart") %>
+  </fieldset>
+<% end %>
+]]></add_to_cart>
 </product>
   
 <%end%>

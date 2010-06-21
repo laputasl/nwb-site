@@ -1,4 +1,4 @@
 <% products.each_with_index do |product, i| %>
-  <%- review_url = "http://www.#{store.code == "nwb" ? "natural" : "pet"}wellbeing.com/#{store.code}/writeareview?pr_page_id=#{product.legacy_id}" -%>
+  <%- review_url = "http://www.#{store.code == "nwb" ? "natural" : "pet"}wellbeing.com/#{store.code}/writeareview?pr_page_id=#{product.powerreviews_page_id}" -%>
   <%= product.name %>: <%= review_url %>
 <% end %>

@@ -22,10 +22,10 @@ class MemcachedConfig
 
   def self.read_yaml(append_rails_env)
     memcached_config_file = File.join(RAILS_ROOT, 'config', 'memcached.yml')
-    raise("cannot read #{memcached_config_file}") unless File.exists? memcached_config_file
+    return {:disabled => true} unless File.exists? memcached_config_file
 
     memcached_config = YAML.load(ERB.new(IO.read(memcached_config_file)).result)
-    raise("cannot load #{memcached_config_file}") unless memcached_config
+    return {:disabled => true} unless memcached_config
 
     # merge defaults options with RAILS_ENV specific options
     memcached_env_config = memcached_config['defaults'] || {}

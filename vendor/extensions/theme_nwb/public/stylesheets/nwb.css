@@ -413,7 +413,6 @@ h5 {
 }
 .product .price {
   clear: both;
-  overflow: auto;
   padding: 0;
 }
 .product .price strong { color: #941c1c; }
@@ -579,7 +578,6 @@ h5 {
   padding: 0 5px;
   zoom: 1;
   *display: inline;
-  _height: 100px;
   overflow: hidden;
 }
 .productList li .photo {
@@ -589,7 +587,6 @@ h5 {
   vertical-align: top;
   zoom: 1;
   *display: inline;
-  _height: 10px;
   overflow: hidden;
   margin: 0px 5px;
 }
@@ -1211,10 +1208,22 @@ div#checkout .progress-steps {
   padding-right: 10px;
   text-align: right;
 }
-#checkout_form_address #billing input { width: 300px; }
-#checkout_form_address #shipping input { width: 300px; }
-#checkout_form_address #billing select { width: 300px; }
-#checkout_form_address #shipping select { width: 300px; }
+#checkout_form_address #billing input {
+  width: 300px;
+  float: left;
+}
+#checkout_form_address #shipping input {
+  width: 300px;
+  float: left;
+}
+#checkout_form_address #billing select {
+  width: 300px;
+  float: left;
+}
+#checkout_form_address #shipping select {
+  width: 300px;
+  float: left;
+}
 #checkout_form_address #billing p.checkbox { padding-left: 210px; }
 #checkout_form_address #shipping p.checkbox { padding-left: 210px; }
 #checkout_form_address #billing p.checkbox label {

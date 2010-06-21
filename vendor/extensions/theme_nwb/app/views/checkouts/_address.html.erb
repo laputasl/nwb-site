@@ -7,8 +7,8 @@ div.inner input[type=text], div.inner select { width: 80%; }
     <legend><%= t("shipping_address")%></legend>
     <div class="inner">
       <p id="sfname" class="field">
-        <%= ship_form.label :firstname, t(:first_name) %>
-        <%= ship_form.text_field :firstname, :class => 'required' -%><span class="req">*</span>
+        <%= ship_form.label :firstname, t(:first_name), :style => 'float:left;' %>
+        <%= ship_form.text_field :firstname, :class => 'required', :style => 'float:left;' -%><span class="req">*</span>
       </p>
       <p id="slname" class="field">
         <%= ship_form.label :lastname, t(:last_name) %>
@@ -86,7 +86,7 @@ div.inner input[type=text], div.inner select { width: 80%; }
     <legend><%= t("billing_address")%></legend>
     <p class="field checkbox">
       <label for="checkout_same_address" id="use_billing">
-        <%= check_box_tag 'checkout[use_billing]', '1', (!(@checkout.ship_address.empty? && @checkout.bill_address.empty?) && @checkout.ship_address.eql?(@checkout.bill_address)) %> Use Shipping Address
+        <%= check_box_tag 'checkout[use_billing]', '1', (!(@checkout.ship_address.empty? && @checkout.bill_address.empty?) && @checkout.ship_address.eql?(@checkout.bill_address)) %>&nbsp;Use Shipping Address
       </label>
     </p>
     <div class="inner">

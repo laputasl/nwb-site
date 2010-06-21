@@ -1,5 +1,17 @@
 module FeedsHelper
-  def category_names prod
+  def category_names prod, store = nil
+    cats = all_category_names(prod)
+    unless prod.store == store || store.nil?
+      if store.code == 'pwb'
+        cats.unshift "Owners"
+      else
+        cats.unshift "Pets"
+      end
+    end
+    cats
+  end
+  
+  def all_category_names prod
     deepest = prod.taxons.inject(nil) do |memo, tax|
       unless tax.permalink.match(/^c\//).nil?
         unless memo.nil?

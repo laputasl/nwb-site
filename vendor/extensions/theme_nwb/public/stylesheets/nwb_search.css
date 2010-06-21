@@ -1,0 +1,88 @@
+#body #breadcrumbs { display: none; }
+.productList .pr_snippet_category .prSnippetNumberOfRatingsText { display: none; }
+.productList {
+  margin-left: 15px;
+  padding: 13px 0 10px;
+}
+.productList #infolinks ul { margin: 10px 0 7px; }
+.productList #infolinks ul li {
+  border-left: 1px solid #d5e3b6;
+  display: inline;
+  list-style: none outside none;
+  margin-right: 5px;
+  padding-left: 9px;
+}
+.productList #infolinks ul li:first-child {
+  border: medium none;
+  padding-left: 0;
+}
+.productList .prSnippetEngine div { padding: 0; }
+.productList .prSnippetRatingUnclickable {
+  display: inline-block;
+  line-height: 15px;
+}
+.productList .pr_snippet_category { padding-bottom: 10px; }
+.productList .pr_snippet_category .prSnippetReadReviews {
+  display: inline;
+  padding-left: 8px;
+}
+.productList .pr_snippet_category .prSnippetWriteReview { display: none; }
+.productList .pr_snippet_category .prSnippetTitle { display: none; }
+.productList .pr_snippet_category div.prStars { float: left; }
+.productList .product { margin-top: 13px; }
+.productList p.description {
+  font-size: 1.5em;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.dollar_price {
+  border-right: 1px solid #aeb39d;
+  float: left;
+  font-size: 1.3em;
+  margin-right: 11px;
+  padding: 0 10px 0 0;
+}
+.price {
+  padding-right: 10px;
+  padding-top: 13px;
+}
+.price .quantity {
+  display: inline;
+  float: left;
+  width: 100px;
+}
+.price .quantity input {
+  margin: 0 0 0 5px;
+  text-align: center;
+  width: 30px;
+}
+.searchpinfo {
+  float: left;
+  margin-left: 10px;
+  margin-top: 0;
+  width: 385px;
+}
+.searchpinfo .dollar_price strong { color: #000000; }
+.searchpinfo strong {
+  color: #000000;
+  font-size: 1em;
+}
+.searchprod {
+  float: left;
+  padding: 0 10px;
+  text-align: center;
+  width: 125px;
+}
+.sli_block_border {
+  border-bottom: 1px dashed #a7b79a;
+  clear: both;
+  display: block;
+  height: 3px;
+  margin: 15px 0;
+  width: 100%;
+}
+.sli_results {
+  float: right;
+  padding: 6px 0;
+}
+.sli_suggestions { padding: 5px 0 20px; }

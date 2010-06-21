@@ -23,7 +23,7 @@ products.each do |prod|
   row << prod.description.gsub(/\s+/, " ")
   row << product_image_url(prod)
   row << number_to_currency(prod.master.volume_price(1).to_s)
-  row << category_names(prod).join("<")
+  row << category_names(prod, store).join("<")
   row << (prod.count_on_hand>0)?1:0
   row << prod.sku
   row << prod.sku

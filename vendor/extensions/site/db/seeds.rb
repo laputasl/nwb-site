@@ -71,3 +71,5 @@ Spree::Config.set(:pwb_homepage_title => "Pet Holistic Health Supplies | Naturop
 Spree::Config.set(:nwb_homepage_title => "Herbal Remedies | Holistic Health Supplies | All Natural Holistic Treatments and Naturopathic Medicine")
 Spree::Config.set(:pwb_homepage_description => "Pet Wellbeing provides natural pet supplies for your cat or dog.  Health products for ailments like cancer, arthritis, conjunctivitis, ear infections, flea control and more.  FREE Shipping Available!")
 Spree::Config.set(:nwb_homepage_description => "Offers permanent hair removal products, hair growth, and hair loss treatments for female and male pattern baldness. Also sells low libido and sex drive enhancers and other herbal supplements.")
+
+Spree::Config.set(:allow_anonymous_checkout => true) #needed to prevent log-out on recalculate on payment step for guests

@@ -1,3 +1,6 @@
 <%= render 'shared/google_analytics' %>
-<%= render 'shared/nwb_fetch_back' %>
+<!-- HERE -->
+<%= render 'shared/ppc'%>
+<!-- HERE -->
+<%= render "shared/#{@current_domain}_fetch_back" %>
 <%= yield :analytics %>

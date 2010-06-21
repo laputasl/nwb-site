@@ -35,6 +35,29 @@ class SiteExtension < Spree::Extension
       end
     end
 
+    OrdersController.class_eval do
+      skip_before_filter :verify_authenticity_token, :only => [:add_variant_only]
+      
+      def add_variant_only
+        # We're going to find the Variants then add them to the cart in 
+        # two steps so that if an invalid variant ID is used, we don't 
+        # have to undo previously added variants.        
+        begin
+          order = find_order
+          logger.info "*" * 78
+          logger.info params["variants"].inspect
+          logger.info "*" * 78
+          variants = params[:variants].map{|variant_id, quant|[Variant.find(variant_id), quant.to_i]}.each do |item|
+            order.add_variant item[0], item[1]
+          end
+          redirect_to edit_order_url(@order)
+        rescue ActiveRecord::RecordNotFound => rnf
+          flash[:error] = "Product does not exist"
+          render :template => "orders/edit" 
+        end
+      end
+    end
+
     ProductsController.class_eval do
       before_filter :can_show_product, :only => :show
 
@@ -157,7 +180,7 @@ class SiteExtension < Spree::Extension
       include ActionView::Helpers::NumberHelper
       belongs_to :store
       has_many :reminder_messages, :as => :remindable
-
+      
       def after_initialize #fallback to ensure order is always assigned to a store
         self.store ||= Store.first
       end

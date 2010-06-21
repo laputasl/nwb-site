@@ -1,4 +1,5 @@
-run "ln -nfs #{shared_path}/config/s3.yml #{release_path}/config/s3.yml"      
+run "ln -nfs #{shared_path}/config/memcached.yml  #{release_path}/config/memcached.yml"
+run "ln -nfs #{shared_path}/config/s3.yml #{release_path}/config/s3.yml"
 run "ln -nfs #{shared_path}/db/xapiandb #{release_path}/db/xapiandb"
 run "ln -nfs #{shared_path}/static_people #{release_path}/public/sl"
 run "ln -nfs #{shared_path}/static_pets #{release_path}/public/st"
