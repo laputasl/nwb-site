@@ -1,0 +1,8 @@
+<% gwo_test = GwoTest.find(gwo_test_id) %>
+<% if gwo_test.status == "enabled" %>
+  <span class="enabled_status" >
+<% elsif gwo_test.status == "disabled" %>
+  <span class="disabled_status" >
+<% end %>
+    <%= gwo_test.status%>
+  </span>

@@ -1,0 +1,2 @@
+page.replace_html "gwo_test_status_#{@gwo_test.id.to_s}", :partial => "status", :locals=>{:gwo_test_id => @gwo_test.id}
+page.replace_html "gwo_test_actions_#{@gwo_test.id.to_s}", :partial => "actions", :locals=>{:gwo_test_id => @gwo_test.id}

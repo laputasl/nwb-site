@@ -3,11 +3,21 @@
 <head>
 <%= render :partial => 'shared/head'%>
 </head>
+  
+<!-- gwo control -->
+<% gwo_test = GwoTest.find_by_name("NWB Product Headline Color Test MV") %>
+<% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
+    <%= render :partial => 'shared/gwo/nwb_control', :locals => {:eid => "#{gwo_test.eid}"} %>
+<% end %>
 
-<%= render :partial => 'shared/gwo/nwb_control', :locals => {:id => '2000484336'}%>
-<script>utmx_section("body tag")</script>
+<% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
+  <script>utmx_section('body_tag')</script>
+<% end %>
 <body>
-</noscript>
+<% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
+  <%= render :text=>"</noscript>" %>
+<% end %>
+
   <div id="container">
     <%= render "/shared/nwb_navigation" %>
     <div id="main">
@@ -29,6 +39,28 @@
   <%= render 'shared/google_analytics' %>
   <%= render 'shared/nwb_fetch_back' %>
 </body>
-<%= render :partial => 'shared/gwo/nwb_tracking', :locals => {:id => '2000484336', :ga_pid => 'UA-981819-14'} %>
+<script type="text/javascript">
+  /*
+    if(document.body.className=='gwo_dog_banner_test_var_1'){
+      document.getElementById("dog_banner").src="/pwb/images/banner-dog-supplies-free-shipping.jpg";
+    }
+    if(document.body.className=='gwo_dog_banner_test_var_2'){
+      document.getElementById("dog_banner").style.display="none";
+    }
+    if(document.body.className=='gwo_cat_banner_test_var_1'){
+      document.getElementById("cat_banner").src="/pwb/images/banner-cat-supplies-free-shipping.jpg";
+    }
+    if(document.body.className=='gwo_cat_banner_test_var_2'){
+      document.getElementById("cat_banner").style.display="none";
+    }
+   */
+  //document.body.style.backgroundImage="url(images/2.jpg)";
+  //document.getElementById("container").style.backgroundColor="white";
+</script>
+<!-- gwo tracking -->
+<% gwo_tests = GwoTest.find(:all, :conditions => ["status=? AND category=?", "enabled", "MV"]) %>
+<% gwo_tests.each do |gwo_test| %>
+  <%= render :partial => 'shared/gwo/nwb_tracking', :locals => {:eid => "#{gwo_test.eid}", :pid => "#{gwo_test.pid}"} %>
+<% end %>
 </html>
 

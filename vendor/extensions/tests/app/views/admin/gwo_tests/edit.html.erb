@@ -1,0 +1,9 @@
+<h1>Editing Test</h1>
+<%= error_messages_for :gwo_test %>
+
+<% form_for(:gwo_test, :url => object_url, :html => { :method => :put }) do |f| -%>
+  <%= render :partial => "form", :locals => { :f => f } %>
+  <p>
+    <%=submit_tag t("update"), {"class" => "wymupdate"}%> or <%= link_to t("cancel"), admin_gwo_tests_path%>
+  </p>
+<% end %>

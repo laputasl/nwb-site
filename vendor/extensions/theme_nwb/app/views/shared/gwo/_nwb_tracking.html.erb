@@ -5,7 +5,10 @@ if(typeof(_gat)!='object')document.write('<sc'+'ript src="http'+
 '.google-analytics.com/ga.js"></sc'+'ript>')</script>
 <script type="text/javascript">
 try {
-var gwoTracker=_gat._getTracker("<%= ga_pid %>");
-gwoTracker._trackPageview("/<%= id %>/test");
+var gwoTracker=_gat._getTracker("<%= pid %>");
+gwoTracker._setDomainName(".naturalwellbeing.com");
+gwoTracker._setAllowHash(false);
+gwoTracker._setAllowLinker(true);
+gwoTracker._trackPageview("/<%= eid %>/test");
 }catch(err){}</script>
 <!-- End of Google Website Optimizer Tracking Script -->

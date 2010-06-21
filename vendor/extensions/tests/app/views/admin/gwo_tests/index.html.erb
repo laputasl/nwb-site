@@ -1,0 +1,51 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag "admin/gwo_test.css" %>
+<% end %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li id="new_ot_link">
+      <%#= button_link_to_remote "New Test",
+                         {:url => new_object_url,
+                         :method => :get,
+                         :update => "new-test"}, :icon => 'add' %>
+      <%= button_link_to "New Test", new_object_url, :icon => 'add' %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1>GWO Tests</h1>
+
+<%= image_tag "spinner.gif", :plugin=>"spree", :style => "display:none", :id => 'busy_indicator' %>
+<div id="new-test"></div>
+
+<table class="admin-report" width="545">
+  <thead>
+    <tr>
+      <th><%=t("name")%></th>
+      <th><%=t("category")%></th>
+      <th>Experiment ID</th>
+      <th>Property ID</th>
+      <th><%=t("status")%></th>
+      <th><%=t("action")%></th>
+    </tr>
+  </thead>
+	
+  <tbody>
+    <% @gwo_tests.each do |gwo_test| %>
+      <tr class="<%= cycle('even', 'odd') %>">
+        <td><%= gwo_test.name%></td>
+        <td><%= gwo_test.category%></td>
+        <td><%= gwo_test.eid%></td>   
+        <td><%= gwo_test.pid%></td>
+        <td id="gwo_test_status_<%= gwo_test.id.to_s %>">
+          <%= render :partial => "status", :locals=>{:gwo_test_id => gwo_test.id} %>
+        </td>
+	<td id="gwo_test_actions_<%= gwo_test.id.to_s %>">
+          <%= render :partial => "actions", :locals=>{:gwo_test_id => gwo_test.id} %>         
+	</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

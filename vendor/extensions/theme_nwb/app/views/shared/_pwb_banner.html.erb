@@ -1,7 +1,35 @@
 <% if @site.code == "pwb" %>
   <% if @taxon.id == 3001 || @taxon.ancestors.any? {|t| t.id == 3001 } %>
-    <%= image_tag "/pwb/images/banner-dog-supplies.jpg", :alt => "PetWellbeing.com : Dog Supplies" %>
+
+    <!-- gwo control -->
+    <% gwo_test = GwoTest.find_by_name("NWB Dog Banner Test MV") %>
+    <% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
+      <%= render :partial => 'shared/gwo/nwb_control', :locals => {:eid => "#{gwo_test.eid}"} %>
+    <% end %>
+    
+    <% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
+      <script>utmx_section('dog_banner')</script>
+    <% end %>
+    <%= image_tag "/pwb/images/banner-dog-supplies.jpg", :alt => "PetWellbeing.com : Dog Supplies", :id=>"dog_banner" %>
+    <% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
+      <%= render :text=>"</noscript>" %>
+    <% end %>
+      
   <% elsif @taxon.id == 3002 || @taxon.ancestors.any? {|t| t.id == 3002 } %>
-    <%= image_tag "/pwb/images/banner-cat-supplies.jpg", :alt => "PetWellbeing.com : Cat Supplies" %>
+
+    <!-- gwo control -->
+    <% gwo_test = GwoTest.find_by_name("NWB Cat Banner Test MV") %>
+    <% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
+      <%= render :partial => 'shared/gwo/nwb_control', :locals => {:eid => "#{gwo_test.eid}"} %>
+    <% end %>
+    
+    <% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
+      <script>utmx_section('cat_banner')</script>
+    <% end %>
+    <%= image_tag "/pwb/images/banner-cat-supplies.jpg", :alt => "PetWellbeing.com : Cat Supplies", :id=>"cat_banner" %>
+    <% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
+      <%= render :text=>"</noscript>" %>
+    <% end %>
+      
   <% end %>
 <% end %>

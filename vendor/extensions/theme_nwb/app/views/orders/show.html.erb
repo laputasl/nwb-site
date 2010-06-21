@@ -1,7 +1,11 @@
 <div id="order">
   
   <% if params.has_key? :checkout_complete %>
-  <%= render :partial => 'shared/gwo/nwb_conversion', :locals => {:id => '2000484336', :ga_pid => 'UA-981819-14'} %>
+  <!-- gwo conversion -->
+  <% gwo_tests = GwoTest.find(:all, :conditions => ["status=? AND category=?", "enabled", "MV"]) %>
+  <% gwo_tests.each do |gwo_test| %>
+    <%= render :partial => 'shared/gwo/nwb_conversion', :locals => {:eid => "#{gwo_test.eid}", :pid => "#{gwo_test.pid}"} %>
+  <% end %>
     <br/><br/>
     <div id="cart-footer">
       <h2><strong>Thank You</strong></h2><br/>
@@ -17,7 +21,7 @@
       <p>Your authorization number is: <strong><%= @order.payments.empty? ? @order.checkout.payments.first.txns.last.id : @order.payments.first.txns.last.id %></strong></p>
 
       <p>Your order number is: <strong><%= @order.number %></strong></p>
-    </div>
+    </div>   
 
   <% else %>
     | <%= link_to t('my_account'), user_path(current_user) if current_user%>

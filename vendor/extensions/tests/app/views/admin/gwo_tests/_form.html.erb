@@ -1,0 +1,25 @@
+<table class="admin-report" width="545">
+  <tr>
+    <td valign="top">Name:</td>
+    <td><%= f.text_field :name, {"style" => "width:500px", :maxlength=>150} %></td>
+  </tr>
+  <tr>
+    <td valign="top">Category:</td>
+    <td>
+      <select name="gwo_test[category]">
+        <option value="MV">Multi-Variate</option>
+        <option value="AB">A/B</option>
+      </select>
+      <input type="hidden" name="gwo_test[status]" value="disabled" />
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">Experiment ID:</td>
+    <td><%= f.text_field :eid, {"style" => "width:200px", :maxlength=>30} %></td>
+  </tr>
+  <tr>
+    <td valign="top">Property ID:</td>
+    <td><%= f.text_field :pid, {"style" => "width:200px", :maxlength=>30} %></td>
+  </tr>
+</table>
+

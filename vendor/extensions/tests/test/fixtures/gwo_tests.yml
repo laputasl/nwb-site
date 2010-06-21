@@ -1,0 +1,20 @@
+NWB_Product_Headline_Color_Test_MV:
+  name: NWB Product Headline Color Test MV
+  category: MV
+  eid: 2000484336
+  pid: UA-981819-14
+  status: enabled
+  
+NWB_Dog_Banner_Test_MV:
+  name: NWB Dog Banner Test MV
+  category: MV
+  eid: 2021971787
+  pid: UA-981819-14
+  status: enabled
+
+NWB_Cat_Banner_Test_MV:
+  name: NWB Cat Banner Test MV
+  category: MV
+  eid: 3819126798
+  pid: UA-981819-14
+  status: enabled
