@@ -38,14 +38,11 @@ class ActiveRecord::Base
   named_scope :conditions_all, lambda { |*args| {:conditions => [args].flatten} }
 
   # forming the disjunction of a list of conditions (as strings)
-  named_scope :conditions_any, lambda { |*args| 
+  named_scope :conditions_any, lambda { |*args|
     args = [args].flatten
     raise "non-strings in conditions_any" unless args.all? {|s| s.is_a? String}
     { :conditions => args.map {|c| "(#{c})"}.join(" OR ") }
   }
-
-  # truncate a list of results
-  named_scope :limit, lambda {|n| {:limit => n}}
 end
 
 
