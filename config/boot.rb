@@ -15,11 +15,11 @@ module Spree
       defined? Spree::Initializer
     end
 
-    def pick_boot   
+    def pick_boot
       return VendorBoot.new if File.exist?("#{RAILS_ROOT}/vendor/spree")
       (File.exist?("#{RAILS_ROOT}/lib/spree.rb") ? AppBoot : GemBoot).new
     end
-    
+
     def vendor_rails?
       File.exist?("#{RAILS_ROOT}/vendor/rails")
     end
@@ -46,20 +46,20 @@ module Spree
       $stderr.puts %(Spree requires RubyGems >= 1.3.6. Please install RubyGems and try again: http://rubygems.rubyforge.org)
       exit 1
     end
-    
+
     def rubygems_version
       Gem::RubyGemsVersion.nil? ? '0.0' : Gem::RubyGemsVersion
     end
   end
 
-  class Boot 
+  class Boot
     include Spree::RubyGemsLoader
     def run
-      load_rails("2.3.5")  # note: spree requires this specific version of rails (change at your own risk)
+      load_rails("2.3.8")  # note: spree requires this specific version of rails (change at your own risk)
       load_initializer
       Spree::Initializer.run(:set_load_path)
     end
-    
+
     def load_initializer
       begin
         require 'spree'
@@ -68,9 +68,9 @@ module Spree
         $stderr.puts %(Spree could not be initialized. #{e})
         exit 1
       end
-    end   
-    
-    # since we're hijacking the initializer rails is no longer guaranteed to be available 
+    end
+
+    # since we're hijacking the initializer rails is no longer guaranteed to be available
     # (but we need it in the initializer)
     def load_rails(version)
       if File.exist?("#{RAILS_ROOT}/vendor/rails")
@@ -84,15 +84,15 @@ module Spree
           exit 1
         end
       end
-    end 
+    end
   end
 
   class VendorBoot < Boot
     def load_initializer
-      $LOAD_PATH.unshift "#{RAILS_ROOT}/vendor/spree/lib" 
+      $LOAD_PATH.unshift "#{RAILS_ROOT}/vendor/spree/lib"
       super
     end
-    
+
     def load_error_message
       "Please verify that vendor/spree contains a complete copy of the Spree sources."
     end
@@ -103,12 +103,12 @@ module Spree
       $LOAD_PATH.unshift "#{RAILS_ROOT}/lib"
       super
     end
-    
+
     def load_error_message
       "Please verify that you have a complete copy of the Spree sources."
     end
   end
-  
+
   class GemBoot < Boot
 
     def load_initializer
@@ -129,7 +129,7 @@ module Spree
     end
 
     class << self
-      include Spree::RubyGemsLoader      
+      include Spree::RubyGemsLoader
 
       def gem_version
         if defined? SPREE_GEM_VERSION
