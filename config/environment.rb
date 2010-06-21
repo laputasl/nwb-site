@@ -27,7 +27,7 @@ Spree::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
 
   config.gem "highline", :version => '1.5.1'
-  config.gem 'authlogic', :version => '2.1.3'
+  config.gem 'authlogic', :version => '>=2.1.2'
   config.gem 'authlogic-oid', :lib => "authlogic_openid", :version => '1.0.4'
   config.gem "activemerchant", :lib => "active_merchant", :version => '1.5.1'
   config.gem 'activerecord-tableless', :lib => 'tableless', :version => '0.1.0'
@@ -36,13 +36,12 @@ Spree::Initializer.run do |config|
   config.gem 'chronic', :version => '0.2.3'
   config.gem 'whenever', :lib => false, :version => '0.3.7'
   config.gem 'searchlogic', :version => '2.3.5'
-  config.gem 'will_paginate', :lib => 'will_paginate', :version => '2.3.14'
+  config.gem 'will_paginate', :lib => 'will_paginate', :version => '2.3.11'
   config.gem 'state_machine', :lib => 'state_machine', :version => '0.8.0'
   config.gem "faker", :version => '0.3.1'
   config.gem 'paperclip', :version => '>=2.3.1.1'
-  config.gem 'refraction', :version => '0.2.0'
+  config.gem 'refraction', :version => '0.2.0'       
   config.gem 'exceptional', :version => '2.0.9'
-  config.gem 'ruby-openid', :lib => "openid", :version => '>=2.0.4'
 
   # Only load the plugins named here, in the order given. By default, all plugins
   # in vendor/plugins are loaded in alphabetical order.
@@ -80,7 +79,7 @@ Spree::Initializer.run do |config|
   # The internationalization framework can be changed to have another default locale (standard is :en) or more load paths.
   # All files from config/locales/*.rb,yml are added automatically.
   #config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
-  config.i18n.default_locale = :'en'
+  config.i18n.default_locale = :'en-US'
 
 end
 
