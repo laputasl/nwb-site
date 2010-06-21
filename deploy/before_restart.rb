@@ -1,1 +1,0 @@
-run "ln -nfs #{shared_path}/config/memcached.yml  #{release_path}/config/memcached.yml"
