@@ -4,7 +4,7 @@
   <!-- gwo conversion -->
   <% gwo_tests = GwoTest.find(:all, :conditions => ["status=? AND category=?", "enabled", "MV"]) %>
   <% gwo_tests.each do |gwo_test| %>
-    <%= render :partial => 'shared/gwo/nwb_conversion', :locals => {:eid => "#{gwo_test.eid}", :pid => "#{gwo_test.pid}"} %>
+    <%= render :partial => 'shared/gwo/conversion', :locals => {:eid => "#{gwo_test.eid}", :pid => "#{gwo_test.pid}"} %>
   <% end %>
     <br/><br/>
     <div id="cart-footer">

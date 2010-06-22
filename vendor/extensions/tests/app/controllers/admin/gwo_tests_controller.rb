@@ -1,5 +1,4 @@
 class Admin::GwoTestsController < Admin::BaseController
-  #require File.dirname(__FILE__) + '/../../helpers/admin/gwo_tests_helper.rb'
   resource_controller
 
   update.response do |wants|

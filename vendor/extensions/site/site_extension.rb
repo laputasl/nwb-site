@@ -119,7 +119,7 @@ class SiteExtension < Spree::Extension
       belongs_to :store
 
       named_scope :by_store, lambda { |*args| { :conditions => ["products.store_id = ?", args.first] } }
-
+=begin
       xapit do |index|
         index.text :name, :weight => 10
         index.text :description, :subtitle_main, :sales_copy, :short_home, :ingredients
@@ -131,7 +131,7 @@ class SiteExtension < Spree::Extension
         index.facet :taxon_names, "Taxon"
         index.sortable :price
       end
-
+=end
       def powerreviews_page_id
         legacy_id || "#{store.code}_#{id}"
       end

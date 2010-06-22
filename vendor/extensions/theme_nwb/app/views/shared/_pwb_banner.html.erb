@@ -4,7 +4,7 @@
     <!-- gwo control -->
     <% gwo_test = GwoTest.find_by_name("NWB Dog Banner Test MV") %>
     <% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
-      <%= render :partial => 'shared/gwo/nwb_control', :locals => {:eid => "#{gwo_test.eid}"} %>
+      <%= render :partial => 'shared/gwo/control', :locals => {:eid => "#{gwo_test.eid}"} %>
     <% end %>
     
     <% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
@@ -20,7 +20,7 @@
     <!-- gwo control -->
     <% gwo_test = GwoTest.find_by_name("NWB Cat Banner Test MV") %>
     <% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
-      <%= render :partial => 'shared/gwo/nwb_control', :locals => {:eid => "#{gwo_test.eid}"} %>
+      <%= render :partial => 'shared/gwo/control', :locals => {:eid => "#{gwo_test.eid}"} %>
     <% end %>
     
     <% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>

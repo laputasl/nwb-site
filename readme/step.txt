@@ -1,0 +1,8 @@
+To add a new gwo test:
+
+1. add control code and section code
+2. launch local test
+3. add new test to database and enable it(attention to name)
+4. get ready for staging test
+5. append to fixture/gwo_test.yml new sample data
+6. record ids to id notes

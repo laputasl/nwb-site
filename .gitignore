@@ -42,5 +42,6 @@ mkmf.log
 
 vendor/extensions/importer/data/*
 
-
+# soft link
+vendor/extensions/theme_nwb/public/pets
 

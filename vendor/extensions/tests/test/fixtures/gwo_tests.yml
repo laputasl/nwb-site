@@ -18,3 +18,17 @@ NWB_Cat_Banner_Test_MV:
   eid: 3819126798
   pid: UA-981819-14
   status: enabled
+
+NWB_Background_Test_MV:
+  name: NWB Background Test MV
+  category: MV
+  eid: 2328395807
+  pid: UA-981819-14
+  status: enabled
+
+NWB_Product_Headline_Font_Family_Test_MV:
+  name: NWB Product Headline Font Family Test MV
+  category: MV
+  eid: 0073225899
+  pid: UA-981819-14
+  status: enabled

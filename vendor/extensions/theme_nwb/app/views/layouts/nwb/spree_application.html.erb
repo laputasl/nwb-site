@@ -7,13 +7,12 @@
 <!-- gwo control -->
 <% gwo_test = GwoTest.find_by_name("NWB Product Headline Color Test MV") %>
 <% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
-    <%= render :partial => 'shared/gwo/nwb_control', :locals => {:eid => "#{gwo_test.eid}"} %>
+  <%= render :partial => 'shared/gwo/control', :locals => {:eid => "#{gwo_test.eid}"} %>
 <% end %>
 
 <% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
   <script>utmx_section('body_tag')</script>
 <% end %>
-
 <body>
 <% if ((not gwo_test.nil?) && gwo_test.status == "enabled") %>
   <%= render :text=>"</noscript>" %>
@@ -56,13 +55,43 @@
       document.getElementById("cat_banner").style.display="none";
     }
    */
-  //document.body.style.backgroundImage="url(images/2.jpg)";
-  //document.getElementById("container").style.backgroundColor="white";
 </script>
+
+<!-- gwo control: background-->
+<% gwo_test = GwoTest.find_by_name_and_status("NWB Background Test MV", "enabled") %>
+<% if not gwo_test.nil? %>
+  <%= render :partial => 'shared/gwo/control', :locals => {:eid => "#{gwo_test.eid}"} %>
+<% end %>
+<% if not gwo_test.nil? %>
+  <script>utmx_section('background_javascript')</script>
+<% end %>
+<script type="text/javascript">
+  document.body.style.backgroundColor="white";
+  document.getElementById("container").style.backgroundColor="white";
+</script>
+<% if not gwo_test.nil? %>
+  <%= render :text=>"</noscript>" %>
+<% end %>
+
+<!-- gwo control: background-->
+<% gwo_test = GwoTest.find_by_name_and_status("NWB Product Headline Font Family Test MV", "enabled") %>
+<% if not gwo_test.nil? %>
+  <%= render :partial => 'shared/gwo/control', :locals => {:eid => "#{gwo_test.eid}"} %>
+<% end %>
+<% if not gwo_test.nil? %>
+  <script>utmx_section('font_family_javascript')</script>
+<% end %>
+<script type="text/javascript">
+  $(".product > h2").css('font-family', 'Arial, Helvetica, sans-serif');
+</script>
+<% if not gwo_test.nil? %>
+  <%= render :text=>"</noscript>" %>
+<% end %>
+
 <!-- gwo tracking -->
 <% gwo_tests = GwoTest.find(:all, :conditions => ["status=? AND category=?", "enabled", "MV"]) %>
 <% gwo_tests.each do |gwo_test| %>
-  <%= render :partial => 'shared/gwo/nwb_tracking', :locals => {:eid => "#{gwo_test.eid}", :pid => "#{gwo_test.pid}"} %>
+  <%= render :partial => 'shared/gwo/tracking', :locals => {:eid => "#{gwo_test.eid}", :pid => "#{gwo_test.pid}"} %>
 <% end %>
 </html>
 
